@@ -2,11 +2,11 @@
 #include <nlohmann/json.hpp>
 #include <DxLib.h>
 
-inline VECTOR operator+ (const VECTOR& v)	{ return v; }
-inline VECTOR operator- (const VECTOR& v)	{ return { -v.x, -v.y, -v.z }; }
+inline VECTOR operator+ (const VECTOR& v)						{ return v; }
+inline VECTOR operator- (const VECTOR& v)						{ return { -v.x, -v.y, -v.z }; }
 
-inline VECTOR operator+ (const VECTOR& v1, const VECTOR& v2)	{ return {v1.x + v2.x, v1.y + v2.y, v1.z + v2.z}; }
-inline VECTOR operator- (const VECTOR& v1, const VECTOR& v2)	{ return {v1.x - v2.x, v1.y - v2.y, v1.z - v2.z}; }
+inline VECTOR operator+ (const VECTOR& v1, const VECTOR& v2)	{ return { v1.x + v2.x, v1.y + v2.y, v1.z + v2.z }; }
+inline VECTOR operator- (const VECTOR& v1, const VECTOR& v2)	{ return { v1.x - v2.x, v1.y - v2.y, v1.z - v2.z }; }
 inline VECTOR operator* (const VECTOR& v1, const VECTOR& v2)	{ return { v1.x * v2.x, v1.y * v2.y, v1.z * v2.z }; }
 
 template<typename ScaleT>
@@ -14,15 +14,15 @@ inline VECTOR operator* (const VECTOR& v, const ScaleT scale)	{ return { v.x * s
 template<typename ScaleT>
 inline VECTOR operator* (const ScaleT scale, const VECTOR& v)	{ return v * scale; }
 
-inline auto operator+=(VECTOR& v1, const VECTOR& v2)	{ v1.x += v2.x; v1.y += v2.y; v1.z += v2.z; return v1; }
-inline auto operator-=(VECTOR& v1, const VECTOR& v2)	{ v1.x -= v2.x; v1.y -= v2.y; v1.z -= v2.z; return v1; }
-inline auto operator*=(VECTOR& v1, const VECTOR& v2)	{ v1.x *= v2.x; v1.y *= v2.y; v1.z *= v2.z; return v1; }
+inline auto operator+=(VECTOR& v1, const VECTOR& v2)			{ v1.x += v2.x; v1.y += v2.y; v1.z += v2.z; return v1; }
+inline auto operator-=(VECTOR& v1, const VECTOR& v2)			{ v1.x -= v2.x; v1.y -= v2.y; v1.z -= v2.z; return v1; }
+inline auto operator*=(VECTOR& v1, const VECTOR& v2)			{ v1.x *= v2.x; v1.y *= v2.y; v1.z *= v2.z; return v1; }
 
 template<typename ScaleT>
-inline auto operator*=(VECTOR& v, const ScaleT scale)	{ v.x *= scale; v.y *= scale; v.z *= scale; return v; }
+inline auto operator*=(VECTOR& v, const ScaleT scale)			{ v.x *= scale; v.y *= scale; v.z *= scale; return v; }
 
-inline bool operator==(const VECTOR& v1, const VECTOR& v2){ return v1.x == v2.x && v1.y == v2.y && v1.z == v2.z; }
-inline bool operator!=(const VECTOR& v1, const VECTOR& v2){ return !(v1 == v2); }
+inline bool operator==(const VECTOR& v1, const VECTOR& v2)		{ return v1.x == v2.x && v1.y == v2.y && v1.z == v2.z; }
+inline bool operator!=(const VECTOR& v1, const VECTOR& v2)		{ return !(v1 == v2); }
 
 
 namespace v3d
