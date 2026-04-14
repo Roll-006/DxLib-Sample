@@ -106,12 +106,12 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <AdditionalIncludeDirectories>../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;../../nlohmann;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Library;../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;../../nlohmann;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../Library;../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -125,20 +125,16 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;../../nlohmann;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Library;../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;../../nlohmann;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../Library;../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="SourceCode\game.cpp" />
     <ClCompile Include="SourceCode\main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="SourceCode\game.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
