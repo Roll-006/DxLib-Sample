@@ -28,43 +28,43 @@ void Player::Move()
 	// 無駄な情報がなくなり読みやすいコードになります！
 
 	// 移動方向を初期化
-	auto move_dir = Vector2(0.0f, 0.0f);
+	auto moveDir = Vector2(0.0f, 0.0f);
 
 	// 移動方向を入力
-	if (CheckHitKey(KEY_INPUT_W)) { move_dir.y -= 1.0f; }
-	if (CheckHitKey(KEY_INPUT_S)) { move_dir.y += 1.0f; }
-	if (CheckHitKey(KEY_INPUT_A)) { move_dir.x -= 1.0f; }
-	if (CheckHitKey(KEY_INPUT_D)) { move_dir.x += 1.0f; }
+	if (CheckHitKey(KEY_INPUT_W)) { moveDir.y -= 1.0f; }
+	if (CheckHitKey(KEY_INPUT_S)) { moveDir.y += 1.0f; }
+	if (CheckHitKey(KEY_INPUT_A)) { moveDir.x -= 1.0f; }
+	if (CheckHitKey(KEY_INPUT_D)) { moveDir.x += 1.0f; }
 
 	// ベクトルを正規化
 	// MEMO : 右下に移動した場合[x = 1, y = 1]で√2の長さを移動してしまい、移動速度が上昇します。
 	//        正規化(長さを1にする)を行い移動速度を常に一定に保ちます。
-	move_dir.Normalize();
+	moveDir.Normalize();
 
 	// velocity(移動方向・速度を持つベクトル)を計算
-	auto velocity = move_dir * kSpeed;
+	auto velocity = moveDir * kSpeed;
 
 	// 座標を更新
 	_pos += velocity;
 
 
 	/*演算子のオーバーロードを使用しない場合 (_posはVECTOR型に変更する必要あり)
-	auto move_dir = VECTOR(0.0f, 0.0f, 0.0f);
+	auto moveDir = VECTOR(0.0f, 0.0f, 0.0f);
 
 	// 移動方向を入力
-	if (CheckHitKey(KEY_INPUT_W)) { move_dir.y -= 1.0f; }
-	if (CheckHitKey(KEY_INPUT_S)) { move_dir.y += 1.0f; }
-	if (CheckHitKey(KEY_INPUT_A)) { move_dir.x -= 1.0f; }
-	if (CheckHitKey(KEY_INPUT_D)) { move_dir.x += 1.0f; }
+	if (CheckHitKey(KEY_INPUT_W)) { moveDir.y -= 1.0f; }
+	if (CheckHitKey(KEY_INPUT_S)) { moveDir.y += 1.0f; }
+	if (CheckHitKey(KEY_INPUT_A)) { moveDir.x -= 1.0f; }
+	if (CheckHitKey(KEY_INPUT_D)) { moveDir.x += 1.0f; }
 
 	// ベクトルを正規化
-	if (VSize(move_dir) != 0.0f)
+	if (VSize(moveDir) != 0.0f)
 	{
-		move_dir = VNorm(move_dir);
+		moveDir = VNorm(moveDir);
 	}
 
 	// VScale	: ベクトルの長さを変える
-	auto velicity = VScale(move_dir, kSpeed);
+	auto velicity = VScale(moveDir, kSpeed);
 
 	// 座標を更新
 	// VAdd : ベクトルの足し算を行う

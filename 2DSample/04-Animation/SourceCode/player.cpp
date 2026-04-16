@@ -1,5 +1,6 @@
 ﻿#include <DxLib.h>
 #include "time.h"
+#include "animator.h"
 #include "player.h"
 
 Player::Player() : 
@@ -64,7 +65,7 @@ void Player::Move()
 		moveDir = VNorm(moveDir);
 	}
 
-	// VScale	: ベクトルの長さを変える
+	// VScale : ベクトルの長さを変える
 	const auto velicity = VScale(moveDir, kSpeed);
 
 	// 座標を更新
