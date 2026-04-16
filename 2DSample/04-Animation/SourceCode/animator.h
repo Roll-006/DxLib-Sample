@@ -4,14 +4,22 @@
 class Animator
 {
 public:
-	Animator();
+	Animator(Transform& transform);
 	~Animator();
 
-	void PlayAnim();
-	void LoadAnim(AnimationClip& clip);
+	void Update();
 	void Draw() const;
 
+	void LoadAnim(const AnimationClip& animClip);
+	void AttachAnim(const std::string& animName);
+
 private:
-	std::unordered_map<int, AnimationClip> _clips;
+	void PlayAnim();
+
+private:
+	std::unordered_map<std::string, AnimationClip> _clips;
 	float _playTimer;
+	int _keyframeIndex;
+	std::string _currentAnimName;
+	Transform& _transform;
 };

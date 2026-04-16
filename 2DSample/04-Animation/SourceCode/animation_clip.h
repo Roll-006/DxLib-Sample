@@ -6,8 +6,12 @@
 /// @brief アニメーションクリップ (1アクション専用)
 struct AnimationClip
 {
-	std::string			filePath;
-	std::vector<int>	animHandle;
-	int					frameNum;		// フレーム数
-	Vector2				graphicSize;	// 画像全体のサイズ
+	std::vector<int>	animHandle;			// アニメーションハンドル
+
+	std::string			name;				// アニメーションの名前
+	std::string			filePath;			// アニメーションのファイルパス
+	Vector2				loadGraphicSize;	// 読み込み時の画像全体のサイズ
+	int					keyframeNum;		// キーフレーム数
+	float				playIntervalTime;	// 再生時間の間隔
+	bool				isLoop;				// ループ再生をするかどうか
 };

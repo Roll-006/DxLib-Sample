@@ -1,12 +1,19 @@
 ﻿#include <DxLib.h>
+#include <Vector/vector2.hpp>
 #include "time.h"
+#include "transform.h"
 #include "animator.h"
 #include "player.h"
 
 Player::Player() : 
-	_pos(kFirstPos)
+	_transform	(Transform()),
+	_animator	(Animator(_transform))
 {
+	_transform.position = kFirstPos;
+	_transform.scale	= kScale;
 
+	_animator.LoadAnim(AnimationClip({}, "Idle", "Assets/Animations/Player/Idle.png", Vector2(1008, 144), 7, 1.0f, true));
+	_animator.AttachAnim("Idle");
 }
 
 Player::~Player()
@@ -17,11 +24,12 @@ Player::~Player()
 void Player::Update()
 {
 	Move();
+	_animator.Update();
 }
 
 void Player::Draw() const
 {
-	DrawCircle(static_cast<int>(_pos.x), static_cast<int>(_pos.y), kRadius, kColor);
+	_animator.Draw();
 }
 
 void Player::Move()
@@ -47,10 +55,10 @@ void Player::Move()
 	const auto velocity = moveDir * kSpeed * Time::GetInstance().GetDeltaTime();
 
 	// 座標を更新
-	_pos += velocity;
+	_transform.position += velocity;
 
 
-	/*演算子のオーバーロードを使用しない場合 (_posはVECTOR型に変更する必要あり)
+	/*演算子のオーバーロードを使用しない場合 (_transform.positionはVECTOR型に変更する必要あり)
 	auto moveDir = VECTOR(0.0f, 0.0f, 0.0f);
 
 	// 移動方向を入力
@@ -70,6 +78,6 @@ void Player::Move()
 
 	// 座標を更新
 	// VAdd : ベクトルの足し算を行う
-	_pos = VAdd(_pos, velicity);
+	_transform.position = VAdd(_transform.position, velicity);
 	*/
 }
