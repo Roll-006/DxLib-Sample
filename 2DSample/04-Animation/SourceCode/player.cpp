@@ -12,7 +12,7 @@ Player::Player() :
 	_transform.position = kFirstPos;
 	_transform.scale	= kScale;
 
-	_animator.LoadAnim(AnimationClip({}, "Idle", "Assets/Animations/Player/Idle.png", Vector2(1008, 144), 7, 1.0f, true));
+	_animator.LoadAnim(AnimationClip({}, "Idle", "Assets/Animations/Player/Idle.png", Vector2(1008, 144), 7, 0.5f, false));
 	_animator.AttachAnim("Idle");
 }
 

@@ -10,7 +10,7 @@ struct AnimationClip
 
 	std::string			name;				// アニメーションの名前
 	std::string			filePath;			// アニメーションのファイルパス
-	Vector2				loadGraphicSize;	// 読み込み時の画像全体のサイズ
+	Vector2				originGraphicSize;	// 元画像全体のサイズ
 	int					keyframeNum;		// キーフレーム数
 	float				playIntervalTime;	// 再生時間の間隔
 	bool				isLoop;				// ループ再生をするかどうか
