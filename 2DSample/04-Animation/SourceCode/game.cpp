@@ -1,5 +1,6 @@
 ﻿#include <DxLib.h>
 #include "time.h"
+#include "animator.h"
 #include "player.h"
 #include "game.h"
 
@@ -28,8 +29,6 @@ int Game::Run() const
 
 		player.Update();
 		player.Draw();
-
-		DrawFormatString(0, 0, 0xffffff, "FPS : %f", Time::GetInstance().GetAverageFPS());
 
 		Time::GetInstance().CapFPS();
 

@@ -9,7 +9,9 @@ public:
 
 	void PlayAnim();
 	void LoadAnim(AnimationClip& clip);
+	void Draw() const;
 
 private:
 	std::unordered_map<int, AnimationClip> _clips;
+	float _playTimer;
 };
