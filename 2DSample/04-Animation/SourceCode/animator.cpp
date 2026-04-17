@@ -40,8 +40,6 @@ void Animator::Draw() const
 		TRUE,
 		FALSE,
 		FALSE);
-
-	printfDx("%f\n", _playTimer);
 }
 
 void Animator::LoadAnim(const AnimationClip& animClip)
@@ -62,14 +60,14 @@ void Animator::AttachAnim(const std::string& animName)
 {
 	_currentAnimName	= animName;
 	_playTimer			= 0.0f;
-	_keyframeIndex		= 0.0f;
+	_keyframeIndex		= 0;
 }
 
 void Animator::PlayAnim()
 {
 	const auto& clip = _clips.at(_currentAnimName);
 
-	// ループしないアニメーションの再生が終了していた場合、早期returnする
+	// ループしないアニメーションの再生が終了していた場合、早期return
 	if (!clip.isLoop && _keyframeIndex == clip.keyframeNum - 1) { return; }
 
 	// 一定間隔で次のキーフレームに移行
@@ -90,6 +88,9 @@ void Animator::PlayAnim()
 			{
 				_keyframeIndex = clip.keyframeNum - 1;
 			}
+
+			// 1行でも書ける！ (三項演算子)
+			// _keyframeIndex = clip.isLoop ? 0 : clip.keyframeNum - 1;
 		}
 	}
 }
