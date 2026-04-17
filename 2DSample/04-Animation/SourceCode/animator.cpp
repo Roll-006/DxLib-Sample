@@ -26,18 +26,22 @@ void Animator::Update()
 
 void Animator::Draw() const
 {
+	const auto& clip = _clips.at(_currentAnimName);
+
 	DrawRotaGraph3(
 		static_cast<int>(_transform.position.x),
 		static_cast<int>(_transform.position.y),
-		static_cast<int>(_clips.at(_currentAnimName).originGraphicSize.x / _clips.at(_currentAnimName).keyframeNum * 0.5f),
-		static_cast<int>(_clips.at(_currentAnimName).originGraphicSize.y * 0.5f),
+		static_cast<int>(clip.originGraphicSize.x / clip.keyframeNum * 0.5f),
+		static_cast<int>(clip.originGraphicSize.y * 0.5f),
 		static_cast<double>(_transform.scale.x),
 		static_cast<double>(_transform.scale.y),
 		_transform.rotation,
-		_clips.at(_currentAnimName).animHandle.at(_keyframeIndex),
+		clip.animHandle.at(_keyframeIndex),
 		TRUE,
 		FALSE,
 		FALSE);
+
+	printfDx("%f\n", _playTimer);
 }
 
 void Animator::LoadAnim(const AnimationClip& animClip)
@@ -63,21 +67,29 @@ void Animator::AttachAnim(const std::string& animName)
 
 void Animator::PlayAnim()
 {
+	const auto& clip = _clips.at(_currentAnimName);
+
+	// ループしないアニメーションの再生が終了していた場合、早期returnする
+	if (!clip.isLoop && _keyframeIndex == clip.keyframeNum - 1) { return; }
+
 	// 一定間隔で次のキーフレームに移行
 	_playTimer += Time::GetInstance().GetDeltaTime();
-	if (_playTimer >= _clips.at(_currentAnimName).playIntervalTime)
+	if (_playTimer >= clip.playIntervalTime)
 	{
 		_playTimer = 0.0f;
 
 		// ループするアニメーションのキーフレームが最大値に到達したら、アニメーションをループ
 		++_keyframeIndex;
-		if (_clips.at(_currentAnimName).isLoop)
+		if (_keyframeIndex >= clip.keyframeNum)
 		{
-			_keyframeIndex = 0;
-		}
-		else if (_keyframeIndex >= _clips.at(_currentAnimName).keyframeNum)
-		{
-			--_keyframeIndex;
+			if (clip.isLoop)
+			{
+				_keyframeIndex = 0;
+			}
+			else
+			{
+				_keyframeIndex = clip.keyframeNum - 1;
+			}
 		}
 	}
 }
