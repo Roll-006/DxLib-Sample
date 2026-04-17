@@ -28,9 +28,8 @@ void Time::Update()
 	if (_frameCount == kFPS)
 	{
 		// 表示のため、平均FPSを計算する
-		const auto totalFrameTime = static_cast<float>(_currentTimeUs - _firstTimeUs);
-		const auto calcAverage = totalFrameTime / kFPS;
-		_averageFps = kUs / calcAverage;
+		const auto elapsedTimeUs = static_cast<float>(_currentTimeUs - _firstTimeUs);
+		_averageFps = kFPS * kUs / elapsedTimeUs;
 
 		// カウントリセット
 		_firstTimeUs = GetNowHiPerformanceCount();
