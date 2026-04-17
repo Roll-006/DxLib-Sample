@@ -58,6 +58,14 @@ void Animator::LoadAnim(const AnimationClip& animClip)
 
 void Animator::AttachAnim(const std::string& animName)
 {
+	if (_clips.contains(_currentAnimName))
+	{
+		const auto& clip = _clips.at(_currentAnimName);
+
+		// 自身からの遷移を許可しない場合はアタッチを許可しない
+		if (clip.name == animName && !clip.canTransitionToSelf) { return; }
+	}
+
 	_currentAnimName	= animName;
 	_playTimer			= 0.0f;
 	_keyframeIndex		= 0;

@@ -45,7 +45,7 @@ void Time::CapFPS() const
 {
 	// 理想の時間と実際の時間の差分を取得し、時間を停止させる
 	const auto idealTimeUs	= kUs / kFPS * _frameCount;
-	const auto actualTimeUs = _currentTimeUs - _firstTimeUs;
+	const auto actualTimeUs = static_cast<float>(_currentTimeUs - _firstTimeUs);
 	const auto waitTimeMs	= (idealTimeUs - actualTimeUs) / kMs;
 
 	// 指定の時間動作を停止
