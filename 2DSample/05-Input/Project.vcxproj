@@ -147,7 +147,7 @@
     <ClInclude Include="SourceCode\animator.h" />
     <ClInclude Include="SourceCode\game.h" />
     <ClInclude Include="SourceCode\input.h" />
-    <ClInclude Include="SourceCode\input_kind.h" />
+    <ClInclude Include="SourceCode\input_state_kind.h" />
     <ClInclude Include="SourceCode\player.h" />
     <ClInclude Include="SourceCode\time.h" />
     <ClInclude Include="SourceCode\transform.h" />

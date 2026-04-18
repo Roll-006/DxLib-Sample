@@ -59,7 +59,7 @@
     <ClInclude Include="SourceCode\input.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\input_kind.h">
+    <ClInclude Include="SourceCode\input_state_kind.h">
       <Filter>リソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>
