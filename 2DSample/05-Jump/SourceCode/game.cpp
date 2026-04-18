@@ -35,11 +35,11 @@ int Game::Run() const
 		player.Update();
 		player.Draw();
 
-		DrawFormatString(0,  0, 0xffffff, "1を長押し : %d",					Input::GetInstance().IsPressed(KEY_INPUT_1));
-		DrawFormatString(0, 20, 0xffffff, "2をこのフレームに入力した : %d",	Input::GetInstance().WasPressedThisFrame(KEY_INPUT_2));
-		DrawFormatString(0, 40, 0xffffff, "3をこのフレームで離した : %d",	Input::GetInstance().WasReleasedThisFrame(KEY_INPUT_3));
-		DrawFormatString(0, 60, 0xffffff, "4の入力カウント : %d",			Input::GetInstance().GetKeyCount(KEY_INPUT_4));
-		DrawFormatString(0, 80, 0xffffff, "マウスの移動量 : %d, %d",		Input::GetInstance().GetMouseDelta().x, Input::GetInstance().GetMouseDelta().y);
+		DrawFormatString(0,  0, 0xffffff, "1を長押し : %d", Input::GetInstance().GetKeyState(KEY_INPUT_1) == InputStateKind::kHold);
+		DrawFormatString(0, 20, 0xffffff, "2を単押し : %d", Input::GetInstance().GetKeyState(KEY_INPUT_2) == InputStateKind::kSingle);
+		DrawFormatString(0, 40, 0xffffff, "3を1フレーム前に単押し : %d", Input::GetInstance().GetKeyState(KEY_INPUT_3) == InputStateKind::kPrev);
+		DrawFormatString(0, 60, 0xffffff, "4の入力カウント : %d", Input::GetInstance().GetKeyCount(KEY_INPUT_4));
+		DrawFormatString(0, 80, 0xffffff, "マウスの移動量 : %d, %d", Input::GetInstance().GetMouseDelta().x, Input::GetInstance().GetMouseDelta().y);
 		DrawCircle(Input::GetInstance().GetMousePos().x, Input::GetInstance().GetMousePos().y, 5, 0xffffff, TRUE);
 
 		Time::GetInstance().CapFPS();

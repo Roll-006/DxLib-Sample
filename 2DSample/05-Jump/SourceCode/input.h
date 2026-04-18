@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "input_state_kind.h"
 
 class Input
 {
@@ -15,25 +16,11 @@ public:
 	void Update();
 
 	/// <summary>
-	/// 長押ししているかを判定
+	/// 入力の状態を取得
 	/// </summary>
 	/// <param name="keyCode">キーコード</param>
-	/// <returns>true : 長押ししている, false : 長押ししていない</returns>
-	bool IsPressed(int keyCode) const { return _keyState.at(keyCode) >= 2; }
-
-	/// <summary>
-	/// このフレームで入力したかを判定
-	/// </summary>
-	/// <param name="keyCode">キーコード</param>
-	/// <returns>true : このフレームでした, false : 入力していない</returns>
-	bool WasPressedThisFrame(int keyCode) const { return _keyState.at(keyCode) == 1; }
-
-	/// <summary>
-	/// このフレームで離されたかを判定
-	/// </summary>
-	/// <param name="keyCode">キーコード</param>
-	/// <returns>true : このフレームで離された, false : その他</returns>
-	bool WasReleasedThisFrame(int keyCode) const { return _keyState.at(keyCode) == -1; }
+	/// <returns>入力の状態</returns>
+	InputStateKind GetKeyState(int keyCode) const;
 
 	/// <summary>
 	/// 入力されてからの回数を取得
