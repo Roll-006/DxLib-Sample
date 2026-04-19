@@ -1,11 +1,9 @@
 ﻿#include <array>
 #include <DxLib.h>
-#include <Vector/vector2.hpp>
 #include <Vector/vector2_int.hpp>
-#include "input.h"
+#include "mouse.h"
 
-Input::Input() :
-	_keyState		(0),
+Mouse::Mouse() :
 	_currentMousePos(0, 0),
 	_prevMousePos	(0, 0),
 	_mouseDelta		(0, 0)
@@ -14,17 +12,14 @@ Input::Input() :
 	_prevMousePos = _currentMousePos;
 }
 
-Input::~Input()
+Mouse::~Mouse()
 {
 
 }
 
-void Input::Update()
+void Mouse::Update()
 {
 	_prevMousePos = _currentMousePos;
-
-	// すべてのキーの入力状態を保存する
-	GetHitKeyStateAllEx(_keyState.data());
 
 	// 現在のマウス座標を取得
 	GetMousePoint(&_currentMousePos.x, &_currentMousePos.y);

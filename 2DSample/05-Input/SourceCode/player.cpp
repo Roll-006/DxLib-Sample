@@ -2,7 +2,7 @@
 #include <Vector/vector2.hpp>
 #include <Vector/vector2_int.hpp>
 #include "time.h"
-#include "input.h"
+#include "keyboard.h"
 #include "transform.h"
 #include "animator.h"
 #include "player.h"
@@ -44,10 +44,10 @@ void Player::Move()
 	auto moveDir = Vector2(0.0f, 0.0f);
 
 	// 移動方向を入力
-	if (Input::GetInstance().IsPressed(KEY_INPUT_W)) { moveDir.y -= 1.0f; }
-	if (Input::GetInstance().IsPressed(KEY_INPUT_S)) { moveDir.y += 1.0f; }
-	if (Input::GetInstance().IsPressed(KEY_INPUT_A)) { moveDir.x -= 1.0f; }
-	if (Input::GetInstance().IsPressed(KEY_INPUT_D)) { moveDir.x += 1.0f; }
+	if (Keyboard::GetInstance().IsPressed(KEY_INPUT_W)) { moveDir.y -= 1.0f; }
+	if (Keyboard::GetInstance().IsPressed(KEY_INPUT_S)) { moveDir.y += 1.0f; }
+	if (Keyboard::GetInstance().IsPressed(KEY_INPUT_A)) { moveDir.x -= 1.0f; }
+	if (Keyboard::GetInstance().IsPressed(KEY_INPUT_D)) { moveDir.x += 1.0f; }
 
 	// ベクトルを正規化
 	// MEMO : 右下に移動した場合[x = 1, y = 1]で√2の長さを移動してしまい、移動速度が上昇します。

@@ -2,7 +2,8 @@
 #include <Vector/vector2.hpp>
 #include <Vector/vector2_int.hpp>
 #include "time.h"
-#include "input.h"
+#include "keyboard.h"
+#include "mouse.h"
 #include "transform.h"
 #include "animator.h"
 #include "player.h"
@@ -29,18 +30,19 @@ int Game::Run() const
 
 	while (ShouldRun())
 	{
-		Time::GetInstance().Update();
-		Input::GetInstance().Update();
+		Time	::GetInstance().Update();
+		Keyboard::GetInstance().Update();
+		Mouse	::GetInstance().Update();
 
 		player.Update();
 		player.Draw();
 
-		DrawFormatString(0,  0, 0xffffff, "1を長押し : %d",					Input::GetInstance().IsPressed(KEY_INPUT_1));
-		DrawFormatString(0, 20, 0xffffff, "2をこのフレームに入力した : %d",	Input::GetInstance().WasPressedThisFrame(KEY_INPUT_2));
-		DrawFormatString(0, 40, 0xffffff, "3をこのフレームで離した : %d",	Input::GetInstance().WasReleasedThisFrame(KEY_INPUT_3));
-		DrawFormatString(0, 60, 0xffffff, "4の入力カウント : %d",			Input::GetInstance().GetKeyCount(KEY_INPUT_4));
-		DrawFormatString(0, 80, 0xffffff, "マウスの移動量 : %d, %d",		Input::GetInstance().GetMouseDelta().x, Input::GetInstance().GetMouseDelta().y);
-		DrawCircle(Input::GetInstance().GetMousePos().x, Input::GetInstance().GetMousePos().y, 5, 0xffffff, TRUE);
+		DrawFormatString(0,   0, 0xffffff, "1を長押し : %d",					Keyboard::GetInstance().IsPressed(KEY_INPUT_1));
+		DrawFormatString(0,  20, 0xffffff, "2をこのフレームに入力した : %d",	Keyboard::GetInstance().WasPressedThisFrame(KEY_INPUT_2));
+		DrawFormatString(0,  40, 0xffffff, "3をこのフレームで離した : %d",		Keyboard::GetInstance().WasReleasedThisFrame(KEY_INPUT_3));
+		DrawFormatString(0,  60, 0xffffff, "4の入力カウント : %d",				Keyboard::GetInstance().GetInputCount(KEY_INPUT_4));
+		DrawFormatString(0,  80, 0xffffff, "マウスの移動量 : %d, %d",			Mouse::GetInstance().GetMouseDelta().x, Mouse::GetInstance().GetMouseDelta().y);
+		DrawCircle(Mouse::GetInstance().GetMousePos().x, Mouse::GetInstance().GetMousePos().y, 5, 0xffffff);
 
 		Time::GetInstance().CapFPS();
 

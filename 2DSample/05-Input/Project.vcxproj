@@ -136,8 +136,9 @@
   <ItemGroup>
     <ClCompile Include="SourceCode\animator.cpp" />
     <ClCompile Include="SourceCode\game.cpp" />
-    <ClCompile Include="SourceCode\input.cpp" />
+    <ClCompile Include="SourceCode\keyboard.cpp" />
     <ClCompile Include="SourceCode\main.cpp" />
+    <ClCompile Include="SourceCode\mouse.cpp" />
     <ClCompile Include="SourceCode\player.cpp" />
     <ClCompile Include="SourceCode\time.cpp" />
     <ClCompile Include="SourceCode\transform.cpp" />
@@ -146,7 +147,8 @@
     <ClInclude Include="SourceCode\animation_clip.h" />
     <ClInclude Include="SourceCode\animator.h" />
     <ClInclude Include="SourceCode\game.h" />
-    <ClInclude Include="SourceCode\input.h" />
+    <ClInclude Include="SourceCode\keyboard.h" />
+    <ClInclude Include="SourceCode\mouse.h" />
     <ClInclude Include="SourceCode\player.h" />
     <ClInclude Include="SourceCode\time.h" />
     <ClInclude Include="SourceCode\transform.h" />
