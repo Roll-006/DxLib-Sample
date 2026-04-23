@@ -51,7 +51,7 @@ void Animator::LoadAnim(const AnimationClip& animClip)
 
 	// 画像を分割して読み込む
 	// MEMO : 画像が別々の場合はサイトでの合成をおすすめします！ [https://web.save-editor.com/pic/picture_split_tool.html]
-	auto result = LoadDivGraph(clip.filePath.c_str(), clip.keyframeNum, clip.keyframeNum, 1, clip.originGraphicSize.x / clip.keyframeNum, clip.originGraphicSize.y, clip.animHandle.data());
+	LoadDivGraph(clip.filePath.c_str(), clip.keyframeNum, clip.keyframeNum, 1, clip.originGraphicSize.x / clip.keyframeNum, clip.originGraphicSize.y, clip.animHandle.data());
 
 	_clips[clip.name] = clip;
 }

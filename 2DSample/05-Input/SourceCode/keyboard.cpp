@@ -3,7 +3,7 @@
 #include "keyboard.h"
 
 Keyboard::Keyboard() :
-	_keyState(0)
+	_state(0)
 {
 
 }
@@ -16,5 +16,5 @@ Keyboard::~Keyboard()
 void Keyboard::Update()
 {
 	// すべてのキーの入力状態を保存する
-	GetHitKeyStateAllEx(_keyState.data());
+	GetHitKeyStateAllEx(_state.data());
 }

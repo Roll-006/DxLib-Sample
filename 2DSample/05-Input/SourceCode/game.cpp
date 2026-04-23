@@ -41,8 +41,8 @@ int Game::Run() const
 		DrawFormatString(0,  20, 0xffffff, "2をこのフレームに入力した : %d",	Keyboard::GetInstance().WasPressedThisFrame(KEY_INPUT_2));
 		DrawFormatString(0,  40, 0xffffff, "3をこのフレームで離した : %d",		Keyboard::GetInstance().WasReleasedThisFrame(KEY_INPUT_3));
 		DrawFormatString(0,  60, 0xffffff, "4の入力カウント : %d",				Keyboard::GetInstance().GetInputCount(KEY_INPUT_4));
-		DrawFormatString(0,  80, 0xffffff, "マウスの移動量 : %d, %d",			Mouse::GetInstance().GetMouseDelta().x, Mouse::GetInstance().GetMouseDelta().y);
-		DrawCircle(Mouse::GetInstance().GetMousePos().x, Mouse::GetInstance().GetMousePos().y, 5, 0xffffff);
+		DrawFormatString(0,  80, 0xffffff, "マウスの移動量 : %d, %d",			Mouse::GetInstance().GetDelta().x, Mouse::GetInstance().GetDelta().y);
+		DrawCircle(Mouse::GetInstance().GetPos().x, Mouse::GetInstance().GetPos().y, 5, 0xffffff);
 
 		Time::GetInstance().CapFPS();
 
