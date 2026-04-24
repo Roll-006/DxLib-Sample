@@ -45,7 +45,6 @@ public:
 
 private:
 	Keyboard();
-	~Keyboard();
 
 private:
 	std::array<int, 256> _state;

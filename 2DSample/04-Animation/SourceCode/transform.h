@@ -4,7 +4,6 @@ class Transform
 {
 public:
 	Transform();
-	~Transform();
 
 public:
 	Vector2 position;

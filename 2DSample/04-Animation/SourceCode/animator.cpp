@@ -14,11 +14,6 @@ Animator::Animator(Transform& transform) :
 
 }
 
-Animator::~Animator()
-{
-
-}
-
 void Animator::Update()
 {
 	PlayAnim();

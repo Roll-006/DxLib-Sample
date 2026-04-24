@@ -8,8 +8,3 @@ Transform::Transform() :
 {
 
 }
-
-Transform::~Transform()
-{
-
-}

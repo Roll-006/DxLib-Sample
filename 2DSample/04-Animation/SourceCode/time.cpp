@@ -13,11 +13,6 @@ Time::Time() :
 
 }
 
-Time::~Time()
-{
-
-}
-
 void Time::Update()
 {
 	_currentTimeUs	= GetNowHiPerformanceCount();			// Windowsが起動してからの経過時間を取得

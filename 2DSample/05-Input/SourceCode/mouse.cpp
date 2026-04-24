@@ -15,11 +15,6 @@ Mouse::Mouse() :
 	_prevPos = _currentPos;
 }
 
-Mouse::~Mouse()
-{
-	
-}
-
 void Mouse::Update()
 {
 	_prevPos = _currentPos;

@@ -5,7 +5,6 @@ class Animator
 {
 public:
 	Animator(Transform& transform);
-	~Animator();
 
 	void Update();
 	void Draw() const;

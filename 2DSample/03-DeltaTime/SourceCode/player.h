@@ -19,5 +19,5 @@ private:
 	static constexpr int			kRadius		= 100;
 	static constexpr unsigned int	kColor		= 0xffffff;
 
-	Vector2 _pos;
+	Vector2 _pos = kFirstPos;
 };

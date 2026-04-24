@@ -8,11 +8,6 @@ Keyboard::Keyboard() :
 
 }
 
-Keyboard::~Keyboard()
-{
-
-}
-
 void Keyboard::Update()
 {
 	// すべてのキーの入力状態を保存する

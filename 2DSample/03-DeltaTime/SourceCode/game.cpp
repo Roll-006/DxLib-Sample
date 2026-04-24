@@ -3,16 +3,6 @@
 #include "player.h"
 #include "game.h"
 
-Game::Game()
-{
-	
-}
-
-Game::~Game()
-{
-
-}
-
 int Game::Run() const
 {
 	if (auto setup_result = SetUpDxLib(); setup_result != EXIT_SUCCESS)
