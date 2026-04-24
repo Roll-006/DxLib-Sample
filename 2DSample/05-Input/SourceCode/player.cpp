@@ -50,7 +50,7 @@ void Player::Move()
 	if (Keyboard::GetInstance().IsPressed(KEY_INPUT_D)) { moveDir.x += 1.0f; }
 
 	// ベクトルを正規化
-	// MEMO : 右下に移動した場合[x = 1, y = 1]で√2の長さを移動してしまい、移動速度が上昇します。
+	// MEMO : 右下に移動した場合 [x = 1, y = 1] で√2の長さを移動してしまい、移動速度が上昇します。
 	//        正規化(長さを1にする)を行い移動速度を常に一定に保ちます。
 	moveDir.Normalize();
 

@@ -19,21 +19,21 @@ public:
 	/// </summary>
 	/// <param name="mouseButton">マウスボタン</param>
 	/// <returns>true : 長押ししている, false : 長押ししていない</returns>
-	bool IsPressed(uint8_t mouseButton) const { return _state.at(GetIndex(mouseButton)) >= 2; }
+	bool IsPressed(const int mouseButton) const { return _state.at(GetIndex(mouseButton)) >= 2; }
 
 	/// <summary>
 	/// このフレームで入力したかを判定
 	/// </summary>
 	/// <param name="mouseButton">マウスボタン</param>
 	/// <returns>true : このフレームでした, false : 入力していない</returns>
-	bool WasPressedThisFrame(uint8_t mouseButton) const { return _state.at(GetIndex(mouseButton)) == 1; }
+	bool WasPressedThisFrame(const int mouseButton) const { return _state.at(GetIndex(mouseButton)) == 1; }
 
 	/// <summary>
 	/// このフレームで離されたかを判定
 	/// </summary>
 	/// <param name="mouseButton">マウスボタン</param>
 	/// <returns>true : このフレームで離された, false : その他</returns>
-	bool WasReleasedThisFrame(uint8_t mouseButton) const { return _state.at(GetIndex(mouseButton)) == -1; }
+	bool WasReleasedThisFrame(const int mouseButton) const { return _state.at(GetIndex(mouseButton)) == -1; }
 
 	/// <summary>
 	/// 入力されてからの回数を取得
@@ -41,7 +41,7 @@ public:
 	/// </summary>
 	/// <param name="mouseButton">マウスボタン</param>
 	/// <returns>0 : 入力なし, 1以上 : 入力されてからの回数, -1以下 : 押されて離されてからの回数</returns>
-	int GetInputCount(uint8_t mouseButton) const { return _state.at(GetIndex(mouseButton)); }
+	int GetInputCount(const int mouseButton) const { return _state.at(GetIndex(mouseButton)); }
 
 	/// <summary>
 	/// スクリーン上のマウス座標を取得
@@ -70,12 +70,19 @@ private:
 	/// </summary>
 	/// <param name="mouseButton">マウスボタン</param>
 	/// <returns>インデックス</returns>
-	int GetIndex(uint8_t mouseButton) const;
+	int GetIndex(const int mouseButton) const;
+
+	/// <summary>
+	/// マウスボタンの状態を更新する
+	/// </summary>
+	void UpdateMouseButtonState();
 
 private:
-	std::array<int, 8> _state;
-	Vector2Int _currentPos;
-	Vector2Int _prevPos;
-	Vector2Int _delta;
-	Vector2 _scroll;
+	std::array<int, 8> _state;		// マウスボタンの状態を格納
+	Vector2Int	_currentPos;		// 現在の座標
+	Vector2Int	_prevPos;			// 以前の座標
+	Vector2Int	_delta;				// 座標の移動量
+	Vector2		_currentScroll;		// 現在のホイール
+	Vector2		_prevScroll;		// 以前のホイール
+	Vector2		_scroll;			// ホイールの移動量
 };

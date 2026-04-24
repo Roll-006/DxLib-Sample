@@ -24,7 +24,7 @@ struct Vector2
 	/// @return 大きさ
 	[[nodiscard]] float GetMagnitude() const
 	{
-		return sqrt(x * x + y * y);
+		return sqrtf(x * x + y * y);
 	}
 
 	/// @brief 大きさの二乗を取得する
