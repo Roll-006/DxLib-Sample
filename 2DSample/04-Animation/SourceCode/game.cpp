@@ -21,12 +21,16 @@ int Game::Run() const
 
 		player.Update();
 		player.Draw();
+		char buffer[MAX_PATH];
+		printfDx("CurrentDir: %s\n", GetCurrentDirectoryA(MAX_PATH, buffer));
 
 		Time::GetInstance().CapFPS();
 
 		// 裏画面を表画面に反映
 		ScreenFlip();
 	}
+
+	return EXIT_SUCCESS;
 }
 
 int Game::SetUpDxLib() const

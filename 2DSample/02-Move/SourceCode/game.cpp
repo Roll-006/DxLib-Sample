@@ -19,6 +19,8 @@ int Game::Run() const
 		// 裏画面を表画面に反映
 		ScreenFlip();
 	}
+
+	return EXIT_SUCCESS;
 }
 
 int Game::SetUpDxLib() const

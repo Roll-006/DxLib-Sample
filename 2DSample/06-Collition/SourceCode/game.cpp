@@ -1,6 +1,16 @@
 ﻿#include <DxLib.h>
+#include <Vector/vector2.hpp>
+#include <Vector/vector2_int.hpp>
+#include "debug.h"
 #include "time.h"
+#include "keyboard.h"
+#include "mouse.h"
+#include "transform.h"
+#include "animator.h"
+#include "aabb.h"
+#include "collision.h"
 #include "player.h"
+#include "enemy.h"
 #include "game.h"
 
 int Game::Run() const
@@ -11,15 +21,21 @@ int Game::Run() const
 	}
 
 	auto player = Player();
+	auto enemy = Enemy();
 
 	while (ShouldRun())
 	{
-		Time::GetInstance().Update();
+		Time	::GetInstance().Update();
+		Keyboard::GetInstance().Update();
+		Mouse	::GetInstance().Update();
 
+		enemy.Update();
 		player.Update();
-		player.Draw();
 
-		DrawFormatString(0, 0, 0xffffff, "FPS : %f", Time::GetInstance().GetAverageFPS());
+		enemy.Draw();
+		player.Draw();
+				
+		DrawFormatString(0, 0, 0xffffff, "衝突した : %d", collision::IsColliding(player.GetCollider(), enemy.GetCollider()));
 
 		Time::GetInstance().CapFPS();
 
@@ -43,9 +59,9 @@ int Game::SetUpDxLib() const
 
 bool Game::ShouldRun() const
 {
-	if (ProcessMessage()  != 0)			{ return false; }		// ウインドウメッセージの処理を行う
-	if (ClearDrawScreen() != 0)			{ return false; }		// 画面に描画されたものを削除する
-	if (CheckHitKey(KEY_INPUT_ESCAPE))	{ return false; }		// ESCAPEが入力された場合は終了する
+	if (ProcessMessage()  != 0) { return false; }		// ウインドウメッセージの処理を行う
+	if (ClearDrawScreen() != 0)	{ return false; }		// 画面に描画されたものを削除する
+	if (Keyboard::GetInstance().WasPressedThisFrame(KEY_INPUT_ESCAPE)) { return false; }	// ESCAPEが入力された場合は終了する
 
 	return true;
 }
