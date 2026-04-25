@@ -20,11 +20,6 @@ Mouse::Mouse() :
 	_prevPos = _currentPos;
 }
 
-Mouse::~Mouse()
-{
-	
-}
-
 void Mouse::Update()
 {
 	// データを保存

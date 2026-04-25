@@ -17,11 +17,6 @@ Player::Player() :
 	_animator.AttachAnim("Idle");
 }
 
-Player::~Player()
-{
-
-}
-
 void Player::Update()
 {
 	Move();

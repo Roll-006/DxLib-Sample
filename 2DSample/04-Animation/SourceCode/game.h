@@ -3,9 +3,6 @@
 class Game
 {
 public:
-	Game();
-	~Game();
-
 	/// <summary>
 	/// ゲームループ処理を行う
 	/// </summary>

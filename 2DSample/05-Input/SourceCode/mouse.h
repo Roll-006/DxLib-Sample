@@ -63,7 +63,6 @@ public:
 
 private:
 	Mouse();
-	~Mouse();
 
 	/// <summary>
 	/// マウスボタンの識別コードからインデックスを取得

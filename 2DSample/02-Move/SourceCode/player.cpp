@@ -1,17 +1,6 @@
 ﻿#include <DxLib.h>
 #include "player.h"
 
-Player::Player() : 
-	_pos(kFirstPos)
-{
-
-}
-
-Player::~Player()
-{
-
-}
-
 void Player::Update()
 {
 	Move();

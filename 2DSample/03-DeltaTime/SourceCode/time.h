@@ -26,7 +26,6 @@ public:
 
 private:
 	Time();
-	~Time();
 
 private:
 	static constexpr float kFPS				= 60.0f;
