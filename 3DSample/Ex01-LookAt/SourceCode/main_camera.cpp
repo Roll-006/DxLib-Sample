@@ -11,7 +11,7 @@ MainCamera::MainCamera() :
 	SetCameraNearFar(1.0f, 100.0f);
 	SetupCamera_Perspective(60.0f * math::kDeg2Rad);
 
-	_transform.SetPosition({ 0, 30, -20 });
+	_transform.SetPosition({ 0, 30, -15 });
 }
 
 void MainCamera::Update()

@@ -12,7 +12,7 @@
 Player::Player() : 
 	_transform	(Transform()),
 	_modeler	(Modeler("../../Assets/Models/Swat/mesh.mv1", _transform)), 
-	_frameIndex	(MV1SearchFrame(_modeler.GetModelHandle(), "mixamorig:LeftForeArm")),
+	_frameIndex	(MV1SearchFrame(_modeler.GetModelHandle(), "mixamorig:Neck1")),
 	_target		(0, 15, 7)
 {
 	_transform.SetScale(0.1f);
@@ -20,9 +20,11 @@ Player::Player() :
 
 void Player::Update()
 {
+	// TODO : ボーンの進行方向とupを指定できるようにする必要あり
+	
 	const auto modelHandle = _modeler.GetModelHandle();
 
-	// 首の行列を取得
+	// 回転させるボーンの行列を取得
 	auto frameWorldMat = static_cast<Matrix4x4>(MV1GetFrameLocalWorldMatrix(modelHandle, _frameIndex));
 
 	// ターゲットを移動
@@ -40,14 +42,15 @@ void Player::Update()
 	// 対象の方向を見る
 	frameWorldMat = Matrix4x4::LookAt(frameWorldMat.GetTranslation(), _target, Vector3::GetUp());
 
-	//ローカル行列に変換
+	// ローカル行列に変換
 	const auto parentWorldRMat	= static_cast<Matrix4x4>(MV1GetFrameLocalWorldMatrix(modelHandle, MV1GetFrameParent(modelHandle, _frameIndex))).GetRMatrix();
 	const auto frameLocalRMat	= frameWorldMat.GetRMatrix() * MInverse(parentWorldRMat);
 
-	// 回転行列を設定
+	// ローカル行列に回転行列を設定
 	auto frameLocalMat = static_cast<Matrix4x4>(MV1GetFrameLocalMatrix(modelHandle, _frameIndex));
 	frameLocalMat.SetRotation(frameLocalRMat);
 
+	// ローカル行列として適用
 	MV1SetFrameUserLocalMatrix(modelHandle, _frameIndex, frameLocalMat);
 }
 
