@@ -14,8 +14,8 @@ Player::Player() :
 	_transform.position = kFirstPos;
 	_transform.scale	= kScale;
 
-	_animator.LoadAnim(AnimationClip({}, "Idle", "Assets/Animations/Player/Idle.png", Vector2(1008, 144), 7, 0.2f, true, false));
-	_animator.LoadAnim(AnimationClip({}, "Run",  "Assets/Animations/Player/Run.png",  Vector2(1152, 144), 8, 0.2f, true, false));
+	_animator.LoadAnim(AnimationClip({}, "Idle", "../../Assets/Animations/Player/Idle.png", Vector2(1008, 144), 7, 0.2f, true, false));
+	_animator.LoadAnim(AnimationClip({}, "Run",  "../../Assets/Animations/Player/Run.png",  Vector2(1152, 144), 8, 0.2f, true, false));
 	_animator.AttachAnim("Idle");
 }
 

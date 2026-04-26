@@ -13,7 +13,7 @@ Enemy::Enemy() :
 	_transform.position = kFirstPos;
 	_transform.scale	= kScale;
 
-	_animator.LoadAnim(AnimationClip({}, "Idle", "Assets/Animations/Skeleton/Skeleton_01_White_Idle.png", Vector2(768, 64), 8, 0.2f, true, false));
+	_animator.LoadAnim(AnimationClip({}, "Idle", "../../Assets/Animations/Skeleton/Skeleton_01_White_Idle.png", Vector2(768, 64), 8, 0.2f, true, false));
 	_animator.AttachAnim("Idle");
 }
 

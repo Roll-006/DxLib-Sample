@@ -1,10 +1,9 @@
-#pragma once
+﻿#pragma once
 
 class Transform
 {
 public:
 	Transform();
-	~Transform();
 
 public:
 	Vector2 position;

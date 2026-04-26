@@ -21,8 +21,6 @@ int Game::Run() const
 
 		player.Update();
 		player.Draw();
-		char buffer[MAX_PATH];
-		printfDx("CurrentDir: %s\n", GetCurrentDirectoryA(MAX_PATH, buffer));
 
 		Time::GetInstance().CapFPS();
 
