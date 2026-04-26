@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <cmath>
 #include <nlohmann/json.hpp>
+#include <DxLib.h>
 
 struct Vector3
 {
@@ -8,8 +9,29 @@ struct Vector3
 	float y;
 	float z;
 
+	Vector3() :
+		x(0.0f),
+		y(0.0f),
+		z(0.0f)
+	{ }
+
+	Vector3(const float x, const float y, const float z) : 
+		x(x),
+		y(y),
+		z(z)
+	{ }
+
+	Vector3(const VECTOR& v) : 
+		x(v.x),
+		y(v.y),
+		z(v.z)
+	{ }
+
+
+	operator VECTOR() const { return { x, y, z }; }
+
 	Vector3 operator+() const				{ return *this; }
-	Vector3 operator-()						{ x = -x; y = -y; z = -z; return *this; }
+	Vector3 operator-()	const				{ return { -x, -y, -z }; }
 
 	Vector3& operator+=(const Vector3& v)	{ x += v.x; y += v.y; z += v.z; return *this; }
 	Vector3& operator-=(const Vector3& v)	{ x -= v.x; y -= v.y; z -= v.z; return *this; }
@@ -20,6 +42,29 @@ struct Vector3
 
 	template<typename T>
 	Vector3& operator/=(const T scale)		{ x /= scale; y /= scale; z /= scale; return *this; }
+
+
+	[[nodiscard]] static Vector3 GetZero()		{ return {  0.0f,  0.0f,  0.0f }; }
+	[[nodiscard]] static Vector3 GetLeft()		{ return { -1.0f,  0.0f,  0.0f }; }
+	[[nodiscard]] static Vector3 GetRight()		{ return {  1.0f,  0.0f,  0.0f }; }
+	[[nodiscard]] static Vector3 GetDown()		{ return {  0.0f, -1.0f,  0.0f }; }
+	[[nodiscard]] static Vector3 GetUp()		{ return {  0.0f,  1.0f,  0.0f }; }
+	[[nodiscard]] static Vector3 GetBack()		{ return {  0.0f,  0.0f, -1.0f }; }
+	[[nodiscard]] static Vector3 GetForward()	{ return {  0.0f,  0.0f,  1.0f }; }
+
+	/// @brief 内積を取得
+	[[nodiscard]] static float GetDot(const Vector3& v1, const Vector3& v2)
+	{
+		return{ v1.x * v2.x + v1.y * v2.y + v1.z * v2.z };
+	}
+
+	/// @brief 外積を取得
+	[[nodiscard]] static Vector3 GetCross(const Vector3& v1, const Vector3& v2)
+	{
+		return{ v1.y * v2.z - v1.z * v2.y,
+				v1.z * v2.x - v1.x * v2.z,
+				v1.x * v2.y - v1.y * v2.x };
+	}
 
 	/// @brief 大きさを取得する
 	/// @return 大きさ
@@ -55,6 +100,7 @@ struct Vector3
 	}
 };
 
+
 inline Vector3 operator+(const Vector3& v1, const Vector3& v2)	{ return { v1.x + v2.x, v1.y + v2.y, v1.z + v2.z }; }
 inline Vector3 operator-(const Vector3& v1, const Vector3& v2)	{ return { v1.x - v2.x, v1.y - v2.y, v1.z - v2.z }; }
 inline Vector3 operator*(const Vector3& v1, const Vector3& v2)	{ return { v1.x * v2.x, v1.y * v2.y, v1.z * v2.z }; }
@@ -82,7 +128,7 @@ inline void from_json(const nlohmann::json& j_data, Vector3& v)
 
 inline void to_json(nlohmann::json& j_data, const Vector3& v)
 {
-	j_data = nlohmann::json
+	j_data = 
 	{
 		{ "x", v.x },
 		{ "y", v.y },

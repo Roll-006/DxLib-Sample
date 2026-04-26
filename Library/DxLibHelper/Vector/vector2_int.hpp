@@ -7,8 +7,9 @@ struct Vector2Int
     int x;
 	int y;
 
+
 	Vector2Int operator+() const				{ return *this; }
-	Vector2Int operator-()						{ x = -x; y = -y; return *this; }
+	Vector2Int operator-() const				{ return { -x, -y }; }
 
     Vector2Int& operator+=(const Vector2Int& v)	{ x += v.x; y += v.y; return *this; }
     Vector2Int& operator-=(const Vector2Int& v)	{ x -= v.x; y -= v.y; return *this; }
@@ -19,6 +20,13 @@ struct Vector2Int
 
 	template<typename T>
 	Vector2Int& operator/=(const T scale)		{ x /= scale; y /= scale; return *this; }
+
+
+	[[nodiscard]] static Vector2Int GetZero()	{ return {  0,  0 }; }
+	[[nodiscard]] static Vector2Int GetLeft()	{ return { -1,  0 }; }
+	[[nodiscard]] static Vector2Int GetRight()	{ return {  1,  0 }; }
+	[[nodiscard]] static Vector2Int GetDown()	{ return {  0, -1 }; }
+	[[nodiscard]] static Vector2Int GetUp()		{ return {  0,  1 }; }
 
 	/// @brief 大きさを取得する
 	/// @return 大きさ
@@ -54,6 +62,7 @@ struct Vector2Int
 	}
 };
 
+
 inline Vector2Int operator+(const Vector2Int& v1, const Vector2Int& v2)	{ return { v1.x + v2.x, v1.y + v2.y }; }
 inline Vector2Int operator-(const Vector2Int& v1, const Vector2Int& v2)	{ return { v1.x - v2.x, v1.y - v2.y }; }
 inline Vector2Int operator*(const Vector2Int& v1, const Vector2Int& v2)	{ return { v1.x * v2.x, v1.y * v2.y }; }
@@ -80,7 +89,7 @@ inline void from_json(const nlohmann::json& j_data, Vector2Int& v)
 
 inline void to_json(nlohmann::json& j_data, const Vector2Int& v)
 {
-	j_data = nlohmann::json
+	j_data = 
 	{
 		{ "x", v.x },
 		{ "y", v.y }
