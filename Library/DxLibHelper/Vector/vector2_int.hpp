@@ -39,7 +39,7 @@ struct Vector2Int
 	/// @return 大きさの二乗
 	[[nodiscard]] float GetSqrMagnitude() const
 	{
-		return x * x + y * y;
+		return static_cast<float>(x * x + y * y);
 	}
 
 	/// @brief 自身を正規化する

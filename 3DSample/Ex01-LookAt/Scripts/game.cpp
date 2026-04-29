@@ -1,28 +1,30 @@
-﻿#include <DxLib.h>
-#include <string>
-#include <array>
-#include <Vector/vector3.hpp>
+﻿#include <string>
+#include <vector>
+#include <DxLib.h>
+#include <JSON/json_loader.hpp>
+#include <Matrix/matrix_4x4.hpp>
 #include <Vector/vector2.hpp>
 #include <Vector/vector2_int.hpp>
-#include <Matrix/matrix_4x4.hpp>
+#include "math.h"
 #include "time.h"
 #include "keyboard.h"
 #include "mouse.h"
 #include "transform.h"
-#include "main_camera.h"
-#include "modeler.h"
-#include "player.h"
+#include "../GameObjects/AimTarget/aim_target.h"
+#include "../GameObjects/Player/player.h"
+#include "../GameObjects/MainCamera/main_camera.h"
+#include "../Scenes/DemoScene/demo_scene.h"
 #include "game.h"
 
 int Game::Run() const
 {
-	if (auto setup_result = SetUpDxLib(); setup_result != EXIT_SUCCESS)
+	if (auto setupResult = SetUpDxLib(); setupResult != EXIT_SUCCESS)
 	{
-		return setup_result;
+		return setupResult;
 	}
 
-	auto mainCamera = MainCamera();
-	auto player		= Player();
+	auto demoScene = std::make_shared<DemoScene>();
+	demoScene->Initialize();
 
 	while (ShouldRun())
 	{
@@ -30,10 +32,9 @@ int Game::Run() const
 		Keyboard::GetInstance().Update();
 		Mouse	::GetInstance().Update();
 
-		player.Update();
-		mainCamera.Update();
-
-		player.Draw();
+		demoScene->Update();
+		demoScene->LateUpdate();
+		demoScene->Render();
 
 		Time::GetInstance().CapFPS();
 

@@ -1,75 +1,158 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{581181a7-7235-4277-af46-fe6699980fd4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{043f1bb2-ddb2-4625-b862-370c7a97f5ed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="GameObjects\MainCamera">
+      <UniqueIdentifier>{d6aa91c0-43b8-4006-a6d6-0d230893d1a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Player">
+      <UniqueIdentifier>{528e0bc0-ba08-4a11-9824-eb837b45110a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JSON">
+      <UniqueIdentifier>{2c451f98-653a-4d9b-82e6-7bef02191c4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\AimTarget">
+      <UniqueIdentifier>{21932620-1452-4bd1-a6bd-e0650d7c39e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{24483b44-3a44-4c32-a939-0c143352e497}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\DemoScene">
+      <UniqueIdentifier>{61757c71-36e4-47c1-9676-5adc7cc0742b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SourceCode\main.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Scripts\camera_applier.cpp">
+      <Filter>Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\game.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Scripts\component.cpp">
+      <Filter>Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\modeler.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Scripts\game.cpp">
+      <Filter>Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\transform.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Scripts\game_object.cpp">
+      <Filter>Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\player.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Scripts\keyboard.cpp">
+      <Filter>Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\main_camera.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Scripts\main.cpp">
+      <Filter>Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\keyboard.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Scripts\model_renderer.cpp">
+      <Filter>Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\mouse.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Scripts\mouse.cpp">
+      <Filter>Scripts</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\time.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Scripts\multi_aim_constraint.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\time.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\transform.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Player\player.cpp">
+      <Filter>GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\MainCamera\main_camera.cpp">
+      <Filter>GameObjects\MainCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\AimTarget\aim_target.cpp">
+      <Filter>GameObjects\AimTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\aim_target_controller.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\scene.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\DemoScene\demo_scene.cpp">
+      <Filter>Scenes\DemoScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SourceCode\game.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Scripts\camera_applier.h">
+      <Filter>Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\modeler.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Scripts\component.h">
+      <Filter>Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\transform.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Scripts\component_concept.h">
+      <Filter>Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\player.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Scripts\game.h">
+      <Filter>Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\main_camera.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Scripts\game_object.h">
+      <Filter>Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\math.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Scripts\keyboard.h">
+      <Filter>Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\keyboard.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Scripts\math.h">
+      <Filter>Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\mouse.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Scripts\model_renderer.h">
+      <Filter>Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\time.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Scripts\mouse.h">
+      <Filter>Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="Scripts\multi_aim_constraint.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\time.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\transform.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Player\player.h">
+      <Filter>GameObjects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\MainCamera\main_camera.h">
+      <Filter>GameObjects\MainCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\component_factory.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\AimTarget\aim_target.h">
+      <Filter>GameObjects\AimTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\aim_target_controller.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\scene.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\DemoScene\demo_scene.h">
+      <Filter>Scenes\DemoScene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="JSON\game_object_tags.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="JSON\main_camera.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="JSON\player.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="JSON\aim_target.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="JSON\demo_scene.json">
+      <Filter>JSON</Filter>
+    </None>
   </ItemGroup>
 </Project>

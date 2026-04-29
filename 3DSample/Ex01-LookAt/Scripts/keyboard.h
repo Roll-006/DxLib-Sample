@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-class Keyboard
+class Keyboard final
 {
 public:
 	/// @brief インスタンスを取得

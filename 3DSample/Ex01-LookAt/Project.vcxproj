@@ -134,26 +134,51 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="SourceCode\game.cpp" />
-    <ClCompile Include="SourceCode\keyboard.cpp" />
-    <ClCompile Include="SourceCode\main.cpp" />
-    <ClCompile Include="SourceCode\main_camera.cpp" />
-    <ClCompile Include="SourceCode\modeler.cpp" />
-    <ClCompile Include="SourceCode\mouse.cpp" />
-    <ClCompile Include="SourceCode\player.cpp" />
-    <ClCompile Include="SourceCode\time.cpp" />
-    <ClCompile Include="SourceCode\transform.cpp" />
+    <ClCompile Include="GameObjects\AimTarget\aim_target.cpp" />
+    <ClCompile Include="GameObjects\MainCamera\main_camera.cpp" />
+    <ClCompile Include="GameObjects\Player\player.cpp" />
+    <ClCompile Include="Scenes\DemoScene\demo_scene.cpp" />
+    <ClCompile Include="Scripts\aim_target_controller.cpp" />
+    <ClCompile Include="Scripts\camera_applier.cpp" />
+    <ClCompile Include="Scripts\component.cpp" />
+    <ClCompile Include="Scripts\game.cpp" />
+    <ClCompile Include="Scripts\game_object.cpp" />
+    <ClCompile Include="Scripts\keyboard.cpp" />
+    <ClCompile Include="Scripts\main.cpp" />
+    <ClCompile Include="Scripts\model_renderer.cpp" />
+    <ClCompile Include="Scripts\mouse.cpp" />
+    <ClCompile Include="Scripts\multi_aim_constraint.cpp" />
+    <ClCompile Include="Scripts\scene.cpp" />
+    <ClCompile Include="Scripts\time.cpp" />
+    <ClCompile Include="Scripts\transform.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SourceCode\game.h" />
-    <ClInclude Include="SourceCode\keyboard.h" />
-    <ClInclude Include="SourceCode\main_camera.h" />
-    <ClInclude Include="SourceCode\math.h" />
-    <ClInclude Include="SourceCode\modeler.h" />
-    <ClInclude Include="SourceCode\mouse.h" />
-    <ClInclude Include="SourceCode\player.h" />
-    <ClInclude Include="SourceCode\time.h" />
-    <ClInclude Include="SourceCode\transform.h" />
+    <ClInclude Include="GameObjects\AimTarget\aim_target.h" />
+    <ClInclude Include="GameObjects\MainCamera\main_camera.h" />
+    <ClInclude Include="GameObjects\Player\player.h" />
+    <ClInclude Include="Scenes\DemoScene\demo_scene.h" />
+    <ClInclude Include="Scripts\aim_target_controller.h" />
+    <ClInclude Include="Scripts\camera_applier.h" />
+    <ClInclude Include="Scripts\component.h" />
+    <ClInclude Include="Scripts\component_concept.h" />
+    <ClInclude Include="Scripts\component_factory.h" />
+    <ClInclude Include="Scripts\game.h" />
+    <ClInclude Include="Scripts\game_object.h" />
+    <ClInclude Include="Scripts\scene.h" />
+    <ClInclude Include="Scripts\keyboard.h" />
+    <ClInclude Include="Scripts\math.h" />
+    <ClInclude Include="Scripts\model_renderer.h" />
+    <ClInclude Include="Scripts\mouse.h" />
+    <ClInclude Include="Scripts\multi_aim_constraint.h" />
+    <ClInclude Include="Scripts\time.h" />
+    <ClInclude Include="Scripts\transform.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="JSON\aim_target.json" />
+    <None Include="JSON\demo_scene.json" />
+    <None Include="JSON\game_object_tags.json" />
+    <None Include="JSON\main_camera.json" />
+    <None Include="JSON\player.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

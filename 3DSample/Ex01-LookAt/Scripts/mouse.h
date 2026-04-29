@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-class Mouse
+class Mouse final
 {
 public:
 	/// @brief インスタンスを取得

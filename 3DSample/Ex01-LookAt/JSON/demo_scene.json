@@ -1,0 +1,31 @@
+﻿{
+  "name": "AimTarget",
+  "tag": "Untagged",
+  "isActive": true,
+  "Components": [
+    {
+      "type": "Transform",
+      "enabled": true,
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "type": "AimTargetController",
+      "enabled": true,
+      "moveSpeed": 15.0
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-class Time
+class Time final
 {
 public:
 	/// @brief インスタンスを取得
