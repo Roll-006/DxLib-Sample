@@ -25,16 +25,16 @@
     {
       "type": "MultiAimConstraint",
       "enabled": true,
-      "constrainedBoneName": "mixamorig:Neck1",
+      "constrainedBoneName": "mixamorig:LeftForeArm",
       "aimAxis": {
-        "x": 0,
-        "y": 0,
-        "z": 1 
-      },
-      "upAxis": {
         "x": 0,
         "y": 1,
         "z": 0 
+      },
+      "upAxis": {
+        "x": 0,
+        "y": 0,
+        "z": 1 
       },
       "sourceObjectName": "AimTarget"
     },

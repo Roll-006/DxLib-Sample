@@ -36,7 +36,7 @@ private:
 	LONGLONG	_firstTimeUs;
 	LONGLONG	_currentTimeUs;
 	LONGLONG	_prevTimeUs;
-	int			_frameCount;
+	int			_boneCount;
 	float		_averageFps;
 	float		_deltaTime;
 	float		_timeScale;

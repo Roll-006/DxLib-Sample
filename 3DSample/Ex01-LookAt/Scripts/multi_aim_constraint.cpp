@@ -22,8 +22,9 @@ MultiAimConstraint::MultiAimConstraint() :
 	_modelHandle			(-1),
 	_constrainedBoneName	(""),
 	_constrainedBoneIndex	(-1),
-	_aimAxis				(0, 0, 1),
-	_upAxis					(0, 1, 0),
+	_parentBoneIndex		(-1),
+	_aimAxis				(Vector3::GetForward()),
+	_upAxis					(Vector3::GetUp()),
 	_sourceObjectName		(""),
 	_sourceObject			(),
 	_transform				()
@@ -51,24 +52,7 @@ void MultiAimConstraint::Update()
 {
 	if (!_enabled) { return; }
 
-	//TODO : ボーンの進行方向とupを指定できるようにする必要あり
-
-	// 回転させるボーンの行列を取得
-	auto frameWorldMat = static_cast<Matrix4x4>(MV1GetFrameLocalWorldMatrix(_modelHandle, _constrainedBoneIndex));
-
-	// 対象の方向を見る
-	frameWorldMat = Matrix4x4::LookAt(frameWorldMat.GetTranslation(), _sourceObject.lock()->GetPosition(), Vector3::GetUp());
-	
-	// ローカル行列に変換
-	const auto parentWorldRMat	= static_cast<Matrix4x4>(MV1GetFrameLocalWorldMatrix(_modelHandle, _parentBoneIndex)).GetRMatrix();
-	const auto frameLocalRMat	= frameWorldMat.GetRMatrix() * MInverse(parentWorldRMat);
-	
-	// ローカル行列に回転行列を設定
-	auto frameLocalMat = static_cast<Matrix4x4>(MV1GetFrameLocalMatrix(_modelHandle, _constrainedBoneIndex));
-	frameLocalMat.SetRotation(frameLocalRMat);
-	
-	// ローカル行列として適用
-	MV1SetFrameUserLocalMatrix(_modelHandle, _constrainedBoneIndex, frameLocalMat);
+	AimBone();
 }
 
 void MultiAimConstraint::LateUpdate()
@@ -79,9 +63,36 @@ void MultiAimConstraint::LateUpdate()
 void MultiAimConstraint::Render() const
 {
 	if (!_enabled) { return; }
+
+	const auto mat = static_cast<Matrix4x4>(MV1GetFrameLocalWorldMatrix(_modelHandle, _constrainedBoneIndex));
+	const auto pos = mat.GetTranslation();
+	DrawLine3D(pos, pos + mat.GetRight()	* 10, GetColor(255,   0,   0));
+	DrawLine3D(pos, pos + mat.GetUp()		* 10, GetColor(  0, 255,   0));
+	DrawLine3D(pos, pos + mat.GetForward()	* 10, GetColor(  0,   0, 255));
 }
 
 void MultiAimConstraint::Deserialize(const nlohmann::json& json)
 {
 	from_json(json, *this);
+}
+
+void MultiAimConstraint::AimBone()
+{
+	const auto boneWorldMat	= static_cast<Matrix4x4>(MV1GetFrameLocalWorldMatrix(_modelHandle, _constrainedBoneIndex));
+
+	auto boneWorldRMat = Matrix4x4::LookAt(boneWorldMat.GetTranslation(), _sourceObject.lock()->GetPosition(), Vector3::GetUp()).GetRMatrix();
+	
+	// 指定されたaim軸及びup軸で姿勢が制御されるように変換
+	const auto offsetRMat = Matrix4x4::CreateRotation(Vector3::GetCross(_upAxis, _aimAxis), _upAxis, _aimAxis);
+	boneWorldRMat = MInverse(offsetRMat) * boneWorldRMat;
+
+	// ローカル行列に変換
+	const auto parentWorldRMat	= static_cast<Matrix4x4>(MV1GetFrameLocalWorldMatrix(_modelHandle, _parentBoneIndex)).GetRMatrix();
+	const auto boneLocalRMat	= boneWorldRMat * MInverse(parentWorldRMat);
+	
+	// ローカル行列に回転行列を設定
+	auto boneLocalMat = static_cast<Matrix4x4>(MV1GetFrameLocalMatrix(_modelHandle, _constrainedBoneIndex));
+	boneLocalMat.SetRotation(boneLocalRMat);
+	
+	MV1SetFrameUserLocalMatrix(_modelHandle, _constrainedBoneIndex, boneLocalMat);
 }

@@ -5,7 +5,7 @@ Time::Time() :
 	_firstTimeUs	(GetNowHiPerformanceCount()),
 	_currentTimeUs	(_firstTimeUs),
 	_prevTimeUs		(_firstTimeUs),
-	_frameCount		(1),
+	_boneCount		(1),
 	_averageFps		(0.0f),
 	_deltaTime		(0.0f),
 	_timeScale		(1.0f)
@@ -20,7 +20,7 @@ void Time::Update()
 	_prevTimeUs		= _currentTimeUs;						// 現在の値を保存
 
 	// フレームカウントが目的のFPSに到達した場合、カウントをリセットする
-	if (_frameCount == kFPS)
+	if (_boneCount == kFPS)
 	{
 		// 表示のため、平均FPSを計算する
 		const auto elapsedTimeUs = static_cast<float>(_currentTimeUs - _firstTimeUs);
@@ -28,18 +28,18 @@ void Time::Update()
 
 		// カウントリセット
 		_firstTimeUs = GetNowHiPerformanceCount();
-		_frameCount = 1;
+		_boneCount = 1;
 	}
 	else
 	{
-		++_frameCount;
+		++_boneCount;
 	}
 }
 
 void Time::CapFPS() const
 {
 	// 理想の時間と実際の時間の差分を取得し、時間を停止させる
-	const auto idealTimeUs	= kUs / kFPS * _frameCount;
+	const auto idealTimeUs	= kUs / kFPS * _boneCount;
 	const auto actualTimeUs = static_cast<float>(_currentTimeUs - _firstTimeUs);
 	const auto waitTimeMs	= (idealTimeUs - actualTimeUs) / kMs;
 

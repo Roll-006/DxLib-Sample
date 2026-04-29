@@ -55,7 +55,13 @@ void AimTargetController::Render() const
 
 	auto transform = _transform.lock();
 	DrawSphere3D(transform->GetPosition(), 0.5f, 8, 0xffffff, 0xffffff, TRUE);
-	
+
+	DrawFormatString(0,   0, 0xffffff, "→ : 右へ移動");
+	DrawFormatString(0,  20, 0xffffff, "← : 左へ移動");
+	DrawFormatString(0,  40, 0xffffff, "↑ : 上へ移動");
+	DrawFormatString(0,  60, 0xffffff, "↓ : 下へ移動");
+	DrawFormatString(0,  80, 0xffffff, "W : 奥へ移動");
+	DrawFormatString(0, 100, 0xffffff, "S : 手前へ移動");
 }
 
 void AimTargetController::Deserialize(const nlohmann::json& json)

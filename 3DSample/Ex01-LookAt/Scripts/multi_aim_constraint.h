@@ -17,6 +17,9 @@ public:
 	void Deserialize(const nlohmann::json& json) override;
 
 private:
+	void AimBone();
+
+private:
 	int							_modelHandle;
 	std::string					_constrainedBoneName;	// sourceObjectの影響を受けるボーンの名前
 	int							_constrainedBoneIndex;	// sourceObjectの影響を受けるボーンのインデックス
