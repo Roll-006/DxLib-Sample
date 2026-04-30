@@ -1,0 +1,31 @@
+﻿{
+  "name": "Player",
+  "tag": "Player",
+  "isActive": true,
+  "Components": [
+    {
+      "type": "Transform",
+      "enabled": true,
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 0.1,
+        "y": 0.1,
+        "z": 0.1
+      }
+    },
+    {
+      "type": "ModelRenderer",
+      "enabled": true,
+      "modelPath": "../../Assets/Models/Swat/mesh.mv1"
+    }
+  ]
+}
