@@ -10,19 +10,22 @@
 #include "scene.h"
 
 Scene::Scene(const std::string& jsonPath) : 
-	_name	(""),
-	_objects()
+	_name		(""),
+	_jsonPath	(jsonPath),
+	_objects	()
 {
-	nlohmann::json json;
-	if (json_loader::Load(jsonPath, json))
-	{
-		from_json(json, *this);
-		LoadGameObjects(json.at("objects"));
-	}
+
 }
 
 void Scene::Initialize()
 {
+	nlohmann::json json;
+	if (json_loader::Load(_jsonPath, json))
+	{
+		from_json(json, *this);
+		LoadGameObjects(json.at("objects"));
+	}
+
 	for (const auto& object : _objects)
 	{
 		object->Initialize(shared_from_this());
@@ -79,7 +82,7 @@ std::vector<std::shared_ptr<Transform>> Scene::LoadGameObjects(const nlohmann::j
 		// 子階層も全て読み込む
 		for (const auto& child : LoadGameObjects(objectJson.at("children")))
 		{
-			transform->AddChild(child);
+			child->SetParent(transform);
 		}
 
 		childTransform.emplace_back(transform);

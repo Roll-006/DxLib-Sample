@@ -26,10 +26,12 @@ public:
 	/// <param name="up">upベクトル</param>
 	void LookAt(const Vector3& target, const Vector3& up = Vector3::GetUp());
 
-	Vector3		GetPosition()	const { return _position; }
-	Vector3		GetRotation()	const { return _rotation; }
-	Vector3		GetScale()		const { return _scale; }
-	Matrix4x4	GetMatrix();
+	#pragma region Getter
+	Vector3		GetLocalPosition()	const { return _localPosition; }
+	Vector3		GetLocalRotation()	const { return _localRotation; }
+	Vector3		GetLocalScale()		const { return _localScale; }
+	Matrix4x4	GetWorldMatrix();
+
 	Vector3		GetRight();
 	Vector3		GetUp();
 	Vector3		GetForward();
@@ -52,23 +54,20 @@ public:
 	/// </summary>
 	/// <returns>子トランスフォームの数</returns>
 	int GetChildCount() const { return static_cast<int>(_children.size()); }
+	#pragma endregion
 
-	void SetPosition(const Vector3& position)	{ _position = position;					_isDirty = true; }
-	void SetRotation(const Vector3& rotation)	{ _rotation = rotation;					_isDirty = true; }
-	void SetScale	(const Vector3& scale)		{ _scale	= scale;					_isDirty = true; }
-	void SetScale	(const float scale)			{ _scale	= { scale, scale, scale };	_isDirty = true; }
+	#pragma region Setter
+	void SetLocalPosition	(const Vector3& position);
+	void SetLocalRotation	(const Vector3& rotation);
+	void SetLocalScale		(const Vector3& scale);
+	void SetLocalScale		(const float scale);
 
 	/// <summary>
 	/// 親トランスフォームを設定する
 	/// </summary>
 	/// <param name="parent">親トランスフォーム</param>
 	void SetParent(const std::shared_ptr<Transform>& parent);
-
-	/// <summary>
-	/// 子トランスフォームを追加する
-	/// </summary>
-	/// <param name="child">子トランスフォーム</param>
-	void AddChild(const std::shared_ptr<Transform>& child);
+	#pragma endregion
 	
 private:
 	/// <summary>
@@ -76,11 +75,22 @@ private:
 	/// </summary>
 	void UpdateMatrix();
 
+	/// <summary>
+	/// 子トランスフォームを追加する
+	/// </summary>
+	/// <param name="child">子トランスフォーム</param>
+	void AddChild(const std::shared_ptr<Transform>& child);
+
+	/// <summary>
+	/// データが汚された
+	/// </summary>
+	void OnDirty();
+
 private:
-	Vector3		_position;
-	Vector3		_rotation;
-	Vector3		_scale;
-	Matrix4x4	_matrix;
+	Vector3		_localPosition;
+	Vector3		_localRotation;
+	Vector3		_localScale;
+	Matrix4x4	_worldMatrix;
 	bool		_isDirty;
 	std::weak_ptr<Transform> _parent;
 	std::vector<std::weak_ptr<Transform>> _children;
@@ -93,20 +103,20 @@ private:
 #pragma region from / to JSON
 inline void from_json(const nlohmann::json& json, Transform& transform)
 {
-	json.at("enabled").	get_to(transform._enabled);
-	json.at("position").get_to(transform._position);
-	json.at("rotation").get_to(transform._rotation);
-	json.at("scale").	get_to(transform._scale);
+	json.at("enabled").			get_to(transform._enabled);
+	json.at("localPosition").	get_to(transform._localPosition);
+	json.at("localRotation").	get_to(transform._localRotation);
+	json.at("localScale").		get_to(transform._localScale);
 }
 
 inline void to_json(nlohmann::json& json, const Transform& transform)
 {
 	json =
 	{
-		{ "enabled",	transform._enabled },
-		{ "position",	transform._position },
-		{ "rotation",	transform._rotation },
-		{ "scale",		transform._scale },
+		{ "enabled",		transform._enabled },
+		{ "localPosition",	transform._localPosition },
+		{ "localRotation",	transform._localRotation },
+		{ "localScale",		transform._localScale },
 	};
 }
 #pragma endregion

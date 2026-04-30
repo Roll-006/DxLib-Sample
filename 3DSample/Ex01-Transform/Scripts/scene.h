@@ -45,6 +45,7 @@ private:
 
 public:
 	std::string _name;
+	std::string _jsonPath;
 	std::vector<std::shared_ptr<GameObject>> _objects;
 
 	friend void from_json	(const nlohmann::json& json, Scene& scene);

@@ -48,7 +48,7 @@ void ModelRenderer::LateUpdate()
 
 void ModelRenderer::Render() const
 {
-	MV1SetMatrix(_modelHandle, _transform.lock()->GetMatrix());
+	MV1SetMatrix(_modelHandle, _transform.lock()->GetWorldMatrix());
 	MV1DrawModel(_modelHandle);
 }
 

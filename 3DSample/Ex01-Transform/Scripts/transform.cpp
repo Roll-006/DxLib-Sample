@@ -16,13 +16,13 @@ namespace
 }
 
 Transform::Transform() :
-	_position	(0.0f, 0.0f, 0.0f),
-	_rotation	(0.0f, 0.0f, 0.0f),
-	_scale		(1.0f, 1.0f, 1.0f),
-	_matrix		(Matrix4x4::GetIdentity()),
-	_isDirty	(false),
-	_parent		(),
-	_children	()
+	_localPosition	(0.0f, 0.0f, 0.0f),
+	_localRotation	(0.0f, 0.0f, 0.0f),
+	_localScale		(1.0f, 1.0f, 1.0f),
+	_worldMatrix	(Matrix4x4::GetIdentity()),
+	_isDirty		(false),
+	_parent			(),
+	_children		()
 {
 	
 }
@@ -30,6 +30,8 @@ Transform::Transform() :
 void Transform::Initialize(const std::shared_ptr<GameObject>& gameObject)
 {
 	_gameObject = gameObject;
+
+	OnDirty();
 }
 
 void Transform::Update()
@@ -50,41 +52,40 @@ void Transform::Render() const
 void Transform::Deserialize(const nlohmann::json& json)
 {
 	from_json(json, *this);
-
-	_isDirty = true;
 }
 
 void Transform::LookAt(const Vector3& target, const Vector3& up)
 {
-	_matrix = Matrix4x4::LookAt(_position, target, up);
+	_worldMatrix = Matrix4x4::LookAt(_localPosition, target, up);
 }
 
-Matrix4x4 Transform::GetMatrix()
+#pragma region Getter
+Matrix4x4 Transform::GetWorldMatrix()
 {
 	UpdateMatrix();
 
-	return _matrix;
+	return _worldMatrix;
 }
 
 Vector3 Transform::GetRight()
 {
 	UpdateMatrix();
 
-	return _matrix.GetRight();
+	return _worldMatrix.GetRight();
 }
 
 Vector3 Transform::GetUp()
 {
 	UpdateMatrix();
 
-	return _matrix.GetUp();
+	return _worldMatrix.GetUp();
 }
 
 Vector3 Transform::GetForward()
 {
 	UpdateMatrix();
 
-	return _matrix.GetForward();
+	return _worldMatrix.GetForward();
 }
 
 std::shared_ptr<Transform> Transform::GetParent() const
@@ -96,23 +97,78 @@ std::shared_ptr<Transform> Transform::GetChild(const int index) const
 {
 	return index < _children.size() ? _children.at(index).lock() : nullptr;
 }
+#pragma endregion
+
+#pragma region Setter
+void Transform::SetLocalPosition(const Vector3& position)
+{
+	_localPosition = position;
+
+	OnDirty();
+}
+
+void Transform::SetLocalRotation(const Vector3& rotation)
+{
+	_localRotation = rotation;
+	
+	OnDirty();
+}
+
+void Transform::SetLocalScale(const Vector3& scale)
+{
+	_localScale = scale;
+	
+	OnDirty();
+}
+
+void Transform::SetLocalScale(const float scale)
+{
+	_localScale = { scale, scale, scale };
+
+	OnDirty();
+}
 
 void Transform::SetParent(const std::shared_ptr<Transform>& parent)
 {
 	_parent = parent;
 	parent->AddChild(std::dynamic_pointer_cast<Transform>(shared_from_this()));
 }
+#pragma endregion
 
 void Transform::AddChild(const std::shared_ptr<Transform>& child)
 {
 	_children.emplace_back(child);
-	child->SetParent(std::dynamic_pointer_cast<Transform>(shared_from_this()));
+}
+
+void Transform::OnDirty()
+{
+	_isDirty = true;
+
+	for (const auto& child : _children)
+	{
+		child.lock()->OnDirty();
+	}
 }
 
 void Transform::UpdateMatrix()
 {
 	if (!_isDirty) { return; }
 	
-	_matrix	 = Matrix4x4::CreateTRS(_position, _rotation, _scale);
+	const auto localMat = Matrix4x4::CreateTRS(_localPosition, _localRotation, _localScale);
+
+	if (const auto& parent = _parent.lock())
+	{
+		_worldMatrix = parent->GetWorldMatrix() * localMat;
+	}
+	else
+	{
+		_worldMatrix = localMat;
+	}
+
+	for (const auto& child : _children)
+	{
+		child.lock()->UpdateMatrix();
+	}
+
 	_isDirty = false;
 }

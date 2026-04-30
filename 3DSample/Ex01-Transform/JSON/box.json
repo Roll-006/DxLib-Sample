@@ -6,17 +6,17 @@
     {
       "type": "Transform",
       "enabled": true,
-      "position": {
+      "localPosition": {
         "x": 0.0,
         "y": 0.0,
         "z": -10.0
       },
-      "rotation": {
+      "localRotation": {
         "x": 0.0,
         "y": 0.0,
         "z": 0.0
       },
-      "scale": {
+      "localScale": {
         "x": 0.01,
         "y": 0.01,
         "z": 0.01
