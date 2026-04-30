@@ -15,9 +15,9 @@
 
 int Game::Run() const
 {
-	if (auto setup_result = SetUpDxLib(); setup_result != EXIT_SUCCESS)
+	if (auto setupResult = SetUpDxLib(); setupResult != EXIT_SUCCESS)
 	{
-		return setup_result;
+		return setupResult;
 	}
 
 	auto player = Player();
