@@ -2,6 +2,10 @@
   "name": "DemoScene",
   "objects": [
     {
+      "name": "MainCamera",
+      "children": []
+    },
+    {
       "name": "Player",
       "children": [
         {

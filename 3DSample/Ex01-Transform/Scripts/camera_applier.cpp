@@ -47,11 +47,6 @@ void CameraApplier::LateUpdate()
 	// カメラの位置及び姿勢を設定
 	const auto transform = _transform.lock();
 	SetCameraPositionAndTargetAndUpVec(transform->GetPosition(), transform->GetForward(), transform->GetUp());
-
-	if (transform->GetParent() == nullptr)
-	{
-		int a = 0;
-	}
 }
 
 void CameraApplier::Render() const

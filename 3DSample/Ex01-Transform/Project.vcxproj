@@ -161,6 +161,7 @@
     <ClInclude Include="Scripts\component_factory.h" />
     <ClInclude Include="Scripts\game.h" />
     <ClInclude Include="Scripts\game_object.h" />
+    <ClInclude Include="Scripts\game_object_concept.h" />
     <ClInclude Include="Scripts\game_object_factory.h" />
     <ClInclude Include="Scripts\scene.h" />
     <ClInclude Include="Scripts\keyboard.h" />

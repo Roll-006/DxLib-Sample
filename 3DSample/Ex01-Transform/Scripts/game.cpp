@@ -9,10 +9,6 @@
 #include "time.h"
 #include "keyboard.h"
 #include "mouse.h"
-#include "transform.h"
-#include "../GameObjects/Box/box.h"
-#include "../GameObjects/Player/player.h"
-#include "../GameObjects/MainCamera/main_camera.h"
 #include "../Scenes/DemoScene/demo_scene.h"
 #include "game.h"
 

@@ -128,6 +128,9 @@
     <ClInclude Include="Scripts\game_object_factory.h">
       <Filter>Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="Scripts\game_object_concept.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="JSON\game_object_tags.json">

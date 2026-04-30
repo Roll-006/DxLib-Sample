@@ -10,7 +10,7 @@ class GameObject;
 class GameObjectFactory final
 {
 public:
-    using CreateFunction = std::function<std::shared_ptr<Component>(GameObject&)>;
+    using CreateFunction = std::function<std::shared_ptr<GameObject>(Scene&)>;
 
     /// <summary>
     /// 型名と生成関数を登録
@@ -23,12 +23,12 @@ public:
     }
 
     /// <summary>
-    /// 型名からコンポーネントを生成
+    /// 型名からゲームオブジェクトを生成
     /// </summary>
     /// <param name="type">型名</param>
-    /// <param name="gameObject">コンポーネントを所持しているオブジェクト</param>
-    /// <returns>生成したコンポーネント</returns>
-    static std::shared_ptr<Component> Create(const std::string& type, GameObject& gameObject)
+    /// <param name="gameObject">ゲームオブジェクトを所持しているシーン</param>
+    /// <returns>生成したゲームオブジェクト</returns>
+    static std::shared_ptr<GameObject> Create(const std::string& type, Scene& scene)
     {
         auto& map = GetMap();
         auto itr = map.find(type);
@@ -38,7 +38,7 @@ public:
             return nullptr;
         }
 
-        return itr->second(gameObject);
+        return itr->second(scene);
     }
 
 private:

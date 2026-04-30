@@ -20,7 +20,6 @@ public:
     /// コンポーネントを追加
     /// </summary>
     /// <typeparam name="T">コンポーネントの型</typeparam>
-    /// <param name="json">読み込むJSONデータ</param>
     /// <returns>登録したコンポーネント</returns>
     template<ComponentT T>
     std::shared_ptr<T> AddComponent()
