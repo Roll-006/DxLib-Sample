@@ -1,3 +1,14 @@
 ﻿{
-  "name": "DemoScene"
+  "name": "DemoScene",
+  "objects": [
+    {
+      "name": "Player",
+      "children": [
+        {
+          "name": "Box",
+          "children": []
+        }
+      ]
+    }
+  ]
 }

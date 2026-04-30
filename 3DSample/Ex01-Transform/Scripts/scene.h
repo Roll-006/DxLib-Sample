@@ -7,7 +7,7 @@ class Transform;
 class Scene abstract : public std::enable_shared_from_this<Scene>
 {
 public:
-	Scene(/*const std::string& jsonPath*/);
+	Scene(const std::string& jsonPath);
 	virtual ~Scene() = default;
 
 	void Initialize();

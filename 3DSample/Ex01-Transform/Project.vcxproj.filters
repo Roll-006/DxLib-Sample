@@ -16,14 +16,14 @@
     <Filter Include="JSON">
       <UniqueIdentifier>{2c451f98-653a-4d9b-82e6-7bef02191c4b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObjects\AimTarget">
-      <UniqueIdentifier>{21932620-1452-4bd1-a6bd-e0650d7c39e6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{24483b44-3a44-4c32-a939-0c143352e497}</UniqueIdentifier>
     </Filter>
     <Filter Include="Scenes\DemoScene">
       <UniqueIdentifier>{61757c71-36e4-47c1-9676-5adc7cc0742b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Box">
+      <UniqueIdentifier>{e4ec2847-a364-477e-b4e0-e762dcf04c4d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,17 +63,14 @@
     <ClCompile Include="GameObjects\MainCamera\main_camera.cpp">
       <Filter>GameObjects\MainCamera</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjects\AimTarget\aim_target.cpp">
-      <Filter>GameObjects\AimTarget</Filter>
-    </ClCompile>
-    <ClCompile Include="Scripts\aim_target_controller.cpp">
-      <Filter>Scripts</Filter>
-    </ClCompile>
     <ClCompile Include="Scripts\scene.cpp">
       <Filter>Scripts</Filter>
     </ClCompile>
     <ClCompile Include="Scenes\DemoScene\demo_scene.cpp">
       <Filter>Scenes\DemoScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Box\box.cpp">
+      <Filter>GameObjects\Box</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,17 +116,17 @@
     <ClInclude Include="Scripts\component_factory.h">
       <Filter>Scripts</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjects\AimTarget\aim_target.h">
-      <Filter>GameObjects\AimTarget</Filter>
-    </ClInclude>
-    <ClInclude Include="Scripts\aim_target_controller.h">
-      <Filter>Scripts</Filter>
-    </ClInclude>
     <ClInclude Include="Scripts\scene.h">
       <Filter>Scripts</Filter>
     </ClInclude>
     <ClInclude Include="Scenes\DemoScene\demo_scene.h">
       <Filter>Scenes\DemoScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Box\box.h">
+      <Filter>GameObjects\Box</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\game_object_factory.h">
+      <Filter>Scripts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -142,7 +139,7 @@
     <None Include="JSON\player.json">
       <Filter>JSON</Filter>
     </None>
-    <None Include="JSON\aim_target.json">
+    <None Include="JSON\box.json">
       <Filter>JSON</Filter>
     </None>
     <None Include="JSON\demo_scene.json">

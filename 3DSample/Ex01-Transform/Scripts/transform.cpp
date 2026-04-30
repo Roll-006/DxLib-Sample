@@ -97,6 +97,18 @@ std::shared_ptr<Transform> Transform::GetChild(const int index) const
 	return index < _children.size() ? _children.at(index).lock() : nullptr;
 }
 
+void Transform::SetParent(const std::shared_ptr<Transform>& parent)
+{
+	_parent = parent;
+	parent->AddChild(std::dynamic_pointer_cast<Transform>(shared_from_this()));
+}
+
+void Transform::AddChild(const std::shared_ptr<Transform>& child)
+{
+	_children.emplace_back(child);
+	child->SetParent(std::dynamic_pointer_cast<Transform>(shared_from_this()));
+}
+
 void Transform::UpdateMatrix()
 {
 	if (!_isDirty) { return; }

@@ -8,9 +8,20 @@
 #include "game_object.h"
 #include "scene.h"
 
-Scene::Scene(/*const std::string& jsonPath*/)
+Scene::Scene(const std::string& jsonPath) : 
+	_name("")
 {
+	nlohmann::json json;
+	if (json_loader::Load(jsonPath, json))
+	{
+		from_json(json, *this);
 
+		// オブジェクトを生成
+		for (const auto& objectJson : json.at("objects"))
+		{
+
+		}
+	}
 }
 
 void Scene::Initialize()

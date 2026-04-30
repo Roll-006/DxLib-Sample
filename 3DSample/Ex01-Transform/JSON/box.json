@@ -1,0 +1,31 @@
+﻿{
+  "name": "Box",
+  "tag": "Untagged",
+  "isActive": true,
+  "components": [
+    {
+      "type": "Transform",
+      "enabled": true,
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": -10.0
+      },
+      "rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "scale": {
+        "x": 0.01,
+        "y": 0.01,
+        "z": 0.01
+      }
+    },
+    {
+      "type": "ModelRenderer",
+      "enabled": true,
+      "modelPath": "../../Assets/Models/Box/mesh.mv1"
+    }
+  ]
+}

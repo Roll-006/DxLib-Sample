@@ -20,7 +20,7 @@ GameObject::GameObject(const std::string& jsonPath) :
 		from_json(json, *this);
 
 		// コンポーネントを生成
-		for (const auto& componentJson : json.at("Components"))
+		for (const auto& componentJson : json.at("components"))
 		{
 			const auto type = componentJson.at("type").get<std::string>();
 			auto component = ComponentFactory::Create(type, *this);

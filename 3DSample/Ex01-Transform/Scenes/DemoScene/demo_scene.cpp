@@ -8,17 +8,17 @@
 #include "../../Scripts/game_object.h"
 
 // 仮
-#include "../../GameObjects/AimTarget/aim_target.h"
+#include "../../GameObjects/Box/box.h"
 #include "../../GameObjects/Player/player.h"
 #include "../../GameObjects/MainCamera/main_camera.h"
 
 #include "demo_scene.h"
 
-DemoScene::DemoScene()
+DemoScene::DemoScene() : 
+	Scene("JSON/demo_scene.json")
 {
 	// 仮
-	_name = "DemoScene";
-	_objects.emplace_back(std::make_shared<AimTarget>());
+	_objects.emplace_back(std::make_shared<Box>());
 	_objects.emplace_back(std::make_shared<Player>());
 	_objects.emplace_back(std::make_shared<MainCamera>());
 }

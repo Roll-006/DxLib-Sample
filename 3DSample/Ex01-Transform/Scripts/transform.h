@@ -51,12 +51,24 @@ public:
 	/// 子トランスフォームの数を取得
 	/// </summary>
 	/// <returns>子トランスフォームの数</returns>
-	int GetChildCount() const { return _children.size(); }
+	int GetChildCount() const { return static_cast<int>(_children.size()); }
 
 	void SetPosition(const Vector3& position)	{ _position = position;					_isDirty = true; }
 	void SetRotation(const Vector3& rotation)	{ _rotation = rotation;					_isDirty = true; }
 	void SetScale	(const Vector3& scale)		{ _scale	= scale;					_isDirty = true; }
 	void SetScale	(const float scale)			{ _scale	= { scale, scale, scale };	_isDirty = true; }
+
+	/// <summary>
+	/// 親トランスフォームを設定する
+	/// </summary>
+	/// <param name="parent">親トランスフォーム</param>
+	void SetParent(const std::shared_ptr<Transform>& parent);
+
+	/// <summary>
+	/// 子トランスフォームを追加する
+	/// </summary>
+	/// <param name="child">子トランスフォーム</param>
+	void AddChild(const std::shared_ptr<Transform>& child);
 	
 private:
 	/// <summary>

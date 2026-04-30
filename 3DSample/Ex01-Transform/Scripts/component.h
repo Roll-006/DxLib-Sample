@@ -1,8 +1,9 @@
 ﻿#pragma once
+#include <memory>
 #include "component_concept.h"
 #include "game_object.h"
 
-class Component abstract
+class Component abstract : public std::enable_shared_from_this<Component>
 {
 public:
 	Component();
