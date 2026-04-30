@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "component.h"
+#include "../Core/component.h"
 
 class GameObject;
 
@@ -30,6 +30,11 @@ public:
 	Vector3		GetLocalPosition()	const { return _localPosition; }
 	Vector3		GetLocalRotation()	const { return _localRotation; }
 	Vector3		GetLocalScale()		const { return _localScale; }
+	Matrix4x4	GetLocalMatrix()	const { return Matrix4x4::CreateTRS(_localPosition, _localRotation, _localScale); }
+
+	Vector3		GetWorldPosition();
+	//Vector3		GetWorldRotation();
+	Vector3		GetWorldScale();
 	Matrix4x4	GetWorldMatrix();
 
 	Vector3		GetRight();
@@ -82,7 +87,7 @@ private:
 	void AddChild(const std::shared_ptr<Transform>& child);
 
 	/// <summary>
-	/// データが汚された
+	/// 座標、回転、スケール情報が汚された
 	/// </summary>
 	void OnDirty();
 

@@ -5,7 +5,7 @@
 #include "math.h"
 #include "component_factory.h"
 #include "game_object_factory.h"
-#include "transform.h"
+#include "../Components/transform.h"
 #include "game_object.h"
 #include "scene.h"
 

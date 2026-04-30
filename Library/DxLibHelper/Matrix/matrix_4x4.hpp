@@ -9,7 +9,7 @@ struct Matrix4x4
 {
 	std::array<std::array<float, 4>, 4> m;
 
-	Matrix4x4(const std::array<std::array<float, 4>, 4> m) : 
+	Matrix4x4(const std::array<std::array<float, 4>, 4>& m) : 
 		m(m)
 	{ }
 

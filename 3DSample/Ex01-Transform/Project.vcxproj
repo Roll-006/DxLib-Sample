@@ -134,42 +134,42 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameObjects\Box\box.cpp" />
-    <ClCompile Include="GameObjects\MainCamera\main_camera.cpp" />
-    <ClCompile Include="GameObjects\Player\player.cpp" />
-    <ClCompile Include="Scenes\DemoScene\demo_scene.cpp" />
-    <ClCompile Include="Scripts\camera_applier.cpp" />
-    <ClCompile Include="Scripts\component.cpp" />
-    <ClCompile Include="Scripts\game.cpp" />
-    <ClCompile Include="Scripts\game_object.cpp" />
-    <ClCompile Include="Scripts\keyboard.cpp" />
-    <ClCompile Include="Scripts\main.cpp" />
-    <ClCompile Include="Scripts\model_renderer.cpp" />
-    <ClCompile Include="Scripts\mouse.cpp" />
-    <ClCompile Include="Scripts\scene.cpp" />
-    <ClCompile Include="Scripts\time.cpp" />
-    <ClCompile Include="Scripts\transform.cpp" />
+    <ClCompile Include="GameObjects\box.cpp" />
+    <ClCompile Include="GameObjects\main_camera.cpp" />
+    <ClCompile Include="GameObjects\player.cpp" />
+    <ClCompile Include="Scenes\demo_scene.cpp" />
+    <ClCompile Include="Scripts\Components\camera_applier.cpp" />
+    <ClCompile Include="Scripts\Components\model_renderer.cpp" />
+    <ClCompile Include="Scripts\Components\transform.cpp" />
+    <ClCompile Include="Scripts\Core\component.cpp" />
+    <ClCompile Include="Scripts\Core\game.cpp" />
+    <ClCompile Include="Scripts\Core\game_object.cpp" />
+    <ClCompile Include="Scripts\Core\main.cpp" />
+    <ClCompile Include="Scripts\Core\scene.cpp" />
+    <ClCompile Include="Scripts\Core\time.cpp" />
+    <ClCompile Include="Scripts\System\keyboard.cpp" />
+    <ClCompile Include="Scripts\System\mouse.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameObjects\Box\box.h" />
-    <ClInclude Include="GameObjects\MainCamera\main_camera.h" />
-    <ClInclude Include="GameObjects\Player\player.h" />
-    <ClInclude Include="Scenes\DemoScene\demo_scene.h" />
-    <ClInclude Include="Scripts\camera_applier.h" />
-    <ClInclude Include="Scripts\component.h" />
-    <ClInclude Include="Scripts\component_concept.h" />
-    <ClInclude Include="Scripts\component_factory.h" />
-    <ClInclude Include="Scripts\game.h" />
-    <ClInclude Include="Scripts\game_object.h" />
-    <ClInclude Include="Scripts\game_object_concept.h" />
-    <ClInclude Include="Scripts\game_object_factory.h" />
-    <ClInclude Include="Scripts\scene.h" />
-    <ClInclude Include="Scripts\keyboard.h" />
-    <ClInclude Include="Scripts\math.h" />
-    <ClInclude Include="Scripts\model_renderer.h" />
-    <ClInclude Include="Scripts\mouse.h" />
-    <ClInclude Include="Scripts\time.h" />
-    <ClInclude Include="Scripts\transform.h" />
+    <ClInclude Include="GameObjects\box.h" />
+    <ClInclude Include="GameObjects\main_camera.h" />
+    <ClInclude Include="GameObjects\player.h" />
+    <ClInclude Include="Scenes\demo_scene.h" />
+    <ClInclude Include="Scripts\Components\camera_applier.h" />
+    <ClInclude Include="Scripts\Components\model_renderer.h" />
+    <ClInclude Include="Scripts\Components\transform.h" />
+    <ClInclude Include="Scripts\Core\component.h" />
+    <ClInclude Include="Scripts\Core\component_concept.h" />
+    <ClInclude Include="Scripts\Core\component_factory.h" />
+    <ClInclude Include="Scripts\Core\game.h" />
+    <ClInclude Include="Scripts\Core\game_object.h" />
+    <ClInclude Include="Scripts\Core\game_object_concept.h" />
+    <ClInclude Include="Scripts\Core\game_object_factory.h" />
+    <ClInclude Include="Scripts\Core\math.h" />
+    <ClInclude Include="Scripts\Core\scene.h" />
+    <ClInclude Include="Scripts\Core\time.h" />
+    <ClInclude Include="Scripts\System\keyboard.h" />
+    <ClInclude Include="Scripts\System\mouse.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="JSON\box.json" />

@@ -4,7 +4,7 @@
 #include <Matrix/matrix_4x4.hpp>
 #include "math.h"
 #include "component_factory.h"
-#include "transform.h"
+#include "../Components/transform.h"
 #include "scene.h"
 #include "game_object.h"
 
@@ -14,6 +14,9 @@ GameObject::GameObject(const std::string& jsonPath) :
 	_isActive	(true),
 	_owenerScene()
 {
+	// Transformは必須で追加
+	AddComponent<Transform>();
+
 	nlohmann::json json;
 	if (json_loader::Load(jsonPath, json))
 	{

@@ -3,9 +3,9 @@
 #include <Matrix/matrix_4x4.hpp>
 #include <JSON/json_loader.hpp>
 #include <string>
-#include "math.h"
+#include "../Core/math.h"
 #include "transform.h"
-#include "component_factory.h"
+#include "../Core/component_factory.h"
 #include "camera_applier.h"
 
 namespace
@@ -46,7 +46,7 @@ void CameraApplier::LateUpdate()
 
 	// カメラの位置及び姿勢を設定
 	const auto transform = _transform.lock();
-	SetCameraPositionAndTargetAndUpVec(transform->GetLocalPosition(), transform->GetForward(), transform->GetUp());
+	SetCameraPositionAndTargetAndUpVec(transform->GetWorldPosition(), transform->GetForward(), transform->GetUp());
 }
 
 void CameraApplier::Render() const

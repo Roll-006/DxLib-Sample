@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "../../Scripts/scene.h"
+#include "../Scripts/Core/scene.h"
 
 class DemoScene final : public Scene
 {

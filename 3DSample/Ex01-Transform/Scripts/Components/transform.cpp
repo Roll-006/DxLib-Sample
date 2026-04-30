@@ -1,16 +1,16 @@
 ﻿#include <string>
 #include <JSON/json_loader.hpp>
 #include <Matrix/matrix_4x4.hpp>
-#include "math.h"
-#include "game_object.h"
-#include "component_factory.h"
+#include "../Core/math.h"
+#include "../Core/game_object.h"
+#include "../Core/component_factory.h"
 #include "transform.h"
 
 namespace
 {
 	const bool registered = []()
 	{
-		ComponentFactory::Register("Transform", [](GameObject& obj) { return obj.AddComponent<Transform>(); });
+		ComponentFactory::Register("Transform", [](GameObject& obj) { return obj.GetComponent<Transform>(); });
 		return true;
 	}();
 }
@@ -60,6 +60,25 @@ void Transform::LookAt(const Vector3& target, const Vector3& up)
 }
 
 #pragma region Getter
+Vector3 Transform::GetWorldPosition()
+{
+	UpdateMatrix();
+
+	return _worldMatrix.GetTranslation();
+}
+
+//Vector3 Transform::GetWorldRotation()
+//{
+//	UpdateMatrix();
+//}
+
+Vector3 Transform::GetWorldScale()
+{
+	UpdateMatrix();
+
+	return _worldMatrix.GetScale();
+}
+
 Matrix4x4 Transform::GetWorldMatrix()
 {
 	UpdateMatrix();
@@ -154,7 +173,7 @@ void Transform::UpdateMatrix()
 {
 	if (!_isDirty) { return; }
 	
-	const auto localMat = Matrix4x4::CreateTRS(_localPosition, _localRotation, _localScale);
+	const auto localMat = GetLocalMatrix();
 
 	if (const auto& parent = _parent.lock())
 	{
@@ -165,10 +184,10 @@ void Transform::UpdateMatrix()
 		_worldMatrix = localMat;
 	}
 
+	_isDirty = false;
+
 	for (const auto& child : _children)
 	{
 		child.lock()->UpdateMatrix();
 	}
-
-	_isDirty = false;
 }

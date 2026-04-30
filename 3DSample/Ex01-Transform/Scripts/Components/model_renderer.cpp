@@ -3,9 +3,9 @@
 #include <Matrix/matrix_4x4.hpp>
 #include <JSON/json_loader.hpp>
 #include <string>
-#include "math.h"
+#include "../Core/math.h"
 #include "transform.h"
-#include "component_factory.h"
+#include "../Core/component_factory.h"
 #include "model_renderer.h"
 
 namespace

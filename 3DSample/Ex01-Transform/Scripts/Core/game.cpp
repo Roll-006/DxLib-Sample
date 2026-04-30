@@ -7,9 +7,9 @@
 #include <Vector/vector2_int.hpp>
 #include "math.h"
 #include "time.h"
-#include "keyboard.h"
-#include "mouse.h"
-#include "../Scenes/DemoScene/demo_scene.h"
+#include "../System/keyboard.h"
+#include "../System/mouse.h"
+#include "../../Scenes/demo_scene.h"
 #include "game.h"
 
 int Game::Run() const
