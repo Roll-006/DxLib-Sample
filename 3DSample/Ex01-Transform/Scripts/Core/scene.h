@@ -33,7 +33,13 @@ public:
 	/// </summary>
 	/// <param name="name">オブジェクト名</param>
 	/// <returns>見つかったオブジェクトのTransform。見つからなかった場合はnullptr</returns>
-	std::shared_ptr<Transform> Find(const std::string& name);
+	std::shared_ptr<Transform> Find(const std::string& name) const;
+
+	/// <summary>
+	/// 階層最上位のトランスフォームを取得
+	/// </summary>
+	/// <returns>階層最上位のトランスフォーム</returns>
+	std::vector<std::shared_ptr<Transform>> GetRoots() const;
 
 private:
 	/// <summary>

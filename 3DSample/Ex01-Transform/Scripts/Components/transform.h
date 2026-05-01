@@ -20,6 +20,18 @@ public:
 	void Deserialize(const nlohmann::json& json) override;
 
 	/// <summary>
+	/// 特定のオブジェクトの子オブジェクトを検索
+	/// </summary>
+	/// <param name="name">オブジェクト名</param>
+	/// <returns>見つかったオブジェクトのTransform。見つからなかった場合はnullptr</returns>
+	std::shared_ptr<Transform> Find(const std::string& name) const;
+
+	/// <summary>
+	/// 全ての子オブジェクトを切り離す
+	/// </summary>
+	void DetachChildren();
+
+	/// <summary>
 	/// 対象の方向を見る
 	/// </summary>
 	/// <param name="target">注視する対象</param>
@@ -55,10 +67,28 @@ public:
 	std::shared_ptr<Transform> GetChild(const int index) const;
 
 	/// <summary>
+	/// 全ての子トランスフォームを取得
+	/// </summary>
+	/// <returns>全ての子トランスフォーム</returns>
+	std::vector<std::shared_ptr<Transform>> GetChildren() const { return _children; }
+
+	/// <summary>
 	/// 子トランスフォームの数を取得
 	/// </summary>
 	/// <returns>子トランスフォームの数</returns>
 	int GetChildCount() const { return static_cast<int>(_children.size()); }
+
+	/// <summary>
+	/// 兄弟内(同一階層)でのインデックスを取得する
+	/// </summary>
+	/// <returns>兄弟内でのインデックス</returns>
+	int GetSiblingIndex();
+
+	/// <summary>
+	/// 階層最上位のトランスフォームを取得
+	/// </summary>
+	/// <returns>階層最上位のトランスフォーム</returns>
+	std::shared_ptr<Transform> GetRoot();
 	#pragma endregion
 
 	#pragma region Setter
@@ -98,7 +128,7 @@ private:
 	Matrix4x4	_worldMatrix;
 	bool		_isDirty;
 	std::weak_ptr<Transform> _parent;
-	std::vector<std::weak_ptr<Transform>> _children;
+	std::vector<std::shared_ptr<Transform>> _children;
 
 	friend void from_json	(const nlohmann::json& json, Transform& transform);
 	friend void to_json		(nlohmann::json& json, const Transform& transform);
@@ -112,6 +142,8 @@ inline void from_json(const nlohmann::json& json, Transform& transform)
 	json.at("localPosition").	get_to(transform._localPosition);
 	json.at("localRotation").	get_to(transform._localRotation);
 	json.at("localScale").		get_to(transform._localScale);
+
+	transform._localRotation *= math::kDeg2Rad;
 }
 
 inline void to_json(nlohmann::json& json, const Transform& transform)

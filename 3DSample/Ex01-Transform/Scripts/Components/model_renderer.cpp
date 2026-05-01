@@ -33,7 +33,7 @@ ModelRenderer::~ModelRenderer()
 void ModelRenderer::Initialize(const std::shared_ptr<GameObject>& gameObject)
 {
 	_gameObject = gameObject;
-	_transform	= GetComponent<Transform>();
+	_transform	= GetTransform();
 }
 
 void ModelRenderer::Update()

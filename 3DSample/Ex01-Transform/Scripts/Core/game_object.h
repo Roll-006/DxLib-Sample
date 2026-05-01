@@ -17,6 +17,13 @@ public:
     void Render() const;
 
     /// <summary>
+    /// 同一シーン上のオブジェクトを検索
+    /// </summary>
+    /// <param name="name">オブジェクト名</param>
+    /// <returns>見つかったオブジェクトのTransform。見つからなかった場合はnullptr</returns>
+    std::shared_ptr<Transform> Find(const std::string& name) const;
+
+    /// <summary>
     /// コンポーネントを追加
     /// </summary>
     /// <typeparam name="T">コンポーネントの型</typeparam>
@@ -35,7 +42,7 @@ public:
     /// <typeparam name="T">コンポーネントの型</typeparam>
     /// <returns>取得するコンポーネント。対象が見つからなかった場合はnullptr</returns>
     template<ComponentT T>
-    std::shared_ptr<T> GetComponent()
+    std::shared_ptr<T> GetComponent() const
     {
         for (const auto& component : _components)
         {
@@ -45,13 +52,15 @@ public:
         return nullptr;
     }
 
+    std::shared_ptr<Transform> GetTransform() const;
+
     /// <summary>
     /// 同一コンポーネントを取得する
     /// </summary>
     /// <typeparam name="T">コンポーネントの型</typeparam>
     /// <returns>取得するコンポーネント。対象が一つも見つからなかった場合は空vector</returns>
     template<ComponentT T>
-    std::vector<std::shared_ptr<T>> GetComponents()
+    std::vector<std::shared_ptr<T>> GetComponents() const
     {
         std::vector<std::shared_ptr<T>> components = {};
 
@@ -65,13 +74,6 @@ public:
 
 	std::string GetName()   const { return _name; }
 	std::string GetTag()    const { return _tag; }
-
-    /// <summary>
-    /// 同一シーン上のオブジェクトを検索
-    /// </summary>
-    /// <param name="name">オブジェクト名</param>
-    /// <returns>見つかったオブジェクトのTransform。見つからなかった場合はnullptr</returns>
-    std::shared_ptr<Transform> Find(const std::string& name);
 
     /// <summary>
     /// アクティブ状態を設定する

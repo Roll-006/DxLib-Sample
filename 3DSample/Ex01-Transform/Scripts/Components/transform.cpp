@@ -10,7 +10,7 @@ namespace
 {
 	const bool registered = []()
 	{
-		ComponentFactory::Register("Transform", [](GameObject& obj) { return obj.GetComponent<Transform>(); });
+		ComponentFactory::Register("Transform", [](GameObject& obj) { return obj.GetTransform(); });
 		return true;
 	}();
 }
@@ -52,6 +52,27 @@ void Transform::Render() const
 void Transform::Deserialize(const nlohmann::json& json)
 {
 	from_json(json, *this);
+}
+
+std::shared_ptr<Transform> Transform::Find(const std::string& name) const
+{
+	for (const auto& child : _children)
+	{
+		if (const auto gameObject = child->_gameObject.lock(); gameObject->GetName() == name)
+		{
+			return gameObject->GetTransform();
+		}
+	}
+
+	return nullptr;
+}
+
+void Transform::DetachChildren()
+{
+	for (const auto& child : _children)
+	{
+		child->SetParent(nullptr);
+	}
 }
 
 void Transform::LookAt(const Vector3& target, const Vector3& up)
@@ -114,7 +135,43 @@ std::shared_ptr<Transform> Transform::GetParent() const
 
 std::shared_ptr<Transform> Transform::GetChild(const int index) const
 {
-	return index < _children.size() ? _children.at(index).lock() : nullptr;
+	return index < _children.size() ? _children.at(index) : nullptr;
+}
+
+int Transform::GetSiblingIndex()
+{
+	// TODO : 親がいないから0は間違い
+	const auto parent = GetParent();
+	if (parent == 0) { return 0; }
+
+	const auto transform	= std::static_pointer_cast<Transform>(shared_from_this());
+	const auto sibling		= parent->GetChildren();
+	auto index = 0;
+
+	for (size_t i = 0; i < sibling.size(); ++i)
+	{
+		if (sibling.at(i) == transform)
+		{
+			index = static_cast<int>(i);
+			break;
+		}
+	}
+
+	return index;
+}
+
+std::shared_ptr<Transform> Transform::GetRoot()
+{
+	auto current = std::static_pointer_cast<Transform>(shared_from_this());
+
+	while (true)
+	{
+		const auto parent = current->GetParent();
+		if (!parent) { break; }
+		current = parent;
+	}
+
+	return current;
 }
 #pragma endregion
 
@@ -150,7 +207,9 @@ void Transform::SetLocalScale(const float scale)
 void Transform::SetParent(const std::shared_ptr<Transform>& parent)
 {
 	_parent = parent;
-	parent->AddChild(std::dynamic_pointer_cast<Transform>(shared_from_this()));
+
+	// TODO : parentがnullの場合chaildを解除する必要あり
+	parent->AddChild(std::static_pointer_cast<Transform>(shared_from_this()));
 }
 #pragma endregion
 
@@ -165,7 +224,7 @@ void Transform::OnDirty()
 
 	for (const auto& child : _children)
 	{
-		child.lock()->OnDirty();
+		child->OnDirty();
 	}
 }
 
@@ -181,6 +240,7 @@ void Transform::UpdateMatrix()
 	}
 	else
 	{
+		// 親がいない場合はローカルをそのままワールドにする
 		_worldMatrix = localMat;
 	}
 
@@ -188,6 +248,6 @@ void Transform::UpdateMatrix()
 
 	for (const auto& child : _children)
 	{
-		child.lock()->UpdateMatrix();
+		child->UpdateMatrix();
 	}
 }

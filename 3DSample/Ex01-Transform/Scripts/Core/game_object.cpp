@@ -80,7 +80,12 @@ void GameObject::Render() const
 /// </summary>
 /// <param name="name">オブジェクト名</param>
 /// <returns>見つかったオブジェクトのTransform。見つからなかった場合はnullptr</returns>
-std::shared_ptr<Transform> GameObject::Find(const std::string& name)
+std::shared_ptr<Transform> GameObject::Find(const std::string& name) const
 {
 	return _owenerScene.lock()->Find(name);
+}
+
+std::shared_ptr<Transform> GameObject::GetTransform() const
+{
+	return GetComponent<Transform>();
 }

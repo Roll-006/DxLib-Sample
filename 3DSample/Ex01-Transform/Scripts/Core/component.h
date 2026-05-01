@@ -22,7 +22,7 @@ public:
     /// <typeparam name="T">コンポーネントの型</typeparam>
     /// <returns>取得するコンポーネント。対象が見つからなかった場合はnullptr</returns>
     template<ComponentT T>
-    std::shared_ptr<T> GetComponent()
+    std::shared_ptr<T> GetComponent() const
     {
         return _gameObject.lock()->GetComponent<T>();
     }
@@ -33,9 +33,14 @@ public:
     /// <typeparam name="T">コンポーネントの型</typeparam>
     /// <returns>取得するコンポーネント。対象が一つも見つからなかった場合は空vector</returns>
     template<ComponentT T>
-    std::vector<std::shared_ptr<T>> GetComponents()
+    std::vector<std::shared_ptr<T>> GetComponents() const
     {
         return _gameObject.lock()->GetComponents<T>();
+    }
+
+    std::shared_ptr<Transform> GetTransform() const
+    {
+        return _gameObject.lock()->GetTransform();
     }
 
     /// <summary>

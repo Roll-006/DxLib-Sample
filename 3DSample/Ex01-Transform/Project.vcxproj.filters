@@ -89,9 +89,6 @@
     <ClInclude Include="Scripts\Components\model_renderer.h">
       <Filter>Scripts\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Scripts\Components\transform.h">
-      <Filter>Scripts\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Scripts\Core\component.h">
       <Filter>Scripts\Core</Filter>
     </ClInclude>
@@ -127,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="Scripts\System\mouse.h">
       <Filter>Scripts\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Components\transform.h">
+      <Filter>Scripts\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

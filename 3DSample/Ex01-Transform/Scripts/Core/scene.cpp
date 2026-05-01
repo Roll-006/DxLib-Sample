@@ -56,17 +56,33 @@ void Scene::Render() const
 	}
 }
 
-std::shared_ptr<Transform> Scene::Find(const std::string& name)
+std::shared_ptr<Transform> Scene::Find(const std::string& name) const
 {
 	for (const auto& object : _objects)
 	{
 		if (object->GetName() == name)
 		{
-			return object->GetComponent<Transform>();
+			return object->GetTransform();
 		}
 	}
 
 	return nullptr;
+}
+
+std::vector<std::shared_ptr<Transform>> Scene::GetRoots() const
+{
+	std::vector<std::shared_ptr<Transform>> roots;
+
+	for (const auto& object : _objects)
+	{
+		const auto transform = object->GetTransform();
+		if (!transform->GetParent())
+		{
+			roots.emplace_back(transform);
+		}
+	}
+
+	return roots;
 }
 
 std::vector<std::shared_ptr<Transform>> Scene::LoadGameObjects(const nlohmann::json& childrenJson)
@@ -77,7 +93,7 @@ std::vector<std::shared_ptr<Transform>> Scene::LoadGameObjects(const nlohmann::j
 	{
 		const auto name			= objectJson.at("name").get<std::string>();
 		const auto gameObject	= GameObjectFactory::Create(name, *this);
-		const auto transform	= gameObject->GetComponent<Transform>();
+		const auto transform	= gameObject->GetTransform();
 
 		// 子階層も全て読み込む
 		for (const auto& child : LoadGameObjects(objectJson.at("children")))
