@@ -78,6 +78,7 @@ void Transform::DetachChildren()
 
 void Transform::LookAt(const Vector3& target, const Vector3& up)
 {
+	// TODO : UpdateMatrixで_worldMatrixを上書きする問題あり
 	_worldMatrix = Matrix4x4::LookAt(_localPosition, target, up);
 }
 

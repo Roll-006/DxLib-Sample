@@ -18,6 +18,7 @@ public:
 
 private:
 	void Move();
+	void RotateLookDir();
 
 private:
 	float	_moveSpeed;

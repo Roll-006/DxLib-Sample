@@ -21,9 +21,9 @@ namespace
 }
 
 PlayerController::PlayerController() : 
-	_moveDir	(Vector3::GetZero()),
 	_moveSpeed	(0.0f),
-	_moveT		(0.0f)
+	_moveT		(0.0f),
+	_moveDir	(Vector3::GetForward())
 {
 
 }
@@ -65,6 +65,7 @@ void PlayerController::Deserialize(const nlohmann::json& json)
 
 void PlayerController::Move()
 {
+	// 移動方向をカメラから取得
 	const auto mainCameraTransform = _mainCameraTransform.lock();
 
 	auto forward = Vector2(mainCameraTransform->GetForward().x, mainCameraTransform->GetForward().z);
@@ -73,6 +74,7 @@ void PlayerController::Move()
 	auto right = Vector2(mainCameraTransform->GetRight().x, mainCameraTransform->GetRight().z);
 	right.Normalize();
 
+	// 入力
 	const auto keyboard = Keyboard::GetInstance();
 	auto inputAxis = Vector2::GetZero();
 	if (keyboard.IsPressed(KEY_INPUT_W)) { inputAxis += forward; }
@@ -86,4 +88,18 @@ void PlayerController::Move()
 	const auto transform = _transform.lock();
 	const auto localPos = transform->GetLocalPosition();
 	transform->SetLocalPosition(localPos + _moveDir * _moveSpeed * Time::GetInstance().GetDeltaTime());
+
+	// 仮
+	transform->LookAt(Vector3::GetRight());
+
+	const auto mat = transform->GetWorldMatrix();
+	for (int i = 0; i < 4; ++i)
+	{
+		for (int j = 0; j < 4; ++j)
+		{
+			int pos_x = 400 + j * 100;
+			int pos_y = 10 + i * 20;
+			DrawFormatString(pos_x, pos_y, 0xffffff, "%f", mat.m[i][j]);
+		}
+	}
 }
