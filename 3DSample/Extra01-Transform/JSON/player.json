@@ -23,6 +23,12 @@
       }
     },
     {
+      "type": "PlayerController",
+      "enabled": true,
+      "moveSpeed": 30.0,
+      "moveT": 0.3
+    },
+    {
       "type": "ModelRenderer",
       "enabled": true,
       "modelPath": "../../Assets/Models/Swat/mesh.mv1"

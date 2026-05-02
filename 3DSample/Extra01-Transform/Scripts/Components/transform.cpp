@@ -43,15 +43,6 @@ void Transform::Update()
 void Transform::LateUpdate()
 {
 	if (!_enabled) { return; }
-
-	// TODO : テスト
-	if (_parent.lock())
-	{
-		if (CheckHitKey(KEY_INPUT_1))
-		{
-			SetParent(nullptr);
-		}
-	}
 }
 
 void Transform::Render() const
@@ -227,11 +218,6 @@ void Transform::SetParent(const std::shared_ptr<Transform>& parent)
 	}
 
 }
-
-//void Transform::SetSiblingIndex(const int index)
-//{
-//
-//}
 #pragma endregion
 
 void Transform::AddChild(const std::shared_ptr<Transform>& child)

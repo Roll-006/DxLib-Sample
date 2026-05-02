@@ -3,6 +3,24 @@
 #include <nlohmann/json.hpp>
 #include <DxLib.h>
 
+struct Vector3;
+Vector3 operator+(const Vector3& v1, const Vector3& v2);
+Vector3 operator-(const Vector3& v1, const Vector3& v2);
+Vector3 operator*(const Vector3& v1, const Vector3& v2);
+
+template<typename T>
+Vector3 operator*(const Vector3& v, const T scale);
+
+template<typename T>
+Vector3 operator*(const T scale, const Vector3& v);
+
+
+template<typename T>
+Vector3 operator/(const Vector3& v, const T scale);
+
+bool operator==(const Vector3& v1, const Vector3& v2);
+bool operator!=(const Vector3& v1, const Vector3& v2);
+
 struct Vector3
 {
 	float x;
@@ -64,6 +82,12 @@ struct Vector3
 		return{ v1.y * v2.z - v1.z * v2.y,
 				v1.z * v2.x - v1.x * v2.z,
 				v1.x * v2.y - v1.y * v2.x };
+	}
+
+	/// @brief 線形補間で補間したベクトルを取得
+	[[nodiscard]] static Vector3 GetLerp(const Vector3 v1, const Vector3 v2, const float t)
+	{
+		return v1 + (v2 - v1) * t;
 	}
 
 	/// @brief 大きさを取得する
