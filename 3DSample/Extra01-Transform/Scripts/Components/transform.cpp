@@ -4,6 +4,7 @@
 #include "../Core/math.h"
 #include "../Core/game_object.h"
 #include "../Core/component_factory.h"
+#include "../Core/scene.h"
 #include "transform.h"
 
 namespace
@@ -42,6 +43,15 @@ void Transform::Update()
 void Transform::LateUpdate()
 {
 	if (!_enabled) { return; }
+
+	// TODO : テスト
+	if (_parent.lock())
+	{
+		if (CheckHitKey(KEY_INPUT_1))
+		{
+			SetParent(nullptr);
+		}
+	}
 }
 
 void Transform::Render() const
@@ -138,28 +148,6 @@ std::shared_ptr<Transform> Transform::GetChild(const int index) const
 	return index < _children.size() ? _children.at(index) : nullptr;
 }
 
-int Transform::GetSiblingIndex()
-{
-	// TODO : 親がいないから0は間違い
-	const auto parent = GetParent();
-	if (parent == 0) { return 0; }
-
-	const auto transform	= std::static_pointer_cast<Transform>(shared_from_this());
-	const auto sibling		= parent->GetChildren();
-	auto index = 0;
-
-	for (size_t i = 0; i < sibling.size(); ++i)
-	{
-		if (sibling.at(i) == transform)
-		{
-			index = static_cast<int>(i);
-			break;
-		}
-	}
-
-	return index;
-}
-
 std::shared_ptr<Transform> Transform::GetRoot()
 {
 	auto current = std::static_pointer_cast<Transform>(shared_from_this());
@@ -172,6 +160,27 @@ std::shared_ptr<Transform> Transform::GetRoot()
 	}
 
 	return current;
+}
+
+int Transform::GetSiblingIndex()
+{
+	const auto transform = std::static_pointer_cast<Transform>(shared_from_this());
+	const auto parent = GetParent();
+	auto index = 0;
+
+	// 親がいる場合は親から、いない場合はSceneから兄弟を取得
+	const auto sibling = parent ? parent->GetChildren() : _gameObject.lock()->GetScene()->GetRoots();
+
+	for (size_t i = 0; i < sibling.size(); ++i)
+	{
+		if (sibling.at(i) == transform)
+		{
+			index = static_cast<int>(i);
+			break;
+		}
+	}
+
+	return index;
 }
 #pragma endregion
 
@@ -206,16 +215,33 @@ void Transform::SetLocalScale(const float scale)
 
 void Transform::SetParent(const std::shared_ptr<Transform>& parent)
 {
-	_parent = parent;
+	if (parent)
+	{
+		_parent = parent;
+		_parent.lock()->AddChild(std::static_pointer_cast<Transform>(shared_from_this()));
+	}
+	else
+	{
+		_parent.lock()->RemoveChild(GetSiblingIndex());
+		_parent = parent;
+	}
 
-	// TODO : parentがnullの場合chaildを解除する必要あり
-	parent->AddChild(std::static_pointer_cast<Transform>(shared_from_this()));
 }
+
+//void Transform::SetSiblingIndex(const int index)
+//{
+//
+//}
 #pragma endregion
 
 void Transform::AddChild(const std::shared_ptr<Transform>& child)
 {
 	_children.emplace_back(child);
+}
+
+void Transform::RemoveChild(const int index)
+{
+	_children.erase(_children.begin() + index);
 }
 
 void Transform::OnDirty()

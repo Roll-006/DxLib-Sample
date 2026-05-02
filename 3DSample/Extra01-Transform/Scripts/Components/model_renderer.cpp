@@ -48,6 +48,8 @@ void ModelRenderer::LateUpdate()
 
 void ModelRenderer::Render() const
 {
+	if (!_enabled) { return; }
+
 	MV1SetMatrix(_modelHandle, _transform.lock()->GetWorldMatrix());
 	MV1DrawModel(_modelHandle);
 }

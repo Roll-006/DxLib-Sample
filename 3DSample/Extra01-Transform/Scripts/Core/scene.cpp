@@ -75,6 +75,7 @@ std::vector<std::shared_ptr<Transform>> Scene::GetRoots() const
 
 	for (const auto& object : _objects)
 	{
+		// 最上位のトランスフォームのみを追加
 		const auto transform = object->GetTransform();
 		if (!transform->GetParent())
 		{

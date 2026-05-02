@@ -36,6 +36,7 @@ public:
         return component;
     }
 
+    #pragma region Getter
     /// <summary>
     /// コンポーネントを取得する
     /// </summary>
@@ -76,6 +77,13 @@ public:
 	std::string GetTag()    const { return _tag; }
 
     /// <summary>
+    /// ゲームオブジェクトが属しているシーンを取得
+    /// </summary>
+    /// <returns></returns>
+    std::shared_ptr<Scene> GetScene() const;
+    #pragma endregion
+
+    /// <summary>
     /// アクティブ状態を設定する
     /// </summary>
     /// <param name="isActive">true : アクティブ化する, false : 非アクティブ化する</param>
@@ -86,7 +94,7 @@ protected:
 	std::string _tag;
     bool _isActive;
 	std::vector<std::shared_ptr<Component>> _components;
-    std::weak_ptr<Scene> _owenerScene;
+    std::weak_ptr<Scene> _scene;
 
 	friend void from_json	(const nlohmann::json& json, GameObject& gameObject);
 	friend void to_json		(nlohmann::json& json, const GameObject& gameObject);

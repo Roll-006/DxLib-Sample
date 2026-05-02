@@ -12,7 +12,7 @@ GameObject::GameObject(const std::string& jsonPath) :
 	_name		(""),
 	_tag		(""),
 	_isActive	(true),
-	_owenerScene()
+	_scene		()
 {
 	// Transformは必須で追加
 	AddComponent<Transform>();
@@ -37,7 +37,7 @@ GameObject::GameObject(const std::string& jsonPath) :
 
 void GameObject::Initialize(const std::shared_ptr<Scene>& scene)
 {
-	_owenerScene = scene;
+	_scene = scene;
 
 	for (const auto& component : _components)
 	{
@@ -75,17 +75,17 @@ void GameObject::Render() const
 	}
 }
 
-/// <summary>
-/// 同一シーン上のオブジェクトを検索
-/// </summary>
-/// <param name="name">オブジェクト名</param>
-/// <returns>見つかったオブジェクトのTransform。見つからなかった場合はnullptr</returns>
 std::shared_ptr<Transform> GameObject::Find(const std::string& name) const
 {
-	return _owenerScene.lock()->Find(name);
+	return _scene.lock()->Find(name);
 }
 
 std::shared_ptr<Transform> GameObject::GetTransform() const
 {
 	return GetComponent<Transform>();
+}
+
+std::shared_ptr<Scene> GameObject::GetScene() const
+{
+	return _scene.lock();
 }

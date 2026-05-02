@@ -44,7 +44,7 @@ int Game::Run() const
 int Game::SetUpDxLib() const
 {
 	SetGraphMode(1920, 1080, 32);						// 解像度とカラービット数を設定
-	ChangeWindowMode(FALSE);							// ウィンドウモードを設定 (true : ウィンドウ, false : フルスクリーン)
+	ChangeWindowMode(TRUE);								// ウィンドウモードを設定 (true : ウィンドウ, false : フルスクリーン)
 	if (DxLib_Init() == -1) { return EXIT_FAILURE; }	// DXライブラリを初期化 (0 : 成功, -1 : 失敗)
 	SetDrawScreen(DX_SCREEN_BACK);						// 描画先画面を裏画面に設定
 	SetMainWindowText("Sample");						// ウインドウのタイトルを設定する

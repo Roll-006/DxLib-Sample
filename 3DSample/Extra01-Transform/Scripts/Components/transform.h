@@ -79,16 +79,16 @@ public:
 	int GetChildCount() const { return static_cast<int>(_children.size()); }
 
 	/// <summary>
-	/// 兄弟内(同一階層)でのインデックスを取得する
-	/// </summary>
-	/// <returns>兄弟内でのインデックス</returns>
-	int GetSiblingIndex();
-
-	/// <summary>
 	/// 階層最上位のトランスフォームを取得
 	/// </summary>
 	/// <returns>階層最上位のトランスフォーム</returns>
 	std::shared_ptr<Transform> GetRoot();
+
+	/// <summary>
+	/// 兄弟内(同一階層)でのインデックスを取得する
+	/// </summary>
+	/// <returns>兄弟内でのインデックス</returns>
+	int GetSiblingIndex();
 	#pragma endregion
 
 	#pragma region Setter
@@ -102,6 +102,12 @@ public:
 	/// </summary>
 	/// <param name="parent">親トランスフォーム</param>
 	void SetParent(const std::shared_ptr<Transform>& parent);
+
+	/// <summary>
+	/// 兄弟内(同一階層)でインデックスを指定しトランスフォームを移動させる
+	/// </summary>
+	/// <param name="index">兄弟内でのインデックス</param>
+	//void SetSiblingIndex(const int index);
 	#pragma endregion
 	
 private:
@@ -115,6 +121,12 @@ private:
 	/// </summary>
 	/// <param name="child">子トランスフォーム</param>
 	void AddChild(const std::shared_ptr<Transform>& child);
+
+	/// <summary>
+	/// 子トランスフォームを解除する
+	/// </summary>
+	/// <param name="index">子のインデックス</param>
+	void RemoveChild(const int index);
 
 	/// <summary>
 	/// 座標、回転、スケール情報が汚された
