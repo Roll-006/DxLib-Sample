@@ -1,0 +1,41 @@
+﻿{
+  "name": "Player",
+  "tag": "Player",
+  "isActive": true,
+  "components": [
+    {
+      "type": "Transform",
+      "enabled": true,
+      "localPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "localRotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "localScale": {
+        "x": 0.1,
+        "y": 0.1,
+        "z": 0.1
+      }
+    },
+    {
+      "type": "PlayerController",
+      "enabled": true,
+      "moveT": 0.3
+    },
+    {
+      "type": "PlayerMover",
+      "enabled": true,
+      "moveSpeed": 30.0
+    },
+    {
+      "type": "ModelRenderer",
+      "enabled": true,
+      "modelPath": "../../Assets/Models/Swat/mesh.mv1"
+    }
+  ]
+}
