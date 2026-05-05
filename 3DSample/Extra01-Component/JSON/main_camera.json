@@ -8,10 +8,10 @@
       "enabled": true,
       "localPosition": {
         "x": 0.0,
-        "y": 30.0,
-        "z": -15.0
+        "y": 40.0,
+        "z": -20.0
       },
-      "localRotation": {
+      "localEulerAngles": {
         "x": 0.0,
         "y": 0.0,
         "z": 0.0

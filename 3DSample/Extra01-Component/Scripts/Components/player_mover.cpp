@@ -56,7 +56,8 @@ void PlayerMover::Deserialize(const nlohmann::json& json)
 
 void PlayerMover::Move()
 {
-	const auto moveDir = _playerController.lock()->GetMoveDir();
+	const auto controller	= _playerController.lock();
+	const auto moveDir		= controller->GetMoveDir();
 
 	// 座標を更新
 	const auto transform	= _transform.lock();
@@ -65,5 +66,5 @@ void PlayerMover::Move()
 	transform->SetLocalPosition(math::Vector3::StoreFromSIMD(pos));
 
 	// 姿勢を更新
-	transform->LookAt(moveDir);
+	if (controller->IsMoving()) { transform->LookAt(moveDir); }
 }

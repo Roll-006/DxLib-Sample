@@ -4,10 +4,13 @@
 #include <DxLib.h>
 #include <nlohmann/json.hpp>
 
+using namespace DirectX;
+
 namespace math
 {
 	static constexpr float kDeg2Rad = static_cast<float>(std::numbers::pi) / 180.0f;		// ディグリーをラジアンに変換 (変換対象と掛け算を行う)
 	static constexpr float kRad2Deg = 180.0f / static_cast<float>(std::numbers::pi);		// ラジアンをディグリーに変換 (変換対象と掛け算を行う)
+	static constexpr float kEpsilon = 1e-05f;
 
 	struct Vector2
 	{

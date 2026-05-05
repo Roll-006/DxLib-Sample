@@ -16,13 +16,15 @@ public:
 	void Deserialize(const nlohmann::json& json) override;
 
 	math::Vector3 GetMoveDir() const { return _moveDir; }
+	bool IsMoving() const { return _isMoving; }
 
 private:
-	void UpdateMoveDir();
+	void UpdateControl();
 
 private:
 	float			_moveT;
 	math::Vector3	_moveDir;
+	bool			_isMoving;
 	std::weak_ptr<Transform> _mainCameraTransform;
 
 	friend void from_json	(const nlohmann::json& json, PlayerController& playerController);

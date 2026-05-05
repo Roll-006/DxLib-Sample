@@ -7,13 +7,13 @@
       "type": "Transform",
       "enabled": true,
       "localPosition": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": -10.0
+        "x": 50.0,
+        "y": 50.0,
+        "z": -100.0
       },
-      "localRotation": {
+      "localEulerAngles": {
         "x": 0.0,
-        "y": 0.0,
+        "y": 45.0,
         "z": 0.0
       },
       "localScale": {

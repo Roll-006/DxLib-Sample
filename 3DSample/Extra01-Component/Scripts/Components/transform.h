@@ -94,8 +94,10 @@ public:
 	#pragma region Setter
 	void SetLocalPosition	(const math::Vector3& position);
 	void SetLocalRotation	(const math::Quaternion& rotation);
+	void SetLocalEulerAngles(const math::Vector3& eulerAnglesDeg);
 	void SetLocalScale		(const math::Vector3& scale);
 	void SetLocalScale		(const float scale);
+	void SetLocalMatrix		(const math::Matrix4x4& matrix);
 
 	/// <summary>
 	/// 親トランスフォームを設定する
@@ -150,27 +152,27 @@ private:
 #pragma region from / to JSON
 inline void from_json(const nlohmann::json& json, Transform& transform)
 {
-	math::Vector3 rotation;
+	math::Vector3 eulerAngles = { 0.0f, 0.0f, 0.0f };
 
 	json.at("enabled").			get_to(transform._enabled);
 	json.at("localPosition").	get_to(transform._localPosition);
-	json.at("localRotation").	get_to(rotation);
+	json.at("localEulerAngles").get_to(eulerAngles);
 	json.at("localScale").		get_to(transform._localScale);
 
-	// TODO : 回転をクォータニオンへ変換
+	transform.SetLocalEulerAngles(eulerAngles);
 }
 
 inline void to_json(nlohmann::json& json, const Transform& transform)
 {
 	// TODO : 回転をクォータニオンへ変換
-	math::Vector3 rotation;
+	math::Vector3 eulerAngles;
 
 	json =
 	{
-		{ "enabled",		transform._enabled },
-		{ "localPosition",	transform._localPosition },
-		{ "localRotation",	rotation },
-		{ "localScale",		transform._localScale },
+		{ "enabled",			transform._enabled },
+		{ "localPosition",		transform._localPosition },
+		{ "localEulerAngles",	eulerAngles },
+		{ "localScale",			transform._localScale },
 	};
 }
 #pragma endregion

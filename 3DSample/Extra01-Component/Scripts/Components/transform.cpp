@@ -17,9 +17,9 @@ namespace
 
 Transform::Transform() :
 	_localPosition	(0.0f, 0.0f, 0.0f),
-	_localRotation	(math::Quaternion::StoreFromSIMD(DirectX::XMQuaternionIdentity())),
+	_localRotation	(math::Quaternion::StoreFromSIMD(XMQuaternionIdentity())),
 	_localScale		(1.0f, 1.0f, 1.0f),
-	_worldMatrix	(math::Matrix4x4::StoreFromSIMD(DirectX::XMMatrixIdentity())),
+	_worldMatrix	(math::Matrix4x4::StoreFromSIMD(XMMatrixIdentity())),
 	_isDirty		(false),
 	_parent			(),
 	_children		()
@@ -77,35 +77,33 @@ void Transform::DetachChildren()
 
 void Transform::LookAt(const math::Vector3& target, const math::Vector3& up)
 {
-	_worldMatrix = math::Matrix4x4::StoreFromSIMD(DirectX::XMMatrixLookAtLH(_localPosition.LoadToSIMD(), target.LoadToSIMD(), up.LoadToSIMD()));
+	const auto pos			= GetWorldPosition().LoadToSIMD();
+	const auto targetVector = target.LoadToSIMD();
+	const auto upVector		= up.LoadToSIMD();
 
-	auto localMat = DirectX::XMMatrixIdentity();
-	if (_parent.expired())
-	{
-		localMat = _worldMatrix.LoadToSIMD();
-	}
-	else
-	{
-		localMat = DirectX::XMMatrixMultiply(_worldMatrix.LoadToSIMD(), DirectX::XMMatrixInverse(nullptr, _parent.lock()->GetWorldMatrix().LoadToSIMD()));
-	}
+	const auto forward		= XMVector3Normalize(targetVector - pos);
+	const auto right		= XMVector3Normalize(XMVector3Cross(upVector, forward));
+	const auto newUp		= XMVector3Cross(forward, right);
 
-	DirectX::XMVECTOR scale;
-	DirectX::XMVECTOR rotation;
-	DirectX::XMVECTOR translation;
-	DirectX::XMMatrixDecompose(&scale, &rotation, &translation, localMat);
-	_localScale = math::Vector3::StoreFromSIMD(scale);
-	_localRotation = math::Quaternion::StoreFromSIMD(rotation);
-	_localPosition = math::Vector3::StoreFromSIMD(translation);
+	const auto scale		= GetWorldScale();
 
-	printfDx("%f, %f, %f, %f\n", _localRotation.x, _localRotation.y, _localRotation.z, _localRotation.w);
+	// ワールド行列を計算
+	auto worldMat = XMMatrixIdentity();
+	worldMat.r[0] = right	* scale.x;
+	worldMat.r[1] = newUp	* scale.y;
+	worldMat.r[2] = forward	* scale.z;
+	worldMat.r[3] = XMVectorSetW(pos, 1.0f);
 
-	OnDirty();
+	// ローカル行列を計算
+	const auto localMat = _parent.expired() ? worldMat : worldMat * XMMatrixInverse(nullptr, _parent.lock()->GetWorldMatrix().LoadToSIMD());
+
+	SetLocalMatrix(math::Matrix4x4::StoreFromSIMD(localMat));
 }
 
 #pragma region Getter
 math::Matrix4x4 Transform::GetLocalMatrix() const
 {
-	return math::Matrix4x4::StoreFromSIMD(DirectX::XMMatrixAffineTransformation(_localScale.LoadToSIMD(), DirectX::XMVectorZero(), _localRotation.LoadToSIMD(), _localPosition.LoadToSIMD()));
+	return math::Matrix4x4::StoreFromSIMD(XMMatrixAffineTransformation(_localScale.LoadToSIMD(), XMVectorZero(), _localRotation.LoadToSIMD(), _localPosition.LoadToSIMD()));
 }
 
 math::Vector3 Transform::GetWorldPosition()
@@ -119,7 +117,7 @@ math::Quaternion Transform::GetWorldRotation()
 {
 	UpdateMatrix();
 
-	return math::Quaternion::StoreFromSIMD(DirectX::XMQuaternionRotationMatrix(_worldMatrix.LoadToSIMD()));
+	return math::Quaternion::StoreFromSIMD(XMQuaternionRotationMatrix(_worldMatrix.LoadToSIMD()));
 }
 
 math::Vector3 Transform::GetWorldScale()
@@ -130,9 +128,9 @@ math::Vector3 Transform::GetWorldScale()
 	const auto scaleY = math::Vector3(_worldMatrix._21, _worldMatrix._22, _worldMatrix._23);
 	const auto scaleZ = math::Vector3(_worldMatrix._31, _worldMatrix._32, _worldMatrix._33);
 
-	return{ DirectX::XMVectorGetX(DirectX::XMVector3Length(scaleX.LoadToSIMD())), 
-			DirectX::XMVectorGetX(DirectX::XMVector3Length(scaleY.LoadToSIMD())), 
-			DirectX::XMVectorGetX(DirectX::XMVector3Length(scaleZ.LoadToSIMD())) };
+	return{ XMVectorGetX(XMVector3Length(scaleX.LoadToSIMD())), 
+			XMVectorGetX(XMVector3Length(scaleY.LoadToSIMD())), 
+			XMVectorGetX(XMVector3Length(scaleZ.LoadToSIMD())) };
 }
 
 math::Matrix4x4 Transform::GetWorldMatrix()
@@ -146,30 +144,30 @@ math::Vector3 Transform::GetRight()
 {
 	UpdateMatrix();
 
-	const auto quaternion	= DirectX::XMQuaternionRotationMatrix(_worldMatrix.LoadToSIMD());
-	const auto rotationMat	= DirectX::XMMatrixRotationQuaternion(quaternion);
+	const auto quaternion	= XMQuaternionRotationMatrix(_worldMatrix.LoadToSIMD());
+	const auto rotationMat	= XMMatrixRotationQuaternion(quaternion);
 	
-	return math::Vector3::StoreFromSIMD(DirectX::XMVector3TransformNormal(DirectX::XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f), rotationMat));
+	return math::Vector3::StoreFromSIMD(XMVector3TransformNormal(XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f), rotationMat));
 }
 
 math::Vector3 Transform::GetUp()
 {
 	UpdateMatrix();
 
-	const auto quaternion	= DirectX::XMQuaternionRotationMatrix(_worldMatrix.LoadToSIMD());
-	const auto rotationMat	= DirectX::XMMatrixRotationQuaternion(quaternion);
+	const auto quaternion	= XMQuaternionRotationMatrix(_worldMatrix.LoadToSIMD());
+	const auto rotationMat	= XMMatrixRotationQuaternion(quaternion);
 
-	return math::Vector3::StoreFromSIMD(DirectX::XMVector3TransformNormal(DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f), rotationMat));
+	return math::Vector3::StoreFromSIMD(XMVector3TransformNormal(XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f), rotationMat));
 }
 
 math::Vector3 Transform::GetForward()
 {
 	UpdateMatrix();
 
-	const auto quaternion	= DirectX::XMQuaternionRotationMatrix(_worldMatrix.LoadToSIMD());
-	const auto rotationMat	= DirectX::XMMatrixRotationQuaternion(quaternion);
+	const auto quaternion	= XMQuaternionRotationMatrix(_worldMatrix.LoadToSIMD());
+	const auto rotationMat	= XMMatrixRotationQuaternion(quaternion);
 
-	return math::Vector3::StoreFromSIMD(DirectX::XMVector3TransformNormal(DirectX::XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f), rotationMat));
+	return math::Vector3::StoreFromSIMD(XMVector3TransformNormal(XMVectorSet(0.0f, 0.0f, 1.0f, 0.0f), rotationMat));
 }
 
 std::shared_ptr<Transform> Transform::GetParent() const
@@ -233,6 +231,13 @@ void Transform::SetLocalRotation(const math::Quaternion& rotation)
 	OnDirty();
 }
 
+void Transform::SetLocalEulerAngles(const math::Vector3& eulerAnglesDeg)
+{
+	_localRotation = math::Quaternion::StoreFromSIMD(XMQuaternionRotationRollPitchYaw(eulerAnglesDeg.x * math::kDeg2Rad, eulerAnglesDeg.y * math::kDeg2Rad, eulerAnglesDeg.z * math::kDeg2Rad));
+
+	OnDirty();
+}
+
 void Transform::SetLocalScale(const math::Vector3& scale)
 {
 	_localScale = scale;
@@ -243,6 +248,17 @@ void Transform::SetLocalScale(const math::Vector3& scale)
 void Transform::SetLocalScale(const float scale)
 {
 	_localScale = { scale, scale, scale };
+
+	OnDirty();
+}
+
+void Transform::SetLocalMatrix(const math::Matrix4x4& matrix)
+{
+	XMVECTOR scale, rotation, translation;
+	XMMatrixDecompose(&scale, &rotation, &translation, matrix.LoadToSIMD());
+	_localScale		= math::Vector3::StoreFromSIMD(scale);
+	_localRotation	= math::Quaternion::StoreFromSIMD(rotation);
+	_localPosition	= math::Vector3::StoreFromSIMD(translation);
 
 	OnDirty();
 }
@@ -291,7 +307,7 @@ void Transform::UpdateMatrix()
 
 	if (const auto& parent = _parent.lock())
 	{
-		_worldMatrix = math::Matrix4x4::StoreFromSIMD(DirectX::XMMatrixMultiply(localMat.LoadToSIMD(), parent->GetWorldMatrix().LoadToSIMD()));
+		_worldMatrix = math::Matrix4x4::StoreFromSIMD(localMat.LoadToSIMD() * parent->GetWorldMatrix().LoadToSIMD());
 	}
 	else
 	{

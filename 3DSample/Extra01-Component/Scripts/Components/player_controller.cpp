@@ -18,6 +18,7 @@ namespace
 PlayerController::PlayerController() : 
 	_moveT				(0.0f),
 	_moveDir			(0.0f, 0.0f, 1.0f),
+	_isMoving			(false),
 	_mainCameraTransform()
 {
 
@@ -34,7 +35,7 @@ void PlayerController::Update()
 {
 	if (!_enabled) { return; }
 
-	UpdateMoveDir();
+	UpdateControl();
 }
 
 void PlayerController::LateUpdate()
@@ -52,7 +53,7 @@ void PlayerController::Deserialize(const nlohmann::json& json)
 	from_json(json, *this);
 }
 
-void PlayerController::UpdateMoveDir()
+void PlayerController::UpdateControl()
 {
 	// 移動方向をカメラから取得
 	const auto mainCameraTransform = _mainCameraTransform.lock();
@@ -65,18 +66,15 @@ void PlayerController::UpdateMoveDir()
 
 	// 入力方向を計算
 	const auto keyboard = Keyboard::GetInstance();
-	//auto inputAxis = DirectX::XMVectorZero();
-	//if (keyboard.IsPressed(KEY_INPUT_W)) { inputAxis = DirectX::XMVectorAdd		(inputAxis, forward); }
-	//if (keyboard.IsPressed(KEY_INPUT_S)) { inputAxis = DirectX::XMVectorSubtract(inputAxis, forward); }
-	//if (keyboard.IsPressed(KEY_INPUT_D)) { inputAxis = DirectX::XMVectorAdd		(inputAxis, right); }
-	//if (keyboard.IsPressed(KEY_INPUT_A)) { inputAxis = DirectX::XMVectorSubtract(inputAxis, right); }
-	auto axis = math::Vector2();
-	if (keyboard.IsPressed(KEY_INPUT_W)) { axis.y += 1; }
-	if (keyboard.IsPressed(KEY_INPUT_S)) { axis.y -= 1; }
-	if (keyboard.IsPressed(KEY_INPUT_D)) { axis.x += 1; }
-	if (keyboard.IsPressed(KEY_INPUT_A)) { axis.x -= 1; }
-	auto inputAxis = axis.LoadToSIMD();
+	auto inputAxis = DirectX::XMVectorZero();
+	if (keyboard.IsPressed(KEY_INPUT_W)) { inputAxis = DirectX::XMVectorAdd		(inputAxis, forward); }
+	if (keyboard.IsPressed(KEY_INPUT_S)) { inputAxis = DirectX::XMVectorSubtract(inputAxis, forward); }
+	if (keyboard.IsPressed(KEY_INPUT_D)) { inputAxis = DirectX::XMVectorAdd		(inputAxis, right); }
+	if (keyboard.IsPressed(KEY_INPUT_A)) { inputAxis = DirectX::XMVectorSubtract(inputAxis, right); }
 	DirectX::XMVector2Normalize(inputAxis);
+
+	// 移動判定
+	_isMoving = DirectX::XMVectorGetX(DirectX::XMVector3Length(inputAxis)) > math::kEpsilon;
 
 	// 移動方向を計算
 	const auto projectInputAxis = DirectX::XMVectorSet(DirectX::XMVectorGetX(inputAxis), 0.0f, DirectX::XMVectorGetY(inputAxis), 0.0f);
