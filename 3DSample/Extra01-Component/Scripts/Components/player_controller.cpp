@@ -67,10 +67,10 @@ void PlayerController::UpdateControl()
 	// 入力方向を計算
 	const auto keyboard = Keyboard::GetInstance();
 	auto inputAxis = DirectX::XMVectorZero();
-	if (keyboard.IsPressed(KEY_INPUT_W)) { inputAxis = DirectX::XMVectorAdd		(inputAxis, forward); }
-	if (keyboard.IsPressed(KEY_INPUT_S)) { inputAxis = DirectX::XMVectorSubtract(inputAxis, forward); }
-	if (keyboard.IsPressed(KEY_INPUT_D)) { inputAxis = DirectX::XMVectorAdd		(inputAxis, right); }
-	if (keyboard.IsPressed(KEY_INPUT_A)) { inputAxis = DirectX::XMVectorSubtract(inputAxis, right); }
+	if (keyboard.IsPressed(KEY_INPUT_W)) { inputAxis += forward; }
+	if (keyboard.IsPressed(KEY_INPUT_S)) { inputAxis -= forward; }
+	if (keyboard.IsPressed(KEY_INPUT_D)) { inputAxis += right; }
+	if (keyboard.IsPressed(KEY_INPUT_A)) { inputAxis -= right; }
 	DirectX::XMVector2Normalize(inputAxis);
 
 	// 移動判定

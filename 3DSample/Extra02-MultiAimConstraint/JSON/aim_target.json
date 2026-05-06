@@ -1,0 +1,31 @@
+﻿{
+  "name": "AimTarget",
+  "tag": "Untagged",
+  "isActive": true,
+  "components": [
+    {
+      "type": "Transform",
+      "enabled": true,
+      "localPosition": {
+        "x": 0.0,
+        "y": 15.0,
+        "z": -10.0
+      },
+      "localEulerAngles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "type": "AimTargetController",
+      "enabled": true,
+      "moveSpeed": 15.0
+    }
+  ]
+}

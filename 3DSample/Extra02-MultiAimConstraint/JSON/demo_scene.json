@@ -1,0 +1,17 @@
+﻿{
+  "name": "DemoScene",
+  "objects": [
+    {
+      "name": "MainCamera",
+      "children": []
+    },
+    {
+      "name": "Player",
+      "children": []
+    },
+    {
+      "name": "AimTarget",
+      "children": []
+    }
+  ]
+}

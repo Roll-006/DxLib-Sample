@@ -23,14 +23,20 @@
       }
     },
     {
-      "type": "PlayerController",
+      "type": "MultiAimConstraint",
       "enabled": true,
-      "moveT": 0.6
-    },
-    {
-      "type": "PlayerMover",
-      "enabled": true,
-      "moveSpeed": 30.0
+      "constrainedBoneName": "mixamorig:LeftForeArm",
+      "aimAxis": {
+        "x": 0,
+        "y": 1,
+        "z": 0
+      },
+      "upAxis": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "sourceObjectName": "AimTarget"
     },
     {
       "type": "ModelRenderer",

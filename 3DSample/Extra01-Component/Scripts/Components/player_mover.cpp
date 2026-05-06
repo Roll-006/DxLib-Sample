@@ -61,8 +61,8 @@ void PlayerMover::Move()
 
 	// 座標を更新
 	const auto transform	= _transform.lock();
-	const auto velocity		= DirectX::XMVectorScale(moveDir.LoadToSIMD(), _moveSpeed * Time::GetInstance().GetDeltaTime());
-	const auto pos			= DirectX::XMVectorAdd(transform->GetLocalPosition().LoadToSIMD(), velocity);
+	const auto velocity		= moveDir.LoadToSIMD() * _moveSpeed * Time::GetInstance().GetDeltaTime();
+	const auto pos			= transform->GetLocalPosition().LoadToSIMD() + velocity;
 	transform->SetLocalPosition(math::Vector3::StoreFromSIMD(pos));
 
 	// 姿勢を更新
