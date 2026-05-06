@@ -1,0 +1,30 @@
+﻿{
+  "name": "MainCamera",
+  "tag": "MainCamera",
+  "isActive": true,
+  "components": [
+    {
+      "type": "Transform",
+      "enabled": true,
+      "localPosition": {
+        "x": 0.0,
+        "y": 40.0,
+        "z": -20.0
+      },
+      "localEulerAngles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "localScale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "type": "CameraApplier",
+      "enabled": true
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{581181a7-7235-4277-af46-fe6699980fd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{043f1bb2-ddb2-4625-b862-370c7a97f5ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JSON">
+      <UniqueIdentifier>{2c451f98-653a-4d9b-82e6-7bef02191c4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{24483b44-3a44-4c32-a939-0c143352e497}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DxLibHelper">
+      <UniqueIdentifier>{552e00d6-8cca-4d16-8a52-614d0d0264a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Components">
+      <UniqueIdentifier>{2ffdc367-072d-4b6e-9f8f-713bfd96d0de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Core">
+      <UniqueIdentifier>{d297a5af-8f53-4553-b2bb-49584be32944}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\References">
+      <UniqueIdentifier>{acf68d71-193c-4e0e-9770-d15f2a5886ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\System">
+      <UniqueIdentifier>{063e823b-2c68-450c-aa1a-2cd9f68d4608}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="JSON\game_object_tags.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="JSON\main_camera.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="JSON\player.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="JSON\aim_target.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="JSON\demo_scene.json">
+      <Filter>JSON</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Library\DxLibHelper\JSON\json_loader.hpp">
+      <Filter>DxLibHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibHelper\Math\math.hpp">
+      <Filter>DxLibHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\demo_scene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\aim_target.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\main_camera.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\player.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\System\mouse.h">
+      <Filter>Scripts\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\System\keyboard.h">
+      <Filter>Scripts\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\component.h">
+      <Filter>Scripts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\component_concept.h">
+      <Filter>Scripts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\component_factory.h">
+      <Filter>Scripts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\game.h">
+      <Filter>Scripts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\game_object.h">
+      <Filter>Scripts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\game_object_concept.h">
+      <Filter>Scripts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\game_object_factory.h">
+      <Filter>Scripts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\scene.h">
+      <Filter>Scripts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\time.h">
+      <Filter>Scripts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Components\camera_applier.h">
+      <Filter>Scripts\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Components\model_renderer.h">
+      <Filter>Scripts\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Components\transform.h">
+      <Filter>Scripts\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Components\aim_target_controller.h">
+      <Filter>Scripts\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Components\multi_aim_constraint.h">
+      <Filter>Scripts\Components</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Scenes\demo_scene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\aim_target.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\main_camera.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\player.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\System\keyboard.cpp">
+      <Filter>Scripts\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\System\mouse.cpp">
+      <Filter>Scripts\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Core\component.cpp">
+      <Filter>Scripts\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Core\game.cpp">
+      <Filter>Scripts\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Core\game_object.cpp">
+      <Filter>Scripts\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Core\main.cpp">
+      <Filter>Scripts\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Core\scene.cpp">
+      <Filter>Scripts\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Core\time.cpp">
+      <Filter>Scripts\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Components\camera_applier.cpp">
+      <Filter>Scripts\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Components\model_renderer.cpp">
+      <Filter>Scripts\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Components\transform.cpp">
+      <Filter>Scripts\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Components\aim_target_controller.cpp">
+      <Filter>Scripts\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Components\multi_aim_constraint.cpp">
+      <Filter>Scripts\Components</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
