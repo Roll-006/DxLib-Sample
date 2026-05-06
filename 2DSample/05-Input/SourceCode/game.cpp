@@ -1,6 +1,4 @@
-﻿#include <DxLib.h>
-#include <Vector/vector2.hpp>
-#include <Vector/vector2_int.hpp>
+﻿#include <Math/math.hpp>
 #include "time.h"
 #include "keyboard.h"
 #include "mouse.h"
@@ -31,7 +29,7 @@ int Game::Run() const
 		DrawFormatString(0,  20, 0xffffff, "2をこのフレームに入力した : %d",	Keyboard::GetInstance().WasPressedThisFrame(KEY_INPUT_2));
 		DrawFormatString(0,  40, 0xffffff, "3をこのフレームで離した : %d",		Keyboard::GetInstance().WasReleasedThisFrame(KEY_INPUT_3));
 		DrawFormatString(0,  60, 0xffffff, "4の入力カウント : %d",				Keyboard::GetInstance().GetInputCount(KEY_INPUT_4));
-		DrawFormatString(0,  80, 0xffffff, "マウスの移動量 : %d, %d",			Mouse::GetInstance().GetDelta().x, Mouse::GetInstance().GetDelta().y);
+		DrawFormatString(0,  80, 0xffffff, "マウスの移動量 : %f, %f",			Mouse::GetInstance().GetDelta().x, Mouse::GetInstance().GetDelta().y);
 		DrawFormatString(0, 100, 0xffffff, "マウスホイールの移動量 : %f, %f",	Mouse::GetInstance().GetScroll().x, Mouse::GetInstance().GetScroll().y);
 		DrawFormatString(0, 120, 0xffffff, "左クリックを長押しした : %d",		Mouse::GetInstance().IsPressed(MOUSE_INPUT_LEFT));
 		DrawCircle(Mouse::GetInstance().GetPos().x, Mouse::GetInstance().GetPos().y, 5, 0xffffff);

@@ -1,14 +1,12 @@
 ﻿#include <array>
-#include <DxLib.h>
-#include <Vector/vector2.hpp>
-#include <Vector/vector2_int.hpp>
+#include <Math/math.hpp>
 #include "mouse.h"
 
 Mouse::Mouse() :
 	_state			(0),
-	_currentPos		(0, 0),
-	_prevPos		(0, 0),
-	_delta			(0, 0),
+	_currentPos		(0.0f, 0.0f),
+	_prevPos		(0.0f, 0.0f),
+	_delta			(0.0f, 0.0f),
 	_currentScroll	(0.0f, 0.0f),
 	_prevScroll		(0.0f, 0.0f),
 	_scroll			(0.0f, 0.0f)
@@ -16,27 +14,15 @@ Mouse::Mouse() :
 	// MOUSE_INPUT_6～MOUSE_INPUT_8を使用する場合は、下記の関数を実行する必要があります
 	// SetUseDirectInputFlag(TRUE);
 
-	GetMousePoint(&_currentPos.x, &_currentPos.y);
-	_prevPos = _currentPos;
+	UpdateMousePos();
+	UpdateScroll();
 }
 
 void Mouse::Update()
 {
-	// データを保存
-	_prevPos	= _currentPos;
-	_prevScroll = _currentScroll;
-
 	UpdateMouseButtonState();
-
-	// 現在のマウス座標を取得
-	GetMousePoint(&_currentPos.x, &_currentPos.y);
-
-	// マウスホイールの移動量を取得
-	_currentScroll += { GetMouseHWheelRotVolF(), GetMouseWheelRotVolF() };
-
-	// 移動量を計算
-	_delta	= _currentPos - _prevPos;
-	_scroll = _currentScroll - _prevScroll;
+	UpdateMousePos();
+	UpdateScroll();
 }
 
 int Mouse::GetIndex(const int mouseButton) const
@@ -95,4 +81,30 @@ void Mouse::UpdateMouseButtonState()
 			}
 		}
 	}
+}
+
+void Mouse::UpdateMousePos()
+{
+	// データを保存
+	_prevPos = _currentPos;
+
+	// 現在の座標を更新
+	int x, y;
+	GetMousePoint(&x, &y);
+	_currentPos = math::Vector2(x, y);
+
+	// 移動量を計算
+	_delta = math::Vector2::StoreFromSIMD(DirectX::XMVectorSubtract(_currentPos.LoadToSIMD(), _prevPos.LoadToSIMD()));
+}
+
+void Mouse::UpdateScroll()
+{
+	// データを保存
+	_prevScroll = _currentScroll;
+
+	// マウスホイールの移動量を取得
+	_currentScroll = math::Vector2::StoreFromSIMD(DirectX::XMVectorAdd(_currentScroll.LoadToSIMD(), DirectX::XMVectorSet(GetMouseHWheelRotVolF(), GetMouseWheelRotVolF(), 0.0f, 0.0f)));
+
+	// 移動量を計算
+	_scroll = math::Vector2::StoreFromSIMD(DirectX::XMVectorSubtract(_currentScroll.LoadToSIMD(), _prevScroll.LoadToSIMD()));
 }

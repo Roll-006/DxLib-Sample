@@ -1,6 +1,4 @@
-﻿#include <DxLib.h>
-#include <Vector/vector2.hpp>
-#include <Vector/vector2_int.hpp>
+﻿#include <Math/math.hpp>
 #include "debug.h"
 #include "time.h"
 #include "keyboard.h"

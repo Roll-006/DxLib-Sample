@@ -1,5 +1,4 @@
-﻿#include <DxLib.h>
-#include <Vector/vector2.hpp>
+﻿#include <Math/math.hpp>
 #include "time.h"
 #include "transform.h"
 #include "animator.h"

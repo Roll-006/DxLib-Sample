@@ -140,6 +140,8 @@
     <ClCompile Include="SourceCode\time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Library\DxLibHelper\JSON\json_loader.hpp" />
+    <ClInclude Include="..\..\Library\DxLibHelper\Math\math.hpp" />
     <ClInclude Include="SourceCode\game.h" />
     <ClInclude Include="SourceCode\player.h" />
     <ClInclude Include="SourceCode\time.h" />

@@ -1,16 +1,15 @@
-﻿#include <DxLib.h>
-#include <Vector/vector2.hpp>
+﻿#include <Math/math.hpp>
 #include "debug.h"
 #include "transform.h"
 #include "aabb.h"
 
-AABB::AABB(Transform& transform, const Vector2& size, const Vector2& offset) :
+AABB::AABB(Transform& transform, const math::Vector2& size, const math::Vector2& offset) :
 	_transform	(transform),
 	_center		(0.0f, 0.0f),
 	_max		(0.0f, 0.0f),
 	_min		(0.0f, 0.0f),
 	_size		(size),
-	_extents	(size / 2),
+	_extents	(math::Vector2::StoreFromSIMD(size.LoadToSIMD() / 2)),
 	_offset		(offset)
 {
 	UpdateCollisionInfo();
@@ -35,7 +34,11 @@ void AABB::Draw() const
 
 void AABB::UpdateCollisionInfo()
 {
-	_center = _transform.position + _offset * _transform.scale;
-	_max	= _center + GetExtents();
-	_min	= _center - GetExtents();
+	_center = math::Vector2::StoreFromSIMD(_transform.position.LoadToSIMD() + _offset.LoadToSIMD() * _transform.scale.LoadToSIMD());
+
+	const auto extents	= GetExtents().LoadToSIMD();
+	const auto center	= _center.LoadToSIMD();
+
+	_max	= math::Vector2::StoreFromSIMD(center + extents);
+	_min	= math::Vector2::StoreFromSIMD(center - extents);
 }

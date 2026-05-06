@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-class Mouse
+class Mouse final
 {
 public:
 	/// @brief インスタンスを取得
@@ -47,19 +47,19 @@ public:
 	/// スクリーン上のマウス座標を取得
 	/// </summary>
 	/// <returns>マウス座標</returns>
-	Vector2Int GetPos() const { return _currentPos; }
+	math::Vector2 GetPos() const { return _currentPos; }
 
 	/// <summary>
 	/// マウスの移動量を取得
 	/// </summary>
 	/// <returns>マウスの移動量</returns>
-	Vector2Int GetDelta() const { return _delta; }
+	math::Vector2 GetDelta() const { return _delta; }
 
 	/// <summary>
 	/// マウスホイールの移動量を取得
 	/// </summary>
 	/// <returns>マウスホイールの移動量</returns>
-	Vector2 GetScroll() const { return _scroll; }
+	math::Vector2 GetScroll() const { return _scroll; }
 
 private:
 	Mouse();
@@ -76,12 +76,22 @@ private:
 	/// </summary>
 	void UpdateMouseButtonState();
 
+	/// <summary>
+	/// マウスの座標を更新する
+	/// </summary>
+	void UpdateMousePos();
+
+	/// <summary>
+	/// マウスホイールを更新する
+	/// </summary>
+	void UpdateScroll();
+
 private:
 	std::array<int, 8> _state;		// マウスボタンの状態を格納
-	Vector2Int	_currentPos;		// 現在の座標
-	Vector2Int	_prevPos;			// 以前の座標
-	Vector2Int	_delta;				// 座標の移動量
-	Vector2		_currentScroll;		// 現在のホイール
-	Vector2		_prevScroll;		// 以前のホイール
-	Vector2		_scroll;			// ホイールの移動量
+	math::Vector2 _currentPos;		// 現在の座標
+	math::Vector2 _prevPos;			// 以前の座標
+	math::Vector2 _delta;			// 座標の移動量
+	math::Vector2 _currentScroll;	// 現在のホイール
+	math::Vector2 _prevScroll;		// 以前のホイール
+	math::Vector2 _scroll;			// ホイールの移動量
 };

@@ -1,5 +1,4 @@
-﻿#include <DxLib.h>
-#include <Vector/vector2.hpp>
+﻿#include <Math/math.hpp>
 #include "debug.h"
 #include "transform.h"
 #include "aabb.h"

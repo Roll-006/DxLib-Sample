@@ -1,4 +1,4 @@
-﻿#include <DxLib.h>
+﻿#include <Math/math.hpp>
 #include "time.h"
 #include "player.h"
 #include "game.h"

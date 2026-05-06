@@ -1,6 +1,5 @@
-﻿#include <DxLib.h>
-#include <unordered_map>
-#include <Vector/vector2.hpp>
+﻿#include <unordered_map>
+#include <Math/math.hpp>
 #include "time.h"
 #include "transform.h"
 #include "animator.h"

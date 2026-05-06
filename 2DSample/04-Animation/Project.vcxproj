@@ -142,6 +142,8 @@
     <ClCompile Include="SourceCode\transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Library\DxLibHelper\JSON\json_loader.hpp" />
+    <ClInclude Include="..\..\Library\DxLibHelper\Math\math.hpp" />
     <ClInclude Include="SourceCode\animation_clip.h" />
     <ClInclude Include="SourceCode\animator.h" />
     <ClInclude Include="SourceCode\game.h" />

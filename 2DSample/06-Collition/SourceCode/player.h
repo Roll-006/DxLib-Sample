@@ -14,9 +14,9 @@ private:
 	void Move();
 
 private:
-	static constexpr Vector2 kFirstPos	= { 500.0f, 500.0f };
-	static constexpr Vector2 kScale		= { 10.0f, 10.0f };
-	static constexpr float	 kSpeed		= 500.0f;
+	static constexpr math::Vector2 kFirstPos	= { 500.0f, 500.0f };
+	static constexpr math::Vector2 kScale		= { 10.0f, 10.0f };
+	static constexpr float	 kSpeed				= 500.0f;
 
 	Transform	_transform;
 	Animator	_animator;
