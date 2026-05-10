@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Library">
+      <UniqueIdentifier>{2ae8d4fb-dd3c-43c9-acfc-204828458024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DxLibHelper">
+      <UniqueIdentifier>{b132f3cf-e466-4902-a2bf-d28301f87a8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DirectXTK">
+      <UniqueIdentifier>{e636121f-8d5f-449b-aa73-fa5d419fb93e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DirectXTK\Source">
+      <UniqueIdentifier>{f201d442-da19-44e2-a9e0-7ee6e77cf462}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\main.cpp">
@@ -39,6 +51,12 @@
     <ClCompile Include="SourceCode\mouse.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Library\DirectXTK\Source\pch.cpp">
+      <Filter>Library\DirectXTK\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DirectXTK\Source\SimpleMath.cpp">
+      <Filter>Library\DirectXTK\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\game.h">
@@ -64,6 +82,15 @@
     </ClInclude>
     <ClInclude Include="SourceCode\mouse.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibHelper\json_loader.hpp">
+      <Filter>Library\DxLibHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibHelper\math.hpp">
+      <Filter>Library\DxLibHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DirectXTK\Source\pch.h">
+      <Filter>Library\DirectXTK\Source</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

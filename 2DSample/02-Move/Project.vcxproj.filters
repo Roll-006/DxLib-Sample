@@ -16,17 +16,14 @@
     <Filter Include="Library">
       <UniqueIdentifier>{9f053501-39e6-4490-af7a-5cf41cd69f7e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Library\Source">
-      <UniqueIdentifier>{7958ce88-bcd8-4246-9af6-9ca9b4058410}</UniqueIdentifier>
+    <Filter Include="Library\DxLibHelper">
+      <UniqueIdentifier>{a1cdf6e4-6a38-4abe-adf6-6fb60ae3e22e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Library\Include">
-      <UniqueIdentifier>{bf7f264d-2674-44a4-af0b-35f8ea49f587}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Library\Source\DirectXTK">
+    <Filter Include="Library\DirectXTK">
       <UniqueIdentifier>{ff46d903-4c8d-4d79-ae81-35c023f00f12}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Library\Include\DxLibHelper">
-      <UniqueIdentifier>{a1cdf6e4-6a38-4abe-adf6-6fb60ae3e22e}</UniqueIdentifier>
+    <Filter Include="Library\DirectXTK\Source">
+      <UniqueIdentifier>{75ade27e-a663-4bf9-b4b8-e10540e3c03d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -39,11 +36,11 @@
     <ClCompile Include="SourceCode\player.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Library\Source\DirectXTK\pch.cpp">
-      <Filter>Library\Source\DirectXTK</Filter>
+    <ClCompile Include="..\..\Library\DirectXTK\Source\pch.cpp">
+      <Filter>Library\DirectXTK\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Library\Source\DirectXTK\SimpleMath.cpp">
-      <Filter>Library\Source\DirectXTK</Filter>
+    <ClCompile Include="..\..\Library\DirectXTK\Source\SimpleMath.cpp">
+      <Filter>Library\DirectXTK\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,14 +50,14 @@
     <ClInclude Include="SourceCode\player.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Library\Source\DirectXTK\pch.h">
-      <Filter>Library\Source\DirectXTK</Filter>
+    <ClInclude Include="..\..\Library\DxLibHelper\json_loader.hpp">
+      <Filter>Library\DxLibHelper</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Library\Include\DxLibHelper\math.hpp">
-      <Filter>Library\Include\DxLibHelper</Filter>
+    <ClInclude Include="..\..\Library\DxLibHelper\math.hpp">
+      <Filter>Library\DxLibHelper</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Library\Include\DxLibHelper\json_loader.hpp">
-      <Filter>Library\Include\DxLibHelper</Filter>
+    <ClInclude Include="..\..\Library\DirectXTK\Source\pch.h">
+      <Filter>Library\DirectXTK\Source</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

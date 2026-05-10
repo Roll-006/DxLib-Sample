@@ -7,26 +7,26 @@
 class AABB
 {
 public:
-	AABB(Transform& transform, const math::Vector2& size, const math::Vector2& offset = { 0.0f, 0.0f });
+	AABB(Transform& transform, const Vector2& size, const Vector2& offset = { 0.0f, 0.0f });
 
 	void Update();
 	void Draw() const;
 
-	math::Vector2 GetCenter()	const { return _center; }
-	math::Vector2 GetMax()		const { return _max; }
-	math::Vector2 GetMin()		const { return _min; }
-	math::Vector2 GetSize()		const { return math::Vector2::StoreFromSIMD(_size.LoadToSIMD() * _transform.scale.LoadToSIMD()); }
-	math::Vector2 GetExtents()	const { return math::Vector2::StoreFromSIMD(_extents.LoadToSIMD() * _transform.scale.LoadToSIMD()); }
+	Vector2 GetCenter()	const { return _center; }
+	Vector2 GetMax()		const { return _max; }
+	Vector2 GetMin()		const { return _min; }
+	Vector2 GetSize()		const { return _size * _transform.scale; }
+	Vector2 GetExtents()	const { return _extents * _transform.scale; }
 
 private:
 	void UpdateCollisionInfo();
 
 private:
-	math::Vector2 _center;
-	math::Vector2 _max;
-	math::Vector2 _min;
-	math::Vector2 _size;
-	math::Vector2 _extents;
-	math::Vector2 _offset;
+	Vector2 _center;
+	Vector2 _max;
+	Vector2 _min;
+	Vector2 _size;
+	Vector2 _extents;
+	Vector2 _offset;
 	Transform& _transform;
 };

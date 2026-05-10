@@ -1,14 +1,14 @@
 ﻿#include <unordered_map>
-#include <Math/math.hpp>
+#include <math.hpp>
 #include "time.h"
 #include "transform.h"
 #include "animator.h"
 
 Animator::Animator(Transform& transform) :
-	_playTimer		(0.0f),
-	_keyframeIndex	(0),
+	_playTimer(0.0f),
+	_keyframeIndex(0),
 	_currentAnimName(""),
-	_transform		(transform)
+	_transform(transform)
 {
 
 }
@@ -45,7 +45,7 @@ void Animator::LoadAnim(const AnimationClip& animClip)
 
 	// 画像を分割して読み込む
 	// MEMO : 画像が別々の場合はサイトでの合成をおすすめします！ [https://web.save-editor.com/pic/picture_split_tool.html]
-	LoadDivGraph(clip.filePath.c_str(), clip.keyframeNum, clip.keyframeNum, 1, clip.originGraphicSize.x / clip.keyframeNum, clip.originGraphicSize.y, clip.animHandle.data());
+	auto result = LoadDivGraph(clip.filePath.c_str(), clip.keyframeNum, clip.keyframeNum, 1, clip.originGraphicSize.x / clip.keyframeNum, clip.originGraphicSize.y, clip.animHandle.data());
 
 	_clips[clip.name] = clip;
 }
@@ -60,9 +60,9 @@ void Animator::AttachAnim(const std::string& animName)
 		if (clip.name == animName && !clip.canTransitionToSelf) { return; }
 	}
 
-	_currentAnimName	= animName;
-	_playTimer			= 0.0f;
-	_keyframeIndex		= 0;
+	_currentAnimName = animName;
+	_playTimer = 0.0f;
+	_keyframeIndex = 0;
 }
 
 void Animator::PlayAnim()

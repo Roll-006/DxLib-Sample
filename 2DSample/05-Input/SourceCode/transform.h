@@ -6,7 +6,7 @@ public:
 	Transform();
 
 public:
-	math::Vector2	position;
-	float			rotation;
-	math::Vector2	scale;
+	Vector2	position;
+	float	rotation;
+	Vector2	scale;
 };

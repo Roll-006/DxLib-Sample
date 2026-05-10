@@ -1,4 +1,4 @@
-﻿#include <Math/math.hpp>
+﻿#include <math.hpp>
 #include "debug.h"
 #include "time.h"
 #include "keyboard.h"
