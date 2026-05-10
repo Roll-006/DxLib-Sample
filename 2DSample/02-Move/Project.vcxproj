@@ -106,12 +106,12 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <AdditionalIncludeDirectories>../../Library;../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Library/Include;../../Library/Include/Dxlib_h;../../Library/Include/DxLibHelper;../../Library/Include/EffekseerForDXLib;../../Library/Include/DirectXTK;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../Library;../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../Library/Include;../../Library/Include/Dxlib_h;../../Library/Include/DxLibHelper;../../Library/Include/EffekseerForDXLib;../../Library/Include/DirectXTK;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -125,26 +125,28 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>../../Library;../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Library/Include;../../Library/Include/Dxlib_h;../../Library/Include/DxLibHelper;../../Library/Include/EffekseerForDXLib;../../Library/Include/DirectXTK;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../Library;../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../Library/Include;../../Library/Include/Dxlib_h;../../Library/Include/DxLibHelper;../../Library/Include/EffekseerForDXLib;../../Library/Include/DirectXTK;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Library\Source\DirectXTK\pch.cpp" />
+    <ClCompile Include="..\..\Library\Source\DirectXTK\SimpleMath.cpp" />
     <ClCompile Include="SourceCode\game.cpp" />
     <ClCompile Include="SourceCode\main.cpp" />
     <ClCompile Include="SourceCode\player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Library\DxLibHelper\JSON\json_loader.hpp" />
-    <ClInclude Include="..\..\Library\DxLibHelper\Math\math.hpp" />
+    <ClInclude Include="..\..\Library\Include\DxLibHelper\json_loader.hpp" />
+    <ClInclude Include="..\..\Library\Include\DxLibHelper\math.hpp" />
+    <ClInclude Include="..\..\Library\Source\DirectXTK\pch.h" />
     <ClInclude Include="SourceCode\game.h" />
     <ClInclude Include="SourceCode\player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

@@ -1,4 +1,4 @@
-﻿#include <Math/math.hpp>
+﻿#include <math.hpp>
 #include "player.h"
 #include "game.h"
 
