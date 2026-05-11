@@ -22,11 +22,20 @@
     <Filter Include="Scripts\System">
       <UniqueIdentifier>{b10a03ac-aab9-42cf-b342-4b6d23eb7ab0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DxLibHelper">
-      <UniqueIdentifier>{932a1c07-4192-4e9b-b981-0ad172531f9e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scripts\References">
       <UniqueIdentifier>{c0052a32-d0ad-4d29-83ea-2670b2eb46bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library">
+      <UniqueIdentifier>{a8ce7b80-8e1c-43f5-a27b-5f2465e021ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DxLibHelper">
+      <UniqueIdentifier>{932a1c07-4192-4e9b-b981-0ad172531f9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DirectXTK">
+      <UniqueIdentifier>{76ea0f15-1444-4230-b3a9-cd77184c62e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DirectXTK\Source">
+      <UniqueIdentifier>{0dce1400-ab53-4341-ab86-f6d2ea456980}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +89,12 @@
     </ClCompile>
     <ClCompile Include="Scripts\Components\player_mover.cpp">
       <Filter>Scripts\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DirectXTK\Source\pch.cpp">
+      <Filter>Library\DirectXTK\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DirectXTK\Source\SimpleMath.cpp">
+      <Filter>Library\DirectXTK\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,14 +155,17 @@
     <ClInclude Include="Scripts\Components\player_controller.h">
       <Filter>Scripts\Components</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Library\DxLibHelper\JSON\json_loader.hpp">
-      <Filter>DxLibHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Library\DxLibHelper\Math\math.hpp">
-      <Filter>DxLibHelper</Filter>
-    </ClInclude>
     <ClInclude Include="Scripts\Components\player_mover.h">
       <Filter>Scripts\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DirectXTK\Source\pch.h">
+      <Filter>Library\DirectXTK\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibHelper\json_loader.hpp">
+      <Filter>Library\DxLibHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibHelper\math.hpp">
+      <Filter>Library\DxLibHelper</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

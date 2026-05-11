@@ -1,7 +1,7 @@
 ﻿#include <string>
 #include <vector>
-#include <JSON/json_loader.hpp>
-#include <Math/math.hpp>
+#include <json_loader.hpp>
+#include <math.hpp>
 #include "time.h"
 #include "../System/keyboard.h"
 #include "../System/mouse.h"

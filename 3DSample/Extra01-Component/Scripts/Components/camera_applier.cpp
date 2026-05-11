@@ -1,6 +1,6 @@
 ﻿#include <string>
-#include <JSON/json_loader.hpp>
-#include <Math/math.hpp>
+#include <json_loader.hpp>
+#include <math.hpp>
 #include "transform.h"
 #include "../Core/component_factory.h"
 #include "camera_applier.h"
@@ -38,7 +38,7 @@ void CameraApplier::LateUpdate()
 
 	// カメラの位置及び姿勢を設定
 	const auto transform = _transform.lock();
-	SetCameraPositionAndTargetAndUpVec(transform->GetWorldPosition(), transform->GetForward(), transform->GetUp());
+	SetCameraPositionAndTargetAndUpVec(ToDxLibVector(transform->GetWorldPosition()), ToDxLibVector(transform->GetForward()), ToDxLibVector(transform->GetUp()));
 }
 
 void CameraApplier::Render() const

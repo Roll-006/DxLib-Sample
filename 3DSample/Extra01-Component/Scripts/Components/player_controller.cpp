@@ -1,6 +1,6 @@
 ﻿#include <string>
-#include <JSON/json_loader.hpp>
-#include <Math/math.hpp>
+#include <json_loader.hpp>
+#include <math.hpp>
 #include "transform.h"
 #include "../Core/component_factory.h"
 #include "../System/keyboard.h"
@@ -58,25 +58,26 @@ void PlayerController::UpdateControl()
 	// 移動方向をカメラから取得
 	const auto mainCameraTransform = _mainCameraTransform.lock();
 
-	auto forward = math::Vector2(mainCameraTransform->GetForward().x, mainCameraTransform->GetForward().z).LoadToSIMD();
+	auto forward = Vector2(mainCameraTransform->GetForward().x, mainCameraTransform->GetForward().z);
 	DirectX::XMVector2Normalize(forward);
 	
-	auto right = math::Vector2(mainCameraTransform->GetRight().x, mainCameraTransform->GetRight().z).LoadToSIMD();
+	auto right = Vector2(mainCameraTransform->GetRight().x, mainCameraTransform->GetRight().z);
 	DirectX::XMVector2Normalize(right);
 
 	// 入力方向を計算
 	const auto keyboard = Keyboard::GetInstance();
-	auto inputAxis = DirectX::XMVectorZero();
+	auto inputAxis = Vector2::Zero;
 	if (keyboard.IsPressed(KEY_INPUT_W)) { inputAxis += forward; }
 	if (keyboard.IsPressed(KEY_INPUT_S)) { inputAxis -= forward; }
 	if (keyboard.IsPressed(KEY_INPUT_D)) { inputAxis += right; }
 	if (keyboard.IsPressed(KEY_INPUT_A)) { inputAxis -= right; }
-	DirectX::XMVector2Normalize(inputAxis);
+	inputAxis.Normalize();
 
 	// 移動判定
-	_isMoving = DirectX::XMVectorGetX(DirectX::XMVector3Length(inputAxis)) > math::kEpsilon;
+	_isMoving = inputAxis.Length() > math::kEpsilon;
+
 
 	// 移動方向を計算
-	const auto projectInputAxis = DirectX::XMVectorSet(DirectX::XMVectorGetX(inputAxis), 0.0f, DirectX::XMVectorGetY(inputAxis), 0.0f);
-	_moveDir = math::Vector3::StoreFromSIMD(DirectX::XMVectorLerp(_moveDir.LoadToSIMD(), projectInputAxis, _moveT));
+	const auto projectInputAxis = Vector3(inputAxis.x, 0.0f, inputAxis.y);
+	_moveDir = Vector3::Lerp(_moveDir, projectInputAxis, _moveT);
 }

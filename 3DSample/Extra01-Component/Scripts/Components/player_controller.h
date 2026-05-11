@@ -15,7 +15,7 @@ public:
 
 	void Deserialize(const nlohmann::json& json) override;
 
-	math::Vector3 GetMoveDir() const { return _moveDir; }
+	Vector3 GetMoveDir() const { return _moveDir; }
 	bool IsMoving() const { return _isMoving; }
 
 private:
@@ -23,7 +23,7 @@ private:
 
 private:
 	float			_moveT;
-	math::Vector3	_moveDir;
+	Vector3	_moveDir;
 	bool			_isMoving;
 	std::weak_ptr<Transform> _mainCameraTransform;
 

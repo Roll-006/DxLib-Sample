@@ -1,7 +1,7 @@
 ﻿#include <string>
 #include <vector>
-#include <JSON/json_loader.hpp>
-#include <Math/math.hpp>
+#include <json_loader.hpp>
+#include <math.hpp>
 #include "../Scripts/Core/component_factory.h"
 #include "../Scripts/Components/transform.h"
 #include "../Scripts/Core/game_object.h"

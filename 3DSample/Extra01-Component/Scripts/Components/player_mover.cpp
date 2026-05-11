@@ -1,6 +1,6 @@
 ﻿#include <string>
-#include <JSON/json_loader.hpp>
-#include <Math/math.hpp>
+#include <json_loader.hpp>
+#include <math.hpp>
 #include "transform.h"
 #include "../Core/time.h"
 #include "../Core/component_factory.h"
@@ -61,9 +61,8 @@ void PlayerMover::Move()
 
 	// 座標を更新
 	const auto transform	= _transform.lock();
-	const auto velocity		= moveDir.LoadToSIMD() * _moveSpeed * Time::GetInstance().GetDeltaTime();
-	const auto pos			= transform->GetLocalPosition().LoadToSIMD() + velocity;
-	transform->SetLocalPosition(math::Vector3::StoreFromSIMD(pos));
+	const auto velocity		= moveDir * _moveSpeed * Time::GetInstance().GetDeltaTime();
+	transform->SetLocalPosition(transform->GetLocalPosition() + velocity);
 
 	// 姿勢を更新
 	if (controller->IsMoving()) { transform->LookAt(moveDir); }
