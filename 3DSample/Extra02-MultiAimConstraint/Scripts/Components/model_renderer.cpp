@@ -1,6 +1,6 @@
 ﻿#include <string>
-#include <JSON/json_loader.hpp>
-#include <Math/math.hpp>
+#include <json_loader.hpp>
+#include <math.hpp>
 #include "transform.h"
 #include "../Core/component_factory.h"
 #include "model_renderer.h"
@@ -47,7 +47,7 @@ void ModelRenderer::Render() const
 {
 	if (!_enabled) { return; }
 
-	MV1SetMatrix(_modelHandle, _transform.lock()->GetWorldMatrix());
+	MV1SetMatrix(_modelHandle, ToDxLibMatrix(_transform.lock()->GetWorldMatrix()));
 	MV1DrawModel(_modelHandle);
 }
 

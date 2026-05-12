@@ -36,22 +36,22 @@ public:
 	/// </summary>
 	/// <param name="target">注視する対象</param>
 	/// <param name="up">upベクトル</param>
-	void LookAt(const math::Vector3& target, const math::Vector3& up = { 0.0f, 1.0f, 0.0f });
+	void LookAt(const Vector3& target, const Vector3& up = Vector3::Up);
 
 	#pragma region Getter
-	math::Vector3		GetLocalPosition()	const { return _localPosition; }
-	math::Quaternion	GetLocalRotation()	const { return _localRotation; }
-	math::Vector3		GetLocalScale()		const { return _localScale; }
-	math::Matrix4x4		GetLocalMatrix()	const;
+	Vector3		GetLocalPosition()	const { return _localPosition; }
+	Quaternion	GetLocalRotation()	const { return _localRotation; }
+	Vector3		GetLocalScale()		const { return _localScale; }
+	Matrix		GetLocalMatrix()	const;
 
-	math::Vector3		GetWorldPosition();
-	math::Quaternion	GetWorldRotation();
-	math::Vector3		GetWorldScale();
-	math::Matrix4x4		GetWorldMatrix();
+	Vector3		GetWorldPosition();
+	Quaternion	GetWorldRotation();
+	Vector3		GetWorldScale();
+	Matrix		GetWorldMatrix();
 
-	math::Vector3		GetRight();
-	math::Vector3		GetUp();
-	math::Vector3		GetForward();
+	Vector3		GetRight();
+	Vector3		GetUp();
+	Vector3		GetForward();
 
 	/// <summary>
 	/// 親トランスフォームを取得
@@ -92,12 +92,12 @@ public:
 	#pragma endregion
 
 	#pragma region Setter
-	void SetLocalPosition	(const math::Vector3& position);
-	void SetLocalRotation	(const math::Quaternion& rotation);
-	void SetLocalEulerAngles(const math::Vector3& eulerAnglesDeg);
-	void SetLocalScale		(const math::Vector3& scale);
+	void SetLocalPosition	(const Vector3& position);
+	void SetLocalRotation	(const Quaternion& rotation);
+	void SetLocalEulerAngles(const Vector3& eulerAnglesDeg);
+	void SetLocalScale		(const Vector3& scale);
 	void SetLocalScale		(const float scale);
-	void SetLocalMatrix		(const math::Matrix4x4& matrix);
+	void SetLocalMatrix		(Matrix& matrix);
 
 	/// <summary>
 	/// 親トランスフォームを設定する
@@ -136,12 +136,12 @@ private:
 	void OnDirty();
 
 private:
-	math::Vector3				_localPosition;
-	math::Quaternion			_localRotation;
-	math::Vector3				_localScale;
-	math::Matrix4x4				_worldMatrix;
-	bool						_isDirty;
-	std::weak_ptr<Transform>	_parent;
+	Vector3		_localPosition;
+	Quaternion	_localRotation;
+	Vector3		_localScale;
+	Matrix		_worldMatrix;
+	bool		_isDirty;
+	std::weak_ptr<Transform> _parent;
 	std::vector<std::shared_ptr<Transform>> _children;
 
 	friend void from_json	(const nlohmann::json& json, Transform& transform);
@@ -152,7 +152,7 @@ private:
 #pragma region from / to JSON
 inline void from_json(const nlohmann::json& json, Transform& transform)
 {
-	math::Vector3 eulerAngles = { 0.0f, 0.0f, 0.0f };
+	auto eulerAngles = Vector3();
 
 	json.at("enabled").			get_to(transform._enabled);
 	json.at("localPosition").	get_to(transform._localPosition);
@@ -164,8 +164,7 @@ inline void from_json(const nlohmann::json& json, Transform& transform)
 
 inline void to_json(nlohmann::json& json, const Transform& transform)
 {
-	// TODO : 回転をクォータニオンへ変換
-	math::Vector3 eulerAngles;
+	auto eulerAngles = transform.GetLocalRotation().ToEuler() * math::kRad2Deg;
 
 	json =
 	{

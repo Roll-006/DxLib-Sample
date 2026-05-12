@@ -16,9 +16,9 @@ namespace
 }
 
 Transform::Transform() :
-	_localPosition	(0.0f, 0.0f, 0.0f),
+	_localPosition	(Vector3::Zero),
 	_localRotation	(Quaternion::Identity),
-	_localScale		(1.0f, 1.0f, 1.0f),
+	_localScale		(Vector3::One),
 	_worldMatrix	(Matrix::Identity),
 	_isDirty		(false),
 	_parent			(),
@@ -78,11 +78,16 @@ void Transform::DetachChildren()
 void Transform::LookAt(const Vector3& target, const Vector3& up)
 {
 	// ワールド行列を計算
-	auto worldMat = Matrix::CreateLookAt(GetWorldPosition(), target, up);
-	worldMat = XMMatrixAffineTransformation(GetWorldScale(), Quaternion(0, 0, 0, 0), Quaternion::CreateFromRotationMatrix(worldMat), worldMat.Translation());
+	auto lookAtMat = Matrix::CreateWorld(GetWorldPosition(), target - GetWorldPosition(), up);
+
+	Vector3 scale, translation;
+	Quaternion rotation;
+	lookAtMat.Decompose(scale, rotation, translation);
+
+	const auto worldMat = Matrix(XMMatrixAffineTransformation(GetWorldScale(), Quaternion(0, 0, 0, 0), rotation, translation));
 
 	// ローカル行列を計算
-	auto localMat = _parent.expired() ? worldMat : worldMat * XMMatrixInverse(nullptr, _parent.lock()->GetWorldMatrix());
+	auto localMat = _parent.expired() ? worldMat : worldMat * _parent.lock()->GetWorldMatrix().Invert();
 
 	SetLocalMatrix(localMat);
 }
@@ -131,30 +136,22 @@ Vector3 Transform::GetRight()
 {
 	UpdateMatrix();
 
-	Vector3 scale, translation;
-	Quaternion rotation;
-	_worldMatrix.Decompose(scale, rotation, translation);
-	return Vector3::TransformNormal(Vector3::Right, Matrix::CreateFromQuaternion(rotation));
+	return Vector3::TransformNormal(Vector3::Right, Matrix::CreateFromQuaternion(GetWorldRotation()));
 }
 
 Vector3 Transform::GetUp()
 {
 	UpdateMatrix();
 
-	Vector3 scale, translation;
-	Quaternion rotation;
-	_worldMatrix.Decompose(scale, rotation, translation);
-	return Vector3::TransformNormal(Vector3::Up, Matrix::CreateFromQuaternion(rotation));
+	return Vector3::TransformNormal(Vector3::Up, Matrix::CreateFromQuaternion(GetWorldRotation()));
 }
 
 Vector3 Transform::GetForward()
 {
 	UpdateMatrix();
 
-	Vector3 scale, translation;
-	Quaternion rotation;
-	_worldMatrix.Decompose(scale, rotation, translation);
-	return Vector3::TransformNormal(Vector3::Forward, Matrix::CreateFromQuaternion(rotation));
+	// MEMO : SimpleMathのForwardの定義は{ 0.f, 0.f, -1.f }であることに注意
+	return Vector3::TransformNormal(Vector3::Backward, Matrix::CreateFromQuaternion(GetWorldRotation()));
 }
 
 std::shared_ptr<Transform> Transform::GetParent() const

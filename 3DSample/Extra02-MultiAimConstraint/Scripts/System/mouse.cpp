@@ -1,5 +1,5 @@
 ﻿#include <array>
-#include <Math/math.hpp>
+#include <math.hpp>
 #include "mouse.h"
 
 Mouse::Mouse() :
@@ -91,10 +91,10 @@ void Mouse::UpdateMousePos()
 	// 現在の座標を更新
 	int x, y;
 	GetMousePoint(&x, &y);
-	_currentPos = math::Vector2(x, y);
+	_currentPos = Vector2(x, y);
 
 	// 移動量を計算
-	_delta = math::Vector2::StoreFromSIMD(DirectX::XMVectorSubtract(_currentPos.LoadToSIMD(), _prevPos.LoadToSIMD()));
+	_delta = _currentPos -_prevPos;
 }
 
 void Mouse::UpdateScroll()
@@ -103,8 +103,8 @@ void Mouse::UpdateScroll()
 	_prevScroll = _currentScroll;
 
 	// マウスホイールの移動量を取得
-	_currentScroll = math::Vector2::StoreFromSIMD(DirectX::XMVectorAdd(_currentScroll.LoadToSIMD(), DirectX::XMVectorSet(GetMouseHWheelRotVolF(), GetMouseWheelRotVolF(), 0.0f, 0.0f)));
+	_currentScroll += Vector2(GetMouseHWheelRotVolF(), GetMouseWheelRotVolF());
 
 	// 移動量を計算
-	_scroll = math::Vector2::StoreFromSIMD(DirectX::XMVectorSubtract(_currentScroll.LoadToSIMD(), _prevScroll.LoadToSIMD()));
+	_scroll = _currentScroll - _prevScroll;
 }

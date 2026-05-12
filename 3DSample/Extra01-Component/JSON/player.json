@@ -25,7 +25,7 @@
     {
       "type": "PlayerController",
       "enabled": true,
-      "moveT": 0.6
+      "moveT": 0.2
     },
     {
       "type": "PlayerMover",

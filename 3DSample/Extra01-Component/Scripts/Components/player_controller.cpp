@@ -35,7 +35,7 @@ void PlayerController::Update()
 {
 	if (!_enabled) { return; }
 
-	UpdateControl();
+	Control();
 }
 
 void PlayerController::LateUpdate()
@@ -53,16 +53,16 @@ void PlayerController::Deserialize(const nlohmann::json& json)
 	from_json(json, *this);
 }
 
-void PlayerController::UpdateControl()
+void PlayerController::Control()
 {
 	// 移動方向をカメラから取得
 	const auto mainCameraTransform = _mainCameraTransform.lock();
 
 	auto forward = Vector2(mainCameraTransform->GetForward().x, mainCameraTransform->GetForward().z);
-	DirectX::XMVector2Normalize(forward);
+	forward.Normalize();
 	
 	auto right = Vector2(mainCameraTransform->GetRight().x, mainCameraTransform->GetRight().z);
-	DirectX::XMVector2Normalize(right);
+	right.Normalize();
 
 	// 入力方向を計算
 	const auto keyboard = Keyboard::GetInstance();
@@ -75,7 +75,6 @@ void PlayerController::UpdateControl()
 
 	// 移動判定
 	_isMoving = inputAxis.Length() > math::kEpsilon;
-
 
 	// 移動方向を計算
 	const auto projectInputAxis = Vector3(inputAxis.x, 0.0f, inputAxis.y);

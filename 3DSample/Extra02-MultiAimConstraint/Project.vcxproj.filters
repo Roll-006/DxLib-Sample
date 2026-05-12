@@ -13,9 +13,6 @@
     <Filter Include="Scenes">
       <UniqueIdentifier>{24483b44-3a44-4c32-a939-0c143352e497}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DxLibHelper">
-      <UniqueIdentifier>{552e00d6-8cca-4d16-8a52-614d0d0264a9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scripts\Components">
       <UniqueIdentifier>{2ffdc367-072d-4b6e-9f8f-713bfd96d0de}</UniqueIdentifier>
     </Filter>
@@ -27,6 +24,18 @@
     </Filter>
     <Filter Include="Scripts\System">
       <UniqueIdentifier>{063e823b-2c68-450c-aa1a-2cd9f68d4608}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library">
+      <UniqueIdentifier>{6e98d530-1211-438c-8a25-3e865619b4a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DxLibHelper">
+      <UniqueIdentifier>{552e00d6-8cca-4d16-8a52-614d0d0264a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DirectXTK">
+      <UniqueIdentifier>{43141a13-2476-45f2-8431-22fb12fa1ac1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DirectXTK\Source">
+      <UniqueIdentifier>{e26104f3-8ef3-4a82-b049-8883d5988630}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -47,12 +56,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Library\DxLibHelper\JSON\json_loader.hpp">
-      <Filter>DxLibHelper</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Library\DxLibHelper\Math\math.hpp">
-      <Filter>DxLibHelper</Filter>
-    </ClInclude>
     <ClInclude Include="Scenes\demo_scene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
@@ -113,6 +116,15 @@
     <ClInclude Include="Scripts\Components\multi_aim_constraint.h">
       <Filter>Scripts\Components</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Library\DirectXTK\Source\pch.h">
+      <Filter>Library\DirectXTK\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibHelper\json_loader.hpp">
+      <Filter>Library\DxLibHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibHelper\math.hpp">
+      <Filter>Library\DxLibHelper</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scenes\demo_scene.cpp">
@@ -165,6 +177,12 @@
     </ClCompile>
     <ClCompile Include="Scripts\Components\multi_aim_constraint.cpp">
       <Filter>Scripts\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DirectXTK\Source\pch.cpp">
+      <Filter>Library\DirectXTK\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DirectXTK\Source\SimpleMath.cpp">
+      <Filter>Library\DirectXTK\Source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

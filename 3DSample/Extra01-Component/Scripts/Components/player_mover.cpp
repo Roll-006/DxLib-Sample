@@ -62,7 +62,8 @@ void PlayerMover::Move()
 	// 座標を更新
 	const auto transform	= _transform.lock();
 	const auto velocity		= moveDir * _moveSpeed * Time::GetInstance().GetDeltaTime();
-	transform->SetLocalPosition(transform->GetLocalPosition() + velocity);
+	const auto position		= transform->GetLocalPosition() + velocity;
+	transform->SetLocalPosition(position);
 
 	// 姿勢を更新
 	if (controller->IsMoving()) { transform->LookAt(moveDir); }

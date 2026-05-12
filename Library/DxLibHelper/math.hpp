@@ -136,6 +136,26 @@ namespace DirectX
 		}
 		#pragma endregion
 
+		#pragma region function
+		inline Matrix CreateRotationMatrix(Matrix& matrix) noexcept
+		{
+			Vector3 scale, translation;
+			Quaternion rotation;
+			matrix.Decompose(scale, rotation, translation);
+			return Matrix::CreateFromQuaternion(rotation);
+		}
+
+		inline Matrix CreateLookAtLH(const Vector3& position, const Vector3& target, const Vector3& up) noexcept
+		{
+			Matrix result;
+			const XMVECTOR positionVector	= DirectX::XMLoadFloat3(&position);
+			const XMVECTOR targetVector		= DirectX::XMLoadFloat3(&target);
+			const XMVECTOR upVector			= DirectX::XMLoadFloat3(&up);
+			XMStoreFloat4x4(&result, DirectX::XMMatrixLookAtLH(positionVector, targetVector, upVector));
+			return result;
+		}
+		#pragma endregion
+
 		#pragma region from / to JSON
 		inline void from_json(const nlohmann::json& j, Matrix& matrix)
 		{

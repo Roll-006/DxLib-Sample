@@ -125,12 +125,12 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>../../Library;../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Library;../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;../../Library/DirectXTK/Include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../Library;../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../Library;../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;../../Library/DirectXTK/Include;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

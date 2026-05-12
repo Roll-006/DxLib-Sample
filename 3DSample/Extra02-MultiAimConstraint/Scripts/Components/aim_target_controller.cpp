@@ -1,6 +1,6 @@
 ﻿#include <string>
-#include <JSON/json_loader.hpp>
-#include <Math/math.hpp>
+#include <json_loader.hpp>
+#include <math.hpp>
 #include "transform.h"
 #include "../Core/component_factory.h"
 #include "../Core/time.h"
@@ -45,7 +45,7 @@ void AimTargetController::Render() const
 	if (!_enabled) { return; }
 
 	auto transform = _transform.lock();
-	DrawSphere3D(transform->GetWorldPosition(), 0.5f, 8, 0xffffff, 0xffffff, TRUE);
+	DrawSphere3D(ToDxLibVector(transform->GetWorldPosition()), 0.5f, 8, 0xffffff, 0xffffff, TRUE);
 
 	DrawFormatString(0,   0, 0xffffff, "→ : 右へ移動");
 	DrawFormatString(0,  20, 0xffffff, "← : 左へ移動");
@@ -63,7 +63,7 @@ void AimTargetController::Deserialize(const nlohmann::json& json)
 void AimTargetController::Move()
 {
 	// ターゲットを移動
-	auto moveDir = math::Vector3(0.0f, 0.0f, 0.0f);
+	auto moveDir = Vector3::Zero;
 	const auto keyboard = Keyboard::GetInstance();
 	if (keyboard.IsPressed(KEY_INPUT_LEFT))
 	{
@@ -92,7 +92,6 @@ void AimTargetController::Move()
 
 	// 座標を移動
 	const auto transform	= _transform.lock();
-	const auto velocity		= moveDir.LoadToSIMD() * _moveSpeed * Time::GetInstance().GetDeltaTime();
-	const auto pos			= transform->GetLocalPosition().LoadToSIMD() + velocity;
-	transform->SetLocalPosition(math::Vector3::StoreFromSIMD(pos));
+	const auto velocity		= moveDir * _moveSpeed * Time::GetInstance().GetDeltaTime();
+	transform->SetLocalPosition(transform->GetLocalPosition() + velocity);
 }

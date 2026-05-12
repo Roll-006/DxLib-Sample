@@ -19,7 +19,7 @@ public:
 	bool IsMoving() const { return _isMoving; }
 
 private:
-	void UpdateControl();
+	void Control();
 
 private:
 	float			_moveT;

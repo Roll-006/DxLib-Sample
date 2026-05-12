@@ -23,8 +23,8 @@ private:
 	std::string					_constrainedBoneName;	// sourceObjectの影響を受けるボーンの名前
 	int							_constrainedBoneIndex;	// sourceObjectの影響を受けるボーンのインデックス
 	int							_parentBoneIndex;		// constrainedBoneの親ボーンのインデックス
-	math::Vector3				_aimAxis;				// ボーンの前方向をsourceObjectに向けるためのローカルaim軸
-	math::Vector3				_upAxis;				// ボーンの上方向に向けるためのローカルup軸
+	Vector3						_aimAxis;				// ボーンの前方向をsourceObjectに向けるためのローカルaim軸
+	Vector3						_upAxis;				// ボーンの上方向に向けるためのローカルup軸
 	std::string					_sourceObjectName;		// ボーンの向きに影響を与えるゲームオブジェクトの名前
 	std::weak_ptr<Transform>	_sourceObject;			// ボーンの向きに影響を与えるゲームオブジェクト
 	std::weak_ptr<Transform>	_transform;

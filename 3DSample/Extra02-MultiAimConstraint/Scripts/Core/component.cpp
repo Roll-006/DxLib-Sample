@@ -1,7 +1,7 @@
 ﻿#include <memory>
 #include <string>
-#include <JSON/json_loader.hpp>
-#include <Math/math.hpp>
+#include <json_loader.hpp>
+#include <math.hpp>
 #include "component.h"
 
 Component::Component() :
