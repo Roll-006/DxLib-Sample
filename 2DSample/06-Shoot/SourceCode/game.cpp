@@ -37,7 +37,7 @@ int Game::Run() const
 
 int Game::SetUpDxLib() const
 {
-	SetGraphMode(static_cast<int>(window::kSize.x), static_cast<int>(window::kSize.y), 32);	// 解像度とカラービット数を設定
+	SetGraphMode(static_cast<int>(window::kSize.x), static_cast<int>(window::kSize.y), window::kColorBitDepth);		// 解像度とカラービット数を設定
 	ChangeWindowMode(FALSE);							// ウィンドウモードを設定 (true : ウィンドウ, false : フルスクリーン)
 	if (DxLib_Init() == -1) { return EXIT_FAILURE; }	// DXライブラリを初期化 (0 : 成功, -1 : 失敗)
 	SetDrawScreen(DX_SCREEN_BACK);						// 描画先画面を裏画面に設定

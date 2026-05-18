@@ -146,6 +146,7 @@
     <ClInclude Include="..\..\Library\DxLibHelper\math.hpp" />
     <ClInclude Include="SourceCode\game.h" />
     <ClInclude Include="SourceCode\player.h" />
+    <ClInclude Include="SourceCode\window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

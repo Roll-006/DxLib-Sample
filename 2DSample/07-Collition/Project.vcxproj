@@ -164,6 +164,7 @@
     <ClInclude Include="SourceCode\player.h" />
     <ClInclude Include="SourceCode\time.h" />
     <ClInclude Include="SourceCode\transform.h" />
+    <ClInclude Include="SourceCode\window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
