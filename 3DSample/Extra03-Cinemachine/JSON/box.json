@@ -1,0 +1,31 @@
+﻿{
+  "name": "Box",
+  "tag": "Untagged",
+  "isActive": true,
+  "components": [
+    {
+      "type": "Transform",
+      "enabled": true,
+      "localPosition": {
+        "x": 50.0,
+        "y": 50.0,
+        "z": -100.0
+      },
+      "localEulerAngles": {
+        "x": 0.0,
+        "y": 45.0,
+        "z": 0.0
+      },
+      "localScale": {
+        "x": 0.1,
+        "y": 0.1,
+        "z": 0.1
+      }
+    },
+    {
+      "type": "ModelRenderer",
+      "enabled": true,
+      "modelPath": "../../Assets/Models/Box/mesh.mv1"
+    }
+  ]
+}

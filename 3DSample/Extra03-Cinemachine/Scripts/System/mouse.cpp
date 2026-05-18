@@ -3,13 +3,13 @@
 #include "mouse.h"
 
 Mouse::Mouse() :
-	_state(0),
-	_currentPos(0.0f, 0.0f),
-	_prevPos(0.0f, 0.0f),
-	_delta(0.0f, 0.0f),
-	_currentScroll(0.0f, 0.0f),
-	_prevScroll(0.0f, 0.0f),
-	_scroll(0.0f, 0.0f)
+	_state			(0),
+	_currentPos		(0.0f, 0.0f),
+	_prevPos		(0.0f, 0.0f),
+	_delta			(0.0f, 0.0f),
+	_currentScroll	(0.0f, 0.0f),
+	_prevScroll		(0.0f, 0.0f),
+	_scroll			(0.0f, 0.0f)
 {
 	// MOUSE_INPUT_6～MOUSE_INPUT_8を使用する場合は、下記の関数を実行する必要があります
 	// SetUseDirectInputFlag(TRUE);
@@ -94,7 +94,7 @@ void Mouse::UpdateMousePos()
 	_currentPos = Vector2(x, y);
 
 	// 移動量を計算
-	_delta = _currentPos - _prevPos;
+	_delta = _currentPos -_prevPos;
 }
 
 void Mouse::UpdateScroll()
@@ -103,7 +103,7 @@ void Mouse::UpdateScroll()
 	_prevScroll = _currentScroll;
 
 	// マウスホイールの移動量を取得
-	_currentScroll += Vector2(DirectX::XMVectorSet(GetMouseHWheelRotVolF(), GetMouseWheelRotVolF(), 0.0f, 0.0f));
+	_currentScroll += Vector2(GetMouseHWheelRotVolF(), GetMouseWheelRotVolF());
 
 	// 移動量を計算
 	_scroll = _currentScroll - _prevScroll;

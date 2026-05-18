@@ -4,12 +4,12 @@
 
 Mouse::Mouse() :
 	_state			(0),
-	_currentPos		(0.0f, 0.0f),
-	_prevPos		(0.0f, 0.0f),
-	_delta			(0.0f, 0.0f),
-	_currentScroll	(0.0f, 0.0f),
-	_prevScroll		(0.0f, 0.0f),
-	_scroll			(0.0f, 0.0f)
+	_currentPos		(Vector2::Zero),
+	_prevPos		(Vector2::Zero),
+	_delta			(Vector2::Zero),
+	_currentScroll	(Vector2::Zero),
+	_prevScroll		(Vector2::Zero),
+	_scroll			(Vector2::Zero)
 {
 	// MOUSE_INPUT_6～MOUSE_INPUT_8を使用する場合は、下記の関数を実行する必要があります
 	// SetUseDirectInputFlag(TRUE);
@@ -91,10 +91,10 @@ void Mouse::UpdateMousePos()
 	// 現在の座標を更新
 	int x, y;
 	GetMousePoint(&x, &y);
-	_currentPos = Vector2(x, y);
+	_currentPos = Vector2(static_cast<float>(x), static_cast<float>(y));
 
 	// 移動量を計算
-	_delta = _currentPos -_prevPos;
+	_delta = _currentPos - _prevPos;
 }
 
 void Mouse::UpdateScroll()

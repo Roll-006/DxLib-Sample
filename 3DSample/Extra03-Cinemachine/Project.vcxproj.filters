@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{581181a7-7235-4277-af46-fe6699980fd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{043f1bb2-ddb2-4625-b862-370c7a97f5ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JSON">
+      <UniqueIdentifier>{2c451f98-653a-4d9b-82e6-7bef02191c4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{24483b44-3a44-4c32-a939-0c143352e497}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Components">
+      <UniqueIdentifier>{63cddf76-fbd0-46fe-b2c5-b819825959b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Core">
+      <UniqueIdentifier>{49f19bed-0933-4e43-b491-8c6806272493}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\System">
+      <UniqueIdentifier>{b10a03ac-aab9-42cf-b342-4b6d23eb7ab0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\References">
+      <UniqueIdentifier>{c0052a32-d0ad-4d29-83ea-2670b2eb46bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library">
+      <UniqueIdentifier>{a8ce7b80-8e1c-43f5-a27b-5f2465e021ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DxLibHelper">
+      <UniqueIdentifier>{932a1c07-4192-4e9b-b981-0ad172531f9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DirectXTK">
+      <UniqueIdentifier>{76ea0f15-1444-4230-b3a9-cd77184c62e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DirectXTK\Source">
+      <UniqueIdentifier>{0dce1400-ab53-4341-ab86-f6d2ea456980}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameObjects\box.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\main_camera.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\player.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\demo_scene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Components\cinemachine_camera.cpp">
+      <Filter>Scripts\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Components\model_renderer.cpp">
+      <Filter>Scripts\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Components\transform.cpp">
+      <Filter>Scripts\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Core\component.cpp">
+      <Filter>Scripts\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Core\game.cpp">
+      <Filter>Scripts\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Core\game_object.cpp">
+      <Filter>Scripts\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Core\main.cpp">
+      <Filter>Scripts\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Core\scene.cpp">
+      <Filter>Scripts\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Core\time.cpp">
+      <Filter>Scripts\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\System\keyboard.cpp">
+      <Filter>Scripts\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\System\mouse.cpp">
+      <Filter>Scripts\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Components\cinemachine_brain.cpp">
+      <Filter>Scripts\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DirectXTK\Source\pch.cpp">
+      <Filter>Library\DirectXTK\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DirectXTK\Source\SimpleMath.cpp">
+      <Filter>Library\DirectXTK\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Components\camera.cpp">
+      <Filter>Scripts\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\References\camera_rendering.h">
+      <Filter>Scripts\References</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameObjects\box.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\main_camera.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\player.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\demo_scene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Components\cinemachine_camera.h">
+      <Filter>Scripts\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Components\model_renderer.h">
+      <Filter>Scripts\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\component.h">
+      <Filter>Scripts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\component_concept.h">
+      <Filter>Scripts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\component_factory.h">
+      <Filter>Scripts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\game.h">
+      <Filter>Scripts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\game_object.h">
+      <Filter>Scripts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\game_object_concept.h">
+      <Filter>Scripts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\game_object_factory.h">
+      <Filter>Scripts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\scene.h">
+      <Filter>Scripts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\time.h">
+      <Filter>Scripts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\System\keyboard.h">
+      <Filter>Scripts\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\System\mouse.h">
+      <Filter>Scripts\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Components\transform.h">
+      <Filter>Scripts\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Components\cinemachine_brain.h">
+      <Filter>Scripts\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DirectXTK\Source\pch.h">
+      <Filter>Library\DirectXTK\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibHelper\json_loader.hpp">
+      <Filter>Library\DxLibHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibHelper\math.hpp">
+      <Filter>Library\DxLibHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Components\camera.h">
+      <Filter>Scripts\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\References\camera_projection.h">
+      <Filter>Scripts\References</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="JSON\game_object_tags.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="JSON\main_camera.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="JSON\player.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="JSON\box.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="JSON\demo_scene.json">
+      <Filter>JSON</Filter>
+    </None>
+  </ItemGroup>
+</Project>
