@@ -19,5 +19,6 @@ private:
 	static constexpr unsigned int	kColor		= 0xffffff;
 
 	Transform _transform;
+	GraphicRenderer _graphicRenderer;
 	Animator _animator;
 };

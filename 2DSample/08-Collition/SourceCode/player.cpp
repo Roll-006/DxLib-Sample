@@ -2,21 +2,24 @@
 #include "time.h"
 #include "keyboard.h"
 #include "transform.h"
+#include "graphic.h"
+#include "graphic_renderer.h"
 #include "animator.h"
 #include "aabb.h"
 #include "player.h"
 
 Player::Player() :
-	_transform(Transform()),
-	_animator(Animator(_transform)),
-	_aabb(AABB(_transform, Vector2(10.0f, 15.0f), Vector2(0.0f, 0.5f)))
+	_transform		(Transform()),
+	_graphicRenderer(GraphicRenderer(_transform)),
+	_animator		(Animator(_transform, _graphicRenderer)),
+	_aabb			(AABB(_transform, Vector2(10.0f, 15.0f), Vector2(0.0f, 0.5f)))
 
 {
 	_transform.position = kFirstPos;
 	_transform.scale = kScale;
 
-	_animator.LoadAnim(AnimationClip({}, "Idle", "../../Assets/Animations/Player/Idle.png", Vector2(1008, 144), 7, 0.2f, true, false));
-	_animator.LoadAnim(AnimationClip({}, "Run", "../../Assets/Animations/Player/Run.png", Vector2(1152, 144), 8, 0.2f, true, false));
+	_animator.LoadAnim("../../Assets/Animations/Player/Idle.png", AnimationClip("Idle", 7, 0.2f, true, false));
+	_animator.LoadAnim("../../Assets/Animations/Player/Run.png",  AnimationClip("Run",  8, 0.2f, true, false));
 	_animator.AttachAnim("Idle");
 }
 
@@ -29,7 +32,7 @@ void Player::Update()
 
 void Player::Draw() const
 {
-	_animator.Draw();
+	_graphicRenderer.Draw();
 	_aabb.Draw();
 }
 

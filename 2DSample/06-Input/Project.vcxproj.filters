@@ -57,6 +57,12 @@
     <ClCompile Include="..\..\Library\DirectXTK\Source\SimpleMath.cpp">
       <Filter>Library\DirectXTK\Source</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\graphic.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\graphic_renderer.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\game.h">
@@ -93,6 +99,12 @@
       <Filter>Library\DirectXTK\Source</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\window.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\graphic.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\graphic_renderer.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

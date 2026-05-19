@@ -1,18 +1,21 @@
 ﻿#include <math.hpp>
 #include "time.h"
 #include "transform.h"
+#include "graphic.h"
+#include "graphic_renderer.h"
 #include "animator.h"
 #include "player.h"
 
 Player::Player() : 
-	_transform	(Transform()),
-	_animator	(Animator(_transform))
+	_transform		(Transform()),
+	_graphicRenderer(GraphicRenderer(_transform)),
+	_animator		(Animator(_transform, _graphicRenderer))
 {
 	_transform.position = kFirstPos;
 	_transform.scale	= kScale;
 
-	_animator.LoadAnim(AnimationClip({}, "Idle", "../../Assets/Animations/Player/Idle.png", Vector2(1008, 144), 7, 0.2f, true, false));
-	_animator.LoadAnim(AnimationClip({}, "Run",  "../../Assets/Animations/Player/Run.png",  Vector2(1152, 144), 8, 0.2f, true, false));
+	_animator.LoadAnim("../../Assets/Animations/Player/Idle.png", AnimationClip("Idle", 7, 0.2f, true, false));
+	_animator.LoadAnim("../../Assets/Animations/Player/Run.png",  AnimationClip("Run",  8, 0.2f, true, false));
 	_animator.AttachAnim("Idle");
 }
 
@@ -24,7 +27,7 @@ void Player::Update()
 
 void Player::Draw() const
 {
-	_animator.Draw();
+	_graphicRenderer.Draw();
 }
 
 void Player::Move()

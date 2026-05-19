@@ -1,13 +1,17 @@
 ﻿#include <math.hpp>
 #include "time.h"
 #include "transform.h"
+#include "graphic.h"
 #include "graphic_renderer.h"
 #include "player.h"
 
 Player::Player() : 
 	_transform		(Transform()),
-	_graphicRenderer(GraphicRenderer(_transform, "../../Assets/Animations/Player/Idle.png"))
+	_graphic		(std::make_shared<Graphic>("../../Assets/Textures/Player.png")),
+	_graphicRenderer(GraphicRenderer(_transform))
 {
+	_graphicRenderer.SetGraphic(_graphic);
+
 	_transform.position = kFirstPos;
 	_transform.scale	= kScale;
 }

@@ -34,10 +34,11 @@ private:
 	static constexpr unsigned int	kColor		= 0xffffff;
 	static constexpr float			kJumpPower	= -1000.0f;
 
-	bool		_isGrounded;
-	Vector2		_moveVelocity;
-	Vector2		_fallVelocity;
-	Transform	_transform;
-	Animator	_animator;
-	AABB		_aabb;
+	bool			_isGrounded;
+	Vector2			_moveVelocity;
+	Vector2			_fallVelocity;
+	Transform		_transform;
+	GraphicRenderer _graphicRenderer;
+	Animator		_animator;
+	AABB			_aabb;
 };

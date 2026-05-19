@@ -2,6 +2,8 @@
 #include "window.h"
 #include "time.h"
 #include "transform.h"
+#include "graphic.h"
+#include "graphic_renderer.h"
 #include "animator.h"
 #include "player.h"
 #include "game.h"

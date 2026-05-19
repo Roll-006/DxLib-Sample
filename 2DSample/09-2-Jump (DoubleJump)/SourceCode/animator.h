@@ -4,12 +4,11 @@
 class Animator
 {
 public:
-	Animator(Transform& transform);
+	Animator(Transform& transform, GraphicRenderer& graphicRenderer);
 
 	void Update();
-	void Draw() const;
 
-	void LoadAnim(const AnimationClip& animClip);
+	void LoadAnim(const std::string& filePath, const AnimationClip& animClip);
 	void AttachAnim(const std::string& animName);
 
 private:
@@ -21,4 +20,5 @@ private:
 	int _keyframeIndex;
 	std::string _currentAnimName;
 	Transform& _transform;
+	GraphicRenderer& _graphicRenderer;
 };

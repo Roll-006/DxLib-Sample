@@ -6,6 +6,8 @@
 #include "mouse.h"
 #include "physics.h"
 #include "transform.h"
+#include "graphic.h"
+#include "graphic_renderer.h"
 #include "animator.h"
 #include "aabb.h"
 #include "collision.h"

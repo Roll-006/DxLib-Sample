@@ -20,7 +20,8 @@ private:
 	static constexpr int			kRadius = 100;
 	static constexpr unsigned int	kColor = 0xffffff;
 
-	Transform	_transform;
-	Animator	_animator;
-	AABB		_aabb;
+	Transform		_transform;
+	GraphicRenderer _graphicRenderer;
+	Animator		_animator;
+	AABB			_aabb;
 };

@@ -35,11 +35,12 @@ private:
 	static constexpr float			kJumpPower	= -1000.0f;
 	static constexpr int			kMaxJumpNum	= 2;
 
-	bool		_isGrounded;
-	int			_jumpCount;
-	Vector2		_moveVelocity;
-	Vector2		_fallVelocity;
-	Transform	_transform;
-	Animator	_animator;
-	AABB		_aabb;
+	bool			_isGrounded;
+	int				_jumpCount;
+	Vector2			_moveVelocity;
+	Vector2			_fallVelocity;
+	Transform		_transform;
+	GraphicRenderer _graphicRenderer;
+	Animator		_animator;
+	AABB			_aabb;
 };

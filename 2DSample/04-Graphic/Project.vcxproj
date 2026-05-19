@@ -137,6 +137,7 @@
     <ClCompile Include="..\..\Library\DirectXTK\Source\pch.cpp" />
     <ClCompile Include="..\..\Library\DirectXTK\Source\SimpleMath.cpp" />
     <ClCompile Include="SourceCode\game.cpp" />
+    <ClCompile Include="SourceCode\graphic.cpp" />
     <ClCompile Include="SourceCode\graphic_renderer.cpp" />
     <ClCompile Include="SourceCode\main.cpp" />
     <ClCompile Include="SourceCode\player.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="..\..\Library\DxLibHelper\JSON\json_loader.hpp" />
     <ClInclude Include="..\..\Library\DxLibHelper\Math\math.hpp" />
     <ClInclude Include="SourceCode\game.h" />
+    <ClInclude Include="SourceCode\graphic.h" />
     <ClInclude Include="SourceCode\graphic_renderer.h" />
     <ClInclude Include="SourceCode\player.h" />
     <ClInclude Include="SourceCode\time.h" />

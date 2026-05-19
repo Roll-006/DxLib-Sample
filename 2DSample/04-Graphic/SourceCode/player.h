@@ -18,5 +18,6 @@ private:
 	static constexpr unsigned int	kColor		= 0xffffff;
 
 	Transform _transform;
+	std::shared_ptr<Graphic> _graphic;
 	GraphicRenderer _graphicRenderer;
 };

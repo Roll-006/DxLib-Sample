@@ -2,13 +2,16 @@
 #include <math.hpp>
 #include "time.h"
 #include "transform.h"
+#include "graphic.h"
+#include "graphic_renderer.h"
 #include "animator.h"
 
-Animator::Animator(Transform& transform) :
-	_playTimer(0.0f),
-	_keyframeIndex(0),
+Animator::Animator(Transform& transform, GraphicRenderer& graphicRenderer) :
+	_playTimer		(0.0f),
+	_keyframeIndex	(0),
 	_currentAnimName(""),
-	_transform(transform)
+	_transform		(transform),
+	_graphicRenderer(graphicRenderer)
 {
 
 }
@@ -18,36 +21,27 @@ void Animator::Update()
 	PlayAnim();
 }
 
-void Animator::Draw() const
+void Animator::LoadAnim(const std::string& filePath, const AnimationClip& animClip)
 {
-	const auto& clip = _clips.at(_currentAnimName);
-
-	DrawRotaGraph3(
-		static_cast<int>(_transform.position.x),
-		static_cast<int>(_transform.position.y),
-		static_cast<int>(clip.originGraphicSize.x / clip.keyframeNum * 0.5f),
-		static_cast<int>(clip.originGraphicSize.y * 0.5f),
-		static_cast<double>(_transform.scale.x),
-		static_cast<double>(_transform.scale.y),
-		_transform.rotation,
-		clip.animHandle.at(_keyframeIndex),
-		TRUE,
-		FALSE,
-		FALSE);
-}
-
-void Animator::LoadAnim(const AnimationClip& animClip)
-{
-	auto clip = animClip;
+	_clips[animClip.name] = animClip;
+	auto& clip = _clips.at(animClip.name);
 
 	// アニメーションハンドルのサイズを指定
-	clip.animHandle.resize(clip.keyframeNum);
+	std::vector<int> animHandles(clip.keyframeNum);
+
+	// アニメーションシートのハンドル及びサイズを取得
+	const auto graphicHandle = LoadGraph(filePath.c_str());
+	auto graphicSize = Vector2::Zero;
+	GetGraphSizeF(graphicHandle, &graphicSize.x, &graphicSize.y);
 
 	// 画像を分割して読み込む
 	// MEMO : 画像が別々の場合はサイトでの合成をおすすめします！ [https://web.save-editor.com/pic/picture_split_tool.html]
-	auto result = LoadDivGraph(clip.filePath.c_str(), clip.keyframeNum, clip.keyframeNum, 1, clip.originGraphicSize.x / clip.keyframeNum, clip.originGraphicSize.y, clip.animHandle.data());
+	LoadDivGraph(filePath.c_str(), clip.keyframeNum, clip.keyframeNum, 1, static_cast<int>(graphicSize.x / clip.keyframeNum), static_cast<int>(graphicSize.y), animHandles.data());
 
-	_clips[clip.name] = clip;
+	for (const auto animHnadle : animHandles)
+	{
+		clip.graphic.emplace_back(std::make_shared<Graphic>(animHnadle));
+	}
 }
 
 void Animator::AttachAnim(const std::string& animName)
@@ -60,9 +54,11 @@ void Animator::AttachAnim(const std::string& animName)
 		if (clip.name == animName && !clip.canTransitionToSelf) { return; }
 	}
 
-	_currentAnimName = animName;
-	_playTimer = 0.0f;
-	_keyframeIndex = 0;
+	_currentAnimName	= animName;
+	_playTimer			= 0.0f;
+	_keyframeIndex		= 0;
+
+	_graphicRenderer.SetGraphic(_clips.at(_currentAnimName).graphic.at(_keyframeIndex));
 }
 
 void Animator::PlayAnim()
@@ -91,8 +87,11 @@ void Animator::PlayAnim()
 				_keyframeIndex = clip.keyframeNum - 1;
 			}
 
-			// 1行でも書ける！ (三項演算子)
+			// MEMO : 1行でも書ける！ (三項演算子)
 			// _keyframeIndex = clip.isLoop ? 0 : clip.keyframeNum - 1;
 		}
+
+		// rendererに現在のキーフレームの画像を設定する
+		_graphicRenderer.SetGraphic(clip.graphic.at(_keyframeIndex));
 	}
 }

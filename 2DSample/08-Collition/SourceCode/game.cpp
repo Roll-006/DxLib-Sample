@@ -5,6 +5,8 @@
 #include "keyboard.h"
 #include "mouse.h"
 #include "transform.h"
+#include "graphic.h"
+#include "graphic_renderer.h"
 #include "animator.h"
 #include "aabb.h"
 #include "collision.h"
