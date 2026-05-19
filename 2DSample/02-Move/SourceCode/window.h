@@ -1,4 +1,5 @@
-﻿#include <math.hpp>
+﻿#pragma once
+#include <math.hpp>
 
 namespace window
 {
