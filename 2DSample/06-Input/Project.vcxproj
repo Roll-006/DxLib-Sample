@@ -153,6 +153,7 @@
     <ClInclude Include="..\..\Library\DxLibHelper\math.hpp" />
     <ClInclude Include="SourceCode\animation_clip.h" />
     <ClInclude Include="SourceCode\animator.h" />
+    <ClInclude Include="SourceCode\cursor_lock_mode_type.h" />
     <ClInclude Include="SourceCode\game.h" />
     <ClInclude Include="SourceCode\graphic.h" />
     <ClInclude Include="SourceCode\graphic_renderer.h" />

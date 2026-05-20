@@ -157,6 +157,7 @@
     <ClInclude Include="SourceCode\animation_clip.h" />
     <ClInclude Include="SourceCode\animator.h" />
     <ClInclude Include="SourceCode\collision.h" />
+    <ClInclude Include="SourceCode\cursor_lock_mode_type.h" />
     <ClInclude Include="SourceCode\debug.h" />
     <ClInclude Include="SourceCode\game.h" />
     <ClInclude Include="SourceCode\graphic.h" />

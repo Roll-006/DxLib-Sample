@@ -1,9 +1,10 @@
-﻿#include <array>
-#include <math.hpp>
+﻿#include <math.hpp>
+#include "window.h"
 #include "mouse.h"
 
 Mouse::Mouse() :
 	_state			(0),
+	_lockState		(CursorLockModeType::kNone),
 	_currentPos		(Vector2::Zero),
 	_prevPos		(Vector2::Zero),
 	_delta			(Vector2::Zero),
@@ -14,6 +15,8 @@ Mouse::Mouse() :
 	// MOUSE_INPUT_6～MOUSE_INPUT_8を使用する場合は、下記の関数を実行する必要があります
 	// SetUseDirectInputFlag(TRUE);
 
+	SetCursorLockState(_lockState);
+
 	UpdateMousePos();
 	UpdateScroll();
 }
@@ -23,6 +26,28 @@ void Mouse::Update()
 	UpdateMouseButtonState();
 	UpdateMousePos();
 	UpdateScroll();
+}
+
+void Mouse::SetCursorLockState(const CursorLockModeType lockState)
+{
+	_lockState = lockState;
+
+	switch (_lockState)
+	{
+	case CursorLockModeType::kNone:
+	case CursorLockModeType::kLocked:
+		SetMouseDispFlag(FALSE);
+		break;
+
+	case CursorLockModeType::kConfined:
+		SetMouseDispFlag(TRUE);
+		break;
+
+	default:
+		_lockState = CursorLockModeType::kNone;
+		SetMouseDispFlag(FALSE);
+		break;
+	}
 }
 
 int Mouse::GetIndex(const int mouseButton) const
@@ -41,7 +66,7 @@ void Mouse::UpdateMouseButtonState()
 
 	const auto inputState = GetMouseInput();
 
-	for (int i = 0; i < _state.size(); ++i)
+	for (size_t i = 0; i < _state.size(); ++i)
 	{
 		auto& state = _state.at(i);
 
@@ -95,6 +120,13 @@ void Mouse::UpdateMousePos()
 
 	// 移動量を計算
 	_delta = _currentPos - _prevPos;
+
+	// カーソル固定中は画面中央に設定
+	if (_lockState == CursorLockModeType::kLocked)
+	{
+		_currentPos = window::kSize * 0.5f;
+		SetMousePoint(static_cast<float>(_currentPos.x), static_cast<float>(_currentPos.y));
+	}
 }
 
 void Mouse::UpdateScroll()

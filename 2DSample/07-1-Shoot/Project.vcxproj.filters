@@ -86,5 +86,8 @@
     <ClInclude Include="..\..\Library\DxLibHelper\math.hpp">
       <Filter>Library\DxLibHelper</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\cursor_lock_mode_type.h">
+      <Filter>リソース ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

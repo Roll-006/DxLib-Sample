@@ -28,15 +28,17 @@ int Game::Run() const
 		player.Update();
 		player.Draw();
 
-		DrawFormatString(0,   0, 0xffffff, "1を長押しした : %d",				Keyboard::GetInstance().IsPressed(KEY_INPUT_1));
-		DrawFormatString(0,  20, 0xffffff, "2をこのフレームに入力した : %d",	Keyboard::GetInstance().WasPressedThisFrame(KEY_INPUT_2));
-		DrawFormatString(0,  40, 0xffffff, "3をこのフレームで離した : %d",		Keyboard::GetInstance().WasReleasedThisFrame(KEY_INPUT_3));
-		DrawFormatString(0,  60, 0xffffff, "4の入力カウント : %d",				Keyboard::GetInstance().GetInputCount(KEY_INPUT_4));
-		DrawFormatString(0,  80, 0xffffff, "マウスの移動量 : %f, %f",			Mouse::GetInstance().GetDelta().x, Mouse::GetInstance().GetDelta().y);
-		DrawFormatString(0, 100, 0xffffff, "マウスホイールの移動量 : %f, %f",	Mouse::GetInstance().GetScroll().x, Mouse::GetInstance().GetScroll().y);
-		DrawFormatString(0, 120, 0xffffff, "左クリックを長押しした : %d",		Mouse::GetInstance().IsPressed(MOUSE_INPUT_LEFT));
-		DrawCircle(Mouse::GetInstance().GetPos().x, Mouse::GetInstance().GetPos().y, 5, 0xffffff);
-		
+		const auto keyboard = Keyboard	::GetInstance();
+		const auto mouse	= Mouse		::GetInstance();
+		DrawFormatString(0,   0, 0xffffff, "１を長押しした　　　　　　 : %d",		keyboard.IsPressed(KEY_INPUT_1));
+		DrawFormatString(0,  20, 0xffffff, "２をこのフレームに入力した : %d",		keyboard.WasPressedThisFrame(KEY_INPUT_2));
+		DrawFormatString(0,  40, 0xffffff, "３をこのフレームで離した　 : %d",		keyboard.WasReleasedThisFrame(KEY_INPUT_3));
+		DrawFormatString(0,  60, 0xffffff, "４の入力カウント　　　　　 : %d",		keyboard.GetInputCount(KEY_INPUT_4));
+		DrawFormatString(0,  80, 0xffffff, "左クリックを長押しした　　 : %d",		mouse.IsPressed(MOUSE_INPUT_LEFT));
+		DrawFormatString(0, 100, 0xffffff, "マウスの位置　　　　　　　 : %f, %f",	mouse.GetPos().x,	 mouse.GetPos().y);
+		DrawFormatString(0, 120, 0xffffff, "マウスの移動量　　　　　　 : %f, %f",	mouse.GetDelta().x,  mouse.GetDelta().y);
+		DrawFormatString(0, 140, 0xffffff, "マウスホイールの移動量　　 : %f, %f",	mouse.GetScroll().x, mouse.GetScroll().y);
+
 		Time::GetInstance().CapFPS();
 
 		// 裏画面を表画面に反映

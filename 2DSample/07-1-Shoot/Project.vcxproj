@@ -149,6 +149,7 @@
     <ClInclude Include="..\..\Library\DxLibHelper\json_loader.hpp" />
     <ClInclude Include="..\..\Library\DxLibHelper\math.hpp" />
     <ClInclude Include="SourceCode\bullet.h" />
+    <ClInclude Include="SourceCode\cursor_lock_mode_type.h" />
     <ClInclude Include="SourceCode\game.h" />
     <ClInclude Include="SourceCode\keyboard.h" />
     <ClInclude Include="SourceCode\mouse.h" />

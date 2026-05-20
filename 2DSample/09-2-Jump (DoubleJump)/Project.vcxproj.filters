@@ -125,5 +125,8 @@
     <ClInclude Include="SourceCode\graphic_renderer.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\cursor_lock_mode_type.h">
+      <Filter>リソース ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
