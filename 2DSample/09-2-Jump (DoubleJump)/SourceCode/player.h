@@ -33,7 +33,7 @@ private:
 	static constexpr int			kRadius		= 100;
 	static constexpr unsigned int	kColor		= 0xffffff;
 	static constexpr float			kJumpPower	= -1000.0f;
-	static constexpr int			kMaxJumpNum	= 2;
+	static constexpr int			kMaxJumpNum	= 3;
 
 	bool			_isGrounded;
 	int				_jumpCount;
