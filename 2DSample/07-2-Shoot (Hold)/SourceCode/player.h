@@ -26,6 +26,6 @@ private:
 	static constexpr float			kShootInterval	= 0.25f;
 
 	Vector2 _pos;
-	float _shootTimer;
+	float _shootIntervalTimer;
 	std::vector<Bullet> _bullets;
 };

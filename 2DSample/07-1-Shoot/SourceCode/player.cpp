@@ -71,6 +71,7 @@ void Player::Shoot()
 	// MEMO : 「早期return」という
 	if (!Keyboard::GetInstance().WasPressedThisFrame(KEY_INPUT_SPACE)) { return; }
 	
+	// 撃てる弾(非アクティブの弾)を探し、1発のみ撃つ
 	for (size_t i = 0; i < _bullets.size(); ++i)
 	{
 		// アクティブ状態の弾は既に撃たれているため無視する

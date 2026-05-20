@@ -8,9 +8,9 @@
 #include "player.h"
 
 Player::Player() : 
-	_pos		(kFirstPos),
-	_shootTimer	(kShootInterval),
-	_bullets	(kBulletNum)	// 指定のサイズを指定して初期化
+	_pos				(kFirstPos),
+	_shootIntervalTimer	(kShootInterval),
+	_bullets			(kBulletNum)		// 指定のサイズを指定して初期化
 {
 
 }
@@ -19,6 +19,8 @@ void Player::Update()
 {
 	Move();
 	Shoot();
+
+	DrawFormatString(0, 0, 0xffffff, "%f", _shootIntervalTimer);
 
 	// すべての弾を更新する
 	for (size_t i = 0; i < _bullets.size(); ++i)
@@ -68,24 +70,18 @@ void Player::Move()
 
 void Player::Shoot()
 {
-	// 入力している場合、タイマーを加算する
-	if (Keyboard::GetInstance().IsPressed(KEY_INPUT_SPACE))
-	{
-		_shootTimer += Time::GetInstance().GetDeltaTime();
+	_shootIntervalTimer += Time::GetInstance().GetDeltaTime();
 
-		// インターバルに到達していない場合は撃たない
-		if (_shootTimer < kShootInterval) { return; }
-		
-		// タイマーリセット (再度タイマーを加算するために)
-		_shootTimer = 0.0f;
-	}
-	// 入力していない場合、次入力した際即座に弾を撃つために、インターバルをそのまま代入する
-	else
-	{
-		_shootTimer = kShootInterval;
-		return;
-	}
+	// 入力していない場合は撃たない
+	if (!Keyboard::GetInstance().IsPressed(KEY_INPUT_SPACE)) { return; }
 	
+	// インターバルに到達していない場合は撃たない
+	if (_shootIntervalTimer < kShootInterval) { return; }
+	
+	// タイマーリセット (再度タイマーを加算するために)
+	_shootIntervalTimer = 0.0f;
+	
+	// 撃てる弾(非アクティブの弾)を探し、1発のみ撃つ
 	for (size_t i = 0; i < _bullets.size(); ++i)
 	{
 		// アクティブ状態の弾は既に撃たれているため無視する
