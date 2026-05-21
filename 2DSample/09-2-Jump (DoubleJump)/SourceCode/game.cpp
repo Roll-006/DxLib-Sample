@@ -30,7 +30,7 @@ int Game::Run() const
 		Mouse	::GetInstance().Update();
 
 		player.Update();
-		player.Draw();
+		player.Render();
 		
 		Time::GetInstance().CapFPS();
 

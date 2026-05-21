@@ -12,7 +12,7 @@ Player::Player() :
 	_graphicRenderer(GraphicRenderer(_transform)),
 	_animator		(Animator(_transform, _graphicRenderer))
 {
-	_transform.position = kFirstPos;
+	_transform.position = kFirstPosition;
 	_transform.scale	= kScale;
 
 	_animator.LoadAnim("../../Assets/Animations/Player/Idle.png", AnimationClip("Idle", 7, 0.2f, true, false));
@@ -26,9 +26,9 @@ void Player::Update()
 	_animator.Update();
 }
 
-void Player::Draw() const
+void Player::Render() const
 {
-	_graphicRenderer.Draw();
+	_graphicRenderer.Render();
 }
 
 void Player::Move()
@@ -37,23 +37,23 @@ void Player::Move()
 	// DXライブラリの演算は計算が不足しており不便なことが理由です。
 
 	// 移動方向を初期化
-	auto moveDir = Vector2::Zero;
+	auto moveDirection = Vector2::Zero;
 
 	// 移動方向を入力
 	const auto keyboard = Keyboard::GetInstance();
-	if (keyboard.IsPressed(KEY_INPUT_W)) { moveDir.y -= 1.0f; }
-	if (keyboard.IsPressed(KEY_INPUT_S)) { moveDir.y += 1.0f; }
-	if (keyboard.IsPressed(KEY_INPUT_A)) { moveDir.x -= 1.0f; }
-	if (keyboard.IsPressed(KEY_INPUT_D)) { moveDir.x += 1.0f; }
+	if (keyboard.IsPressed(KEY_INPUT_W)) { moveDirection.y -= 1.0f; }
+	if (keyboard.IsPressed(KEY_INPUT_S)) { moveDirection.y += 1.0f; }
+	if (keyboard.IsPressed(KEY_INPUT_A)) { moveDirection.x -= 1.0f; }
+	if (keyboard.IsPressed(KEY_INPUT_D)) { moveDirection.x += 1.0f; }
 
 	// ベクトルを正規化
 	// MEMO : 右下に移動した場合[x = 1, y = 1]で√2の長さを移動してしまい、移動速度が上昇します。
 	//        正規化(長さを1にする)を行い移動速度を常に一定に保ちます。
-	moveDir.Normalize();
+	moveDirection.Normalize();
 
 	// velocity(移動方向・速度を持つベクトル)を計算
 	// MEMO : デルタタイムを掛けてどの環境で動かしても速度が一定になるようにする。
-	const auto velocity = moveDir * kSpeed * Time::GetInstance().GetDeltaTime();
+	const auto velocity = moveDirection * kSpeed * Time::GetInstance().GetDeltaTime();
 
 	// 座標を更新
 	_transform.position += velocity;

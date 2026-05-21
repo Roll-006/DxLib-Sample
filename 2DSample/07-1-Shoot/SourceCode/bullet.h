@@ -4,7 +4,7 @@ class Bullet
 {
 public:
 	void Update();
-	void Draw() const;
+	void Render() const;
 
 	/// <summary>
 	/// 撃たれる

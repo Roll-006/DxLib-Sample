@@ -18,7 +18,7 @@ Player::Player() :
 	_aabb			(AABB(_transform, Vector2(10.0f, 15.0f), Vector2(0.0f, 0.5f)))
 
 {
-	_transform.position = kFirstPos;
+	_transform.position = kFirstPosition;
 	_transform.scale	= kScale;
 
 	_animator.LoadAnim("../../Assets/Animations/Player/Idle.png", AnimationClip("Idle", 7, 0.2f, true, false));
@@ -31,7 +31,7 @@ void Player::Update()
 	ApplyGravity();
 	Move();
 	Jump();
-	UpdatePos();
+	UpdatePosition();
 
 	_animator.Update();
 	_aabb.Update();
@@ -39,10 +39,10 @@ void Player::Update()
 	UpdateGroundedState();
 }
 
-void Player::Draw() const
+void Player::Render() const
 {
-	_graphicRenderer.Draw();
-	_aabb.Draw();
+	_graphicRenderer.Render();
+	_aabb.Render();
 }
 
 void Player::ApplyGravity()
@@ -76,15 +76,15 @@ void Player::Move()
 	// DXライブラリの演算は計算が不足しており不便なことが理由です。
 
 	// 移動方向を初期化
-	auto moveDir = Vector2::Zero;
+	auto moveDirection = Vector2::Zero;
 
 	// 移動方向を入力
 	const auto keyboard = Keyboard::GetInstance();
-	if (keyboard.IsPressed(KEY_INPUT_A)) { moveDir.x -= 1.0f; }
-	if (keyboard.IsPressed(KEY_INPUT_D)) { moveDir.x += 1.0f; }
+	if (keyboard.IsPressed(KEY_INPUT_A)) { moveDirection.x -= 1.0f; }
+	if (keyboard.IsPressed(KEY_INPUT_D)) { moveDirection.x += 1.0f; }
 
 	// 移動velocity(移動方向・速度を持つベクトル)を計算
-	_moveVelocity = moveDir * kSpeed;
+	_moveVelocity = moveDirection * kSpeed;
 }
 
 void Player::Jump()
@@ -102,7 +102,7 @@ void Player::Jump()
 	_isGrounded = false;
 }
 
-void Player::UpdatePos()
+void Player::UpdatePosition()
 {
 	const auto velocity = Vector2(_moveVelocity.x, _fallVelocity.y) * Time::GetInstance().GetDeltaTime();
 	_transform.position += velocity;

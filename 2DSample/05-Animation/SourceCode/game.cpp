@@ -22,7 +22,7 @@ int Game::Run() const
 		Time::GetInstance().Update();
 
 		player.Update();
-		player.Draw();
+		player.Render();
 
 		Time::GetInstance().CapFPS();
 

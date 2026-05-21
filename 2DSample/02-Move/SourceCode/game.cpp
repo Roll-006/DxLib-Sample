@@ -15,7 +15,7 @@ int Game::Run() const
 	while (ShouldRun())
 	{
 		player.Update();
-		player.Draw();
+		player.Render();
 
 		// 裏画面を表画面に反映
 		ScreenFlip();

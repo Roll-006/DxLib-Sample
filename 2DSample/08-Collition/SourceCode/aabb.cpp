@@ -20,7 +20,7 @@ void AABB::Update()
 	UpdateCollisionInfo();
 }
 
-void AABB::Draw() const
+void AABB::Render() const
 {
 	DrawBox(
 		static_cast<int>(_min.x),

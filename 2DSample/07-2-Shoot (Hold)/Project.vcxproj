@@ -140,7 +140,7 @@
     <ClCompile Include="SourceCode\game.cpp" />
     <ClCompile Include="SourceCode\keyboard.cpp" />
     <ClCompile Include="SourceCode\main.cpp" />
-    <ClCompile Include="SourceCode\mouse.cpp" />
+    <ClCompile Include="SourceCode\mouse.cc" />
     <ClCompile Include="SourceCode\player.cpp" />
     <ClCompile Include="SourceCode\time.cpp" />
   </ItemGroup>

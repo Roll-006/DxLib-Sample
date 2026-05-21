@@ -48,7 +48,7 @@ public:
 	/// スクリーン上のマウス座標を取得
 	/// </summary>
 	/// <returns>マウス座標</returns>
-	Vector2 GetPos() const { return _currentPos; }
+	Vector2 GetPosition() const { return _currentPosition; }
 
 	/// <summary>
 	/// マウスの移動量を取得
@@ -86,7 +86,7 @@ private:
 	/// <summary>
 	/// マウスの座標を更新する
 	/// </summary>
-	void UpdateMousePos();
+	void UpdateMousePosition();
 
 	/// <summary>
 	/// マウスホイールを更新する
@@ -96,8 +96,8 @@ private:
 private:
 	std::array<int, 8> _state;		// マウスボタンの状態を格納
 	CursorLockModeType _lockState;
-	Vector2 _currentPos;			// 現在の座標
-	Vector2 _prevPos;				// 以前の座標
+	Vector2 _currentPosition;		// 現在の座標
+	Vector2 _prevPosition;			// 以前の座標
 	Vector2 _delta;					// 座標の移動量
 	Vector2 _currentScroll;			// 現在のホイール
 	Vector2 _prevScroll;			// 以前のホイール

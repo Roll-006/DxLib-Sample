@@ -5,8 +5,8 @@
 Mouse::Mouse() :
 	_state			(0),
 	_lockState		(CursorLockModeType::kNone),
-	_currentPos		(Vector2::Zero),
-	_prevPos		(Vector2::Zero),
+	_currentPosition		(Vector2::Zero),
+	_prevPosition		(Vector2::Zero),
 	_delta			(Vector2::Zero),
 	_currentScroll	(Vector2::Zero),
 	_prevScroll		(Vector2::Zero),
@@ -17,14 +17,14 @@ Mouse::Mouse() :
 
 	SetCursorLockState(_lockState);
 
-	UpdateMousePos();
+	UpdateMousePosition();
 	UpdateScroll();
 }
 
 void Mouse::Update()
 {
 	UpdateMouseButtonState();
-	UpdateMousePos();
+	UpdateMousePosition();
 	UpdateScroll();
 }
 
@@ -108,24 +108,24 @@ void Mouse::UpdateMouseButtonState()
 	}
 }
 
-void Mouse::UpdateMousePos()
+void Mouse::UpdateMousePosition()
 {
 	// データを保存
-	_prevPos = _currentPos;
+	_prevPosition = _currentPosition;
 
 	// 現在の座標を更新
 	int x, y;
 	GetMousePoint(&x, &y);
-	_currentPos = Vector2(static_cast<float>(x), static_cast<float>(y));
+	_currentPosition = Vector2(static_cast<float>(x), static_cast<float>(y));
 
 	// 移動量を計算
-	_delta = _currentPos - _prevPos;
+	_delta = _currentPosition - _prevPosition;
 
 	// カーソル固定中は画面中央に設定
 	if (_lockState == CursorLockModeType::kLocked)
 	{
-		_currentPos = window::kSize * 0.5f;
-		SetMousePoint(static_cast<float>(_currentPos.x), static_cast<float>(_currentPos.y));
+		_currentPosition = window::kSize * 0.5f;
+		SetMousePoint(static_cast<float>(_currentPosition.x), static_cast<float>(_currentPosition.y));
 	}
 }
 

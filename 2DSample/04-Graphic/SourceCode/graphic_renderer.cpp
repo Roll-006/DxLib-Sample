@@ -12,7 +12,7 @@ GraphicRenderer::GraphicRenderer(Transform& transform) :
 
 }
 
-void GraphicRenderer::Draw() const
+void GraphicRenderer::Render() const
 {
 	const auto graphic = _graphic.lock();
 	if (!graphic) { return; }

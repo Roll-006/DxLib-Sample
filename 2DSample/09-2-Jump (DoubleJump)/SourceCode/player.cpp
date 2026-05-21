@@ -19,7 +19,7 @@ Player::Player() :
 	_aabb			(AABB(_transform, Vector2(10.0f, 15.0f), Vector2(0.0f, 0.5f)))
 
 {
-	_transform.position = kFirstPos;
+	_transform.position = kFirstPosition;
 	_transform.scale = kScale;
 
 	_animator.LoadAnim("../../Assets/Animations/Player/Idle.png", AnimationClip("Idle", 7, 0.2f, true, false));
@@ -32,7 +32,7 @@ void Player::Update()
 	ApplyGravity();
 	Move();
 	Jump();
-	UpdatePos();
+	UpdatePosition();
 
 	_animator.Update();
 	_aabb.Update();
@@ -40,10 +40,10 @@ void Player::Update()
 	UpdateGroundedState();
 }
 
-void Player::Draw() const
+void Player::Render() const
 {
-	_graphicRenderer.Draw();
-	_aabb.Draw();
+	_graphicRenderer.Render();
+	_aabb.Render();
 }
 
 void Player::ApplyGravity()
@@ -112,7 +112,7 @@ void Player::Jump()
 	_isGrounded = false;
 }
 
-void Player::UpdatePos()
+void Player::UpdatePosition()
 {
 	const auto velocity = Vector2(_moveVelocity.x, _fallVelocity.y) * Time::GetInstance().GetDeltaTime();
 	_transform.position += velocity;

@@ -12,7 +12,7 @@ Enemy::Enemy() :
 	_animator		(Animator(_transform, _graphicRenderer)),
 	_aabb			(AABB(_transform, Vector2(14.0f, 42.0f), Vector2(-3.0f, 11.0f)))
 {
-	_transform.position = kFirstPos;
+	_transform.position = kFirstPosition;
 	_transform.scale	= kScale;
 
 	_animator.LoadAnim("../../Assets/Animations/Skeleton/Skeleton_01_White_Idle.png", AnimationClip("Idle", 8, 0.2f, true, false));
@@ -25,8 +25,8 @@ void Enemy::Update()
 	_aabb.Update();
 }
 
-void Enemy::Draw() const
+void Enemy::Render() const
 {
-	_graphicRenderer.Draw();
-	_aabb.Draw();
+	_graphicRenderer.Render();
+	_aabb.Render();
 }

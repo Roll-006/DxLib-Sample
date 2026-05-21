@@ -6,7 +6,7 @@ public:
 	Player();
 
 	void Update();
-	void Draw() const;
+	void Render() const;
 
 	AABB GetCollider() const { return _aabb; }
 
@@ -24,16 +24,16 @@ private:
 	void Move();
 	void Jump();
 
-	void UpdatePos();
+	void UpdatePosition();
 
 private:
-	static constexpr Vector2		kFirstPos	= { 500.0f, 500.0f };
-	static constexpr Vector2		kScale		= { 10.0f, 10.0f };
-	static constexpr float			kSpeed		= 500.0f;
-	static constexpr int			kRadius		= 100;
-	static constexpr unsigned int	kColor		= 0xffffff;
-	static constexpr float			kJumpPower	= -1000.0f;
-	static constexpr int			kMaxJumpNum	= 3;
+	static constexpr Vector2		kFirstPosition	= { 500.0f, 500.0f };
+	static constexpr Vector2		kScale			= { 10.0f, 10.0f };
+	static constexpr float			kSpeed			= 500.0f;
+	static constexpr int			kRadius			= 100;
+	static constexpr unsigned int	kColor			= 0xffffff;
+	static constexpr float			kJumpPower		= -1000.0f;
+	static constexpr int			kMaxJumpNum		= 3;
 
 	bool			_isGrounded;
 	int				_jumpCount;

@@ -14,7 +14,7 @@ void Bullet::Update()
 	if (IsOffScreen()) { _isActive = false; }
 }
 
-void Bullet::Draw() const
+void Bullet::Render() const
 {
 	// 非アクティブ(撃たれていない)の場合は描画しない
 	if (!_isActive) { return; }

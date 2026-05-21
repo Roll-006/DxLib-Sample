@@ -5,7 +5,7 @@ class GraphicRenderer
 public:
 	GraphicRenderer(Transform& transform);
 
-	void Draw() const;
+	void Render() const;
 
 	bool IsFlipX() const { return _isFlipX; }
 	bool IsFlipY() const { return _isFlipY; }

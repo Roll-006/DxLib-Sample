@@ -18,7 +18,7 @@ int Game::Run() const
 		Time::GetInstance().Update();
 
 		player.Update();
-		player.Draw();
+		player.Render();
 
 		DrawFormatString(0, 0, 0xffffff, "FPS : %f", Time::GetInstance().GetAverageFPS());
 

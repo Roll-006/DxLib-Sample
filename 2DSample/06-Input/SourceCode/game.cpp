@@ -26,7 +26,7 @@ int Game::Run() const
 		Mouse	::GetInstance().Update();
 
 		player.Update();
-		player.Draw();
+		player.Render();
 
 		const auto keyboard = Keyboard	::GetInstance();
 		const auto mouse	= Mouse		::GetInstance();
@@ -35,8 +35,8 @@ int Game::Run() const
 		DrawFormatString(0,  40, 0xffffff, "３をこのフレームで離した　 : %d",		keyboard.WasReleasedThisFrame(KEY_INPUT_3));
 		DrawFormatString(0,  60, 0xffffff, "４の入力カウント　　　　　 : %d",		keyboard.GetInputCount(KEY_INPUT_4));
 		DrawFormatString(0,  80, 0xffffff, "左クリックを長押しした　　 : %d",		mouse.IsPressed(MOUSE_INPUT_LEFT));
-		DrawFormatString(0, 100, 0xffffff, "マウスの位置　　　　　　　 : %f, %f",	mouse.GetPos().x,	 mouse.GetPos().y);
-		DrawFormatString(0, 120, 0xffffff, "マウスの移動量　　　　　　 : %f, %f",	mouse.GetDelta().x,  mouse.GetDelta().y);
+		DrawFormatString(0, 100, 0xffffff, "マウスの位置　　　　　　　 : %f, %f",	mouse.GetPosition().x, mouse.GetPosition().y);
+		DrawFormatString(0, 120, 0xffffff, "マウスの移動量　　　　　　 : %f, %f",	mouse.GetDelta().x, mouse.GetDelta().y);
 		DrawFormatString(0, 140, 0xffffff, "マウスホイールの移動量　　 : %f, %f",	mouse.GetScroll().x, mouse.GetScroll().y);
 
 		Time::GetInstance().CapFPS();

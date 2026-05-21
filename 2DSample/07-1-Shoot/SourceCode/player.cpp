@@ -8,7 +8,7 @@
 #include "player.h"
 
 Player::Player() : 
-	_pos	(kFirstPos),
+	_pos	(kFirstPosition),
 	_bullets(kBulletNum)	// 指定のサイズを指定して初期化
 {
 
@@ -26,14 +26,14 @@ void Player::Update()
 	}
 }
 
-void Player::Draw() const
+void Player::Render() const
 {
 	DrawCircle(static_cast<int>(_pos.x), static_cast<int>(_pos.y), kRadius, kColor);
 
 	// すべての弾を描画する
 	for (size_t i = 0; i < _bullets.size(); ++i)
 	{
-		_bullets.at(i).Draw();
+		_bullets.at(i).Render();
 	}
 }
 
@@ -43,23 +43,23 @@ void Player::Move()
 	// DXライブラリの演算は計算が不足しており不便なことが理由です。
 
 	// 移動方向を初期化
-	auto moveDir = Vector2::Zero;
+	auto moveDirection = Vector2::Zero;
 
 	// 移動方向を入力
 	const auto keyboard = Keyboard::GetInstance();
-	if (keyboard.IsPressed(KEY_INPUT_W)) { moveDir.y -= 1.0f; }
-	if (keyboard.IsPressed(KEY_INPUT_S)) { moveDir.y += 1.0f; }
-	if (keyboard.IsPressed(KEY_INPUT_A)) { moveDir.x -= 1.0f; }
-	if (keyboard.IsPressed(KEY_INPUT_D)) { moveDir.x += 1.0f; }
+	if (keyboard.IsPressed(KEY_INPUT_W)) { moveDirection.y -= 1.0f; }
+	if (keyboard.IsPressed(KEY_INPUT_S)) { moveDirection.y += 1.0f; }
+	if (keyboard.IsPressed(KEY_INPUT_A)) { moveDirection.x -= 1.0f; }
+	if (keyboard.IsPressed(KEY_INPUT_D)) { moveDirection.x += 1.0f; }
 
 	// ベクトルを正規化
 	// MEMO : 右下に移動した場合[x = 1, y = 1]で√2の長さを移動してしまい、移動速度が上昇します。
 	//        正規化(長さを1にする)を行い移動速度を常に一定に保ちます。
-	moveDir.Normalize();
+	moveDirection.Normalize();
 
 	// velocity(移動方向・速度を持つベクトル)を計算
 	// MEMO : デルタタイムを掛けてどの環境で動かしても速度が一定になるようにする。
-	const auto velocity = moveDir * kSpeed * Time::GetInstance().GetDeltaTime();
+	const auto velocity = moveDirection * kSpeed * Time::GetInstance().GetDeltaTime();
 
 	// 座標を更新
 	_pos += velocity;
@@ -78,7 +78,7 @@ void Player::Shoot()
 		if (_bullets.at(i).IsActive()) { continue; }
 		
 		// 弾を撃つ
-		_bullets.at(i).OnShoot(_pos, kShootDir, kShootSpeed);
+		_bullets.at(i).OnShoot(_pos, kShootDirection, kShootSpeed);
 
 		printfDx("弾のindex : %2d\n", i);
 

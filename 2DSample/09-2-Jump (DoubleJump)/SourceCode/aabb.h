@@ -10,7 +10,7 @@ public:
 	AABB(Transform& transform, const Vector2& size, const Vector2& offset = { 0.0f, 0.0f });
 
 	void Update();
-	void Draw() const;
+	void Render() const;
 
 	Vector2 GetCenter()	const { return _center; }
 	Vector2 GetMax()		const { return _max; }

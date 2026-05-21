@@ -33,8 +33,8 @@ int Game::Run() const
 		enemy.Update();
 		player.Update();
 
-		enemy.Draw();
-		player.Draw();
+		enemy.Render();
+		player.Render();
 				
 		DrawFormatString(0, 0, 0xffffff, "衝突した : %d", collision::IsColliding(player.GetCollider(), enemy.GetCollider()));
 
