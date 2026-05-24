@@ -138,6 +138,7 @@
     <ClCompile Include="..\..\Library\DirectXTK\Source\SimpleMath.cpp" />
     <ClCompile Include="SourceCode\animator.cpp" />
     <ClCompile Include="SourceCode\game.cpp" />
+    <ClCompile Include="SourceCode\gamepad.cpp" />
     <ClCompile Include="SourceCode\graphic.cpp" />
     <ClCompile Include="SourceCode\graphic_renderer.cpp" />
     <ClCompile Include="SourceCode\keyboard.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="SourceCode\animator.h" />
     <ClInclude Include="SourceCode\cursor_lock_mode_type.h" />
     <ClInclude Include="SourceCode\game.h" />
+    <ClInclude Include="SourceCode\gamepad.h" />
     <ClInclude Include="SourceCode\graphic.h" />
     <ClInclude Include="SourceCode\graphic_renderer.h" />
     <ClInclude Include="SourceCode\keyboard.h" />

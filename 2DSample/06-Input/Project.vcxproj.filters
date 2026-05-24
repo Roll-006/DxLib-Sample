@@ -63,6 +63,9 @@
     <ClCompile Include="SourceCode\graphic_renderer.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\gamepad.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\game.h">
@@ -109,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="SourceCode\cursor_lock_mode_type.h">
       <Filter>リソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\gamepad.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

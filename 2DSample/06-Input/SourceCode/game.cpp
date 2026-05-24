@@ -3,6 +3,7 @@
 #include "time.h"
 #include "keyboard.h"
 #include "mouse.h"
+#include "gamepad.h"
 #include "transform.h"
 #include "graphic.h"
 #include "graphic_renderer.h"
@@ -24,12 +25,14 @@ int Game::Run() const
 		Time	::GetInstance().Update();
 		Keyboard::GetInstance().Update();
 		Mouse	::GetInstance().Update();
+		Gamepad	::GetInstance().Update();
 
 		player.Update();
 		player.Render();
 
 		const auto keyboard = Keyboard	::GetInstance();
 		const auto mouse	= Mouse		::GetInstance();
+		const auto gamepad	= Gamepad	::GetInstance();
 		DrawFormatString(0,   0, 0xffffff, "１を長押しした　　　　　　 : %d",		keyboard.IsPressed(KEY_INPUT_1));
 		DrawFormatString(0,  20, 0xffffff, "２をこのフレームに入力した : %d",		keyboard.WasPressedThisFrame(KEY_INPUT_2));
 		DrawFormatString(0,  40, 0xffffff, "３をこのフレームで離した　 : %d",		keyboard.WasReleasedThisFrame(KEY_INPUT_3));
@@ -38,6 +41,8 @@ int Game::Run() const
 		DrawFormatString(0, 100, 0xffffff, "マウスの位置　　　　　　　 : %f, %f",	mouse.GetPosition().x, mouse.GetPosition().y);
 		DrawFormatString(0, 120, 0xffffff, "マウスの移動量　　　　　　 : %f, %f",	mouse.GetDelta().x, mouse.GetDelta().y);
 		DrawFormatString(0, 140, 0xffffff, "マウスホイールの移動量　　 : %f, %f",	mouse.GetScroll().x, mouse.GetScroll().y);
+		DrawFormatString(0, 160, 0xffffff, "接続されているパッド数  　 : %d",		gamepad.GetGamepadNum());
+		DrawFormatString(0, 180, 0xffffff, "パッドAを長押しした  　    : %d",		gamepad.IsPressed(0, XINPUT_BUTTON_A));
 
 		Time::GetInstance().CapFPS();
 
