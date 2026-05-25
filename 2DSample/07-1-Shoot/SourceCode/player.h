@@ -3,7 +3,6 @@
 class Player
 {
 public:
-	Player();
 	void Update();
 	void Render() const;
 
@@ -24,6 +23,6 @@ private:
 	static constexpr float			kShootSpeed		= 1000.0f;
 	static constexpr Vector2		kShootDirection	= { 1.0f, 0.0f };
 
-	Vector2 _pos;
-	std::vector<Bullet> _bullets;
+	Vector2 _position = kFirstPosition;
+	std::array<Bullet, kBulletNum> _bullets;	// 指定のサイズを指定して初期化
 };

@@ -19,17 +19,17 @@ void Bullet::Render() const
 	// 非アクティブ(撃たれていない)の場合は描画しない
 	if (!_isActive) { return; }
 
-	DrawCircle(static_cast<int>(_pos.x), static_cast<int>(_pos.y), kRadius, kColor);
+	DrawCircle(static_cast<int>(_position.x), static_cast<int>(_position.y), kRadius, kColor);
 }
 
-void Bullet::OnShoot(const Vector2& shotPos, const Vector2& moveDir, const float speed)
+void Bullet::OnShoot(const Vector2& shotPosition, const Vector2& moveDirection, const float speed)
 {
-	_pos = shotPos;
-	_moveDir = moveDir;
+	_position = shotPosition;
+	_moveDirection = moveDirection;
 	_speed = speed;
 
 	// 安全のため移動方向を正規化する
-	_moveDir.Normalize();
+	_moveDirection.Normalize();
 
 	// 撃たれたらアクティブ状態にする
 	_isActive = true;
@@ -37,16 +37,16 @@ void Bullet::OnShoot(const Vector2& shotPos, const Vector2& moveDir, const float
 
 void Bullet::Move()
 {
-	const auto velocity = _moveDir * _speed * Time::GetInstance().GetDeltaTime();
-	_pos += velocity;
+	const auto velocity = _moveDirection * _speed * Time::GetInstance().GetDeltaTime();
+	_position += velocity;
 }
 
 bool Bullet::IsOffScreen() const
 {
-	if (_pos.x + kRadius < 0.0f)			{ return true; }	// スクリーン左に出た
-	if (_pos.x - kRadius > window::kSize.x) { return true; }	// スクリーン右に出た
-	if (_pos.y + kRadius < 0.0f)			{ return true; }	// スクリーン上に出た
-	if (_pos.y - kRadius > window::kSize.y)	{ return true; }	// スクリーン下に出た
+	if (_position.x + kRadius < 0.0f)				{ return true; }	// スクリーン左に出た
+	if (_position.x - kRadius > window::kSize.x)	{ return true; }	// スクリーン右に出た
+	if (_position.y + kRadius < 0.0f)				{ return true; }	// スクリーン上に出た
+	if (_position.y - kRadius > window::kSize.y)	{ return true; }	// スクリーン下に出た
 
 	return false;
 }

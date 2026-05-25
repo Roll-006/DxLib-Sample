@@ -1,19 +1,10 @@
-﻿#include <vector>
-#include <math.hpp>
+﻿#include <math.hpp>
 #include "window.h"
 #include "time.h"
 #include "keyboard.h"
 #include "mouse.h"
 #include "bullet.h"
 #include "player.h"
-
-Player::Player() : 
-	_pos				(kFirstPosition),
-	_shootIntervalTimer	(kShootInterval),
-	_bullets			(kBulletNum)		// 指定のサイズを指定して初期化
-{
-
-}
 
 void Player::Update()
 {
@@ -31,7 +22,7 @@ void Player::Update()
 
 void Player::Render() const
 {
-	DrawCircle(static_cast<int>(_pos.x), static_cast<int>(_pos.y), kRadius, kColor);
+	DrawCircle(static_cast<int>(_position.x), static_cast<int>(_position.y), kRadius, kColor);
 
 	// すべての弾を描画する
 	for (size_t i = 0; i < _bullets.size(); ++i)
@@ -65,7 +56,7 @@ void Player::Move()
 	const auto velocity = moveDirection * kSpeed * Time::GetInstance().GetDeltaTime();
 
 	// 座標を更新
-	_pos += velocity;
+	_position += velocity;
 }
 
 void Player::Shoot()
@@ -88,7 +79,7 @@ void Player::Shoot()
 		if (_bullets.at(i).IsActive()) { continue; }
 		
 		// 弾を撃つ
-		_bullets.at(i).OnShoot(_pos, kShootDirection, kShootSpeed);
+		_bullets.at(i).OnShoot(_position, kShootDirection, kShootSpeed);
 
 		// 弾を撃ったため、for文から抜ける
 		// ※breakを書かないとすべての弾を撃ってしまう

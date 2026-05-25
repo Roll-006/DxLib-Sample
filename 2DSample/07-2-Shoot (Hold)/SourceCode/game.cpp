@@ -1,5 +1,4 @@
-﻿#include <vector>
-#include <math.hpp>
+﻿#include <math.hpp>
 #include "window.h"
 #include "time.h"
 #include "keyboard.h"

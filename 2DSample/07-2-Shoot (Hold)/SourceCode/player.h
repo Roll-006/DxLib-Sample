@@ -3,7 +3,6 @@
 class Player
 {
 public:
-	Player();
 	void Update();
 	void Render() const;
 
@@ -25,7 +24,7 @@ private:
 	static constexpr Vector2		kShootDirection	= { 1.0f, 0.0f };
 	static constexpr float			kShootInterval	= 0.25f;
 
-	Vector2 _pos;
-	float _shootIntervalTimer;
-	std::vector<Bullet> _bullets;
+	Vector2 _position = kFirstPosition;
+	float _shootIntervalTimer = kShootInterval;
+	std::array<Bullet, kBulletNum> _bullets;
 };
