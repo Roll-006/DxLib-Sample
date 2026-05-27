@@ -5,16 +5,6 @@
 #include "bullet.h"
 #include "player.h"
 
-<<<<<<< HEAD:2DSample/06-1-Shoot/SourceCode/player.cpp
-Player::Player() : 
-	_position	(kFirstPosition),
-	_bullets(kBulletNum)	// 指定のサイズを指定して初期化
-{
-
-}
-
-=======
->>>>>>> f6fd91f0c5688c20eac593b66c33923a445441b1:2DSample/07-1-Shoot/SourceCode/player.cpp
 void Player::Update()
 {
 	Move();
