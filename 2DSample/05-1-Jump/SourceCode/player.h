@@ -28,6 +28,10 @@ private:
 	static constexpr int			kRadius			= 50;
 	static constexpr unsigned int	kColor			= 0xffffff;
 	static constexpr float			kJumpPower		= -1000.0f;
+<<<<<<< HEAD:2DSample/05-1-Jump/SourceCode/player.h
+=======
+	static constexpr int			kMaxJumpNum		= 2;
+>>>>>>> f6fd91f0c5688c20eac593b66c33923a445441b1:2DSample/09-2-Jump (DoubleJump)/SourceCode/player.h
 
 	bool	_isGrounded = false;
 	Vector2	_moveVelocity;

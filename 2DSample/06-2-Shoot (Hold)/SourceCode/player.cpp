@@ -1,5 +1,4 @@
-﻿#include <vector>
-#include <math.hpp>
+﻿#include <math.hpp>
 #include "window.h"
 #include "time.h"
 #include "keyboard.h"
@@ -7,6 +6,7 @@
 #include "bullet.h"
 #include "player.h"
 
+<<<<<<< HEAD:2DSample/06-2-Shoot (Hold)/SourceCode/player.cpp
 Player::Player() : 
 	_position				(kFirstPosition),
 	_shootIntervalTimer	(kShootInterval),
@@ -15,6 +15,8 @@ Player::Player() :
 
 }
 
+=======
+>>>>>>> f6fd91f0c5688c20eac593b66c33923a445441b1:2DSample/07-2-Shoot (Hold)/SourceCode/player.cpp
 void Player::Update()
 {
 	Move();
