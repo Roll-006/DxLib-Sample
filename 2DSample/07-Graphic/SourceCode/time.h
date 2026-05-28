@@ -3,7 +3,10 @@
 class Time
 {
 public:
-	/// @brief インスタンスを取得
+	/// <summary>
+	/// インスタンスを取得
+	/// </summary>
+	/// <returns></returns>
 	static Time& GetInstance()
 	{
 		// ローカル静的オブジェクトにより実装
@@ -14,7 +17,9 @@ public:
 
 	void Update();
 
-	/// @brief FPSに上限を設ける
+	/// <summary>
+	/// FPSに上限を設ける
+	/// </summary>
 	void CapFPS() const;
 
 	void SetTimeScale(const float timeScale) { _timeScale = timeScale; }
@@ -29,15 +34,15 @@ private:
 
 private:
 	static constexpr float kFPS				= 60.0f;
-	static constexpr float kMaxWaitTimeMs	= 1000;
+	static constexpr float kMaxWaitTimeMs	= 1000.0f;
 	static constexpr float kMs				= 1000.0f;		// ミリ秒
 	static constexpr float kUs				= 1000000.0f;	// マイクロ秒
 
-	LONGLONG	_firstTimeUs;
-	LONGLONG	_currentTimeUs;
-	LONGLONG	_prevTimeUs;
-	int			_frameCount;
-	float		_averageFps;
-	float		_deltaTime;
-	float		_timeScale;
+	LONGLONG _firstTimeUs;
+	LONGLONG _currentTimeUs;
+	LONGLONG _prevTimeUs;
+	int		 _frameCount;
+	float	 _averageFps;
+	float	 _deltaTime;
+	float	 _timeScale;
 };
