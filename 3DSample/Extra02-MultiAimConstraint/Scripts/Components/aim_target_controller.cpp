@@ -1,11 +1,4 @@
-﻿#include <string>
-#include <json_loader.hpp>
-#include <math.hpp>
-#include "transform.h"
-#include "../Core/component_factory.h"
-#include "../Core/time.h"
-#include "../System/keyboard.h"
-#include "aim_target_controller.h"
+﻿#include "aim_target_controller.h"
 
 namespace
 {

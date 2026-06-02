@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "../References/cursor_lock_mode_type.h"
 
 class Mouse final
 {
@@ -47,7 +48,7 @@ public:
 	/// スクリーン上のマウス座標を取得
 	/// </summary>
 	/// <returns>マウス座標</returns>
-	Vector2 GetPos() const { return _currentPos; }
+	Vector2 GetPosition() const { return _currentPosition; }
 
 	/// <summary>
 	/// マウスの移動量を取得
@@ -60,6 +61,12 @@ public:
 	/// </summary>
 	/// <returns>マウスホイールの移動量</returns>
 	Vector2 GetScroll() const { return _scroll; }
+
+	/// <summary>
+	/// カーソルのロック状態を設定する
+	/// </summary>
+	/// <param name="lockState">ロック状態</param>
+	void SetCursorLockState(const CursorLockModeType lockState);
 
 private:
 	Mouse();
@@ -79,7 +86,7 @@ private:
 	/// <summary>
 	/// マウスの座標を更新する
 	/// </summary>
-	void UpdateMousePos();
+	void UpdateMousePosition();
 
 	/// <summary>
 	/// マウスホイールを更新する
@@ -87,11 +94,12 @@ private:
 	void UpdateScroll();
 
 private:
-	std::array<int, 8> _state;	// マウスボタンの状態を格納
-	Vector2 _currentPos;		// 現在の座標
-	Vector2 _prevPos;			// 以前の座標
-	Vector2 _delta;				// 座標の移動量
-	Vector2 _currentScroll;		// 現在のホイール
-	Vector2 _prevScroll;		// 以前のホイール
-	Vector2 _scroll;			// ホイールの移動量
+	std::array<int, 8> _state;		// マウスボタンの状態を格納
+	CursorLockModeType _lockState;
+	Vector2 _currentPosition;		// 現在の座標
+	Vector2 _prevPosition;			// 以前の座標
+	Vector2 _delta;					// 座標の移動量
+	Vector2 _currentScroll;			// 現在のホイール
+	Vector2 _prevScroll;			// 以前のホイール
+	Vector2 _scroll;				// ホイールの移動量
 };

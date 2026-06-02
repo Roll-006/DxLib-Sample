@@ -37,6 +37,9 @@
     <Filter Include="Library\DirectXTK\Source">
       <UniqueIdentifier>{0dce1400-ab53-4341-ab86-f6d2ea456980}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Library\DxLib">
+      <UniqueIdentifier>{4d9ff2a1-04f7-4a70-a7ff-e79b1c0342fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObjects\box.cpp">
@@ -166,6 +169,18 @@
     </ClInclude>
     <ClInclude Include="..\..\Library\DxLibHelper\math.hpp">
       <Filter>Library\DxLibHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLib\DxLib.h">
+      <Filter>Library\DxLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLib\DxFunctionWin.h">
+      <Filter>Library\DxLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\References\cursor_lock_mode_type.h">
+      <Filter>Scripts\References</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\References\window.h">
+      <Filter>Scripts\References</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

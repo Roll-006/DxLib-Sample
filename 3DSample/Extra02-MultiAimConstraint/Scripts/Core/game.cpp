@@ -1,8 +1,7 @@
-﻿#include <string>
-#include <vector>
-#include <json_loader.hpp>
+﻿#include <json_loader.hpp>
 #include <math.hpp>
 #include "time.h"
+#include "../References/window.h"
 #include "../System/keyboard.h"
 #include "../System/mouse.h"
 #include "../../Scenes/demo_scene.h"
@@ -39,7 +38,7 @@ int Game::Run() const
 
 int Game::SetUpDxLib() const
 {
-	SetGraphMode(1920, 1080, 32);						// 解像度とカラービット数を設定
+	SetGraphMode(static_cast<int>(window::kSize.x), static_cast<int>(window::kSize.y), window::kColorBitDepth);	// 解像度とカラービット数を設定
 	ChangeWindowMode(TRUE);								// ウィンドウモードを設定 (true : ウィンドウ, false : フルスクリーン)
 	if (DxLib_Init() == -1) { return EXIT_FAILURE; }	// DXライブラリを初期化 (0 : 成功, -1 : 失敗)
 	SetDrawScreen(DX_SCREEN_BACK);						// 描画先画面を裏画面に設定

@@ -5,8 +5,8 @@
 Mouse::Mouse() :
 	_state			(0),
 	_lockState		(CursorLockModeType::kNone),
-	_currentPosition		(Vector2::Zero),
-	_prevPosition		(Vector2::Zero),
+	_currentPosition(Vector2::Zero),
+	_prevPosition	(Vector2::Zero),
 	_delta			(Vector2::Zero),
 	_currentScroll	(Vector2::Zero),
 	_prevScroll		(Vector2::Zero),
@@ -125,7 +125,7 @@ void Mouse::UpdateMousePosition()
 	if (_lockState == CursorLockModeType::kLocked)
 	{
 		_currentPosition = window::kSize * 0.5f;
-		SetMousePoint(static_cast<float>(_currentPosition.x), static_cast<float>(_currentPosition.y));
+		SetMousePoint(static_cast<int>(_currentPosition.x), static_cast<int>(_currentPosition.y));
 	}
 }
 

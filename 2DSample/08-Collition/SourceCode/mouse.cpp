@@ -5,8 +5,8 @@
 Mouse::Mouse() :
 	_state			(0),
 	_lockState		(CursorLockModeType::kNone),
-	_currentPosition		(Vector2::Zero),
-	_prevPosition		(Vector2::Zero),
+	_currentPosition(Vector2::Zero),
+	_prevPosition	(Vector2::Zero),
 	_delta			(Vector2::Zero),
 	_currentScroll	(Vector2::Zero),
 	_prevScroll		(Vector2::Zero),

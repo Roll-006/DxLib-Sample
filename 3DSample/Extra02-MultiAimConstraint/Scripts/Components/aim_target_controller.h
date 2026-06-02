@@ -1,4 +1,10 @@
 ﻿#pragma once
+#include <json_loader.hpp>
+#include <math.hpp>
+#include "transform.h"
+#include "../Core/component_factory.h"
+#include "../Core/time.h"
+#include "../System/keyboard.h"
 #include "../Core/component.h"
 
 class GameObject;

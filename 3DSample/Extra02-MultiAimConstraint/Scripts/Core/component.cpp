@@ -1,5 +1,4 @@
 ﻿#include <memory>
-#include <string>
 #include <json_loader.hpp>
 #include <math.hpp>
 #include "component.h"

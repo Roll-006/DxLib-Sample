@@ -25,6 +25,9 @@
     <Filter Include="Library\DirectXTK\Source">
       <UniqueIdentifier>{6aef5219-8951-4f29-8fe7-899cf0b3cf3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Library\DxLib">
+      <UniqueIdentifier>{2b0869f4-8125-4f39-bb24-2bb56d1a7c6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\main.cpp">
@@ -55,6 +58,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Library\DxLibHelper\math.hpp">
       <Filter>Library\DxLibHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLib\DxLib.h">
+      <Filter>Library\DxLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLib\DxFunctionWin.h">
+      <Filter>Library\DxLib</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

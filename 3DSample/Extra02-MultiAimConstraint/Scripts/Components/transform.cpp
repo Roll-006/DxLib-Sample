@@ -1,5 +1,4 @@
-﻿#include <string>
-#include <json_loader.hpp>
+﻿#include <json_loader.hpp>
 #include <math.hpp>
 #include "../Core/game_object.h"
 #include "../Core/component_factory.h"

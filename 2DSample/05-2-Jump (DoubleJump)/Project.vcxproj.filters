@@ -25,6 +25,9 @@
     <Filter Include="Library\DirectXTK\Source">
       <UniqueIdentifier>{01950d58-e270-46c1-90f3-281d5285476a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Library\DxLib">
+      <UniqueIdentifier>{17a8fca9-97bc-4bd0-bce3-166e6eb5d7ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\main.cpp">
@@ -85,6 +88,12 @@
     </ClInclude>
     <ClInclude Include="SourceCode\physics.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLib\DxLib.h">
+      <Filter>Library\DxLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLib\DxFunctionWin.h">
+      <Filter>Library\DxLib</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

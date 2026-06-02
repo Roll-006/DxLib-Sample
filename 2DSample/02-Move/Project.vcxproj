@@ -106,12 +106,12 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <AdditionalIncludeDirectories>../../Library;../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;../../Library/DirectXTK/Include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Library;../../Library/DxLib;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;../../Library/DirectXTK/Include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../Library;../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;../../Library/DirectXTK/Include;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../Library;../../Library/DxLib;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;../../Library/DirectXTK/Include;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -125,12 +125,12 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>../../Library;../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;../../Library/DirectXTK/Include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../Library;../../Library/DxLib;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;../../Library/DirectXTK/Include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../Library;../../Library/Dxlib_h;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;../../Library/DirectXTK/Include;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../Library;../../Library/DxLib;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;../../Library/DirectXTK/Include;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -144,6 +144,8 @@
     <ClInclude Include="..\..\Library\DirectXTK\Source\pch.h" />
     <ClInclude Include="..\..\Library\DxLibHelper\json_loader.hpp" />
     <ClInclude Include="..\..\Library\DxLibHelper\math.hpp" />
+    <ClInclude Include="..\..\Library\DxLib\DxFunctionWin.h" />
+    <ClInclude Include="..\..\Library\DxLib\DxLib.h" />
     <ClInclude Include="SourceCode\game.h" />
     <ClInclude Include="SourceCode\player.h" />
     <ClInclude Include="SourceCode\window.h" />

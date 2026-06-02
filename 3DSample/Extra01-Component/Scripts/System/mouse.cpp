@@ -1,11 +1,12 @@
-﻿#include <array>
-#include <math.hpp>
+﻿#include <math.hpp>
+#include "../References/window.h"
 #include "mouse.h"
 
 Mouse::Mouse() :
 	_state			(0),
-	_currentPos		(Vector2::Zero),
-	_prevPos		(Vector2::Zero),
+	_lockState		(CursorLockModeType::kNone),
+	_currentPosition(Vector2::Zero),
+	_prevPosition	(Vector2::Zero),
 	_delta			(Vector2::Zero),
 	_currentScroll	(Vector2::Zero),
 	_prevScroll		(Vector2::Zero),
@@ -14,15 +15,39 @@ Mouse::Mouse() :
 	// MOUSE_INPUT_6～MOUSE_INPUT_8を使用する場合は、下記の関数を実行する必要があります
 	// SetUseDirectInputFlag(TRUE);
 
-	UpdateMousePos();
+	SetCursorLockState(_lockState);
+
+	UpdateMousePosition();
 	UpdateScroll();
 }
 
 void Mouse::Update()
 {
 	UpdateMouseButtonState();
-	UpdateMousePos();
+	UpdateMousePosition();
 	UpdateScroll();
+}
+
+void Mouse::SetCursorLockState(const CursorLockModeType lockState)
+{
+	_lockState = lockState;
+
+	switch (_lockState)
+	{
+	case CursorLockModeType::kNone:
+	case CursorLockModeType::kLocked:
+		SetMouseDispFlag(FALSE);
+		break;
+
+	case CursorLockModeType::kConfined:
+		SetMouseDispFlag(TRUE);
+		break;
+
+	default:
+		_lockState = CursorLockModeType::kNone;
+		SetMouseDispFlag(FALSE);
+		break;
+	}
 }
 
 int Mouse::GetIndex(const int mouseButton) const
@@ -41,7 +66,7 @@ void Mouse::UpdateMouseButtonState()
 
 	const auto inputState = GetMouseInput();
 
-	for (int i = 0; i < _state.size(); ++i)
+	for (size_t i = 0; i < _state.size(); ++i)
 	{
 		auto& state = _state.at(i);
 
@@ -83,18 +108,25 @@ void Mouse::UpdateMouseButtonState()
 	}
 }
 
-void Mouse::UpdateMousePos()
+void Mouse::UpdateMousePosition()
 {
 	// データを保存
-	_prevPos = _currentPos;
+	_prevPosition = _currentPosition;
 
 	// 現在の座標を更新
 	int x, y;
 	GetMousePoint(&x, &y);
-	_currentPos = Vector2(static_cast<float>(x), static_cast<float>(y));
+	_currentPosition = Vector2(static_cast<float>(x), static_cast<float>(y));
 
 	// 移動量を計算
-	_delta = _currentPos - _prevPos;
+	_delta = _currentPosition - _prevPosition;
+
+	// カーソル固定中は画面中央に設定
+	if (_lockState == CursorLockModeType::kLocked)
+	{
+		_currentPosition = window::kSize * 0.5f;
+		SetMousePoint(static_cast<int>(_currentPosition.x), static_cast<int>(_currentPosition.y));
+	}
 }
 
 void Mouse::UpdateScroll()

@@ -1,6 +1,4 @@
-﻿#include <string>
-#include <vector>
-#include <json_loader.hpp>
+﻿#include <json_loader.hpp>
 #include <math.hpp>
 #include "component_factory.h"
 #include "../Components/transform.h"

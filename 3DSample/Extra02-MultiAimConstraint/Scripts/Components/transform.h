@@ -1,8 +1,6 @@
 ﻿#pragma once
 #include "../Core/component.h"
 
-class GameObject;
-
 /// <summary>
 /// オブジェクトの座標、回転、スケールを保持している。
 /// また、親子関係も保持している。

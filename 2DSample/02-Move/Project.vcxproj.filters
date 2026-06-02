@@ -25,6 +25,9 @@
     <Filter Include="Library\DirectXTK\Source">
       <UniqueIdentifier>{75ade27e-a663-4bf9-b4b8-e10540e3c03d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Library\DxLib">
+      <UniqueIdentifier>{b389f192-e7ea-4e6e-9847-571f0bbdc6d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\main.cpp">
@@ -61,6 +64,12 @@
     </ClInclude>
     <ClInclude Include="SourceCode\window.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLib\DxLib.h">
+      <Filter>Library\DxLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLib\DxFunctionWin.h">
+      <Filter>Library\DxLib</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
