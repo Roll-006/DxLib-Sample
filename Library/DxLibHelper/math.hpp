@@ -318,4 +318,3 @@ namespace DirectX
 		#pragma endregion
 	}
 }
-

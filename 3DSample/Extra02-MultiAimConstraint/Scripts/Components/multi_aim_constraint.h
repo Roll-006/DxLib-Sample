@@ -16,6 +16,7 @@ public:
 	void Deserialize(const nlohmann::json& json) override;
 
 private:
+	void CreateOffsetRotationInverseMatrix();
 	void AimBone() const;
 
 private:
@@ -35,6 +36,9 @@ private:
 	bool						_constrainedAxisZ;		// コンストレイントをZ軸に適用するかどうか
 	float						_minLimit;				// 回転軸に適用する最小値
 	float						_maxLimit;				// 回転軸に適用する最大値
+	Quaternion					_initialBoneRotation;	// ボーンの初期回転量
+	Quaternion					_resultRotation;
+	Matrix						_offsetRotationInverseMatrix;
 	std::weak_ptr<Transform>	_transform;
 
 	friend void from_json	(const nlohmann::json& json, MultiAimConstraint& multiAimConstraint);

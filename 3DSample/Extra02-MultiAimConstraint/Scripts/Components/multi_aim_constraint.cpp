@@ -24,7 +24,8 @@ MultiAimConstraint::MultiAimConstraint() :
 	_constrainedAxisY		(true),
 	_constrainedAxisZ		(true),
 	_minLimit				(kMinLimit),
-	_maxLimit				(kMaxLimit)
+	_maxLimit				(kMaxLimit),
+	_initialBoneRotation	(Quaternion::Identity)
 {
 
 }
@@ -40,6 +41,11 @@ void MultiAimConstraint::Initialize(const std::shared_ptr<GameObject>& gameObjec
 	_parentBoneIndex		= MV1GetFrameParent(_modelHandle, _constrainedBoneIndex);
 	_minLimit				= std::clamp(_minLimit, kMinLimit, kMaxLimit);
 	_maxLimit				= std::clamp(_maxLimit, kMinLimit, kMaxLimit);
+	
+	auto boneMat = ToMatrix(MV1GetFrameLocalWorldMatrix(_modelHandle, _constrainedBoneIndex));
+	_initialBoneRotation = Quaternion::CreateFromRotationMatrix(CreateRotationMatrix(boneMat));
+	
+	CreateOffsetRotationInverseMatrix();
 }
 
 void MultiAimConstraint::Update()
@@ -64,27 +70,50 @@ void MultiAimConstraint::Deserialize(const nlohmann::json& json)
 	from_json(json, *this);
 }
 
+void MultiAimConstraint::CreateOffsetRotationInverseMatrix()
+{
+	// 指定されたaim軸及びup軸で姿勢が制御されるように行列を生成
+	_offsetRotationInverseMatrix = Matrix::Identity;
+	_offsetRotationInverseMatrix.Right(_aimAxis.Cross(_upAxis));
+	_offsetRotationInverseMatrix.Up(_upAxis);
+	_offsetRotationInverseMatrix.Forward(_aimAxis);
+	_offsetRotationInverseMatrix = _offsetRotationInverseMatrix.Transpose();
+}
+
 void MultiAimConstraint::AimBone() const
 {
-	const auto defaultWorldMat = ToMatrix(MV1GetFrameLocalWorldMatrix(_modelHandle, _constrainedBoneIndex));
-	const auto defaultWorldEulerAngles = defaultWorldMat.ToEuler();
-	
+	auto originWorldMat = ToMatrix(MV1GetFrameLocalWorldMatrix(_modelHandle, _constrainedBoneIndex));
+	auto originWorldRotation = Quaternion::CreateFromRotationMatrix(CreateRotationMatrix(originWorldMat));
+
 	// ワールド回転行列を計算
-	auto lookAt = Matrix::CreateWorld(defaultWorldMat.Translation(), _sourceObject.lock()->GetWorldPosition() - defaultWorldMat.Translation(), Vector3::Up);
-	auto worldRMat = CreateRotationMatrix(lookAt);
+	auto targetWorldRotation = Quaternion::LookRotation(_sourceObject.lock()->GetWorldPosition() - originWorldMat.Translation(), Vector3::Up);
 	
-	// 指定されたaim軸及びup軸で姿勢が制御されるように変換
-	auto invOffsetRMat = Matrix::Identity;
-	invOffsetRMat.Right(_aimAxis.Cross(_upAxis));
-	invOffsetRMat.Up(_upAxis);
-	invOffsetRMat.Forward(_aimAxis);
-	invOffsetRMat = invOffsetRMat.Transpose();
-	worldRMat = invOffsetRMat * worldRMat;
+	
+	
+	// 角度制限
+	Quaternion resultRotation;
+	originWorldRotation.RotateTowards(targetWorldRotation, 0.05f, resultRotation);
+	
+	const auto diffAngle = Quaternion::Angle(_initialBoneRotation, resultRotation) * math::kRad2Deg;
+	
+	
+	if (diffAngle > _maxLimit || diffAngle < _minLimit)
+	{
+		resultRotation = originWorldRotation;
+	}
+	
+	auto resultWorldRMat = Matrix::CreateFromQuaternion(resultRotation);
+	
+	printfDx("diffAngle : %f\n", diffAngle);
+	printfDx("_initialBoneRotation : %f, %f, %f\n", _initialBoneRotation.ToEuler().x, _initialBoneRotation.ToEuler().y, _initialBoneRotation.ToEuler().z);
+	printfDx("resultRotation : %f, %f, %f\n", resultRotation.ToEuler().x, resultRotation.ToEuler().y, resultRotation.ToEuler().z);
+	
+	resultWorldRMat = _offsetRotationInverseMatrix * resultWorldRMat;
 
 	// ローカル回転行列に変換
 	auto parentWorldMat = ToMatrix(MV1GetFrameLocalWorldMatrix(_modelHandle, _parentBoneIndex));
 	const auto invParentWorldRMat = CreateRotationMatrix(parentWorldMat).Transpose();
-	auto localMat = worldRMat * invParentWorldRMat;
+	auto localMat = resultWorldRMat * invParentWorldRMat;
 
 	// 座標を設定してローカル行列を生成
 	const auto mat = ToMatrix(MV1GetFrameLocalMatrix(_modelHandle, _constrainedBoneIndex));
