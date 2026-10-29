@@ -16,12 +16,12 @@ public:
 	void Deserialize(const nlohmann::json& json) override;
 
 private:
-	void CreateOffsetRotationInverseMatrix();
+	void CreateOffsetRotationMatrix();
 	void AimBone() const;
+	Matrix CalcConstrainedRotationMatrix(const Quaternion& origin, const Quaternion& target) const;
 
 private:
-	static constexpr float		kMinLimit = -180.0f;
-	static constexpr float		kMaxLimit = 180.0f;
+	static constexpr float		kLimit = 180.0f;
 	
 	int							_modelHandle;
 	std::string					_constrainedBoneName;	// sourceObjectの影響を受けるボーンの名前
@@ -31,14 +31,12 @@ private:
 	Vector3						_upAxis;				// ボーンの上方向に向けるためのローカルup軸
 	std::string					_sourceObjectName;		// ボーンの向きに影響を与えるゲームオブジェクトの名前
 	std::weak_ptr<Transform>	_sourceObject;			// ボーンの向きに影響を与えるゲームオブジェクト
-	bool						_constrainedAxisX;		// コンストレイントをX軸に適用するかどうか
-	bool						_constrainedAxisY;		// コンストレイントをY軸に適用するかどうか
-	bool						_constrainedAxisZ;		// コンストレイントをZ軸に適用するかどうか
-	float						_minLimit;				// 回転軸に適用する最小値
-	float						_maxLimit;				// 回転軸に適用する最大値
+	bool						_constrainedXAxis;		// コンストレイントをX軸に適用するかどうか
+	bool						_constrainedYAxis;		// コンストレイントをY軸に適用するかどうか
+	bool						_constrainedZAxis;		// コンストレイントをZ軸に適用するかどうか
+	float						_limit;					// 回転軸に適用する上限値
 	Quaternion					_initialBoneRotation;	// ボーンの初期回転量
-	Quaternion					_resultRotation;
-	Matrix						_offsetRotationInverseMatrix;
+	Matrix						_offsetRotationMatrix;
 	std::weak_ptr<Transform>	_transform;
 
 	friend void from_json	(const nlohmann::json& json, MultiAimConstraint& multiAimConstraint);
@@ -54,11 +52,10 @@ inline void from_json(const nlohmann::json& json, MultiAimConstraint& multiAimCo
 	json.at("aimAxis").				get_to(multiAimConstraint._aimAxis);
 	json.at("upAxis").				get_to(multiAimConstraint._upAxis);
 	json.at("sourceObjectName").	get_to(multiAimConstraint._sourceObjectName);
-	json.at("constrainedAxisX").	get_to(multiAimConstraint._constrainedAxisX);
-	json.at("constrainedAxisY").	get_to(multiAimConstraint._constrainedAxisY);
-	json.at("constrainedAxisZ").	get_to(multiAimConstraint._constrainedAxisZ);
-	json.at("minLimit").			get_to(multiAimConstraint._minLimit);
-	json.at("maxLimit").			get_to(multiAimConstraint._maxLimit);
+	json.at("constrainedXAxis").	get_to(multiAimConstraint._constrainedXAxis);
+	json.at("constrainedYAxis").	get_to(multiAimConstraint._constrainedYAxis);
+	json.at("constrainedZAxis").	get_to(multiAimConstraint._constrainedZAxis);
+	json.at("limit").				get_to(multiAimConstraint._limit);
 }
 
 inline void to_json(nlohmann::json& json, const MultiAimConstraint& multiAimConstraint)
@@ -70,11 +67,10 @@ inline void to_json(nlohmann::json& json, const MultiAimConstraint& multiAimCons
 		{ "aimAxis",				multiAimConstraint._aimAxis },
 		{ "upAxis",					multiAimConstraint._upAxis },
 		{ "sourceObjectName",		multiAimConstraint._sourceObjectName },
-		{ "constrainedAxisX",		multiAimConstraint._constrainedAxisX },
-		{ "constrainedAxisY",		multiAimConstraint._constrainedAxisY },
-		{ "constrainedAxisZ",		multiAimConstraint._constrainedAxisZ },
-		{ "minLimit",				multiAimConstraint._minLimit },
-		{ "maxLimit",				multiAimConstraint._maxLimit },
+		{ "constrainedXAxis",		multiAimConstraint._constrainedXAxis },
+		{ "constrainedYAxis",		multiAimConstraint._constrainedYAxis },
+		{ "constrainedZAxis",		multiAimConstraint._constrainedZAxis },
+		{ "limit",					multiAimConstraint._limit },
 	};
 }
 #pragma endregion

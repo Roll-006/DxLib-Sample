@@ -25,7 +25,7 @@
     {
       "type": "MultiAimConstraint",
       "enabled": true,
-      "constrainedBoneName": "mixamorig:Neck1",
+      "constrainedBoneName": "mixamorig:Neck",
       "aimAxis": {
         "x": 0,
         "y": 0,
@@ -37,11 +37,10 @@
         "z": 0
       },
       "sourceObjectName": "AimTarget",
-      "constrainedAxisX": true,
-      "constrainedAxisY": true,
-      "constrainedAxisZ": true,
-      "minLimit": -90,
-      "maxLimit": 90
+      "constrainedXAxis": true,
+      "constrainedYAxis": true,
+      "constrainedZAxis": true,
+      "limit": 90
     },
     {
       "type": "ModelRenderer",
