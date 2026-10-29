@@ -66,7 +66,7 @@ std::shared_ptr<Transform> Transform::Find(const std::string& name) const
 	return nullptr;
 }
 
-void Transform::DetachChildren()
+void Transform::DetachChildren() const
 {
 	for (const auto& child : _children)
 	{
@@ -112,6 +112,13 @@ Quaternion Transform::GetWorldRotation()
 	Quaternion rotation;
 	_worldMatrix.Decompose(scale, rotation, translation);
 	return rotation;
+}
+
+Vector3 Transform::GetWorldEulerAngles()
+{
+	UpdateMatrix();
+	
+	return GetWorldRotation().ToEuler() * math::kRad2Deg;
 }
 
 Vector3 Transform::GetWorldScale()

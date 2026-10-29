@@ -27,7 +27,7 @@ public:
 	/// <summary>
 	/// 全ての子オブジェクトを切り離す
 	/// </summary>
-	void DetachChildren();
+	void DetachChildren() const;
 
 	/// <summary>
 	/// 対象の方向を見る
@@ -37,13 +37,15 @@ public:
 	void LookAt(const Vector3& target, const Vector3& up = Vector3::Up);
 
 	#pragma region Getter
-	Vector3		GetLocalPosition()	const { return _localPosition; }
-	Quaternion	GetLocalRotation()	const { return _localRotation; }
-	Vector3		GetLocalScale()		const { return _localScale; }
-	Matrix		GetLocalMatrix()	const;
+	Vector3		GetLocalPosition()		const { return _localPosition; }
+	Quaternion	GetLocalRotation()		const { return _localRotation; }
+	Vector3		GetLocalEulerAngles()	const { return GetLocalRotation().ToEuler() * math::kRad2Deg; }
+	Vector3		GetLocalScale()			const { return _localScale; }
+	Matrix		GetLocalMatrix()		const;
 
 	Vector3		GetWorldPosition();
 	Quaternion	GetWorldRotation();
+	Vector3		GetWorldEulerAngles();
 	Vector3		GetWorldScale();
 	Matrix		GetWorldMatrix();
 
@@ -162,13 +164,11 @@ inline void from_json(const nlohmann::json& json, Transform& transform)
 
 inline void to_json(nlohmann::json& json, const Transform& transform)
 {
-	auto eulerAngles = transform.GetLocalRotation().ToEuler() * math::kRad2Deg;
-
 	json =
 	{
 		{ "enabled",			transform._enabled },
 		{ "localPosition",		transform._localPosition },
-		{ "localEulerAngles",	eulerAngles },
+		{ "localEulerAngles",	transform.GetLocalEulerAngles() },
 		{ "localScale",			transform._localScale },
 	};
 }

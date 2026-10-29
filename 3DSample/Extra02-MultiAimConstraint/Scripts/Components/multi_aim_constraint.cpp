@@ -16,14 +16,15 @@ namespace
 
 MultiAimConstraint::MultiAimConstraint() : 
 	_modelHandle			(-1),
-	_constrainedBoneName	(""),
 	_constrainedBoneIndex	(-1),
 	_parentBoneIndex		(-1),
 	_aimAxis				(0.0f, 0.0f, 1.0f),
 	_upAxis					(0.0f, 1.0f, 0.0f),
-	_sourceObjectName		(""),
-	_sourceObject			(),
-	_transform				()
+	_constrainedAxisX		(true),
+	_constrainedAxisY		(true),
+	_constrainedAxisZ		(true),
+	_minLimit				(kMinLimit),
+	_maxLimit				(kMaxLimit)
 {
 
 }
@@ -37,6 +38,8 @@ void MultiAimConstraint::Initialize(const std::shared_ptr<GameObject>& gameObjec
 	_modelHandle			= GetComponent<ModelRenderer>()->GetModelHandle();
 	_constrainedBoneIndex	= MV1SearchFrame(_modelHandle, _constrainedBoneName.c_str());
 	_parentBoneIndex		= MV1GetFrameParent(_modelHandle, _constrainedBoneIndex);
+	_minLimit				= std::clamp(_minLimit, kMinLimit, kMaxLimit);
+	_maxLimit				= std::clamp(_maxLimit, kMinLimit, kMaxLimit);
 }
 
 void MultiAimConstraint::Update()
@@ -61,16 +64,17 @@ void MultiAimConstraint::Deserialize(const nlohmann::json& json)
 	from_json(json, *this);
 }
 
-void MultiAimConstraint::AimBone()
+void MultiAimConstraint::AimBone() const
 {
-	const auto worldMat	= ToMatrix(MV1GetFrameLocalWorldMatrix(_modelHandle, _constrainedBoneIndex));
+	const auto defaultWorldMat = ToMatrix(MV1GetFrameLocalWorldMatrix(_modelHandle, _constrainedBoneIndex));
+	const auto defaultWorldEulerAngles = defaultWorldMat.ToEuler();
 	
 	// ワールド回転行列を計算
-	auto lookAt	= Matrix::CreateWorld(worldMat.Translation(), _sourceObject.lock()->GetWorldPosition() - worldMat.Translation(), Vector3::Up);
+	auto lookAt = Matrix::CreateWorld(defaultWorldMat.Translation(), _sourceObject.lock()->GetWorldPosition() - defaultWorldMat.Translation(), Vector3::Up);
 	auto worldRMat = CreateRotationMatrix(lookAt);
 	
 	// 指定されたaim軸及びup軸で姿勢が制御されるように変換
-	auto invOffsetRMat	= Matrix::Identity;
+	auto invOffsetRMat = Matrix::Identity;
 	invOffsetRMat.Right(_aimAxis.Cross(_upAxis));
 	invOffsetRMat.Up(_upAxis);
 	invOffsetRMat.Forward(_aimAxis);
