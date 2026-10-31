@@ -71,7 +71,7 @@ void MultiAimConstraint::Render() const
 {
 	if (!_enabled) return;
 	
-	RenderDebugLine();
+	DrawAimLine();
 }
 
 void MultiAimConstraint::Deserialize(const nlohmann::json& json)
@@ -155,7 +155,7 @@ Quaternion MultiAimConstraint::CalcSwingRotation(const Vector3& from, const Vect
 	return Quaternion::CreateFromAxisAngle(axis, std::min(angleRad, _limit / math::kRad2Deg));
 }
 
-void MultiAimConstraint::RenderDebugLine() const
+void MultiAimConstraint::DrawAimLine() const
 {
 	const auto mat = ToMatrix(MV1GetFrameLocalWorldMatrix(_modelHandle, _constrainedBoneIndex));
 	const auto rotMat = CreateRotationMatrix(mat);

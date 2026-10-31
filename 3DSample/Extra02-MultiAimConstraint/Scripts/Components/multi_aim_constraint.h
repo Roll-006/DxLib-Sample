@@ -48,7 +48,7 @@ private:
 	/// <returns></returns>
 	Quaternion CalcSwingRotation(const Vector3& from, const Vector3& to);
 
-	void RenderDebugLine() const;
+	void DrawAimLine() const;
 	
 private:
 	static constexpr float		kLimit = 180.f;
