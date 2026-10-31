@@ -12,8 +12,8 @@ public:
     virtual ~GameObject() = default;
 
     void Initialize(const std::shared_ptr<Scene>& scene);
-    void Update();
-    void LateUpdate();
+    void Update() const;
+    void LateUpdate() const;
     void Render() const;
 
     /// <summary>
@@ -47,7 +47,7 @@ public:
     {
         for (const auto& component : _components)
         {
-            if (const auto casted = std::dynamic_pointer_cast<T>(component)) { return casted; }
+            if (const auto casted = std::dynamic_pointer_cast<T>(component)) return casted;
         }
 
         return nullptr;

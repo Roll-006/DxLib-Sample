@@ -16,12 +16,43 @@ public:
 	void Deserialize(const nlohmann::json& json) override;
 
 private:
+	/// <summary>
+	/// ボーン独自の軸を適用するためのオフセット行列を生成する。
+	/// </summary>
 	void CreateOffsetRotationMatrix();
-	void AimBone() const;
-	Matrix CalcConstrainedRotationMatrix(const Quaternion& origin, const Quaternion& target) const;
 
+	/// <summary>
+	/// ボーンを対象に向ける。
+	/// </summary>
+	void AimAtSourceObject();
+
+	/// <summary>
+	/// 回転をボーンに適用する。
+	/// </summary>
+	/// <param name="resultLocalRotation">ボーンに適用させるローカルクォータニオン</param>
+	void ApplyRotationBone(const Quaternion& resultLocalRotation) const;
+
+	/// <summary>
+	/// 角度制限を行ったローカルクォータニオンを計算する。
+	/// </summary>
+	/// <param name="originLocalRotation">回転させるボーンのローカルクォータニオン</param>
+	/// <param name="localToSourceObject">追尾対象までのローカル方向ベクトル</param>
+	/// <returns></returns>
+	Quaternion CalcConstrainedLocalRotation(const Quaternion& originLocalRotation, const Vector3& localToSourceObject);
+
+	/// <summary>
+	/// 傾きを計算する。
+	/// </summary>
+	/// <param name="from">回転元のaim軸</param>
+	/// <param name="to">回転目標のaim軸</param>
+	/// <returns></returns>
+	Quaternion CalcSwingRotation(const Vector3& from, const Vector3& to);
+
+	void RenderDebugLine() const;
+	
 private:
-	static constexpr float		kLimit = 180.0f;
+	static constexpr float		kLimit = 180.f;
+	static constexpr float		kFollowSpeed = 8.f;
 	
 	int							_modelHandle;
 	std::string					_constrainedBoneName;	// sourceObjectの影響を受けるボーンの名前
@@ -35,8 +66,11 @@ private:
 	bool						_constrainedYAxis;		// コンストレイントをY軸に適用するかどうか
 	bool						_constrainedZAxis;		// コンストレイントをZ軸に適用するかどうか
 	float						_limit;					// 回転軸に適用する上限値
-	Quaternion					_initialBoneRotation;	// ボーンの初期回転量
-	Matrix						_offsetRotationMatrix;
+	Matrix						_offsetRotationMatrix;	// ボーン独自の軸を適用するためのオフセット
+	Quaternion					_initialLocalRotation;  // オフセットを除いた親基準の初期回転
+	Vector3						_initialAimAxis;		// 親空間での初期aim方向
+	Vector3						_initialUpAxis;			// 親空間での初期up方向
+	Vector3						_lastSwingAxis;         // 直前のスイング軸
 	std::weak_ptr<Transform>	_transform;
 
 	friend void from_json	(const nlohmann::json& json, MultiAimConstraint& multiAimConstraint);

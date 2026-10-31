@@ -25,6 +25,26 @@
     {
       "type": "MultiAimConstraint",
       "enabled": true,
+      "constrainedBoneName": "mixamorig:Spine2",
+      "aimAxis": {
+        "x": 0,
+        "y": 0,
+        "z": -1
+      },
+      "upAxis": {
+        "x": 0,
+        "y": 1,
+        "z": 0
+      },
+      "sourceObjectName": "AimTarget",
+      "constrainedXAxis": true,
+      "constrainedYAxis": true,
+      "constrainedZAxis": true,
+      "limit": 60
+    },
+    {
+      "type": "MultiAimConstraint",
+      "enabled": true,
       "constrainedBoneName": "mixamorig:Neck",
       "aimAxis": {
         "x": 0,
@@ -40,7 +60,7 @@
       "constrainedXAxis": true,
       "constrainedYAxis": true,
       "constrainedZAxis": true,
-      "limit": 90
+      "limit": 20
     },
     {
       "type": "ModelRenderer",

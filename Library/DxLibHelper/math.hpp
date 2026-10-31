@@ -9,8 +9,8 @@ using namespace DirectX::SimpleMath;
 namespace math
 {
 	#pragma region constant
-	static constexpr float kDeg2Rad = static_cast<float>(std::numbers::pi) / 180.0f;		// ディグリーをラジアンに変換 (変換対象と掛け算を行う)
-	static constexpr float kRad2Deg = 180.0f / static_cast<float>(std::numbers::pi);		// ラジアンをディグリーに変換 (変換対象と掛け算を行う)
+	static constexpr float kDeg2Rad = static_cast<float>(std::numbers::pi) / 180.f;		// ディグリーをラジアンに変換 (変換対象と掛け算を行う)
+	static constexpr float kRad2Deg = 180.f / static_cast<float>(std::numbers::pi);		// ラジアンをディグリーに変換 (変換対象と掛け算を行う)
 	static constexpr float kEpsilon = 1.0e-5f;
 	#pragma endregion
 }
@@ -137,11 +137,17 @@ namespace DirectX
 		#pragma endregion
 
 		#pragma region function
-		inline Matrix CreateRotationMatrix(Matrix& matrix) noexcept
+		inline Matrix GetLocalMatrix(const Matrix& childWorldMatrix, const Matrix& parentWorldMatrix) noexcept
+		{
+			return childWorldMatrix * parentWorldMatrix.Invert();
+		}
+		
+		inline Matrix CreateRotationMatrix(const Matrix& matrix) noexcept
 		{
 			Vector3 scale, translation;
 			Quaternion rotation;
-			matrix.Decompose(scale, rotation, translation);
+			Matrix m = matrix;
+			m.Decompose(scale, rotation, translation);
 			return Matrix::CreateFromQuaternion(rotation);
 		}
 

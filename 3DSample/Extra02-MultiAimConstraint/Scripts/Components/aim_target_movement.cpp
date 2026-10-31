@@ -1,41 +1,41 @@
-﻿#include "aim_target_controller.h"
+﻿#include "aim_target_movement.h"
 
 namespace
 {
 	const bool registered = []()
 	{
-		ComponentFactory::Register("AimTargetController", [](GameObject& obj) { return obj.AddComponent<AimTargetController>(); });
+		ComponentFactory::Register("AimTargetMovement", [](GameObject& obj) { return obj.AddComponent<AimTargetMovement>(); });
 		return true;
 	}();
 }
 
-AimTargetController::AimTargetController() : 
-	_moveSpeed(0.0f)
+AimTargetMovement::AimTargetMovement() : 
+	_moveSpeed(0.f)
 {
 
 }
 
-void AimTargetController::Initialize(const std::shared_ptr<GameObject>& gameObject)
+void AimTargetMovement::Initialize(const std::shared_ptr<GameObject>& gameObject)
 {
 	_gameObject = gameObject;
 	_transform	= GetTransform();
 }
 
-void AimTargetController::Update()
+void AimTargetMovement::Update()
 {
-	if (!_enabled) { return; }
+	if (!_enabled) return;
 
 	Move();
 }
 
-void AimTargetController::LateUpdate()
+void AimTargetMovement::LateUpdate()
 {
-	if (!_enabled) { return; }
+	if (!_enabled) return;
 }
 
-void AimTargetController::Render() const
+void AimTargetMovement::Render() const
 {
-	if (!_enabled) { return; }
+	if (!_enabled) return;
 
 	auto transform = _transform.lock();
 	DrawSphere3D(ToDxLibVector(transform->GetWorldPosition()), 0.5f, 8, 0xffffff, 0xffffff, TRUE);
@@ -48,43 +48,43 @@ void AimTargetController::Render() const
 	DrawFormatString(0, 100, 0xffffff, "SHIFT + ↓ : 手前へ移動");
 }
 
-void AimTargetController::Deserialize(const nlohmann::json& json)
+void AimTargetMovement::Deserialize(const nlohmann::json& json)
 {
 	from_json(json, *this);
 }
 
-void AimTargetController::Move()
+void AimTargetMovement::Move() const
 {
 	// ターゲットを移動
-	auto moveDir = Vector3::Zero;
+	auto moveDirection = Vector3::Zero;
 	const auto keyboard = Keyboard::GetInstance();
 	if (keyboard.IsPressed(KEY_INPUT_LEFT))
 	{
-		moveDir.x -= 1;
+		moveDirection.x -= 1;
 	}
 	if (keyboard.IsPressed(KEY_INPUT_RIGHT))
 	{
-		moveDir.x += 1;
+		moveDirection.x += 1;
 	}
 	if (keyboard.IsPressed(KEY_INPUT_LSHIFT) && keyboard.IsPressed(KEY_INPUT_DOWN))
 	{
-		moveDir.z -= 1;
+		moveDirection.z -= 1;
 	}
 	else if (keyboard.IsPressed(KEY_INPUT_DOWN))
 	{
-		moveDir.y -= 1;
+		moveDirection.y -= 1;
 	}
 	if (keyboard.IsPressed(KEY_INPUT_LSHIFT) && keyboard.IsPressed(KEY_INPUT_UP))
 	{
-		moveDir.z += 1;
+		moveDirection.z += 1;
 	}
 	else if (keyboard.IsPressed(KEY_INPUT_UP))
 	{
-		moveDir.y += 1;
+		moveDirection.y += 1;
 	}
 
 	// 座標を移動
-	const auto transform	= _transform.lock();
-	const auto velocity		= moveDir * _moveSpeed * Time::GetInstance().GetDeltaTime();
+	const auto transform = _transform.lock();
+	const auto velocity = moveDirection * _moveSpeed * Time::GetInstance().GetDeltaTime();
 	transform->SetLocalPosition(transform->GetLocalPosition() + velocity);
 }

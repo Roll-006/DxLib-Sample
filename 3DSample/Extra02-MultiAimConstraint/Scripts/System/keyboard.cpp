@@ -2,10 +2,9 @@
 #include <DxLib.h>
 #include "keyboard.h"
 
-Keyboard::Keyboard() :
-	_state(0)
+Keyboard::Keyboard()
 {
-
+	
 }
 
 void Keyboard::Update()

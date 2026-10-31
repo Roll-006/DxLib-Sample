@@ -113,9 +113,6 @@
     <ClInclude Include="Scripts\Components\transform.h">
       <Filter>Scripts\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Scripts\Components\aim_target_controller.h">
-      <Filter>Scripts\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Scripts\Components\multi_aim_constraint.h">
       <Filter>Scripts\Components</Filter>
     </ClInclude>
@@ -139,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="Scripts\References\window.h">
       <Filter>Scripts\References</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Components\aim_target_movement.h">
+      <Filter>Scripts\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -187,9 +187,6 @@
     <ClCompile Include="Scripts\Components\transform.cpp">
       <Filter>Scripts\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Scripts\Components\aim_target_controller.cpp">
-      <Filter>Scripts\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Scripts\Components\multi_aim_constraint.cpp">
       <Filter>Scripts\Components</Filter>
     </ClCompile>
@@ -198,6 +195,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Library\DirectXTK\Source\SimpleMath.cpp">
       <Filter>Library\DirectXTK\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Components\aim_target_movement.cpp">
+      <Filter>Scripts\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

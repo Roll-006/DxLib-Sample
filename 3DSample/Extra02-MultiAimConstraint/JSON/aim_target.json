@@ -23,7 +23,7 @@
       }
     },
     {
-      "type": "AimTargetController",
+      "type": "AimTargetMovement",
       "enabled": true,
       "moveSpeed": 15.0
     }

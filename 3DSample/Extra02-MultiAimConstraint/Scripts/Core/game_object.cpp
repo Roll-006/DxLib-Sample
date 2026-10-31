@@ -6,10 +6,7 @@
 #include "game_object.h"
 
 GameObject::GameObject(const std::string& jsonPath) :
-	_name		(""),
-	_tag		(""),
-	_isActive	(true),
-	_scene		()
+	_isActive(true)
 {
 	// Transformは必須で追加
 	AddComponent<Transform>();
@@ -42,9 +39,9 @@ void GameObject::Initialize(const std::shared_ptr<Scene>& scene)
 	}
 }
 
-void GameObject::Update()
+void GameObject::Update() const
 {
-	if (!_isActive) { return; }
+	if (!_isActive) return;
 
 	for (const auto& component : _components)
 	{
@@ -52,9 +49,9 @@ void GameObject::Update()
 	}
 }
 
-void GameObject::LateUpdate()
+void GameObject::LateUpdate() const
 {
-	if (!_isActive) { return; }
+	if (!_isActive) return;
 
 	for (const auto& component : _components)
 	{
@@ -64,7 +61,7 @@ void GameObject::LateUpdate()
 
 void GameObject::Render() const
 {
-	if (!_isActive) { return; }
+	if (!_isActive) return;
 
 	for (const auto& component : _components)
 	{
