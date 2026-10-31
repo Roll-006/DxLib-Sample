@@ -28,15 +28,15 @@ private:
 	Time();
 
 private:
-	static constexpr float kFPS				= 60.0f;
+	static constexpr float kFPS				= 60.f;
 	static constexpr float kMaxWaitTimeMs	= 1000;
-	static constexpr float kMs				= 1000.0f;		// ミリ秒
-	static constexpr float kUs				= 1000000.0f;	// マイクロ秒
+	static constexpr float kMs				= 1000.f;		// ミリ秒
+	static constexpr float kUs				= 1000000.f;	// マイクロ秒
 
 	LONGLONG	_firstTimeUs;
 	LONGLONG	_currentTimeUs;
 	LONGLONG	_prevTimeUs;
-	int			_boneCount;
+	int			_frameCount;
 	float		_averageFps;
 	float		_deltaTime;
 	float		_timeScale;

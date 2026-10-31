@@ -4,8 +4,7 @@
 #include "component.h"
 
 Component::Component() :
-	_gameObject	(),
-	_enabled	(true)
+	_enabled(true)
 {
 
 }

@@ -16,8 +16,8 @@ namespace
 CameraApplier::CameraApplier()
 {
 	// 仮
-	SetCameraNearFar(1.0f, 100.0f);
-	SetupCamera_Perspective(60.0f * math::kDeg2Rad);
+	SetCameraNearFar(1.f, 100.f);
+	SetupCamera_Perspective(60.f * math::kDeg2Rad);
 }
 
 void CameraApplier::Initialize(const std::shared_ptr<GameObject>& gameObject)
@@ -28,12 +28,12 @@ void CameraApplier::Initialize(const std::shared_ptr<GameObject>& gameObject)
 
 void CameraApplier::Update()
 {
-	if (!_enabled) { return; }
+	if (!_enabled) return;
 }
 
 void CameraApplier::LateUpdate()
 {
-	if (!_enabled) { return; }
+	if (!_enabled) return;
 
 	// カメラの位置及び姿勢を設定
 	const auto transform = _transform.lock();
@@ -42,7 +42,7 @@ void CameraApplier::LateUpdate()
 
 void CameraApplier::Render() const
 {
-	if (!_enabled) { return; }
+	if (!_enabled) return;
 }
 
 void CameraApplier::Deserialize(const nlohmann::json& json)

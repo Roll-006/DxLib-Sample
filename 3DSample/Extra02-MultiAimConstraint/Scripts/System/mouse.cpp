@@ -3,14 +3,7 @@
 #include "mouse.h"
 
 Mouse::Mouse() :
-	_state			(0),
-	_lockState		(CursorLockModeType::kNone),
-	_currentPosition(Vector2::Zero),
-	_prevPosition	(Vector2::Zero),
-	_delta			(Vector2::Zero),
-	_currentScroll	(Vector2::Zero),
-	_prevScroll		(Vector2::Zero),
-	_scroll			(Vector2::Zero)
+	_lockState(CursorLockModeType::kNone)
 {
 	// MOUSE_INPUT_6～MOUSE_INPUT_8を使用する場合は、下記の関数を実行する必要があります
 	// SetUseDirectInputFlag(TRUE);
@@ -54,7 +47,7 @@ int Mouse::GetIndex(const int mouseButton) const
 {
 	for (int i = 0; i < _state.size(); ++i)
 	{
-		if (mouseButton == (1 << i)) { return i; }
+		if (mouseButton == (1 << i)) return i;
 	}
 
 	return -1;

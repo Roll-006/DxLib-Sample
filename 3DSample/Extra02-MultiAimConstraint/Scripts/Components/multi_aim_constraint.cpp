@@ -1,9 +1,9 @@
-﻿#include <json_loader.hpp>
-#include <math.hpp>
+﻿#include <math.hpp>
 #include "transform.h"
 #include "../Core/component_factory.h"
 #include "model_renderer.h"
 #include "multi_aim_constraint.h"
+#include "../Core/time.h"
 
 namespace
 {
@@ -16,16 +16,16 @@ namespace
 
 MultiAimConstraint::MultiAimConstraint() : 
 	_modelHandle			(-1),
-	_constrainedBoneName	(""),
 	_constrainedBoneIndex	(-1),
 	_parentBoneIndex		(-1),
-	_aimAxis				(0.0f, 0.0f, 1.0f),
-	_upAxis					(0.0f, 1.0f, 0.0f),
-	_sourceObjectName		(""),
-	_sourceObject			(),
-	_transform				()
+	_aimAxis				(Vector3::Backward),
+	_upAxis					(Vector3::Up),
+	_constrainedXAxis		(true),
+	_constrainedYAxis		(true),
+	_constrainedZAxis		(true),
+	_limit					(kLimit)
 {
-
+	
 }
 
 void MultiAimConstraint::Initialize(const std::shared_ptr<GameObject>& gameObject)
@@ -33,27 +33,45 @@ void MultiAimConstraint::Initialize(const std::shared_ptr<GameObject>& gameObjec
 	_gameObject		= gameObject;
 	_transform		= GetComponent<Transform>();
 	_sourceObject	= gameObject->Find(_sourceObjectName);
-
+	
 	_modelHandle			= GetComponent<ModelRenderer>()->GetModelHandle();
 	_constrainedBoneIndex	= MV1SearchFrame(_modelHandle, _constrainedBoneName.c_str());
 	_parentBoneIndex		= MV1GetFrameParent(_modelHandle, _constrainedBoneIndex);
+	_limit					= std::clamp(_limit, 0.f, kLimit);
+	
+	CreateOffsetRotationMatrix();
+	
+	const auto localMat = ToMatrix(MV1GetFrameLocalMatrix(_modelHandle, _constrainedBoneIndex));
+ 
+	// オフセットを除いた、親基準の初期回転
+	_initialLocalRotation = Quaternion::CreateFromRotationMatrix(CreateRotationMatrix(_offsetRotationMatrix.Transpose() * localMat));
+	
+	// 親空間での初期aim軸及びup軸
+	_initialAimAxis = Vector3::TransformNormal(_aimAxis, localMat);
+	_initialUpAxis = Vector3::TransformNormal(_upAxis, localMat);
+	
+	// スイング軸が不定になったときのフォールバック用
+	_lastSwingAxis = _initialAimAxis.Cross(_initialUpAxis);
+	if (_lastSwingAxis.LengthSquared() <= math::kEpsilon) { _lastSwingAxis = Vector3::Up; }
 }
 
 void MultiAimConstraint::Update()
 {
-	if (!_enabled) { return; }
-
-	AimBone();
+	if (!_enabled) return;
+	
+	AimAtSourceObject();
 }
 
 void MultiAimConstraint::LateUpdate()
 {
-	if (!_enabled) { return; }
+	if (!_enabled) return;
 }
 
 void MultiAimConstraint::Render() const
 {
-	if (!_enabled) { return; }
+	if (!_enabled) return;
+	
+	DrawAimLine();
 }
 
 void MultiAimConstraint::Deserialize(const nlohmann::json& json)
@@ -61,32 +79,86 @@ void MultiAimConstraint::Deserialize(const nlohmann::json& json)
 	from_json(json, *this);
 }
 
-void MultiAimConstraint::AimBone()
+void MultiAimConstraint::CreateOffsetRotationMatrix()
 {
-	const auto worldMat	= ToMatrix(MV1GetFrameLocalWorldMatrix(_modelHandle, _constrainedBoneIndex));
+	// 指定されたaim軸及びup軸で姿勢が制御されるように行列を生成
+	_offsetRotationMatrix.Right(_aimAxis.Cross(_upAxis));
+	_offsetRotationMatrix.Up(_upAxis);
+	_offsetRotationMatrix.Forward(_aimAxis);
+	_offsetRotationMatrix = _offsetRotationMatrix.Transpose();
+}
+
+void MultiAimConstraint::AimAtSourceObject()
+{
+	const auto originWorldMat = ToMatrix(MV1GetFrameLocalWorldMatrix(_modelHandle, _constrainedBoneIndex));
+	const auto parentWorldMat = ToMatrix(MV1GetFrameLocalWorldMatrix(_modelHandle, _parentBoneIndex));
 	
-	// ワールド回転行列を計算
-	auto lookAt	= Matrix::CreateWorld(worldMat.Translation(), _sourceObject.lock()->GetWorldPosition() - worldMat.Translation(), Vector3::Up);
-	auto worldRMat = CreateRotationMatrix(lookAt);
+	// ターゲット方向を取得
+	auto worldToSourceObject = _sourceObject.lock()->GetWorldPosition() - originWorldMat.Translation();
+	if (worldToSourceObject.LengthSquared() <= math::kEpsilon) return;
+	worldToSourceObject.Normalize();
 	
-	// 指定されたaim軸及びup軸で姿勢が制御されるように変換
-	auto invOffsetRMat	= Matrix::Identity;
-	invOffsetRMat.Right(_aimAxis.Cross(_upAxis));
-	invOffsetRMat.Up(_upAxis);
-	invOffsetRMat.Forward(_aimAxis);
-	invOffsetRMat = invOffsetRMat.Transpose();
-	worldRMat = invOffsetRMat * worldRMat;
+	// ターゲット方向をローカル空間に変換
+	const auto parentWorldInvRotMat = CreateRotationMatrix(parentWorldMat).Transpose();
+	const auto localToSourceObject = Vector3::TransformNormal(worldToSourceObject, parentWorldInvRotMat);
+	
+	const auto originLocalRotMat = CreateRotationMatrix(GetLocalMatrix(_offsetRotationMatrix.Transpose() * originWorldMat, parentWorldMat));
+	const auto originLocalRotation = Quaternion::CreateFromRotationMatrix(originLocalRotMat);
+	
+	const auto resultLocalRotation = CalcConstrainedLocalRotation(originLocalRotation, localToSourceObject);
+	
+	ApplyRotationBone(resultLocalRotation);
+}
 
-	// ローカル回転行列に変換
-	auto parentWorldMat = ToMatrix(MV1GetFrameLocalWorldMatrix(_modelHandle, _parentBoneIndex));
-	const auto invParentWorldRMat = CreateRotationMatrix(parentWorldMat).Transpose();
-	auto localMat = worldRMat * invParentWorldRMat;
+void MultiAimConstraint::ApplyRotationBone(const Quaternion& resultLocalRotation) const
+{
+	const auto resultLocalRotMat = _offsetRotationMatrix * Matrix::CreateFromQuaternion(resultLocalRotation);
+	const auto originLocalMat = ToMatrix(MV1GetFrameLocalMatrix(_modelHandle, _constrainedBoneIndex));
+	
+	auto resultLocalMat = resultLocalRotMat;
+	resultLocalMat.m[3][0] = originLocalMat.m[3][0];
+	resultLocalMat.m[3][1] = originLocalMat.m[3][1];
+	resultLocalMat.m[3][2] = originLocalMat.m[3][2];
+ 
+	MV1SetFrameUserLocalMatrix(_modelHandle, _constrainedBoneIndex, ToDxLibMatrix(resultLocalMat));
+}
 
-	// 座標を設定してローカル行列を生成
-	const auto mat = ToMatrix(MV1GetFrameLocalMatrix(_modelHandle, _constrainedBoneIndex));
-	localMat.m[3][0] = mat.m[3][0];
-	localMat.m[3][1] = mat.m[3][1];
-	localMat.m[3][2] = mat.m[3][2];
+Quaternion MultiAimConstraint::CalcConstrainedLocalRotation(const Quaternion& originLocalRotation, const Vector3& localToSourceObject)
+{
+	const auto swing = CalcSwingRotation(_initialAimAxis, localToSourceObject);
+	const auto targetLocalRotation = _initialLocalRotation * swing;
+	const auto t = kFollowSpeed * Time::GetInstance().GetDeltaTime();
+	
+	Quaternion resultLocalRotation;
+	Quaternion::Slerp(originLocalRotation, targetLocalRotation, t, resultLocalRotation);
+	return resultLocalRotation;
+}
 
-	MV1SetFrameUserLocalMatrix(_modelHandle, _constrainedBoneIndex, ToDxLibMatrix(localMat));
+Quaternion MultiAimConstraint::CalcSwingRotation(const Vector3& from, const Vector3& to)
+{
+	// from・to = cos θ
+	const auto angleRad = std::acos(std::clamp(from.Dot(to), -1.f, 1.f));
+	
+	// 同方向であった場合は回転させない
+	if (angleRad <= math::kEpsilon) return Quaternion::Identity;
+	
+	// fromとtoに垂直な軸を取得し、回転軸とする
+	auto axis = from.Cross(to);
+	
+	// 逆方向であった場合は軸が定まらないため前回の軸を使用する
+	if (axis.LengthSquared() <= math::kEpsilon)
+	{
+		axis = _lastSwingAxis;
+	}
+	_lastSwingAxis = axis;
+	
+	return Quaternion::CreateFromAxisAngle(axis, std::min(angleRad, _limit / math::kRad2Deg));
+}
+
+void MultiAimConstraint::DrawAimLine() const
+{
+	const auto mat = ToMatrix(MV1GetFrameLocalWorldMatrix(_modelHandle, _constrainedBoneIndex));
+	const auto rotMat = CreateRotationMatrix(mat);
+	const auto forward = Vector3::TransformNormal(Vector3::Forward, rotMat);
+	DrawLine3D(ToDxLibVector(mat.Translation()), ToDxLibVector(mat.Translation() + forward * 30.f), 0xffffff);
 }

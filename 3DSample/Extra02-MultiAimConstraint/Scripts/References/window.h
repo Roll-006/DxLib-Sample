@@ -3,6 +3,6 @@
 
 namespace window
 {
-	constexpr Vector2 kSize = { 1920.0f, 1080.0f };
+	constexpr Vector2 kSize = { 1920.f, 1080.f };
 	constexpr int kColorBitDepth = 32;
 }

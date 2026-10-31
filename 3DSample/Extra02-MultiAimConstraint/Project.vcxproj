@@ -150,7 +150,7 @@
     <ClInclude Include="GameObjects\main_camera.h" />
     <ClInclude Include="GameObjects\player.h" />
     <ClInclude Include="Scenes\demo_scene.h" />
-    <ClInclude Include="Scripts\Components\aim_target_controller.h" />
+    <ClInclude Include="Scripts\Components\aim_target_movement.h" />
     <ClInclude Include="Scripts\Components\camera_applier.h" />
     <ClInclude Include="Scripts\Components\model_renderer.h" />
     <ClInclude Include="Scripts\Components\multi_aim_constraint.h" />
@@ -176,7 +176,7 @@
     <ClCompile Include="GameObjects\main_camera.cpp" />
     <ClCompile Include="GameObjects\player.cpp" />
     <ClCompile Include="Scenes\demo_scene.cpp" />
-    <ClCompile Include="Scripts\Components\aim_target_controller.cpp" />
+    <ClCompile Include="Scripts\Components\aim_target_movement.cpp" />
     <ClCompile Include="Scripts\Components\camera_applier.cpp" />
     <ClCompile Include="Scripts\Components\model_renderer.cpp" />
     <ClCompile Include="Scripts\Components\multi_aim_constraint.cpp" />

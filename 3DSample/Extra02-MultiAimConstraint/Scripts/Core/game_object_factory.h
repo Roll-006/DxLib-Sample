@@ -13,21 +13,21 @@ public:
     using CreateFunction = std::function<std::shared_ptr<GameObject>(Scene&)>;
 
     /// <summary>
-    /// Œ^–¼‚Æ¶¬ŠÖ”‚ğ“o˜^
+    /// ï¿½^ï¿½ï¿½ï¿½Æï¿½ï¿½ï¿½ï¿½Öï¿½ï¿½ï¿½oï¿½^
     /// </summary>
-    /// <param name="type">Œ^–¼</param>
-    /// <param name="function">¶¬ŠÖ”</param>
+    /// <param name="type">ï¿½^ï¿½ï¿½</param>
+    /// <param name="function">ï¿½ï¿½ï¿½ï¿½ï¿½Öï¿½</param>
     static void Register(const std::string& type, CreateFunction function)
     {
         GetMap()[type] = function;
     }
 
     /// <summary>
-    /// Œ^–¼‚©‚çƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ¶¬
+    /// ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Qï¿½[ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ğ¶ï¿½
     /// </summary>
-    /// <param name="type">Œ^–¼</param>
-    /// <param name="gameObject">ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğŠ‚µ‚Ä‚¢‚éƒV[ƒ“</param>
-    /// <returns>¶¬‚µ‚½ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg</returns>
+    /// <param name="type">ï¿½^ï¿½ï¿½</param>
+    /// <param name="gameObject">ï¿½Qï¿½[ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Vï¿½[ï¿½ï¿½</param>
+    /// <returns>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Qï¿½[ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½g</returns>
     static std::shared_ptr<GameObject> Create(const std::string& type, Scene& scene)
     {
         auto& map = GetMap();
@@ -43,10 +43,10 @@ public:
 
 private:
     /// <summary>
-    /// Œ^–¼‚Æ¶¬ŠÖ”‚ğ•Û‚µ‚½ƒ}ƒbƒv‚ğæ“¾
-    /// ‰Šú‰»‡
+    /// ï¿½^ï¿½ï¿½ï¿½Æï¿½ï¿½ï¿½ï¿½Öï¿½ï¿½ï¿½Ûï¿½ï¿½ï¿½ï¿½ï¿½ï¿½}ï¿½bï¿½vï¿½ï¿½ï¿½æ“¾
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
-    /// <returns>Œ^–¼‚Æ¶¬ŠÖ”‚ğ•Û‚µ‚½ƒ}ƒbƒv</returns>
+    /// <returns>ï¿½^ï¿½ï¿½ï¿½Æï¿½ï¿½ï¿½ï¿½Öï¿½ï¿½ï¿½Ûï¿½ï¿½ï¿½ï¿½ï¿½ï¿½}ï¿½bï¿½v</returns>
     static std::unordered_map<std::string, CreateFunction>& GetMap()
     {
         static std::unordered_map<std::string, CreateFunction> map;

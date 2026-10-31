@@ -7,9 +7,7 @@
 #include "scene.h"
 
 Scene::Scene(const std::string& jsonPath) : 
-	_name		(""),
-	_jsonPath	(jsonPath),
-	_objects	()
+	_jsonPath(jsonPath)
 {
 
 }
@@ -29,7 +27,7 @@ void Scene::Initialize()
 	}
 }
 
-void Scene::Update()
+void Scene::Update() const
 {
 	for (const auto& object : _objects)
 	{
@@ -37,7 +35,7 @@ void Scene::Update()
 	}
 }
 
-void Scene::LateUpdate()
+void Scene::LateUpdate() const
 {
 	for (const auto& object : _objects)
 	{
@@ -89,9 +87,9 @@ std::vector<std::shared_ptr<Transform>> Scene::LoadGameObjects(const nlohmann::j
 
 	for (const auto& objectJson : childrenJson)
 	{
-		const auto name			= objectJson.at("name").get<std::string>();
-		const auto gameObject	= GameObjectFactory::Create(name, *this);
-		const auto transform	= gameObject->GetTransform();
+		const auto name = objectJson.at("name").get<std::string>();
+		const auto gameObject = GameObjectFactory::Create(name, *this);
+		const auto transform = gameObject->GetTransform();
 
 		// 子階層も全て読み込む
 		for (const auto& child : LoadGameObjects(objectJson.at("children")))

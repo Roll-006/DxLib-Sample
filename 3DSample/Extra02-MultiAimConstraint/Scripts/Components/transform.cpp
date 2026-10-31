@@ -19,9 +19,7 @@ Transform::Transform() :
 	_localRotation	(Quaternion::Identity),
 	_localScale		(Vector3::One),
 	_worldMatrix	(Matrix::Identity),
-	_isDirty		(false),
-	_parent			(),
-	_children		()
+	_isDirty		(false)
 {
 	
 }
@@ -35,17 +33,17 @@ void Transform::Initialize(const std::shared_ptr<GameObject>& gameObject)
 
 void Transform::Update()
 {
-	if (!_enabled) { return; }
+	if (!_enabled) return;
 }
 
 void Transform::LateUpdate()
 {
-	if (!_enabled) { return; }
+	if (!_enabled) return;
 }
 
 void Transform::Render() const
 {
-	if (!_enabled) { return; }
+	if (!_enabled) return;
 }
 
 void Transform::Deserialize(const nlohmann::json& json)
@@ -66,7 +64,7 @@ std::shared_ptr<Transform> Transform::Find(const std::string& name) const
 	return nullptr;
 }
 
-void Transform::DetachChildren()
+void Transform::DetachChildren() const
 {
 	for (const auto& child : _children)
 	{
@@ -112,6 +110,13 @@ Quaternion Transform::GetWorldRotation()
 	Quaternion rotation;
 	_worldMatrix.Decompose(scale, rotation, translation);
 	return rotation;
+}
+
+Vector3 Transform::GetWorldEulerAngles()
+{
+	UpdateMatrix();
+	
+	return GetWorldRotation().ToEuler() * math::kRad2Deg;
 }
 
 Vector3 Transform::GetWorldScale()
@@ -230,7 +235,7 @@ void Transform::SetLocalScale(const Vector3& scale)
 
 void Transform::SetLocalScale(const float scale)
 {
-	_localScale = { scale, scale, scale };
+	_localScale = Vector3(scale, scale, scale);
 
 	OnDirty();
 }
@@ -285,7 +290,7 @@ void Transform::OnDirty()
 
 void Transform::UpdateMatrix()
 {
-	if (!_isDirty) { return; }
+	if (!_isDirty) return;
 	
 	const auto localMat = GetLocalMatrix();
 

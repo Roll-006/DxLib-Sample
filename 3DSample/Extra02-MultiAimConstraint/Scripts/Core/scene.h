@@ -11,8 +11,8 @@ public:
 	virtual ~Scene() = default;
 
 	void Initialize();
-	void Update();
-	void LateUpdate();
+	void Update() const;
+	void LateUpdate() const;
 	void Render() const;
 
 	/// <summary>

@@ -14,9 +14,7 @@ namespace
 }
 
 ModelRenderer::ModelRenderer() :
-	_modelHandle(-1),
-	_modelPath	(""),
-	_transform	()
+	_modelHandle(-1)
 {
 
 }
@@ -34,17 +32,17 @@ void ModelRenderer::Initialize(const std::shared_ptr<GameObject>& gameObject)
 
 void ModelRenderer::Update()
 {
-	if (!_enabled) { return; }
+	if (!_enabled) return;
 }
 
 void ModelRenderer::LateUpdate()
 {
-	if (!_enabled) { return; }
+	if (!_enabled) return;
 }
 
 void ModelRenderer::Render() const
 {
-	if (!_enabled) { return; }
+	if (!_enabled) return;
 
 	MV1SetMatrix(_modelHandle, ToDxLibMatrix(_transform.lock()->GetWorldMatrix()));
 	MV1DrawModel(_modelHandle);
