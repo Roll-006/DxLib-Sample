@@ -23,8 +23,63 @@
       }
     },
     {
+      "type": "ModelRenderer",
+      "enabled": true,
+      "modelPath": "../../Assets/Models/Swat/mesh.mv1"
+    },
+    {
+      "type": "Animator",
+      "enabled": true,
+      "animatorController": {
+        "defaultAnimationName": "Aim",
+        "animationClips": {
+          "Idle": {
+            "animationPath": "../../Assets/Animations/Swat/Idle.mv1",
+            "isLooping": true,
+            "speed": 70,
+            "transitionDuration": 3,
+            "animationIndex": 0
+          },
+          "Aim": {
+            "animationPath": "../../Assets/Animations/Swat/Pistol Idle.mv1",
+            "isLooping": true,
+            "speed": 70,
+            "transitionDuration": 5,
+            "animationIndex": 0
+          }
+        }
+      }
+    },
+    {
       "type": "MultiAimConstraint",
       "enabled": true,
+      "weight": 1,
+      "constrainedBoneName": "mixamorig:Spine1",
+      "aimAxis": {
+        "x": 0,
+        "y": 0,
+        "z": -1
+      },
+      "upAxis": {
+        "x": 0,
+        "y": 1,
+        "z": 0
+      },
+      "sourceObjectName": "AimTarget",
+      "offset": {
+        "x": 0,
+        "y": 30,
+        "z": 0
+      },
+      "constrainedXAxis": true,
+      "constrainedYAxis": true,
+      "constrainedZAxis": true,
+      "limit": 40
+    },
+    {
+      "type": "MultiAimConstraint",
+      "enabled": true,
+      "weight": 1,
       "constrainedBoneName": "mixamorig:Spine2",
       "aimAxis": {
         "x": 0,
@@ -37,15 +92,21 @@
         "z": 0
       },
       "sourceObjectName": "AimTarget",
+      "offset": {
+        "x": 0,
+        "y": 30,
+        "z": 0
+      },
       "constrainedXAxis": true,
       "constrainedYAxis": true,
       "constrainedZAxis": true,
-      "limit": 60
+      "limit": 40
     },
     {
       "type": "MultiAimConstraint",
       "enabled": true,
-      "constrainedBoneName": "mixamorig:Neck",
+      "weight": 1,
+      "constrainedBoneName": "mixamorig:Head",
       "aimAxis": {
         "x": 0,
         "y": 0,
@@ -57,15 +118,15 @@
         "z": 0
       },
       "sourceObjectName": "AimTarget",
+      "offset": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
       "constrainedXAxis": true,
       "constrainedYAxis": true,
       "constrainedZAxis": true,
       "limit": 20
-    },
-    {
-      "type": "ModelRenderer",
-      "enabled": true,
-      "modelPath": "../../Assets/Models/Swat/mesh.mv1"
     }
   ]
 }

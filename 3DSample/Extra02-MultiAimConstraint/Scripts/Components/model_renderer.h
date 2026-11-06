@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "../Core/component.h"
+#include "../References/model_data.h"
 
 class GameObject;
 
@@ -16,10 +17,10 @@ public:
 
 	void Deserialize(const nlohmann::json& json) override;
 
-	int GetModelHandle() const { return _modelHandle; }
+	ModelData GetModelData() const { return _modelData; }
 
 private:
-	int _modelHandle;
+	ModelData _modelData;
 	std::string _modelPath;
 	std::weak_ptr<Transform> _transform;
 

@@ -12,13 +12,13 @@ namespace
 AimTargetMovement::AimTargetMovement() : 
 	_moveSpeed(0.f)
 {
-
+	
 }
 
 void AimTargetMovement::Initialize(const std::shared_ptr<GameObject>& gameObject)
 {
 	_gameObject = gameObject;
-	_transform	= GetTransform();
+	_transform = GetTransform();
 }
 
 void AimTargetMovement::Update()

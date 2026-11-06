@@ -3,6 +3,7 @@
 #include "../Core/component_factory.h"
 #include "model_renderer.h"
 #include "multi_aim_constraint.h"
+#include "animator.h"
 #include "../Core/time.h"
 
 namespace
@@ -16,6 +17,7 @@ namespace
 
 MultiAimConstraint::MultiAimConstraint() : 
 	_modelHandle			(-1),
+	_weight					(1.f),
 	_constrainedBoneIndex	(-1),
 	_parentBoneIndex		(-1),
 	_aimAxis				(Vector3::Backward),
@@ -31,10 +33,9 @@ MultiAimConstraint::MultiAimConstraint() :
 void MultiAimConstraint::Initialize(const std::shared_ptr<GameObject>& gameObject)
 {
 	_gameObject		= gameObject;
-	_transform		= GetComponent<Transform>();
+	_modelHandle	= GetComponent<Animator>()->GetModelData().modelHandle;
 	_sourceObject	= gameObject->Find(_sourceObjectName);
 	
-	_modelHandle			= GetComponent<ModelRenderer>()->GetModelHandle();
 	_constrainedBoneIndex	= MV1SearchFrame(_modelHandle, _constrainedBoneName.c_str());
 	_parentBoneIndex		= MV1GetFrameParent(_modelHandle, _constrainedBoneIndex);
 	_limit					= std::clamp(_limit, 0.f, kLimit);
@@ -59,6 +60,16 @@ void MultiAimConstraint::Update()
 {
 	if (!_enabled) return;
 	
+	if (CheckHitKey(KEY_INPUT_1))
+	{
+		_weight += 10.f * Time::GetInstance().GetDeltaTime();
+	}
+	else if (CheckHitKey(KEY_INPUT_2))
+	{
+		_weight -= 10.f * Time::GetInstance().GetDeltaTime();
+	}
+	
+	_weight = std::clamp(_weight, 0.f, 1.f);
 	AimAtSourceObject();
 }
 
@@ -70,8 +81,6 @@ void MultiAimConstraint::LateUpdate()
 void MultiAimConstraint::Render() const
 {
 	if (!_enabled) return;
-	
-	DrawAimLine();
 }
 
 void MultiAimConstraint::Deserialize(const nlohmann::json& json)
@@ -125,8 +134,8 @@ void MultiAimConstraint::ApplyRotationBone(const Quaternion& resultLocalRotation
 
 Quaternion MultiAimConstraint::CalcConstrainedLocalRotation(const Quaternion& originLocalRotation, const Vector3& localToSourceObject)
 {
-	const auto swing = CalcSwingRotation(_initialAimAxis, localToSourceObject);
-	const auto targetLocalRotation = _initialLocalRotation * swing;
+	const auto swing = Quaternion::Slerp(Quaternion::Identity, CalcSwingRotation(_initialAimAxis, localToSourceObject), _weight);
+	const auto targetLocalRotation = _initialLocalRotation * Quaternion::CreateFromYawPitchRoll(_offset * math::kDeg2Rad) * swing;
 	const auto t = kFollowSpeed * Time::GetInstance().GetDeltaTime();
 	
 	Quaternion resultLocalRotation;
@@ -153,12 +162,4 @@ Quaternion MultiAimConstraint::CalcSwingRotation(const Vector3& from, const Vect
 	_lastSwingAxis = axis;
 	
 	return Quaternion::CreateFromAxisAngle(axis, std::min(angleRad, _limit / math::kRad2Deg));
-}
-
-void MultiAimConstraint::DrawAimLine() const
-{
-	const auto mat = ToMatrix(MV1GetFrameLocalWorldMatrix(_modelHandle, _constrainedBoneIndex));
-	const auto rotMat = CreateRotationMatrix(mat);
-	const auto forward = Vector3::TransformNormal(Vector3::Forward, rotMat);
-	DrawLine3D(ToDxLibVector(mat.Translation()), ToDxLibVector(mat.Translation() + forward * 30.f), 0xffffff);
 }

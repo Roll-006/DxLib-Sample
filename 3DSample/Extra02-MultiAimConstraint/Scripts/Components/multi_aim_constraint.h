@@ -14,6 +14,8 @@ public:
 	void Render() const override;
 
 	void Deserialize(const nlohmann::json& json) override;
+	
+	void SetWeight(float weight) { _weight = weight; }
 
 private:
 	/// <summary>
@@ -47,14 +49,13 @@ private:
 	/// <param name="to">回転目標のaim軸</param>
 	/// <returns></returns>
 	Quaternion CalcSwingRotation(const Vector3& from, const Vector3& to);
-
-	void DrawAimLine() const;
 	
 private:
 	static constexpr float		kLimit = 180.f;
 	static constexpr float		kFollowSpeed = 8.f;
 	
 	int							_modelHandle;
+	float						_weight;				// 重さ
 	std::string					_constrainedBoneName;	// sourceObjectの影響を受けるボーンの名前
 	int							_constrainedBoneIndex;	// sourceObjectの影響を受けるボーンのインデックス
 	int							_parentBoneIndex;		// constrainedBoneの親ボーンのインデックス
@@ -62,6 +63,7 @@ private:
 	Vector3						_upAxis;				// ボーンの上方向に向けるためのローカルup軸
 	std::string					_sourceObjectName;		// ボーンの向きに影響を与えるゲームオブジェクトの名前
 	std::weak_ptr<Transform>	_sourceObject;			// ボーンの向きに影響を与えるゲームオブジェクト
+	Vector3						_offset;				// 回転をずらす量
 	bool						_constrainedXAxis;		// コンストレイントをX軸に適用するかどうか
 	bool						_constrainedYAxis;		// コンストレイントをY軸に適用するかどうか
 	bool						_constrainedZAxis;		// コンストレイントをZ軸に適用するかどうか
@@ -71,7 +73,6 @@ private:
 	Vector3						_initialAimAxis;		// 親空間での初期aim方向
 	Vector3						_initialUpAxis;			// 親空間での初期up方向
 	Vector3						_lastSwingAxis;         // 直前のスイング軸
-	std::weak_ptr<Transform>	_transform;
 
 	friend void from_json	(const nlohmann::json& json, MultiAimConstraint& multiAimConstraint);
 	friend void to_json		(nlohmann::json& json, const MultiAimConstraint& multiAimConstraint);
@@ -82,10 +83,12 @@ private:
 inline void from_json(const nlohmann::json& json, MultiAimConstraint& multiAimConstraint)
 {
 	json.at("enabled").				get_to(multiAimConstraint._enabled);
+	json.at("weight").				get_to(multiAimConstraint._weight);
 	json.at("constrainedBoneName").	get_to(multiAimConstraint._constrainedBoneName);
 	json.at("aimAxis").				get_to(multiAimConstraint._aimAxis);
 	json.at("upAxis").				get_to(multiAimConstraint._upAxis);
 	json.at("sourceObjectName").	get_to(multiAimConstraint._sourceObjectName);
+	json.at("offset").				get_to(multiAimConstraint._offset);
 	json.at("constrainedXAxis").	get_to(multiAimConstraint._constrainedXAxis);
 	json.at("constrainedYAxis").	get_to(multiAimConstraint._constrainedYAxis);
 	json.at("constrainedZAxis").	get_to(multiAimConstraint._constrainedZAxis);
@@ -97,10 +100,12 @@ inline void to_json(nlohmann::json& json, const MultiAimConstraint& multiAimCons
 	json =
 	{
 		{ "enabled",				multiAimConstraint._enabled },
+		{ "weight",					multiAimConstraint._weight },
 		{ "constrainedBoneName",	multiAimConstraint._constrainedBoneName },
 		{ "aimAxis",				multiAimConstraint._aimAxis },
 		{ "upAxis",					multiAimConstraint._upAxis },
 		{ "sourceObjectName",		multiAimConstraint._sourceObjectName },
+		{ "offset",					multiAimConstraint._offset },
 		{ "constrainedXAxis",		multiAimConstraint._constrainedXAxis },
 		{ "constrainedYAxis",		multiAimConstraint._constrainedYAxis },
 		{ "constrainedZAxis",		multiAimConstraint._constrainedZAxis },

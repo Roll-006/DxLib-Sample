@@ -23,7 +23,7 @@ CameraApplier::CameraApplier()
 void CameraApplier::Initialize(const std::shared_ptr<GameObject>& gameObject)
 {
 	_gameObject = gameObject;
-	_transform	= GetTransform();
+	_transform = GetTransform();
 }
 
 void CameraApplier::Update()

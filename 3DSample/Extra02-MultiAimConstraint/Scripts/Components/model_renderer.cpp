@@ -13,21 +13,20 @@ namespace
 	}();
 }
 
-ModelRenderer::ModelRenderer() :
-	_modelHandle(-1)
+ModelRenderer::ModelRenderer()
 {
-
+	
 }
 
 ModelRenderer::~ModelRenderer()
 {
-	MV1DeleteModel(_modelHandle);
+	MV1DeleteModel(_modelData.modelHandle);
 }
 
 void ModelRenderer::Initialize(const std::shared_ptr<GameObject>& gameObject)
 {
 	_gameObject = gameObject;
-	_transform	= GetTransform();
+	_transform = GetTransform();
 }
 
 void ModelRenderer::Update()
@@ -44,13 +43,13 @@ void ModelRenderer::Render() const
 {
 	if (!_enabled) return;
 
-	MV1SetMatrix(_modelHandle, ToDxLibMatrix(_transform.lock()->GetWorldMatrix()));
-	MV1DrawModel(_modelHandle);
+	MV1SetMatrix(_modelData.modelHandle, ToDxLibMatrix(_transform.lock()->GetWorldMatrix()));
+	MV1DrawModel(_modelData.modelHandle);
 }
 
 void ModelRenderer::Deserialize(const nlohmann::json& json)
 {
 	from_json(json, *this);
 
-	_modelHandle = MV1LoadModel(_modelPath.c_str());
+	_modelData.modelHandle = MV1LoadModel(_modelPath.c_str());
 }
