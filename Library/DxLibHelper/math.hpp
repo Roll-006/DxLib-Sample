@@ -6,7 +6,7 @@
 
 using namespace DirectX::SimpleMath;
 
-namespace math
+namespace Math
 {
 	#pragma region constant
 	static constexpr float kDeg2Rad = static_cast<float>(std::numbers::pi) / 180.f;		// ディグリーをラジアンに変換 (変換対象と掛け算を行う)

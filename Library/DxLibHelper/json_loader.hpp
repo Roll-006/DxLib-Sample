@@ -3,7 +3,7 @@
 #include <fstream>
 #include <nlohmann/json.hpp>
 
-namespace json_loader
+namespace JsonLoader
 {
     inline bool Save(const std::string_view& file_path, const nlohmann::json& data)
     {

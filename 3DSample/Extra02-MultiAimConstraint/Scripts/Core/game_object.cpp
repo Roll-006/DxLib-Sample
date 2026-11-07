@@ -1,9 +1,11 @@
 ﻿#include <json_loader.hpp>
 #include <math.hpp>
 #include "component_factory.h"
-#include "../Components/transform.h"
+#include "transform.h"
 #include "scene.h"
 #include "game_object.h"
+
+using namespace Core;
 
 GameObject::GameObject(const std::string& jsonPath) :
 	_isActive(true)
@@ -12,7 +14,7 @@ GameObject::GameObject(const std::string& jsonPath) :
 	AddComponent<Transform>();
 
 	nlohmann::json json;
-	if (json_loader::Load(jsonPath, json))
+	if (JsonLoader::Load(jsonPath, json))
 	{
 		from_json(json, *this);
 
@@ -36,6 +38,14 @@ void GameObject::Initialize(const std::shared_ptr<Scene>& scene)
 	for (const auto& component : _components)
 	{
 		component->Initialize(shared_from_this());
+	}
+}
+
+void GameObject::Start() const
+{
+	for (const auto& component : _components)
+	{
+		component->Start();
 	}
 }
 
@@ -82,4 +92,19 @@ std::shared_ptr<Transform> GameObject::GetTransform() const
 std::shared_ptr<Scene> GameObject::GetScene() const
 {
 	return _scene.lock();
+}
+
+std::vector<std::shared_ptr<GameObject>> GameObject::GetChildrenGameObject() const
+{
+	std::vector<std::shared_ptr<GameObject>> gameObjects = {};
+
+	const auto transform = GetTransform();
+	if (!transform) return gameObjects;
+
+	for (const auto& child : transform->GetChildren())
+	{
+		if (const auto object = child->GetGameObject()) gameObjects.emplace_back(object);
+	}
+
+	return gameObjects;
 }

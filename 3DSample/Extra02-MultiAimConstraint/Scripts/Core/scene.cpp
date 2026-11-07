@@ -2,28 +2,36 @@
 #include <math.hpp>
 #include "component_factory.h"
 #include "game_object_factory.h"
-#include "../Components/transform.h"
+#include "transform.h"
 #include "game_object.h"
 #include "scene.h"
+
+using namespace Core;
 
 Scene::Scene(const std::string& jsonPath) : 
 	_jsonPath(jsonPath)
 {
-
-}
-
-void Scene::Initialize()
-{
 	nlohmann::json json;
-	if (json_loader::Load(_jsonPath, json))
+	if (JsonLoader::Load(_jsonPath, json))
 	{
 		from_json(json, *this);
 		LoadGameObjects(json.at("objects"));
 	}
+}
 
+void Scene::Initialize()
+{
 	for (const auto& object : _objects)
 	{
 		object->Initialize(shared_from_this());
+	}
+}
+
+void Scene::Start() const
+{
+	for (const auto& object : _objects)
+	{
+		object->Start();
 	}
 }
 

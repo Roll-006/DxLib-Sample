@@ -3,6 +3,8 @@
 #include <math.hpp>
 #include "component.h"
 
+using namespace Core;
+
 Component::Component() :
 	_enabled(true)
 {

@@ -1,8 +1,11 @@
 ﻿#pragma once
 #include "../Scripts/Core/game_object.h"
 
-class AimTarget final : public GameObject
+namespace GameObjects
 {
-public:
-	AimTarget();
-};
+	class AimTarget final : public Core::GameObject
+	{
+	public:
+		AimTarget();
+	};
+}

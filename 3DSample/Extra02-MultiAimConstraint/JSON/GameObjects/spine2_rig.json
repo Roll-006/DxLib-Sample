@@ -1,0 +1,30 @@
+﻿{
+  "name": "Spine2Rig",
+  "tag": "Untagged",
+  "isActive": true,
+  "components": [
+    {
+      "type": "MultiAimConstraint",
+      "enabled": true,
+      "weight": 1,
+      "constrainedBoneName": "mixamorig:Spine2",
+      "aimAxis": {
+        "x": 0,
+        "y": 0,
+        "z": -1
+      },
+      "upAxis": {
+        "x": 0,
+        "y": 1,
+        "z": 0
+      },
+      "sourceObjectName": "AimTarget",
+      "offset": {
+        "x": 0,
+        "y": 30,
+        "z": 0
+      },
+      "limit": 40
+    }
+  ]
+}

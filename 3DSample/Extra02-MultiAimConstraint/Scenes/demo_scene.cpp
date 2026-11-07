@@ -1,12 +1,11 @@
 ﻿#include <json_loader.hpp>
 #include <math.hpp>
-#include "../Scripts/Core/component_factory.h"
-#include "../Scripts/Components/transform.h"
-#include "../Scripts/Core/game_object.h"
 #include "demo_scene.h"
 
+using namespace Scenes;
+
 DemoScene::DemoScene() : 
-	Scene("JSON/demo_scene.json")
+	Scene("JSON/Scenes/demo_scene.json")
 {
 
 }

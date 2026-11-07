@@ -1,0 +1,12 @@
+﻿{
+  "name": "AimRig",
+  "tag": "Untagged",
+  "isActive": true,
+  "components": [
+    {
+      "type": "Rig",
+      "enabled": true,
+      "weight": 1
+    }
+  ]
+}
