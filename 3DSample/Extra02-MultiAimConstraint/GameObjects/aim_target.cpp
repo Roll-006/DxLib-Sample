@@ -1,9 +1,12 @@
 ﻿#include <json_loader.hpp>
 #include <math.hpp>
-#include "../Scripts/Components/transform.h"
+#include "../Scripts/Core/transform.h"
 #include "../Scripts/Core/scene.h"
 #include "../Scripts/Core/game_object_factory.h"
 #include "aim_target.h"
+
+using namespace Core;
+using namespace GameObjects;
 
 namespace
 {
@@ -15,7 +18,7 @@ namespace
 }
 
 AimTarget::AimTarget() :
-	GameObject("JSON/aim_target.json")
+	GameObject("JSON/GameObjects/aim_target.json")
 {
 
 }

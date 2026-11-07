@@ -1,6 +1,8 @@
 ﻿#include <DxLib.h>
 #include "time.h"
 
+using namespace Core;
+
 Time::Time() : 
 	_firstTimeUs	(GetNowHiPerformanceCount()),
 	_currentTimeUs	(_firstTimeUs),

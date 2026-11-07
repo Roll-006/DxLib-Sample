@@ -2,6 +2,8 @@
 #include <DxLib.h>
 #include "keyboard.h"
 
+using namespace Input;
+
 Keyboard::Keyboard()
 {
 	

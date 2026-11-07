@@ -1,0 +1,108 @@
+﻿#pragma once
+#include "rig_constraint.h"
+
+namespace Core
+{
+	class GameObject;
+}
+
+namespace Animations::Rigging
+{
+	class MultiAimConstraint final : public RigConstraint
+	{
+	public:
+		MultiAimConstraint();
+
+		void Initialize(const std::shared_ptr<Core::GameObject>& gameObject) override;
+		void Start()		override;
+		void Update()       override;
+		void LateUpdate()   override;
+		void Render() const override;
+
+		void Deserialize(const nlohmann::json& json) override;
+
+	private:
+		/// <summary>
+		/// ボーン独自の軸を適用するためのオフセット行列を生成する。
+		/// </summary>
+		void CreateOffsetRotationMatrix();
+
+		/// <summary>
+		/// ボーンを対象に向ける。
+		/// </summary>
+		void AimAtSourceObject();
+
+		/// <summary>
+		/// 回転をボーンに適用する。
+		/// </summary>
+		/// <param name="resultLocalRotation">ボーンに適用させるローカルクォータニオン</param>
+		void ApplyRotationBone(const Quaternion& resultLocalRotation) const;
+
+		/// <summary>
+		/// 角度制限を行ったローカルクォータニオンを計算する。
+		/// </summary>
+		/// <param name="originLocalRotation">回転させるボーンのローカルクォータニオン</param>
+		/// <param name="localToSourceObject">追尾対象までのローカル方向ベクトル</param>
+		/// <returns></returns>
+		[[nodiscard]] Quaternion CalcConstrainedLocalRotation(const Quaternion& originLocalRotation, const Vector3& localToSourceObject);
+
+		/// <summary>
+		/// 傾きを計算する。
+		/// </summary>
+		/// <param name="from">回転元のaim軸</param>
+		/// <param name="to">回転目標のaim軸</param>
+		/// <returns></returns>
+		[[nodiscard]] Quaternion CalcSwingRotation(const Vector3& from, const Vector3& to);
+	
+	private:
+		static constexpr float kLimit = 180.f;
+	
+		int								_modelHandle;
+		std::string						_constrainedBoneName;	// sourceObjectの影響を受けるボーンの名前
+		int								_constrainedBoneIndex;	// sourceObjectの影響を受けるボーンのインデックス
+		int								_parentBoneIndex;		// constrainedBoneの親ボーンのインデックス
+		Vector3							_aimAxis;				// ボーンの前方向をsourceObjectに向けるためのローカルaim軸
+		Vector3							_upAxis;				// ボーンの上方向に向けるためのローカルup軸
+		std::string						_sourceObjectName;		// ボーンの向きに影響を与えるゲームオブジェクトの名前
+		std::weak_ptr<Core::Transform>	_sourceObject;			// ボーンの向きに影響を与えるゲームオブジェクト
+		Vector3							_offset;				// 回転をずらす量
+		float							_limit;					// 回転軸に適用する上限値
+		Matrix							_offsetRotationMatrix;	// ボーン独自の軸を適用するためのオフセット
+		Quaternion						_initialLocalRotation;  // オフセットを除いた親基準の初期回転
+		Vector3							_initialAimAxis;		// 親空間での初期aim方向
+		Vector3							_initialUpAxis;			// 親空間での初期up方向
+		Vector3							_lastSwingAxis;         // 直前のスイング軸
+
+		friend void from_json	(const nlohmann::json& json, MultiAimConstraint& multiAimConstraint);
+		friend void to_json		(nlohmann::json& json, const MultiAimConstraint& multiAimConstraint);
+	};
+
+	#pragma region from / to JSON
+	inline void from_json(const nlohmann::json& json, MultiAimConstraint& multiAimConstraint)
+	{
+		json.at("enabled").				get_to(multiAimConstraint._enabled);
+		json.at("weight").				get_to(multiAimConstraint._weight);
+		json.at("constrainedBoneName").	get_to(multiAimConstraint._constrainedBoneName);
+		json.at("aimAxis").				get_to(multiAimConstraint._aimAxis);
+		json.at("upAxis").				get_to(multiAimConstraint._upAxis);
+		json.at("sourceObjectName").	get_to(multiAimConstraint._sourceObjectName);
+		json.at("offset").				get_to(multiAimConstraint._offset);
+		json.at("limit").				get_to(multiAimConstraint._limit);
+	}
+
+	inline void to_json(nlohmann::json& json, const MultiAimConstraint& multiAimConstraint)
+	{
+		json =
+		{
+			{ "enabled",				multiAimConstraint._enabled },
+			{ "weight",					multiAimConstraint._weight },
+			{ "constrainedBoneName",	multiAimConstraint._constrainedBoneName },
+			{ "aimAxis",				multiAimConstraint._aimAxis },
+			{ "upAxis",					multiAimConstraint._upAxis },
+			{ "sourceObjectName",		multiAimConstraint._sourceObjectName },
+			{ "offset",					multiAimConstraint._offset },
+			{ "limit",					multiAimConstraint._limit },
+		};
+	}
+	#pragma endregion
+}

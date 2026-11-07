@@ -1,11 +1,13 @@
 ﻿#include <json_loader.hpp>
 #include <math.hpp>
 #include "time.h"
-#include "../References/window.h"
-#include "../System/keyboard.h"
-#include "../System/mouse.h"
+#include "../Screen/screen.h"
+#include "../Input/keyboard.h"
+#include "../Input/mouse.h"
 #include "../../Scenes/demo_scene.h"
 #include "game.h"
+
+using namespace Core;
 
 int Game::Run() const
 {
@@ -14,20 +16,21 @@ int Game::Run() const
 		return setupResult;
 	}
 
-	auto demoScene = std::make_shared<DemoScene>();
+	auto demoScene = std::make_shared<Scenes::DemoScene>();
 	demoScene->Initialize();
+	demoScene->Start();
 
 	while (ShouldRun())
 	{
-		Time	::GetInstance().Update();
-		Keyboard::GetInstance().Update();
-		Mouse	::GetInstance().Update();
+		Time::I().Update();
+		Input::Keyboard::I().Update();
+		Input::Mouse::I().Update();
 
 		demoScene->Update();
 		demoScene->LateUpdate();
 		demoScene->Render();
 
-		Time::GetInstance().CapFPS();
+		Time::I().CapFPS();
 
 		// 裏画面を表画面に反映
 		ScreenFlip();
@@ -38,8 +41,8 @@ int Game::Run() const
 
 int Game::SetUpDxLib() const
 {
-	SetGraphMode(static_cast<int>(window::kSize.x), static_cast<int>(window::kSize.y), window::kColorBitDepth);	// 解像度とカラービット数を設定
-	ChangeWindowMode(TRUE);								// ウィンドウモードを設定 (true : ウィンドウ, false : フルスクリーン)
+	SetGraphMode(static_cast<int>(Screen::kSize.x), static_cast<int>(Screen::kSize.y), Screen::kColorBitDepth);	// 解像度とカラービット数を設定
+	ChangeWindowMode(TRUE);							// ウィンドウモードを設定 (true : ウィンドウ, false : フルスクリーン)
 	if (DxLib_Init() == -1) return EXIT_FAILURE;			// DXライブラリを初期化 (0 : 成功, -1 : 失敗)
 	SetDrawScreen(DX_SCREEN_BACK);							// 描画先画面を裏画面に設定
 	SetMainWindowText("Sample");							// ウインドウのタイトルを設定する
@@ -54,7 +57,7 @@ bool Game::ShouldRun() const
 {
 	if (ProcessMessage()  != 0) return false;		// ウインドウメッセージの処理を行う
 	if (ClearDrawScreen() != 0) return false;		// 画面に描画されたものを削除する
-	if (Keyboard::GetInstance().WasPressedThisFrame(KEY_INPUT_ESCAPE)) return false;	// ESCAPEが入力された場合は終了する
+	if (Input::Keyboard::I().WasPressedThisFrame(KEY_INPUT_ESCAPE)) return false;	// ESCAPEが入力された場合は終了する
 
 	return true;
 }

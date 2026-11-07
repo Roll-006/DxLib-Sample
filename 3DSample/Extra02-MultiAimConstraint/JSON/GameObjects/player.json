@@ -1,0 +1,85 @@
+﻿{
+  "name": "Player",
+  "tag": "Player",
+  "isActive": true,
+  "components": [
+    {
+      "type": "Transform",
+      "enabled": true,
+      "localPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "localEulerAngles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "localScale": {
+        "x": 0.1,
+        "y": 0.1,
+        "z": 0.1
+      }
+    },
+    {
+      "type": "ModelRenderer",
+      "enabled": true,
+      "modelPath": "../../Assets/Models/Swat/mesh.mv1"
+    },
+    {
+      "type": "Animator",
+      "enabled": true,
+      "animatorController": {
+        "defaultAnimationName": "Idle",
+        "animationParameters": {
+          "floats": {},
+          "booleans": {
+            "IsAiming": false
+          },
+          "integers": {}
+        },
+        "animationTransitions": [
+          {
+            "originAnimationName": "Idle",
+            "targetAnimationName": "Aim",
+            "transitionDuration": 5,
+            "floats": {},
+            "booleans": {
+              "IsAiming": { "type": 1 }
+            },
+            "integers": {}
+          },
+          {
+            "originAnimationName": "Aim",
+            "targetAnimationName": "Idle",
+            "transitionDuration": 3,
+            "floats": {},
+            "booleans": {
+              "IsAiming": { "type": 0 }
+            },
+            "integers": {}
+          }
+        ],
+        "animationClips": {
+          "Idle": {
+            "animationPath": "../../Assets/Animations/Swat/Idle.mv1",
+            "isLooping": true,
+            "speed": 70,
+            "animationIndex": 0
+          },
+          "Aim": {
+            "animationPath": "../../Assets/Animations/Swat/Pistol Idle.mv1",
+            "isLooping": true,
+            "speed": 70,
+            "animationIndex": 0
+          }
+        }
+      }
+    },
+    {
+      "type": "Shooter",
+      "enabled": true
+    }
+  ]
+}

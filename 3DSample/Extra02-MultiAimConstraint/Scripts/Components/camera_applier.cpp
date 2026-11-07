@@ -1,8 +1,11 @@
 ﻿#include <json_loader.hpp>
 #include <math.hpp>
-#include "transform.h"
+#include "../Core/transform.h"
 #include "../Core/component_factory.h"
 #include "camera_applier.h"
+
+using namespace Core;
+using namespace Components;
 
 namespace
 {
@@ -17,13 +20,18 @@ CameraApplier::CameraApplier()
 {
 	// 仮
 	SetCameraNearFar(1.f, 100.f);
-	SetupCamera_Perspective(60.f * math::kDeg2Rad);
+	SetupCamera_Perspective(60.f * Math::kDeg2Rad);
 }
 
 void CameraApplier::Initialize(const std::shared_ptr<GameObject>& gameObject)
 {
 	_gameObject = gameObject;
-	_transform	= GetTransform();
+	_transform = GetTransform();
+}
+
+void CameraApplier::Start()
+{
+	
 }
 
 void CameraApplier::Update()

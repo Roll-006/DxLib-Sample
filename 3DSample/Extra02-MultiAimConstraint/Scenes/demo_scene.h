@@ -1,8 +1,11 @@
 ﻿#pragma once
 #include "../Scripts/Core/scene.h"
 
-class DemoScene final : public Scene
+namespace Scenes
 {
-public:
-	DemoScene();
-};
+	class DemoScene final : public Core::Scene
+	{
+	public:
+		DemoScene();
+	};
+}

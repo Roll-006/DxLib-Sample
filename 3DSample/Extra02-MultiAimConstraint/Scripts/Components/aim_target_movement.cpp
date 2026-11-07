@@ -1,4 +1,14 @@
-﻿#include "aim_target_movement.h"
+﻿#include <json_loader.hpp>
+#include <math.hpp>
+#include "../Core/transform.h"
+#include "../Core/component_factory.h"
+#include "aim_target_movement.h"
+#include "../Input/keyboard.h"
+#include "../Core/time.h"
+
+using namespace Core;
+using namespace Input;
+using namespace Components;
 
 namespace
 {
@@ -12,13 +22,18 @@ namespace
 AimTargetMovement::AimTargetMovement() : 
 	_moveSpeed(0.f)
 {
-
+	
 }
 
 void AimTargetMovement::Initialize(const std::shared_ptr<GameObject>& gameObject)
 {
 	_gameObject = gameObject;
-	_transform	= GetTransform();
+	_transform = GetTransform();
+}
+
+void AimTargetMovement::Start()
+{
+	
 }
 
 void AimTargetMovement::Update()
@@ -57,7 +72,7 @@ void AimTargetMovement::Move() const
 {
 	// ターゲットを移動
 	auto moveDirection = Vector3::Zero;
-	const auto keyboard = Keyboard::GetInstance();
+	const auto keyboard = Keyboard::I();
 	if (keyboard.IsPressed(KEY_INPUT_LEFT))
 	{
 		moveDirection.x -= 1;
@@ -85,6 +100,6 @@ void AimTargetMovement::Move() const
 
 	// 座標を移動
 	const auto transform = _transform.lock();
-	const auto velocity = moveDirection * _moveSpeed * Time::GetInstance().GetDeltaTime();
+	const auto velocity = moveDirection * _moveSpeed * Time::I().GetDeltaTime();
 	transform->SetLocalPosition(transform->GetLocalPosition() + velocity);
 }

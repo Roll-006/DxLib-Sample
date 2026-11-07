@@ -1,6 +1,8 @@
 ﻿#include <math.hpp>
-#include "../References/window.h"
+#include "../Screen/screen.h"
 #include "mouse.h"
+
+using namespace Input;
 
 Mouse::Mouse() :
 	_lockState(CursorLockModeType::kNone)
@@ -21,7 +23,7 @@ void Mouse::Update()
 	UpdateScroll();
 }
 
-void Mouse::SetCursorLockState(const CursorLockModeType lockState)
+void Mouse::SetCursorLockState(CursorLockModeType lockState)
 {
 	_lockState = lockState;
 
@@ -43,7 +45,7 @@ void Mouse::SetCursorLockState(const CursorLockModeType lockState)
 	}
 }
 
-int Mouse::GetIndex(const int mouseButton) const
+int Mouse::GetIndex(int mouseButton) const
 {
 	for (int i = 0; i < _state.size(); ++i)
 	{
@@ -117,7 +119,7 @@ void Mouse::UpdateMousePosition()
 	// カーソル固定中は画面中央に設定
 	if (_lockState == CursorLockModeType::kLocked)
 	{
-		_currentPosition = window::kSize * 0.5f;
+		_currentPosition = Screen::kSize * 0.5f;
 		SetMousePoint(static_cast<int>(_currentPosition.x), static_cast<int>(_currentPosition.y));
 	}
 }

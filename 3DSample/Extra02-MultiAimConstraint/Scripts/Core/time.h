@@ -1,43 +1,46 @@
 ﻿#pragma once
 
-class Time final
+namespace Core
 {
-public:
-	/// @brief インスタンスを取得
-	static Time& GetInstance()
+	class Time final
 	{
-		// ローカル静的オブジェクトにより実装
-		// ※オブジェクトの解放タイミングを任意に決めることはできない
-		static Time instance;
-		return instance;
-	}
+	public:
+		/// @brief インスタンスを取得
+		static Time& I()
+		{
+			// ローカル静的オブジェクトにより実装
+			// ※オブジェクトの解放タイミングを任意に決めることはできない
+			static Time instance;
+			return instance;
+		}
 
-	void Update();
+		void Update();
 
-	/// @brief FPSに上限を設ける
-	void CapFPS() const;
+		/// @brief FPSに上限を設ける
+		void CapFPS() const;
 
-	void SetTimeScale(const float timeScale) { _timeScale = timeScale; }
+		[[nodiscard]] float GetTimeScale() const			{ return _timeScale; }
+		[[nodiscard]] float GetDeltaTime() const			{ return _deltaTime * _timeScale; }
+		[[nodiscard]] float GetUnscaledDeltaTime() const	{ return _deltaTime; }
+		[[nodiscard]] float GetAverageFPS() const			{ return _averageFps; }
 
-	float GetTimeScale() const			{ return _timeScale; }
-	float GetDeltaTime() const			{ return _deltaTime * _timeScale; }
-	float GetUnscaledDeltaTime() const	{ return _deltaTime; }
-	float GetAverageFPS() const			{ return _averageFps; }
+		void SetTimeScale(const float timeScale) { _timeScale = timeScale; }
 
-private:
-	Time();
+	private:
+		Time();
 
-private:
-	static constexpr float kFPS				= 60.f;
-	static constexpr float kMaxWaitTimeMs	= 1000;
-	static constexpr float kMs				= 1000.f;		// ミリ秒
-	static constexpr float kUs				= 1000000.f;	// マイクロ秒
+	private:
+		static constexpr float kFPS				= 60.f;
+		static constexpr float kMaxWaitTimeMs	= 1000;
+		static constexpr float kMs				= 1000.f;		// ミリ秒
+		static constexpr float kUs				= 1000000.f;	// マイクロ秒
 
-	LONGLONG	_firstTimeUs;
-	LONGLONG	_currentTimeUs;
-	LONGLONG	_prevTimeUs;
-	int			_frameCount;
-	float		_averageFps;
-	float		_deltaTime;
-	float		_timeScale;
-};
+		LONGLONG	_firstTimeUs;
+		LONGLONG	_currentTimeUs;
+		LONGLONG	_prevTimeUs;
+		int			_frameCount;
+		float		_averageFps;
+		float		_deltaTime;
+		float		_timeScale;
+	};
+}

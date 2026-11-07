@@ -1,9 +1,11 @@
 ﻿#include <json_loader.hpp>
 #include <math.hpp>
-#include "../Core/game_object.h"
-#include "../Core/component_factory.h"
-#include "../Core/scene.h"
+#include "game_object.h"
+#include "component_factory.h"
+#include "scene.h"
 #include "transform.h"
+
+using namespace Core;
 
 namespace
 {
@@ -29,6 +31,11 @@ void Transform::Initialize(const std::shared_ptr<GameObject>& gameObject)
 	_gameObject = gameObject;
 
 	OnDirty();
+}
+
+void Transform::Start()
+{
+	
 }
 
 void Transform::Update()
@@ -116,7 +123,7 @@ Vector3 Transform::GetWorldEulerAngles()
 {
 	UpdateMatrix();
 	
-	return GetWorldRotation().ToEuler() * math::kRad2Deg;
+	return GetWorldRotation().ToEuler() * Math::kRad2Deg;
 }
 
 Vector3 Transform::GetWorldScale()
@@ -163,7 +170,7 @@ std::shared_ptr<Transform> Transform::GetParent() const
 	return _parent.lock();
 }
 
-std::shared_ptr<Transform> Transform::GetChild(const int index) const
+std::shared_ptr<Transform> Transform::GetChild(int index) const
 {
 	return index < _children.size() ? _children.at(index) : nullptr;
 }
@@ -221,7 +228,7 @@ void Transform::SetLocalRotation(const Quaternion& rotation)
 
 void Transform::SetLocalEulerAngles(const Vector3& eulerAnglesDeg)
 {
-	_localRotation = Quaternion::CreateFromYawPitchRoll(eulerAnglesDeg * math::kDeg2Rad);
+	_localRotation = Quaternion::CreateFromYawPitchRoll(eulerAnglesDeg * Math::kDeg2Rad);
 
 	OnDirty();
 }
@@ -233,7 +240,7 @@ void Transform::SetLocalScale(const Vector3& scale)
 	OnDirty();
 }
 
-void Transform::SetLocalScale(const float scale)
+void Transform::SetLocalScale(float scale)
 {
 	_localScale = Vector3(scale, scale, scale);
 
@@ -273,7 +280,7 @@ void Transform::AddChild(const std::shared_ptr<Transform>& child)
 	_children.emplace_back(child);
 }
 
-void Transform::RemoveChild(const int index)
+void Transform::RemoveChild(int index)
 {
 	_children.erase(_children.begin() + index);
 }

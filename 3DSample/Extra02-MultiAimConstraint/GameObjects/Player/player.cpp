@@ -1,9 +1,12 @@
 ﻿#include <json_loader.hpp>
 #include <math.hpp>
-#include "../Scripts/Components/transform.h"
-#include "../Scripts/Core/scene.h"
-#include "../Scripts/Core/game_object_factory.h"
+#include "../../Scripts/Core/transform.h"
+#include "../../Scripts/Core/scene.h"
+#include "../../Scripts/Core/game_object_factory.h"
 #include "player.h"
+
+using namespace Core;
+using namespace GameObjects::Player;
 
 namespace
 {
@@ -15,7 +18,7 @@ namespace
 }
 
 Player::Player() : 
-	GameObject("JSON/player.json")
+	GameObject("JSON/GameObjects/player.json")
 {
 
 }
