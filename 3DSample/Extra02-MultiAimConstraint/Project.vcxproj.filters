@@ -19,12 +19,6 @@
     <Filter Include="Scripts\Core">
       <UniqueIdentifier>{d297a5af-8f53-4553-b2bb-49584be32944}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scripts\References">
-      <UniqueIdentifier>{acf68d71-193c-4e0e-9770-d15f2a5886ac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scripts\System">
-      <UniqueIdentifier>{063e823b-2c68-450c-aa1a-2cd9f68d4608}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Library">
       <UniqueIdentifier>{6e98d530-1211-438c-8a25-3e865619b4a7}</UniqueIdentifier>
     </Filter>
@@ -40,22 +34,55 @@
     <Filter Include="Library\DxLib">
       <UniqueIdentifier>{34e74371-34fd-4885-8bb0-a64d102fd724}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts\Animations">
+      <UniqueIdentifier>{893badcd-131d-4a42-a7f2-e2b0abdf6a7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Animations\Rigging">
+      <UniqueIdentifier>{10a9969a-8a5a-4bca-9793-891d4543f984}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Input">
+      <UniqueIdentifier>{acf68d71-193c-4e0e-9770-d15f2a5886ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Model">
+      <UniqueIdentifier>{063e823b-2c68-450c-aa1a-2cd9f68d4608}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Screen">
+      <UniqueIdentifier>{b05c88fa-7ab4-4568-8ebe-5e7bc260fe8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JSON\GameObjects">
+      <UniqueIdentifier>{b5f1eb2c-63ab-401b-a8d7-714f74482ea2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JSON\Scenes">
+      <UniqueIdentifier>{4ac318cb-2230-48e0-a0a2-15e225e9b814}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Player">
+      <UniqueIdentifier>{f774accc-96b8-4906-a32c-73075f9ffa74}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="JSON\game_object_tags.json">
       <Filter>JSON</Filter>
     </None>
-    <None Include="JSON\main_camera.json">
-      <Filter>JSON</Filter>
+    <None Include="JSON\Scenes\demo_scene.json">
+      <Filter>JSON\Scenes</Filter>
     </None>
-    <None Include="JSON\player.json">
-      <Filter>JSON</Filter>
+    <None Include="JSON\GameObjects\aim_rig.json">
+      <Filter>JSON\GameObjects</Filter>
     </None>
-    <None Include="JSON\aim_target.json">
-      <Filter>JSON</Filter>
+    <None Include="JSON\GameObjects\aim_target.json">
+      <Filter>JSON\GameObjects</Filter>
     </None>
-    <None Include="JSON\demo_scene.json">
-      <Filter>JSON</Filter>
+    <None Include="JSON\GameObjects\main_camera.json">
+      <Filter>JSON\GameObjects</Filter>
+    </None>
+    <None Include="JSON\GameObjects\player.json">
+      <Filter>JSON\GameObjects</Filter>
+    </None>
+    <None Include="JSON\GameObjects\spine1_rig.json">
+      <Filter>JSON\GameObjects</Filter>
+    </None>
+    <None Include="JSON\GameObjects\spine2_rig.json">
+      <Filter>JSON\GameObjects</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -67,15 +94,6 @@
     </ClInclude>
     <ClInclude Include="GameObjects\main_camera.h">
       <Filter>GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObjects\player.h">
-      <Filter>GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Scripts\System\mouse.h">
-      <Filter>Scripts\System</Filter>
-    </ClInclude>
-    <ClInclude Include="Scripts\System\keyboard.h">
-      <Filter>Scripts\System</Filter>
     </ClInclude>
     <ClInclude Include="Scripts\Core\component.h">
       <Filter>Scripts\Core</Filter>
@@ -107,15 +125,6 @@
     <ClInclude Include="Scripts\Components\camera_applier.h">
       <Filter>Scripts\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Scripts\Components\model_renderer.h">
-      <Filter>Scripts\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Scripts\Components\transform.h">
-      <Filter>Scripts\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Scripts\Components\multi_aim_constraint.h">
-      <Filter>Scripts\Components</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Library\DirectXTK\Source\pch.h">
       <Filter>Library\DirectXTK\Source</Filter>
     </ClInclude>
@@ -131,14 +140,71 @@
     <ClInclude Include="..\..\Library\DxLib\DxFunctionWin.h">
       <Filter>Library\DxLib</Filter>
     </ClInclude>
-    <ClInclude Include="Scripts\References\cursor_lock_mode_type.h">
-      <Filter>Scripts\References</Filter>
-    </ClInclude>
-    <ClInclude Include="Scripts\References\window.h">
-      <Filter>Scripts\References</Filter>
-    </ClInclude>
     <ClInclude Include="Scripts\Components\aim_target_movement.h">
       <Filter>Scripts\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Animations\Rigging\rig.h">
+      <Filter>Scripts\Animations\Rigging</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Animations\Rigging\rig_constraint.h">
+      <Filter>Scripts\Animations\Rigging</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Animations\Rigging\multi_aim_constraint.h">
+      <Filter>Scripts\Animations\Rigging</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Animations\animator.h">
+      <Filter>Scripts\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Animations\animation_clip.h">
+      <Filter>Scripts\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Animations\animation_parameters.h">
+      <Filter>Scripts\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Animations\animation_transition.h">
+      <Filter>Scripts\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Animations\animator_controller.h">
+      <Filter>Scripts\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Animations\attach_animation_data.h">
+      <Filter>Scripts\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Components\shooter.h">
+      <Filter>Scripts\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Input\cursor_lock_mode_type.h">
+      <Filter>Scripts\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Input\keyboard.h">
+      <Filter>Scripts\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Input\mouse.h">
+      <Filter>Scripts\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Model\model_data.h">
+      <Filter>Scripts\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Model\model_renderer.h">
+      <Filter>Scripts\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Screen\screen.h">
+      <Filter>Scripts\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\transform.h">
+      <Filter>Scripts\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Player\spine2_rig.h">
+      <Filter>GameObjects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Player\aim_rig.h">
+      <Filter>GameObjects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Player\player.h">
+      <Filter>GameObjects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Player\spine1_rig.h">
+      <Filter>GameObjects\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -150,15 +216,6 @@
     </ClCompile>
     <ClCompile Include="GameObjects\main_camera.cpp">
       <Filter>GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObjects\player.cpp">
-      <Filter>GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Scripts\System\keyboard.cpp">
-      <Filter>Scripts\System</Filter>
-    </ClCompile>
-    <ClCompile Include="Scripts\System\mouse.cpp">
-      <Filter>Scripts\System</Filter>
     </ClCompile>
     <ClCompile Include="Scripts\Core\component.cpp">
       <Filter>Scripts\Core</Filter>
@@ -181,15 +238,6 @@
     <ClCompile Include="Scripts\Components\camera_applier.cpp">
       <Filter>Scripts\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Scripts\Components\model_renderer.cpp">
-      <Filter>Scripts\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Scripts\Components\transform.cpp">
-      <Filter>Scripts\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Scripts\Components\multi_aim_constraint.cpp">
-      <Filter>Scripts\Components</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Library\DirectXTK\Source\pch.cpp">
       <Filter>Library\DirectXTK\Source</Filter>
     </ClCompile>
@@ -198,6 +246,48 @@
     </ClCompile>
     <ClCompile Include="Scripts\Components\aim_target_movement.cpp">
       <Filter>Scripts\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Animations\Rigging\rig.cpp">
+      <Filter>Scripts\Animations\Rigging</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Animations\Rigging\rig_constraint.cpp">
+      <Filter>Scripts\Animations\Rigging</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Animations\Rigging\multi_aim_constraint.cpp">
+      <Filter>Scripts\Animations\Rigging</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Animations\animator.cpp">
+      <Filter>Scripts\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Animations\animator_controller.cpp">
+      <Filter>Scripts\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Components\shooter.cpp">
+      <Filter>Scripts\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Input\keyboard.cpp">
+      <Filter>Scripts\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Input\mouse.cpp">
+      <Filter>Scripts\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Model\model_renderer.cpp">
+      <Filter>Scripts\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Core\transform.cpp">
+      <Filter>Scripts\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Player\aim_rig.cpp">
+      <Filter>GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Player\player.cpp">
+      <Filter>GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Player\spine1_rig.cpp">
+      <Filter>GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Player\spine2_rig.cpp">
+      <Filter>GameObjects\Player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
