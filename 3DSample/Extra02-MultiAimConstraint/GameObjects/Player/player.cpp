@@ -18,7 +18,7 @@ namespace
 }
 
 Player::Player() : 
-	GameObject("JSON/GameObjects/player.json")
+	GameObject("JSON/GameObjects/Player/player.json")
 {
 
 }

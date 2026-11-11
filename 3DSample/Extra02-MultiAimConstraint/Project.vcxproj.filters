@@ -58,6 +58,9 @@
     <Filter Include="GameObjects\Player">
       <UniqueIdentifier>{f774accc-96b8-4906-a32c-73075f9ffa74}</UniqueIdentifier>
     </Filter>
+    <Filter Include="JSON\GameObjects\Player">
+      <UniqueIdentifier>{0d3f7d48-7677-40ca-9328-802b802bb6d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="JSON\game_object_tags.json">
@@ -66,23 +69,23 @@
     <None Include="JSON\Scenes\demo_scene.json">
       <Filter>JSON\Scenes</Filter>
     </None>
-    <None Include="JSON\GameObjects\aim_rig.json">
-      <Filter>JSON\GameObjects</Filter>
-    </None>
     <None Include="JSON\GameObjects\aim_target.json">
       <Filter>JSON\GameObjects</Filter>
     </None>
     <None Include="JSON\GameObjects\main_camera.json">
       <Filter>JSON\GameObjects</Filter>
     </None>
-    <None Include="JSON\GameObjects\player.json">
-      <Filter>JSON\GameObjects</Filter>
+    <None Include="JSON\GameObjects\Player\aim_rig.json">
+      <Filter>JSON\GameObjects\Player</Filter>
     </None>
-    <None Include="JSON\GameObjects\spine1_rig.json">
-      <Filter>JSON\GameObjects</Filter>
+    <None Include="JSON\GameObjects\Player\player.json">
+      <Filter>JSON\GameObjects\Player</Filter>
     </None>
-    <None Include="JSON\GameObjects\spine2_rig.json">
-      <Filter>JSON\GameObjects</Filter>
+    <None Include="JSON\GameObjects\Player\spine1_rig.json">
+      <Filter>JSON\GameObjects\Player</Filter>
+    </None>
+    <None Include="JSON\GameObjects\Player\spine2_rig.json">
+      <Filter>JSON\GameObjects\Player</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +209,9 @@
     <ClInclude Include="GameObjects\Player\spine1_rig.h">
       <Filter>GameObjects\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Scripts\Animations\Rigging\bone_renderer.h">
+      <Filter>Scripts\Animations\Rigging</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scenes\demo_scene.cpp">
@@ -288,6 +294,9 @@
     </ClCompile>
     <ClCompile Include="GameObjects\Player\spine2_rig.cpp">
       <Filter>GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Animations\Rigging\bone_renderer.cpp">
+      <Filter>Scripts\Animations\Rigging</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

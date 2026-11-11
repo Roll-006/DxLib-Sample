@@ -42,9 +42,17 @@ namespace Animations::Rigging
 		/// 角度制限を行ったローカルクォータニオンを計算する。
 		/// </summary>
 		/// <param name="originLocalRotation">回転させるボーンのローカルクォータニオン</param>
-		/// <param name="localToSourceObject">追尾対象までのローカル方向ベクトル</param>
-		/// <returns></returns>
-		[[nodiscard]] Quaternion CalcConstrainedLocalRotation(const Quaternion& originLocalRotation, const Vector3& localToSourceObject);
+		/// <param name="originToSourceObjectLocal">追尾対象までのローカル方向ベクトル</param>
+		/// <returns>角度制限を行ったローカルクォータニオン</returns>
+		[[nodiscard]] Quaternion CalcConstrainedLocalRotation(const Quaternion& originLocalRotation, const Vector3& originToSourceObjectLocal);
+		
+		/// <summary>
+		/// 各軸を有効状態を適用する。
+		/// </summary>
+		/// <param name="originLocalRotation">回転させるボーンのローカルクォータニオン</param>
+		/// <param name="targetLocalRotation">回転目標のローカルクォータニオン</param>
+		/// <returns>有効状態が適用されたローカルクォータニオン</returns>
+		[[nodiscard]] Quaternion ApplyAxisConstraint(const Quaternion& originLocalRotation, const Quaternion& targetLocalRotation) const;
 
 		/// <summary>
 		/// 傾きを計算する。
@@ -55,7 +63,7 @@ namespace Animations::Rigging
 		[[nodiscard]] Quaternion CalcSwingRotation(const Vector3& from, const Vector3& to);
 	
 	private:
-		static constexpr float kLimit = 180.f;
+		static constexpr float kMaxLimit = 180.f;
 	
 		int								_modelHandle;
 		std::string						_constrainedBoneName;	// sourceObjectの影響を受けるボーンの名前
@@ -66,6 +74,9 @@ namespace Animations::Rigging
 		std::string						_sourceObjectName;		// ボーンの向きに影響を与えるゲームオブジェクトの名前
 		std::weak_ptr<Core::Transform>	_sourceObject;			// ボーンの向きに影響を与えるゲームオブジェクト
 		Vector3							_offset;				// 回転をずらす量
+		bool 							_constrainedXAxis;		// X軸回転を有効にするかどうか
+		bool 							_constrainedYAxis;		// Y軸回転を有効にするかどうか
+		bool 							_constrainedZAxis;		// Z軸回転を有効にするかどうか
 		float							_limit;					// 回転軸に適用する上限値
 		Matrix							_offsetRotationMatrix;	// ボーン独自の軸を適用するためのオフセット
 		Quaternion						_initialLocalRotation;  // オフセットを除いた親基準の初期回転
@@ -87,6 +98,9 @@ namespace Animations::Rigging
 		json.at("upAxis").				get_to(multiAimConstraint._upAxis);
 		json.at("sourceObjectName").	get_to(multiAimConstraint._sourceObjectName);
 		json.at("offset").				get_to(multiAimConstraint._offset);
+		json.at("constrainedXAxis").	get_to(multiAimConstraint._constrainedXAxis);
+		json.at("constrainedYAxis").	get_to(multiAimConstraint._constrainedYAxis);
+		json.at("constrainedZAxis").	get_to(multiAimConstraint._constrainedZAxis);
 		json.at("limit").				get_to(multiAimConstraint._limit);
 	}
 
@@ -95,13 +109,16 @@ namespace Animations::Rigging
 		json =
 		{
 			{ "enabled",				multiAimConstraint._enabled },
-			{ "weight",					multiAimConstraint._weight },
+			{ "weight",				multiAimConstraint._weight },
 			{ "constrainedBoneName",	multiAimConstraint._constrainedBoneName },
 			{ "aimAxis",				multiAimConstraint._aimAxis },
-			{ "upAxis",					multiAimConstraint._upAxis },
+			{ "upAxis",				multiAimConstraint._upAxis },
 			{ "sourceObjectName",		multiAimConstraint._sourceObjectName },
-			{ "offset",					multiAimConstraint._offset },
-			{ "limit",					multiAimConstraint._limit },
+			{ "offset",				multiAimConstraint._offset },
+			{ "constrainedXAxis",		multiAimConstraint._constrainedXAxis },
+			{ "constrainedYAxis",		multiAimConstraint._constrainedYAxis },
+			{ "constrainedZAxis",		multiAimConstraint._constrainedZAxis },
+			{ "limit",				multiAimConstraint._limit },
 		};
 	}
 	#pragma endregion

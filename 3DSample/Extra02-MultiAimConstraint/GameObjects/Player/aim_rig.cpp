@@ -18,7 +18,7 @@ namespace
 }
 
 AimRig::AimRig() : 
-	GameObject("JSON/GameObjects/aim_rig.json")
+	GameObject("JSON/GameObjects/Player/aim_rig.json")
 {
 
 }

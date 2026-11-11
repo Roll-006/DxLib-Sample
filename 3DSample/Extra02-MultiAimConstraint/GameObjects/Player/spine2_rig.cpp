@@ -18,7 +18,7 @@ namespace
 }
 
 Spine2Rig::Spine2Rig() : 
-	GameObject("JSON/GameObjects/spine2_rig.json")
+	GameObject("JSON/GameObjects/Player/spine2_rig.json")
 {
 
 }

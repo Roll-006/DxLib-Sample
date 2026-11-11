@@ -13,6 +13,11 @@ namespace Math
 	static constexpr float kRad2Deg = 180.f / static_cast<float>(std::numbers::pi);		// ラジアンをディグリーに変換 (変換対象と掛け算を行う)
 	static constexpr float kEpsilon = 1.0e-5f;
 	#pragma endregion
+	
+	inline float Remap(float value, float oldMin, float oldMax, float newMin, float newMax)
+	{
+		return std::lerp(newMin, newMax, (value - oldMin) / (oldMax - oldMin));
+	}
 }
 
 namespace DirectX

@@ -134,12 +134,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="JSON\GameObjects\aim_rig.json" />
     <None Include="JSON\GameObjects\aim_target.json" />
     <None Include="JSON\GameObjects\main_camera.json" />
-    <None Include="JSON\GameObjects\player.json" />
-    <None Include="JSON\GameObjects\spine1_rig.json" />
-    <None Include="JSON\GameObjects\spine2_rig.json" />
+    <None Include="JSON\GameObjects\Player\aim_rig.json" />
+    <None Include="JSON\GameObjects\Player\player.json" />
+    <None Include="JSON\GameObjects\Player\spine1_rig.json" />
+    <None Include="JSON\GameObjects\Player\spine2_rig.json" />
     <None Include="JSON\game_object_tags.json" />
     <None Include="JSON\Scenes\demo_scene.json" />
   </ItemGroup>
@@ -162,6 +162,7 @@
     <ClInclude Include="Scripts\Animations\animator.h" />
     <ClInclude Include="Scripts\Animations\animator_controller.h" />
     <ClInclude Include="Scripts\Animations\attach_animation_data.h" />
+    <ClInclude Include="Scripts\Animations\Rigging\bone_renderer.h" />
     <ClInclude Include="Scripts\Animations\Rigging\multi_aim_constraint.h" />
     <ClInclude Include="Scripts\Animations\Rigging\rig.h" />
     <ClInclude Include="Scripts\Animations\Rigging\rig_constraint.h" />
@@ -582,6 +583,7 @@
       <AdditionalIncludeDirectories>../../Library;../../Library/DxLib;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;../../Library/DirectXTK/Include;</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="Scripts\Animations\Rigging\bone_renderer.cpp" />
     <ClCompile Include="Scripts\Animations\Rigging\multi_aim_constraint.cpp" />
     <ClCompile Include="Scripts\Animations\Rigging\rig.cpp" />
     <ClCompile Include="Scripts\Animations\Rigging\rig_constraint.cpp" />
