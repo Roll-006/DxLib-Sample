@@ -24,6 +24,9 @@
         "y": 30,
         "z": 0
       },
+      "constrainedXAxis": true,
+      "constrainedYAxis": true,
+      "constrainedZAxis": false,
       "limit": 40
     }
   ]

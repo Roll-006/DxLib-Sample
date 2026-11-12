@@ -28,6 +28,15 @@
       "modelPath": "../../Assets/Models/Swat/mesh.mv1"
     },
     {
+      "type": "BoneRenderer",
+      "enabled": true,
+      "enabledBone": true,
+      "boneSize": 0.1,
+      "color": 16777215,
+      "enabledTripod": true,
+      "tripodSize": 0.5
+    },
+    {
       "type": "Animator",
       "enabled": true,
       "animatorController": {
