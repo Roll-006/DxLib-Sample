@@ -84,8 +84,8 @@ void BoneRenderer::DrawBone() const
         const auto parentMat = ToMatrix(MV1GetFrameLocalWorldMatrix(_modelData.modelHandle, parentIndex));
         const auto parentPosition = parentMat.Translation();
 
-        const auto childNum = MV1GetFrameChildNum(_modelData.modelHandle, parentIndex);
-        for (auto i = 0; i < childNum; ++i)
+        const auto childCount = MV1GetFrameChildNum(_modelData.modelHandle, parentIndex);
+        for (auto i = 0; i < childCount; ++i)
         {
             const auto childIndex = MV1GetFrameChild(_modelData.modelHandle, parentIndex, i);
             if (childIndex <= -1) continue;
@@ -127,7 +127,7 @@ void BoneRenderer::DrawTripod(const Matrix& mat) const
     const auto up = rotationMat.Up();
     const auto forward = rotationMat.Forward();
     
-    DrawLine3D(ToDxLibVector(position), ToDxLibVector(position + right * _tripodSize),      GetColor(255, 0, 0));
-    DrawLine3D(ToDxLibVector(position), ToDxLibVector(position + up * _tripodSize),         GetColor(0, 255, 0));
-    DrawLine3D(ToDxLibVector(position), ToDxLibVector(position + forward * _tripodSize),    GetColor(0, 0, 255));
+    DrawLine3D(ToDxLibVector(position), ToDxLibVector(position + right * _tripodSize),      ToDxLibColor(kRed));
+    DrawLine3D(ToDxLibVector(position), ToDxLibVector(position + up * _tripodSize),         ToDxLibColor(kGreen));
+    DrawLine3D(ToDxLibVector(position), ToDxLibVector(position + forward * _tripodSize),    ToDxLibColor(kBlue));
 }

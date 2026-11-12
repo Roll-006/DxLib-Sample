@@ -1,7 +1,8 @@
 ﻿#include <math.hpp>
-#include "../Screen/screen.h"
+#include "../Core/screen.h"
 #include "mouse.h"
 
+using namespace Core;
 using namespace Input;
 
 Mouse::Mouse() :
@@ -119,7 +120,7 @@ void Mouse::UpdateMousePosition()
 	// カーソル固定中は画面中央に設定
 	if (_lockState == CursorLockModeType::kLocked)
 	{
-		_currentPosition = Screen::kSize * 0.5f;
+		_currentPosition = Screen::I().GetScreenSize() * 0.5f;
 		SetMousePoint(static_cast<int>(_currentPosition.x), static_cast<int>(_currentPosition.y));
 	}
 }

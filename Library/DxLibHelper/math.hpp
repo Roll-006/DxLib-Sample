@@ -256,6 +256,21 @@ namespace DirectX
 		#pragma region conversion
 		inline Color ToColor(const DxLib::COLOR_F& colorF) { return { colorF.r, colorF.g, colorF.b, colorF.a }; }
 		inline DxLib::COLOR_F ToDxLibColorF(const Color& color) { return { color.x, color.y, color.z, color.w }; }
+		inline unsigned int ToDxLibColor(const Color& color) { return GetColor(color.x * UCHAR_MAX, color.y * UCHAR_MAX, color.z * UCHAR_MAX); }
+		inline unsigned int ToDxLibColor(const DxLib::COLOR_F& colorF) { return GetColor(colorF.r * UCHAR_MAX, colorF.g * UCHAR_MAX, colorF.b * UCHAR_MAX); }
+		#pragma endregion
+		
+		#pragma region constant
+		static constexpr Color kBlack = { 0.f, 0.f, 0.f, 1.f };
+		static constexpr Color kBlue = { 0.f, 0.f, 1.f, 1.f };
+		static constexpr Color kClear = { 0.f, 0.f, 0.f, 0.f };
+		static constexpr Color kCyan = { 0.f, 1.f, 1.f, 1.f };
+		static constexpr Color kGray = { 0.5f, 0.5f, 0.5f, 1.f };
+		static constexpr Color kGreen = { 0.f, 1.f, 0.f, 1.f };
+		static constexpr Color kMagenta = { 1.f, 0.f, 1.f, 1.f };
+		static constexpr Color kRed = { 1.f, 0.f, 0.f, 1.f };
+		static constexpr Color kWhite = { 1.f, 1.f, 1.f, 1.f };
+		static constexpr Color kYellow = { 1.f, 0.92f, 0.016f, 1.f };
 		#pragma endregion
 
 		#pragma region from / to JSON

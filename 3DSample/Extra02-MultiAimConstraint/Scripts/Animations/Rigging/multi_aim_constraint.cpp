@@ -71,10 +71,7 @@ void MultiAimConstraint::Start()
 void MultiAimConstraint::Update()
 {
 	if (!_enabled) return;
-	
-	MV1ResetFrameUserLocalMatrix(_modelHandle, _constrainedBoneIndex);
-	if (GetEffectiveWeight() <= Math::kEpsilon) return;
-	
+
 	AimAtSourceObject();
 }
 
@@ -104,6 +101,10 @@ void MultiAimConstraint::CreateOffsetRotationMatrix()
 
 void MultiAimConstraint::AimAtSourceObject()
 {
+	// ボーンをリセットし、weight が0の場合は処理を行わない
+	MV1ResetFrameUserLocalMatrix(_modelHandle, _constrainedBoneIndex);
+	if (GetEffectiveWeight() <= Math::kEpsilon) return;
+	
 	const auto originWorldMat = ToMatrix(MV1GetFrameLocalWorldMatrix(_modelHandle, _constrainedBoneIndex));
 	const auto parentWorldMat = ToMatrix(MV1GetFrameLocalWorldMatrix(_modelHandle, _parentBoneIndex));
 

@@ -21,10 +21,10 @@
       "sourceObjectName": "AimTarget",
       "offset": {
         "x": 0,
-        "y": 0,
+        "y": 30,
         "z": 0
       },
-      "constrainedXAxis": false,
+      "constrainedXAxis": true,
       "constrainedYAxis": true,
       "constrainedZAxis": false,
       "limit": 40

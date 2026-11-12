@@ -1,22 +1,20 @@
 ﻿#include <json_loader.hpp>
 #include <math.hpp>
 #include "time.h"
-#include "../Screen/screen.h"
+#include "screen.h"
 #include "../Input/keyboard.h"
 #include "../Input/mouse.h"
 #include "../../Scenes/demo_scene.h"
 #include "game.h"
 
 using namespace Core;
+using namespace Scenes;
 
 int Game::Run() const
 {
-	if (auto setupResult = SetUpDxLib(); setupResult != EXIT_SUCCESS)
-	{
-		return setupResult;
-	}
-
-	auto demoScene = std::make_shared<Scenes::DemoScene>();
+	if (auto setupResult = SetUpDxLib(); setupResult != EXIT_SUCCESS) return setupResult;
+	
+	auto demoScene = std::make_shared<DemoScene>();
 	demoScene->Initialize();
 	demoScene->Start();
 
@@ -25,6 +23,8 @@ int Game::Run() const
 		Time::I().Update();
 		Input::Keyboard::I().Update();
 		Input::Mouse::I().Update();
+		
+		Screen::I().UpdateScreenMode();
 
 		demoScene->Update();
 		demoScene->LateUpdate();
@@ -41,14 +41,14 @@ int Game::Run() const
 
 int Game::SetUpDxLib() const
 {
-	SetGraphMode(static_cast<int>(Screen::kSize.x), static_cast<int>(Screen::kSize.y), Screen::kColorBitDepth);	// 解像度とカラービット数を設定
-	ChangeWindowMode(TRUE);							// ウィンドウモードを設定 (true : ウィンドウ, false : フルスクリーン)
-	if (DxLib_Init() == -1) return EXIT_FAILURE;			// DXライブラリを初期化 (0 : 成功, -1 : 失敗)
-	SetDrawScreen(DX_SCREEN_BACK);							// 描画先画面を裏画面に設定
-	SetMainWindowText("Sample");							// ウインドウのタイトルを設定する
+	SetGraphMode(static_cast<int>(Screen::I().GetScreenSize().x), static_cast<int>(Screen::I().GetScreenSize().y), Screen::I().kColorBitDepth);	// 解像度とカラービット数を設定
+	ChangeWindowMode(TRUE);					// ウィンドウモードを設定 (true : ウィンドウ, false : フルスクリーン)
+	if (DxLib_Init() == -1) return EXIT_FAILURE;	// DXライブラリを初期化 (0 : 成功, -1 : 失敗)
+	SetDrawScreen(DX_SCREEN_BACK);					// 描画先画面を裏画面に設定
+	SetMainWindowText("Sample");					// ウインドウのタイトルを設定する
 
-	SetUseZBuffer3D(TRUE);								// Zバッファを使用する
-	SetWriteZBuffer3D(TRUE);							// Zバッファに書き込む
+	SetUseZBuffer3D(TRUE);						// Zバッファを使用する
+	SetWriteZBuffer3D(TRUE);					// Zバッファに書き込む
 
 	return EXIT_SUCCESS;
 }
