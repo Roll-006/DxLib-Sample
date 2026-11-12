@@ -179,5 +179,5 @@ Quaternion MultiAimConstraint::CalcSwingRotation(const Vector3& from, const Vect
 	}
 	_lastSwingAxis = axis;
 	
-	return Quaternion::CreateFromAxisAngle(axis, std::min(rad, _limit / Math::kRad2Deg));
+	return Quaternion::CreateFromAxisAngle(axis, std::min(rad, _limit * Math::kDeg2Rad));
 }

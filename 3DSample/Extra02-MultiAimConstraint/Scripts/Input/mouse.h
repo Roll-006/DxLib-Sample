@@ -6,7 +6,9 @@ namespace Input
 	class Mouse final
 	{
 	public:
-		/// @brief インスタンスを取得
+		/// <summary>
+		/// インスタンスを取得
+		/// </summary>
 		static Mouse& I()
 		{
 			// ローカル静的オブジェクトにより実装

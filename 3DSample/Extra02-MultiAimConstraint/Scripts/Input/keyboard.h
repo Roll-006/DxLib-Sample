@@ -5,7 +5,9 @@ namespace Input
 	class Keyboard final
 	{
 	public:
-		/// @brief インスタンスを取得
+		/// <summary>
+		/// インスタンスを取得
+		/// </summary>
 		static Keyboard& I()
 		{
 			// ローカル静的オブジェクトにより実装

@@ -5,7 +5,9 @@ namespace Core
 	class Time final
 	{
 	public:
-		/// @brief インスタンスを取得
+		/// <summary>
+		/// インスタンスを取得
+		/// </summary>
 		static Time& I()
 		{
 			// ローカル静的オブジェクトにより実装
