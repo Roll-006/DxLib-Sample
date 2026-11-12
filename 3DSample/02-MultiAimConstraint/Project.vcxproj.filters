@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{581181a7-7235-4277-af46-fe6699980fd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{043f1bb2-ddb2-4625-b862-370c7a97f5ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JSON">
+      <UniqueIdentifier>{2c451f98-653a-4d9b-82e6-7bef02191c4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{24483b44-3a44-4c32-a939-0c143352e497}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library">
+      <UniqueIdentifier>{6e98d530-1211-438c-8a25-3e865619b4a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DxLibHelper">
+      <UniqueIdentifier>{552e00d6-8cca-4d16-8a52-614d0d0264a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DirectXTK">
+      <UniqueIdentifier>{43141a13-2476-45f2-8431-22fb12fa1ac1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DirectXTK\Source">
+      <UniqueIdentifier>{e26104f3-8ef3-4a82-b049-8883d5988630}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DxLib">
+      <UniqueIdentifier>{34e74371-34fd-4885-8bb0-a64d102fd724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JSON\GameObjects">
+      <UniqueIdentifier>{b5f1eb2c-63ab-401b-a8d7-714f74482ea2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JSON\Scenes">
+      <UniqueIdentifier>{4ac318cb-2230-48e0-a0a2-15e225e9b814}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Player">
+      <UniqueIdentifier>{f774accc-96b8-4906-a32c-73075f9ffa74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JSON\GameObjects\Player">
+      <UniqueIdentifier>{0d3f7d48-7677-40ca-9328-802b802bb6d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DxLibSample">
+      <UniqueIdentifier>{c9df336f-f3f6-47fc-ba4f-8afb931f3040}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DxLibSample\Animations">
+      <UniqueIdentifier>{90de0afd-71e1-4014-ad54-797323f241fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DxLibSample\Animations\Rigging">
+      <UniqueIdentifier>{07fb1667-6c86-4e7b-8c97-32a5acae55c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DxLibSample\Input">
+      <UniqueIdentifier>{e6b37beb-732b-48b7-80d8-ea60271292f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library\DxLibSample\Model">
+      <UniqueIdentifier>{ad487bc9-bc07-4f8a-9e1b-8616f11a4030}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Components">
+      <UniqueIdentifier>{6c5d181a-f9a3-47d1-a7c1-6b921a341aef}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="JSON\game_object_tags.json">
+      <Filter>JSON</Filter>
+    </None>
+    <None Include="JSON\Scenes\demo_scene.json">
+      <Filter>JSON\Scenes</Filter>
+    </None>
+    <None Include="JSON\GameObjects\aim_target.json">
+      <Filter>JSON\GameObjects</Filter>
+    </None>
+    <None Include="JSON\GameObjects\main_camera.json">
+      <Filter>JSON\GameObjects</Filter>
+    </None>
+    <None Include="JSON\GameObjects\Player\aim_rig.json">
+      <Filter>JSON\GameObjects\Player</Filter>
+    </None>
+    <None Include="JSON\GameObjects\Player\player.json">
+      <Filter>JSON\GameObjects\Player</Filter>
+    </None>
+    <None Include="JSON\GameObjects\Player\spine1_rig.json">
+      <Filter>JSON\GameObjects\Player</Filter>
+    </None>
+    <None Include="JSON\GameObjects\Player\spine2_rig.json">
+      <Filter>JSON\GameObjects\Player</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Scenes\demo_scene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\aim_target.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\main_camera.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DirectXTK\Source\pch.h">
+      <Filter>Library\DirectXTK\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibHelper\json_loader.hpp">
+      <Filter>Library\DxLibHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibHelper\math.hpp">
+      <Filter>Library\DxLibHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLib\DxLib.h">
+      <Filter>Library\DxLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLib\DxFunctionWin.h">
+      <Filter>Library\DxLib</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Player\spine2_rig.h">
+      <Filter>GameObjects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Player\aim_rig.h">
+      <Filter>GameObjects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Player\player.h">
+      <Filter>GameObjects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Player\spine1_rig.h">
+      <Filter>GameObjects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\component.h">
+      <Filter>Library\DxLibSample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\component_concept.h">
+      <Filter>Library\DxLibSample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\component_factory.h">
+      <Filter>Library\DxLibSample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\game_object.h">
+      <Filter>Library\DxLibSample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\game_object_concept.h">
+      <Filter>Library\DxLibSample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\game_object_factory.h">
+      <Filter>Library\DxLibSample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\scene.h">
+      <Filter>Library\DxLibSample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\screen.h">
+      <Filter>Library\DxLibSample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\transform.h">
+      <Filter>Library\DxLibSample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\Animations\animation_clip.h">
+      <Filter>Library\DxLibSample\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\Animations\animation_parameters.h">
+      <Filter>Library\DxLibSample\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\Animations\animation_transition.h">
+      <Filter>Library\DxLibSample\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\Animations\animator.h">
+      <Filter>Library\DxLibSample\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\Animations\animator_controller.h">
+      <Filter>Library\DxLibSample\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\Animations\attach_animation_data.h">
+      <Filter>Library\DxLibSample\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\Animations\Rigging\bone_renderer.h">
+      <Filter>Library\DxLibSample\Animations\Rigging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\Animations\Rigging\multi_aim_constraint.h">
+      <Filter>Library\DxLibSample\Animations\Rigging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\Animations\Rigging\rig.h">
+      <Filter>Library\DxLibSample\Animations\Rigging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\Animations\Rigging\rig_constraint.h">
+      <Filter>Library\DxLibSample\Animations\Rigging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\Input\cursor_lock_mode_type.h">
+      <Filter>Library\DxLibSample\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\Input\keyboard.h">
+      <Filter>Library\DxLibSample\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\Input\mouse.h">
+      <Filter>Library\DxLibSample\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\Model\model_data.h">
+      <Filter>Library\DxLibSample\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\Model\model_renderer.h">
+      <Filter>Library\DxLibSample\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\game.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Components\aim_target_movement.h">
+      <Filter>Scripts\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Components\camera_applier.h">
+      <Filter>Scripts\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Components\shooter.h">
+      <Filter>Scripts\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\game_time.h">
+      <Filter>Library\DxLibSample</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Scenes\demo_scene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\aim_target.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\main_camera.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DirectXTK\Source\pch.cpp">
+      <Filter>Library\DirectXTK\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DirectXTK\Source\SimpleMath.cpp">
+      <Filter>Library\DirectXTK\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Player\aim_rig.cpp">
+      <Filter>GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Player\player.cpp">
+      <Filter>GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Player\spine1_rig.cpp">
+      <Filter>GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Player\spine2_rig.cpp">
+      <Filter>GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DxLibSample\component.cpp">
+      <Filter>Library\DxLibSample</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DxLibSample\game_object.cpp">
+      <Filter>Library\DxLibSample</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DxLibSample\scene.cpp">
+      <Filter>Library\DxLibSample</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DxLibSample\screen.cpp">
+      <Filter>Library\DxLibSample</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DxLibSample\transform.cpp">
+      <Filter>Library\DxLibSample</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DxLibSample\Animations\animator.cpp">
+      <Filter>Library\DxLibSample\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DxLibSample\Animations\animator_controller.cpp">
+      <Filter>Library\DxLibSample\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DxLibSample\Animations\Rigging\bone_renderer.cpp">
+      <Filter>Library\DxLibSample\Animations\Rigging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DxLibSample\Animations\Rigging\multi_aim_constraint.cpp">
+      <Filter>Library\DxLibSample\Animations\Rigging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DxLibSample\Animations\Rigging\rig.cpp">
+      <Filter>Library\DxLibSample\Animations\Rigging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DxLibSample\Animations\Rigging\rig_constraint.cpp">
+      <Filter>Library\DxLibSample\Animations\Rigging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DxLibSample\Input\keyboard.cpp">
+      <Filter>Library\DxLibSample\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DxLibSample\Input\mouse.cpp">
+      <Filter>Library\DxLibSample\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DxLibSample\Model\model_renderer.cpp">
+      <Filter>Library\DxLibSample\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\game.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\main.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Components\aim_target_movement.cpp">
+      <Filter>Scripts\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Components\camera_applier.cpp">
+      <Filter>Scripts\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Components\shooter.cpp">
+      <Filter>Scripts\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Library\DxLibSample\game_time.cpp">
+      <Filter>Library\DxLibSample</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

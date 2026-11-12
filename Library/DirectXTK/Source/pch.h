@@ -1,4 +1,4 @@
-//--------------------------------------------------------------------------------------
+﻿//--------------------------------------------------------------------------------------
 // File: pch.h
 //
 // Copyright (c) Microsoft Corporation.
@@ -201,7 +201,7 @@ template<> inline auto __mingw_uuidof<GameInput::v1::IGameInput>() -> GUID const
 #if (defined(WINAPI_FAMILY) && (WINAPI_FAMILY == WINAPI_FAMILY_APP)) || (defined(_XBOX_ONE) && defined(_TITLE))
 #pragma warning(push)
 #pragma warning(disable: 4471 5204 5256)
-#include <Windows.UI.Core.h>
+#include <Windows.UI.DxLibSample.h>
 #pragma warning(pop)
 #endif
 
