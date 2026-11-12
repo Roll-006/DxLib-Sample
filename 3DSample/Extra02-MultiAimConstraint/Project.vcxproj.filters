@@ -191,9 +191,6 @@
     <ClInclude Include="Scripts\Model\model_renderer.h">
       <Filter>Scripts\Model</Filter>
     </ClInclude>
-    <ClInclude Include="Scripts\Screen\screen.h">
-      <Filter>Scripts\Screen</Filter>
-    </ClInclude>
     <ClInclude Include="Scripts\Core\transform.h">
       <Filter>Scripts\Core</Filter>
     </ClInclude>
@@ -211,6 +208,9 @@
     </ClInclude>
     <ClInclude Include="Scripts\Animations\Rigging\bone_renderer.h">
       <Filter>Scripts\Animations\Rigging</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Core\screen.h">
+      <Filter>Scripts\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -297,6 +297,9 @@
     </ClCompile>
     <ClCompile Include="Scripts\Animations\Rigging\bone_renderer.cpp">
       <Filter>Scripts\Animations\Rigging</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Core\screen.cpp">
+      <Filter>Scripts\Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

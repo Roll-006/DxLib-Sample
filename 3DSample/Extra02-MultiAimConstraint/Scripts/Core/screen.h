@@ -5,7 +5,9 @@ namespace Core
     class Screen final
     {
     public:
-        /// @brief インスタンスを取得
+        /// <summary>
+        /// インスタンスを取得
+        /// </summary>
         static Screen& I()
         {
             // ローカル静的オブジェクトにより実装

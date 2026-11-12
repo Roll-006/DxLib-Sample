@@ -122,10 +122,10 @@ void BoneRenderer::DrawBone() const
 void BoneRenderer::DrawTripod(const Matrix& mat) const
 {
     const auto position = mat.Translation();
-    const auto rotationMat = CreateRotationMatrix(mat);
-    const auto right = rotationMat.Right();
-    const auto up = rotationMat.Up();
-    const auto forward = rotationMat.Forward();
+    const auto rotMat = CreateRotationMatrix(mat);
+    const auto right = rotMat.Right();
+    const auto up = rotMat.Up();
+    const auto forward = rotMat.Forward();
     
     DrawLine3D(ToDxLibVector(position), ToDxLibVector(position + right * _tripodSize),      ToDxLibColor(kRed));
     DrawLine3D(ToDxLibVector(position), ToDxLibVector(position + up * _tripodSize),         ToDxLibColor(kGreen));
