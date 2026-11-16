@@ -9,8 +9,9 @@ namespace DxLibSample::Animations
     {
         int animationHandle = -1;
         bool isLooping;
+        bool isBakeIntoPoseY;
+        bool isBakeIntoPoseXZ;
         float speed;
-        float totalTime;
         int animationIndex = -1;
     };
 
@@ -21,6 +22,8 @@ namespace DxLibSample::Animations
     
         json.at("animationPath").       get_to(path);
         json.at("isLooping").           get_to(animationClip.isLooping);
+        json.at("isBakeIntoPoseY").     get_to(animationClip.isBakeIntoPoseY);
+        json.at("isBakeIntoPoseXZ").    get_to(animationClip.isBakeIntoPoseXZ);
         json.at("speed").               get_to(animationClip.speed);
         json.at("animationIndex").      get_to(animationClip.animationIndex);
     
@@ -32,6 +35,8 @@ namespace DxLibSample::Animations
         json =
         {
             { "isLooping",          animationClip.isLooping },
+            { "isBakeIntoPoseY",    animationClip.isBakeIntoPoseY },
+            { "isBakeIntoPoseXZ",   animationClip.isBakeIntoPoseXZ },
             { "speed",              animationClip.speed },
             { "animationIndex",     animationClip.animationIndex },
         };

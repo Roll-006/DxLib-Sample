@@ -1,5 +1,4 @@
-﻿#include <json_loader.hpp>
-#include <math.hpp>
+﻿#include <math.hpp>
 #include "component_factory.h"
 #include "game_object_factory.h"
 #include "transform.h"
@@ -56,6 +55,14 @@ void Scene::Render() const
 	for (const auto& object : _objects)
 	{
 		object->Render();
+	}
+}
+
+void Scene::DebugRender() const
+{
+	for (const auto& object : _objects)
+	{
+		object->DebugRender();
 	}
 }
 

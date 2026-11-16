@@ -6,7 +6,9 @@ namespace DxLibSample::Animations
     struct AttachAnimationData
     {
         std::string animationName;
-        float currentTime = 0.f;
         int attachIndex = -1;
+        float currentTime = 0.f;
+        float totalTime = 0.f;
+        float playRate = 0.f;
     };
 }

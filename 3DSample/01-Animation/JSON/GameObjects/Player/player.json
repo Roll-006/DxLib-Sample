@@ -1,0 +1,342 @@
+﻿{
+  "name": "Player",
+  "tag": "Player",
+  "isActive": true,
+  "components": [
+    {
+      "type": "Transform",
+      "enabled": true,
+      "localPosition": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "localEulerAngles": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "localScale": {
+        "x": 0.1,
+        "y": 0.1,
+        "z": 0.1
+      }
+    },
+    {
+      "type": "BoneRenderer",
+      "enabled": true,
+      "enabledBone": true,
+      "boneSize": 0.1,
+      "color": 16777215,
+      "enabledTripod": true,
+      "tripodSize": 0.5
+    },
+    {
+      "type": "Animator",
+      "enabled": true,
+      "isApplyRootMotion": true,
+      "animationRootName": "mixamorig:Hips",
+      "animatorController": {
+        "defaultAnimationName": "Idle",
+        "animationParameters": {
+          "floats": {},
+          "booleans": {
+            "IsMoving": false,
+            "IsSprinting": false,
+            "IsJumping": false
+          },
+          "integers": {},
+          "triggers": {
+            "Jump": false
+          }
+        },
+        "animationTransitions": [
+          {
+            "originAnimationName": "Idle",
+            "targetAnimationName": "Walk",
+            "hasExitTime": false,
+            "exitTime": 0,
+            "isFixedDuration": true,
+            "transitionDuration": 0.5,
+            "interruptionSourceType": 1,
+            "floats": {},
+            "booleans": {
+              "IsMoving": {
+                "type": 1
+              },
+              "IsSprinting": {
+                "type": 0
+              }
+            },
+            "integers": {},
+            "triggers": []
+          },
+          {
+            "originAnimationName": "Walk",
+            "targetAnimationName": "Idle",
+            "hasExitTime": false,
+            "exitTime": 0,
+            "isFixedDuration": true,
+            "transitionDuration": 0.5,
+            "interruptionSourceType": 1,
+            "floats": {},
+            "booleans": {
+              "IsMoving": {
+                "type": 0
+              }
+            },
+            "integers": {},
+            "triggers": []
+          },
+          {
+            "originAnimationName": "Idle",
+            "targetAnimationName": "Sprint",
+            "hasExitTime": false,
+            "exitTime": 0,
+            "isFixedDuration": true,
+            "transitionDuration": 0.5,
+            "interruptionSourceType": 1,
+            "floats": {},
+            "booleans": {
+              "IsMoving": {
+                "type": 1
+              },
+              "IsSprinting": {
+                "type": 1
+              }
+            },
+            "integers": {},
+            "triggers": []
+          },
+          {
+            "originAnimationName": "Walk",
+            "targetAnimationName": "Sprint",
+            "hasExitTime": false,
+            "exitTime": 0,
+            "isFixedDuration": true,
+            "transitionDuration": 0.5,
+            "interruptionSourceType": 1,
+            "floats": {},
+            "booleans": {
+              "IsSprinting": {
+                "type": 1
+              }
+            },
+            "integers": {},
+            "triggers": []
+          },
+          {
+            "originAnimationName": "Sprint",
+            "targetAnimationName": "Idle",
+            "hasExitTime": false,
+            "exitTime": 0,
+            "isFixedDuration": true,
+            "transitionDuration": 0.5,
+            "interruptionSourceType": 1,
+            "floats": {},
+            "booleans": {
+              "IsMoving": {
+                "type": 0
+              }
+            },
+            "integers": {},
+            "triggers": []
+          },
+          {
+            "originAnimationName": "Sprint",
+            "targetAnimationName": "Walk",
+            "hasExitTime": false,
+            "exitTime": 0,
+            "isFixedDuration": true,
+            "transitionDuration": 0.5,
+            "interruptionSourceType": 1,
+            "floats": {},
+            "booleans": {
+              "IsSprinting": {
+                "type": 0
+              }
+            },
+            "integers": {},
+            "triggers": []
+          },
+          {
+            "originAnimationName": "Idle",
+            "targetAnimationName": "Jump",
+            "hasExitTime": false,
+            "exitTime": 0,
+            "isFixedDuration": true,
+            "transitionDuration": 0.5,
+            "interruptionSourceType": 0,
+            "floats": {},
+            "booleans": {
+              "IsMoving": {
+                "type": 0
+              }
+            },
+            "integers": {},
+            "triggers": [
+              "Jump"
+            ]
+          },
+          {
+            "originAnimationName": "Walk",
+            "targetAnimationName": "SprintJump",
+            "hasExitTime": false,
+            "exitTime": 0,
+            "isFixedDuration": true,
+            "transitionDuration": 0.5,
+            "interruptionSourceType": 0,
+            "floats": {},
+            "booleans": {
+              "IsMoving": {
+                "type": 1
+              },
+              "IsSprinting": {
+                "type": 0
+              }
+            },
+            "integers": {},
+            "triggers": [
+              "Jump"
+            ]
+          },
+          {
+            "originAnimationName": "Sprint",
+            "targetAnimationName": "SprintJump",
+            "hasExitTime": false,
+            "exitTime": 0,
+            "isFixedDuration": true,
+            "transitionDuration": 0.5,
+            "interruptionSourceType": 0,
+            "floats": {},
+            "booleans": {
+              "IsMoving": {
+                "type": 1
+              },
+              "IsSprinting": {
+                "type": 1
+              }
+            },
+            "integers": {},
+            "triggers": [
+              "Jump"
+            ]
+          },
+          {
+            "originAnimationName": "Jump",
+            "targetAnimationName": "Idle",
+            "hasExitTime": true,
+            "exitTime": 0.7,
+            "isFixedDuration": true,
+            "transitionDuration": 0.5,
+            "interruptionSourceType": 0,
+            "floats": {},
+            "booleans": {},
+            "integers": {},
+            "triggers": []
+          },
+          {
+            "originAnimationName": "SprintJump",
+            "targetAnimationName": "Idle",
+            "hasExitTime": true,
+            "exitTime": 0.9,
+            "isFixedDuration": true,
+            "transitionDuration": 0.5,
+            "interruptionSourceType": 0,
+            "floats": {},
+            "booleans": {
+              "IsMoving": {
+                "type": 0
+              }
+            },
+            "integers": {},
+            "triggers": []
+          },
+          {
+            "originAnimationName": "SprintJump",
+            "targetAnimationName": "Walk",
+            "hasExitTime": true,
+            "exitTime": 0.7,
+            "isFixedDuration": true,
+            "transitionDuration": 0.5,
+            "interruptionSourceType": 0,
+            "floats": {},
+            "booleans": {
+              "IsSprinting": {
+                "type": 0
+              }
+            },
+            "integers": {},
+            "triggers": []
+          },
+          {
+            "originAnimationName": "SprintJump",
+            "targetAnimationName": "Sprint",
+            "hasExitTime": true,
+            "exitTime": 0.7,
+            "isFixedDuration": true,
+            "transitionDuration": 0.5,
+            "interruptionSourceType": 0,
+            "floats": {},
+            "booleans": {
+              "IsMoving": {
+                "type": 1
+              },
+              "IsSprinting": {
+                "type": 1
+              }
+            },
+            "integers": {},
+            "triggers": []
+          }
+        ],
+        "animationClips": {
+          "Idle": {
+            "animationPath": "../../Assets/Animations/Swat/Idle.mv1",
+            "isLooping": true,
+            "isBakeIntoPoseY": true,
+            "isBakeIntoPoseXZ": true,
+            "speed": 60,
+            "animationIndex": 0
+          },
+          "Walk": {
+            "animationPath": "../../Assets/Animations/Swat/Walking.mv1",
+            "isLooping": true,
+            "isBakeIntoPoseY": true,
+            "isBakeIntoPoseXZ": false,
+            "speed": 60,
+            "animationIndex": 0
+          },
+          "Sprint": {
+            "animationPath": "../../Assets/Animations/Swat/Running.mv1",
+            "isLooping": true,
+            "isBakeIntoPoseY": true,
+            "isBakeIntoPoseXZ": false,
+            "speed": 60,
+            "animationIndex": 0
+          },
+          "Jump": {
+            "animationPath": "../../Assets/Animations/Swat/Jump.mv1",
+            "isLooping": false,
+            "isBakeIntoPoseY": true,
+            "isBakeIntoPoseXZ": false,
+            "speed": 60,
+            "animationIndex": 0
+          },
+          "SprintJump": {
+            "animationPath": "../../Assets/Animations/Swat/Sprint Jump.mv1",
+            "isLooping": false,
+            "isBakeIntoPoseY": true,
+            "isBakeIntoPoseXZ": false,
+            "speed": 60,
+            "animationIndex": 0
+          }
+        }
+      }
+    },
+    {
+      "type": "PlayerMovement",
+      "enabled": true
+    }
+  ]
+}

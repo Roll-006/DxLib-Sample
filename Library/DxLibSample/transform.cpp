@@ -1,5 +1,4 @@
 ﻿#include <json_loader.hpp>
-#include <math.hpp>
 #include "game_object.h"
 #include "component_factory.h"
 #include "scene.h"
@@ -44,11 +43,6 @@ void Transform::Update()
 }
 
 void Transform::LateUpdate()
-{
-	if (!_enabled) return;
-}
-
-void Transform::Render() const
 {
 	if (!_enabled) return;
 }
@@ -161,7 +155,7 @@ Vector3 Transform::GetForward()
 {
 	UpdateMatrix();
 
-	// MEMO : SimpleMathのForwardの定義は{ 0.f, 0.f, -1.f }であることに注意
+	// MEMO : SimpleMathのForwardの定義は { 0.f, 0.f, -1.f } であることに注意
 	return Vector3::TransformNormal(Vector3::Backward, Matrix::CreateFromQuaternion(GetWorldRotation()));
 }
 
@@ -226,9 +220,9 @@ void Transform::SetLocalRotation(const Quaternion& rotation)
 	OnDirty();
 }
 
-void Transform::SetLocalEulerAngles(const Vector3& eulerAnglesDeg)
+void Transform::SetLocalEulerAngles(const Vector3& eulerAngles)
 {
-	_localRotation = Quaternion::CreateFromYawPitchRoll(eulerAnglesDeg * Math::kDeg2Rad);
+	_localRotation = Quaternion::CreateFromYawPitchRoll(eulerAngles * Math::kDeg2Rad);
 
 	OnDirty();
 }
@@ -257,6 +251,75 @@ void Transform::SetLocalMatrix(Matrix& matrix)
 	_localPosition	= translation;
 
 	OnDirty();
+}
+
+void Transform::SetWorldPosition(const Vector3& position)
+{
+	if (const auto parent = _parent.lock())
+	{
+		_localPosition = Vector3::Transform(position, parent->GetWorldMatrix().Invert());
+	}
+	else
+	{
+		_localPosition = position;
+	}
+	
+	OnDirty();
+}
+
+void Transform::SetWorldRotation(const Quaternion& rotation)
+{
+	if (const auto parent = _parent.lock())
+	{
+		Quaternion invParentRotation;
+		parent->GetWorldRotation().Inverse(invParentRotation);
+		_localRotation = rotation * invParentRotation;
+	}
+	else
+	{
+		_localRotation = rotation;
+	}
+	
+	OnDirty();
+}
+
+void Transform::SetWorldEulerAngles(const Vector3& eulerAngles)
+{
+	SetWorldRotation(Quaternion::CreateFromYawPitchRoll(eulerAngles * Math::kDeg2Rad));
+}
+
+void Transform::SetWorldScale(const Vector3& scale)
+{
+	if (const auto parent = _parent.lock())
+	{
+		const auto parentScale = parent->GetWorldScale();
+		_localScale = Vector3(
+			parentScale.x != 0.f ? scale.x / parentScale.x : 0.f,
+			parentScale.y != 0.f ? scale.y / parentScale.y : 0.f,
+			parentScale.z != 0.f ? scale.z / parentScale.z : 0.f);
+	}
+	else
+	{
+		_localScale = scale;
+	}
+	
+	OnDirty();
+}
+
+void Transform::SetWorldScale(float scale)
+{
+	SetWorldScale({ scale, scale, scale });
+}
+
+void Transform::SetWorldMatrix(const Matrix& matrix)
+{
+	auto localMat = matrix;
+	if (const auto parent = _parent.lock())
+	{
+		localMat = matrix * parent->GetWorldMatrix().Invert();
+	}
+	
+	SetLocalMatrix(localMat); 
 }
 
 void Transform::SetParent(const std::shared_ptr<Transform>& parent)

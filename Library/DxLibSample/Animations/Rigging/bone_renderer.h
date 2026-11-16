@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "../../component.h"
+#include "../../i_renderer.h"
 
 namespace DxLibSample
 {
@@ -8,7 +9,7 @@ namespace DxLibSample
 
 namespace DxLibSample::Animations::Rigging
 {
-    class BoneRenderer final : public Component
+    class BoneRenderer final : public Component, public IRenderer
     {
     public:
         BoneRenderer();
@@ -17,7 +18,8 @@ namespace DxLibSample::Animations::Rigging
         void Start()		override;
         void Update()       override;
         void LateUpdate()   override;
-        void Render() const override;
+        void Render() const	override;
+        void DebugRender() const override;
 
         void Deserialize(const nlohmann::json& json) override;
 
@@ -33,9 +35,10 @@ namespace DxLibSample::Animations::Rigging
         static constexpr float kTripodMinSize = 0.01f;
         static constexpr float kTripodMaxSize = 1.f;
         
+        std::shared_ptr<Model::ModelRenderer> _modelRenderer;
         Model::ModelData _modelData;
         bool _enabledBone;
-        std::string _rootBoneName;
+        int _rootIndex;
         float _boneSize;
         unsigned _color;
         int _smoothness;

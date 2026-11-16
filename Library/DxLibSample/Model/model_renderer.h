@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "../component.h"
+#include "../i_renderer.h"
 #include "model_data.h"
 
 namespace DxLibSample
@@ -9,7 +10,7 @@ namespace DxLibSample
 
 namespace DxLibSample::Model
 {
-	class ModelRenderer final : public Component
+	class ModelRenderer final : public Component, public IRenderer
 	{
 	public:
 		ModelRenderer();
@@ -19,7 +20,8 @@ namespace DxLibSample::Model
 		void Start()		override;
 		void Update()       override;
 		void LateUpdate()   override;
-		void Render() const override;
+		void Render() const	override;
+		void DebugRender() const override;
 
 		void Deserialize(const nlohmann::json& json) override;
 

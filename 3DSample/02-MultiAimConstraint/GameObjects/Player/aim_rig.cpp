@@ -1,7 +1,4 @@
-﻿#include <json_loader.hpp>
-#include <math.hpp>
-#include <DxLibSample/transform.h>
-#include <DxLibSample/scene.h>
+﻿#include <DxLibSample/scene.h>
 #include <DxLibSample/game_object_factory.h>
 #include "aim_rig.h"
 

@@ -9,6 +9,10 @@
       "name": "Player",
       "children": [
         {
+          "name": "Skin",
+          "children": []
+        },
+        {
           "name": "AimRig",
           "children": [
             {

@@ -84,6 +84,9 @@
     <None Include="JSON\GameObjects\Player\spine2_rig.json">
       <Filter>JSON\GameObjects\Player</Filter>
     </None>
+    <None Include="JSON\GameObjects\Player\skin.json">
+      <Filter>JSON\GameObjects\Player</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\demo_scene.h">
@@ -200,14 +203,23 @@
     <ClInclude Include="Scripts\Components\aim_target_movement.h">
       <Filter>Scripts\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Scripts\Components\camera_applier.h">
-      <Filter>Scripts\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Scripts\Components\shooter.h">
       <Filter>Scripts\Components</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Library\DxLibSample\game_time.h">
       <Filter>Library\DxLibSample</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\Animations\attach_animation_layer.h">
+      <Filter>Library\DxLibSample\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\Animations\interruption_source_type.h">
+      <Filter>Library\DxLibSample\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\Components\camera.h">
+      <Filter>Scripts\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjects\Player\skin.h">
+      <Filter>GameObjects\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -289,14 +301,17 @@
     <ClCompile Include="Scripts\Components\aim_target_movement.cpp">
       <Filter>Scripts\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Scripts\Components\camera_applier.cpp">
-      <Filter>Scripts\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Scripts\Components\shooter.cpp">
       <Filter>Scripts\Components</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Library\DxLibSample\game_time.cpp">
       <Filter>Library\DxLibSample</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Components\camera.cpp">
+      <Filter>Scripts\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjects\Player\skin.cpp">
+      <Filter>GameObjects\Player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

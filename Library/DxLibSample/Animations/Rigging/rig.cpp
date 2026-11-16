@@ -42,11 +42,6 @@ void Rig::LateUpdate()
 	if (!_enabled) return;
 }
 
-void Rig::Render() const
-{
-	if (!_enabled) return;
-}
-
 void Rig::Deserialize(const nlohmann::json& json)
 {
 	from_json(json, *this);

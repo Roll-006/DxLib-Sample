@@ -1,0 +1,22 @@
+﻿{
+  "name": "DemoScene",
+  "objects": [
+    {
+      "name": "MainCamera",
+      "children": []
+    },
+    {
+      "name": "PrototypeMap",
+      "children": []
+    },
+    {
+      "name": "Player",
+      "children": [
+        {
+          "name": "Skin",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

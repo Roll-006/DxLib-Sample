@@ -17,7 +17,6 @@ namespace Components
 		void Start()		override;
 		void Update()       override;
 		void LateUpdate()   override;
-		void Render() const override;
 
 		void Deserialize(const nlohmann::json& json) override;
 
@@ -26,6 +25,7 @@ namespace Components
 
 	private:
 		float _moveSpeed;
+		std::shared_ptr<DxLibSample::Transform> _cameraTransform;
 		std::weak_ptr<DxLibSample::Transform> _transform;
 
 		friend void from_json	(const nlohmann::json& json, AimTargetMovement& aimTargetMovement);
