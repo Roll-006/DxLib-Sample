@@ -7,25 +7,25 @@
       "type": "Transform",
       "enabled": true,
       "localPosition": {
-        "x": 0.0,
-        "y": 15.0,
-        "z": -10.0
+        "x": 0,
+        "y": 15,
+        "z": 10
       },
       "localEulerAngles": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
+        "x": 0,
+        "y": 0,
+        "z": 0
       },
       "localScale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
+        "x": 1,
+        "y": 1,
+        "z": 1
       }
     },
     {
       "type": "AimTargetMovement",
       "enabled": true,
-      "moveSpeed": 15.0
+      "moveSpeed": 15
     }
   ]
 }

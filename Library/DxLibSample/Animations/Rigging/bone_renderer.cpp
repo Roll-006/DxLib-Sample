@@ -32,8 +32,6 @@ void BoneRenderer::Initialize(const std::shared_ptr<GameObject>& gameObject)
 {
     _gameObject	= gameObject;
     
-    _modelData = GetComponent<ModelRenderer>()->GetModelData();
-    _rootBoneName = MV1GetFrameName(_modelData.modelHandle, 0);
     _boneSize = std::clamp(_boneSize, kBoneMinSize, kBoneMaxSize);
     _smoothness = static_cast<int>(Math::Remap(_boneSize, kBoneMinSize, kBoneMaxSize, static_cast<float>(kMinSmoothness), static_cast<float>(kMaxSmoothness)));
     _tripodSize = std::clamp(_tripodSize, kTripodMinSize, kTripodMaxSize);
@@ -41,7 +39,9 @@ void BoneRenderer::Initialize(const std::shared_ptr<GameObject>& gameObject)
 
 void BoneRenderer::Start()
 {
-    
+    _modelRenderer = GetComponentInChildren<ModelRenderer>();
+    _modelData = _modelRenderer->GetModelData();
+    _rootIndex = MV1SearchFrame(_modelData.modelHandle, MV1GetFrameName(_modelData.modelHandle, 0));
 }
 
 void BoneRenderer::Update()
@@ -57,6 +57,11 @@ void BoneRenderer::LateUpdate()
 void BoneRenderer::Render() const
 {
     if (!_enabled) return;
+}
+
+void BoneRenderer::DebugRender() const
+{
+    if (!_enabled) return;
     
     DrawBone();
 }
@@ -68,10 +73,10 @@ void BoneRenderer::Deserialize(const nlohmann::json& json)
 
 void BoneRenderer::DrawBone() const
 {
+    if (_rootIndex <= -1) return;
     if (!_enabledBone && !_enabledTripod) return;
     
-    const auto rootIndex = MV1SearchFrame(_modelData.modelHandle, _rootBoneName.c_str());
-    if (rootIndex <= -1) return;
+    MV1SetMatrix(_modelData.modelHandle, ToDxLibMatrix(_modelRenderer->GetTransform()->GetWorldMatrix()));
     
     SetUseZBuffer3D(FALSE);
     SetWriteZBuffer3D(FALSE);
@@ -113,7 +118,7 @@ void BoneRenderer::DrawBone() const
         }
     };
 
-    Traverse(rootIndex);
+    Traverse(_rootIndex);
     
     SetUseZBuffer3D(TRUE);
     SetWriteZBuffer3D(TRUE);

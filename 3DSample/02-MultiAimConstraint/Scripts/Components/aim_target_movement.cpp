@@ -5,6 +5,7 @@
 #include "aim_target_movement.h"
 #include <DxLibSample/Input/keyboard.h>
 #include <DxLibSample/game_time.h>
+#include <DxLibSample/scene.h>
 
 using namespace DxLibSample;
 using namespace DxLibSample::Input;
@@ -33,7 +34,7 @@ void AimTargetMovement::Initialize(const std::shared_ptr<GameObject>& gameObject
 
 void AimTargetMovement::Start()
 {
-	
+	_cameraTransform = _gameObject.lock()->GetScene()->Find("MainCamera");
 }
 
 void AimTargetMovement::Update()
@@ -41,19 +42,8 @@ void AimTargetMovement::Update()
 	if (!_enabled) return;
 
 	Move();
-}
-
-void AimTargetMovement::LateUpdate()
-{
-	if (!_enabled) return;
-}
-
-void AimTargetMovement::Render() const
-{
-	if (!_enabled) return;
-
-	auto transform = _transform.lock();
-	DrawSphere3D(ToDxLibVector(transform->GetWorldPosition()), 0.5f, 8, 0xffffff, 0xffffff, TRUE);
+	
+	DrawSphere3D(ToDxLibVector(_transform.lock()->GetWorldPosition()), 0.5f, 8, 0xffffff, 0xffffff, TRUE);
 
 	DrawFormatString(0,   0, 0xffffff, "→ : 右へ移動");
 	DrawFormatString(0,  20, 0xffffff, "← : 左へ移動");
@@ -63,6 +53,11 @@ void AimTargetMovement::Render() const
 	DrawFormatString(0, 100, 0xffffff, "SHIFT + ↓ : 手前へ移動");
 }
 
+void AimTargetMovement::LateUpdate()
+{
+	if (!_enabled) return;
+}
+
 void AimTargetMovement::Deserialize(const nlohmann::json& json)
 {
 	from_json(json, *this);
@@ -70,36 +65,26 @@ void AimTargetMovement::Deserialize(const nlohmann::json& json)
 
 void AimTargetMovement::Move() const
 {
-	// ターゲットを移動
-	auto moveDirection = Vector3::Zero;
 	const auto keyboard = Keyboard::I();
-	if (keyboard.IsPressed(KEY_INPUT_LEFT))
-	{
-		moveDirection.x -= 1;
-	}
-	if (keyboard.IsPressed(KEY_INPUT_RIGHT))
-	{
-		moveDirection.x += 1;
-	}
-	if (keyboard.IsPressed(KEY_INPUT_LSHIFT) && keyboard.IsPressed(KEY_INPUT_DOWN))
-	{
-		moveDirection.z -= 1;
-	}
-	else if (keyboard.IsPressed(KEY_INPUT_DOWN))
-	{
-		moveDirection.y -= 1;
-	}
-	if (keyboard.IsPressed(KEY_INPUT_LSHIFT) && keyboard.IsPressed(KEY_INPUT_UP))
-	{
-		moveDirection.z += 1;
-	}
-	else if (keyboard.IsPressed(KEY_INPUT_UP))
-	{
-		moveDirection.y += 1;
-	}
+	
+	auto inputAxis = Vector3::Zero;
+	if (keyboard.IsPressed(KEY_INPUT_RIGHT)) inputAxis.x += 1.f;
+	if (keyboard.IsPressed(KEY_INPUT_LEFT)) inputAxis.x -= 1.f;
+	if (keyboard.IsPressed(KEY_INPUT_UP) && keyboard.IsPressed(KEY_INPUT_LSHIFT)) inputAxis.z += 1.f;
+	else if (keyboard.IsPressed(KEY_INPUT_UP)) inputAxis.y += 1.f;
+	if (keyboard.IsPressed(KEY_INPUT_DOWN) && keyboard.IsPressed(KEY_INPUT_LSHIFT)) inputAxis.z -= 1.f;
+	else if (keyboard.IsPressed(KEY_INPUT_DOWN)) inputAxis.y -= 1.f;
+	
+	auto cameraForward = _cameraTransform->GetForward();
+	cameraForward.y = 0.f;
+	cameraForward.Normalize();
 
-	// 座標を移動
-	const auto transform = _transform.lock();
+	auto cameraRight = _cameraTransform->GetRight();
+	cameraRight.y = 0.f;
+	cameraRight.Normalize();
+
+	const auto moveDirection = cameraRight * inputAxis.x + cameraForward * inputAxis.z + Vector3::Up * inputAxis.y;
 	const auto velocity = moveDirection * _moveSpeed * GameTime::I().GetDeltaTime();
+	const auto transform = _transform.lock();
 	transform->SetLocalPosition(transform->GetLocalPosition() + velocity);
 }

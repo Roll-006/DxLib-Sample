@@ -28,6 +28,7 @@ int Game::Run() const
 		demoScene->Update();
 		demoScene->LateUpdate();
 		demoScene->Render();
+		demoScene->DebugRender();
 
 		GameTime::I().CapFPS();
 

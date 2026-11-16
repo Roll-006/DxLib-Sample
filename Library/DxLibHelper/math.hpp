@@ -73,6 +73,21 @@ namespace DirectX
 		inline Vector3 ToVector3(const DxLib::VECTOR& vector) { return { vector.x, vector.y, vector.z }; }
 		inline DxLib::VECTOR ToDxLibVector(const Vector3& vector) { return { vector.x, vector.y, vector.z }; }
 		#pragma endregion
+		
+		#pragma region function
+		inline Vector3 MoveTowards(const Vector3& current, const Vector3& target, float maxDelta)
+		{
+			const Vector3 delta = target - current;
+			const float distance = delta.Length();
+
+			if (distance <= maxDelta || distance < Math::kEpsilon)
+			{
+				return target;
+			}
+
+			return current + delta * (maxDelta / distance);
+		}
+		#pragma endregion
 
 		#pragma region from / to JSON
 		inline void from_json(const nlohmann::json& j, Vector3& vector)
@@ -256,8 +271,8 @@ namespace DirectX
 		#pragma region conversion
 		inline Color ToColor(const DxLib::COLOR_F& colorF) { return { colorF.r, colorF.g, colorF.b, colorF.a }; }
 		inline DxLib::COLOR_F ToDxLibColorF(const Color& color) { return { color.x, color.y, color.z, color.w }; }
-		inline unsigned int ToDxLibColor(const Color& color) { return GetColor(color.x * UCHAR_MAX, color.y * UCHAR_MAX, color.z * UCHAR_MAX); }
-		inline unsigned int ToDxLibColor(const DxLib::COLOR_F& colorF) { return GetColor(colorF.r * UCHAR_MAX, colorF.g * UCHAR_MAX, colorF.b * UCHAR_MAX); }
+		inline unsigned int ToDxLibColor(const Color& color) { return GetColor(static_cast<int>(color.x * UCHAR_MAX), static_cast<int>(color.y * UCHAR_MAX), static_cast<int>(color.z * UCHAR_MAX)); }
+		inline unsigned int ToDxLibColor(const DxLib::COLOR_F& colorF) { return GetColor(static_cast<int>(colorF.r * UCHAR_MAX), static_cast<int>(colorF.g * UCHAR_MAX), static_cast<int>(colorF.b * UCHAR_MAX)); }
 		#pragma endregion
 		
 		#pragma region constant

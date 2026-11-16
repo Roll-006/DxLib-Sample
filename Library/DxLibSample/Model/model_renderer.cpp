@@ -55,6 +55,11 @@ void ModelRenderer::Render() const
 	MV1DrawModel(_modelData.modelHandle);
 }
 
+void ModelRenderer::DebugRender() const
+{
+	if (!_enabled) return;
+}
+
 void ModelRenderer::Deserialize(const nlohmann::json& json)
 {
 	from_json(json, *this);

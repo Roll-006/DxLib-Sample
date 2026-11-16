@@ -13,7 +13,6 @@ namespace DxLibSample
         virtual void Start()        abstract;
         virtual void Update()       abstract;
         virtual void LateUpdate()   abstract;
-        virtual void Render() const abstract;
 
         virtual void Deserialize(const nlohmann::json& json) abstract;
 

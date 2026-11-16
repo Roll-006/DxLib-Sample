@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <math.hpp>
 #include "component.h"
 
 namespace DxLibSample
@@ -16,7 +17,6 @@ namespace DxLibSample
 		void Start()		override;
 		void Update()       override;
 		void LateUpdate()   override;
-		void Render() const	override;
 
 		void Deserialize(const nlohmann::json& json) override;
 
@@ -42,7 +42,7 @@ namespace DxLibSample
 		#pragma region Getter
 		[[nodiscard]] Vector3		GetLocalPosition()		const { return _localPosition; }
 		[[nodiscard]] Quaternion	GetLocalRotation()		const { return _localRotation; }
-		[[nodiscard]] Vector3		GetLocalEulerAngles()	const { return GetLocalRotation().ToEuler() * Math::kRad2Deg; }
+		[[nodiscard]] Vector3		GetLocalEulerAngles()	const { return _localRotation.ToEuler() * Math::kRad2Deg; }
 		[[nodiscard]] Vector3		GetLocalScale()			const { return _localScale; }
 		[[nodiscard]] Matrix		GetLocalMatrix()		const;
 
@@ -97,10 +97,17 @@ namespace DxLibSample
 		#pragma region Setter
 		void SetLocalPosition	(const Vector3& position);
 		void SetLocalRotation	(const Quaternion& rotation);
-		void SetLocalEulerAngles(const Vector3& eulerAnglesDeg);
+		void SetLocalEulerAngles(const Vector3& eulerAngles);
 		void SetLocalScale		(const Vector3& scale);
 		void SetLocalScale		(float scale);
 		void SetLocalMatrix		(Matrix& matrix);
+		
+		void SetWorldPosition	(const Vector3& position);
+		void SetWorldRotation	(const Quaternion& rotation);
+		void SetWorldEulerAngles(const Vector3& eulerAngles);
+		void SetWorldScale		(const Vector3& scale);
+		void SetWorldScale		(float scale);
+		void SetWorldMatrix		(const Matrix& matrix);
 
 		/// <summary>
 		/// 親トランスフォームを設定する

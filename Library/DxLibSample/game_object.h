@@ -1,5 +1,7 @@
 ﻿#pragma once
+#include <json_loader.hpp>
 #include <memory>
+#include <vector>
 #include "component_concept.h"
 
 namespace DxLibSample
@@ -21,6 +23,7 @@ namespace DxLibSample
 		void Update() const;
 		void LateUpdate() const;
 		void Render() const;
+		void DebugRender() const;
 
 		/// <summary>
 		/// 同一シーン上のオブジェクトを検索

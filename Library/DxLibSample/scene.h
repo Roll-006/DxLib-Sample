@@ -1,5 +1,7 @@
 ﻿#pragma once
+#include <json_loader.hpp>
 #include <memory>
+#include <vector>
 #include "game_object_concept.h"
 
 namespace DxLibSample
@@ -20,6 +22,7 @@ namespace DxLibSample
 		void Update() const;
 		void LateUpdate() const;
 		void Render() const;
+		void DebugRender() const;
 
 		/// <summary>
 		/// ゲームオブジェクトを追加

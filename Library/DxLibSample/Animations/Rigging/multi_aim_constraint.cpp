@@ -80,11 +80,6 @@ void MultiAimConstraint::LateUpdate()
 	if (!_enabled) return;
 }
 
-void MultiAimConstraint::Render() const
-{
-	if (!_enabled) return;
-}
-
 void MultiAimConstraint::Deserialize(const nlohmann::json& json)
 {
 	from_json(json, *this);

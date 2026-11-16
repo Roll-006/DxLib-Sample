@@ -44,6 +44,8 @@ void Shooter::Update()
 {
     if (!_enabled) return;
     
+    DrawFormatString(0, 120, 0xffffff, "SPACE : Idle / Aim");
+    
     if (Keyboard::I().WasPressedThisFrame(KEY_INPUT_SPACE)) _isAiming = !_isAiming;
     
     _animator->SetBool("IsAiming", _isAiming);
@@ -56,13 +58,6 @@ void Shooter::Update()
 void Shooter::LateUpdate()
 {
     if (!_enabled) return;
-}
-
-void Shooter::Render() const
-{
-    if (!_enabled) return;
-    
-    DrawFormatString(0, 120, 0xffffff, "SPACE : Idle / Aim");
 }
 
 void Shooter::Deserialize(const nlohmann::json& json)
