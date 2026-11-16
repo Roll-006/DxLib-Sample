@@ -38,7 +38,11 @@ void MultiAimConstraint::Initialize(const std::shared_ptr<GameObject>& gameObjec
 
 void MultiAimConstraint::Start()
 {
-	_sourceObject = _gameObject.lock()->Find(_sourceObjectName);
+	const auto gameObject = _gameObject.lock();
+	for (auto& source : _sourceObjects)
+	{
+		source.sourceObject = gameObject->Find(source.sourceObjectName);
+	}
 	
 	auto animator = GetComponent<Animator>();
 	for (auto parent = GetTransform()->GetParent(); !animator && parent; parent = parent->GetParent())
@@ -103,7 +107,10 @@ void MultiAimConstraint::AimAtSourceObject()
 	const auto originWorldMat = ToMatrix(MV1GetFrameLocalWorldMatrix(_modelHandle, _constrainedBoneIndex));
 	const auto parentWorldMat = ToMatrix(MV1GetFrameLocalWorldMatrix(_modelHandle, _parentBoneIndex));
 
-	auto originToSourceObjectWorld = _sourceObject.lock()->GetWorldPosition() - originWorldMat.Translation();
+	Vector3 sourceObjectPosition;
+	if (!GetSourceObjectPosition(sourceObjectPosition)) return;
+	
+	auto originToSourceObjectWorld = sourceObjectPosition - originWorldMat.Translation();
 	if (originToSourceObjectWorld.LengthSquared() <= Math::kEpsilon) return;
 	originToSourceObjectWorld.Normalize();
 
@@ -115,6 +122,29 @@ void MultiAimConstraint::AimAtSourceObject()
 	const auto resultLocalRotation = CalcConstrainedLocalRotation(originLocalRotation, originToSourceObjectLocal);
 
 	ApplyRotationBone(resultLocalRotation);
+}
+
+bool MultiAimConstraint::GetSourceObjectPosition(Vector3& sourceObjectPosition) const
+{
+	auto sumWeight = 0.f;
+	for (auto& source : _sourceObjects)
+	{
+		if (!source.sourceObject.lock()) continue;
+		sumWeight += source.weight;
+	}
+	
+	if (sumWeight <= Math::kEpsilon) return false;
+
+	Vector3 result;
+	for (auto& source : _sourceObjects)
+	{
+		auto sourceObject = source.sourceObject.lock();
+		if (!sourceObject) continue;
+		result += sourceObject->GetWorldPosition() * (source.weight / sumWeight);
+	}
+
+	sourceObjectPosition = result;
+	return true;
 }
 
 void MultiAimConstraint::ApplyRotationBone(const Quaternion& resultLocalRotation) const

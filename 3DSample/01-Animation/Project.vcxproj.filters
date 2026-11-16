@@ -200,6 +200,9 @@
     <ClInclude Include="..\..\Library\DxLibSample\i_renderer.h">
       <Filter>Library\DxLibSample</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\Animations\Rigging\source_object.h">
+      <Filter>Library\DxLibSample\Animations\Rigging</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scenes\demo_scene.cpp">

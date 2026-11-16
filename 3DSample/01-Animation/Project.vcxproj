@@ -156,6 +156,7 @@
     <ClInclude Include="..\..\Library\DxLibSample\Animations\Rigging\multi_aim_constraint.h" />
     <ClInclude Include="..\..\Library\DxLibSample\Animations\Rigging\rig.h" />
     <ClInclude Include="..\..\Library\DxLibSample\Animations\Rigging\rig_constraint.h" />
+    <ClInclude Include="..\..\Library\DxLibSample\Animations\Rigging\source_object.h" />
     <ClInclude Include="..\..\Library\DxLibSample\component.h" />
     <ClInclude Include="..\..\Library\DxLibSample\component_concept.h" />
     <ClInclude Include="..\..\Library\DxLibSample\component_factory.h" />

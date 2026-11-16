@@ -18,7 +18,12 @@
         "y": 1,
         "z": 0
       },
-      "sourceObjectName": "AimTarget",
+      "sourceObjects": [
+        {
+          "sourceObjectName": "AimTarget",
+          "weight": 1
+        }
+      ],
       "offset": {
         "x": 0,
         "y": 30,
