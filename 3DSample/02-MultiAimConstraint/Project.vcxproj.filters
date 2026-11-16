@@ -221,6 +221,9 @@
     <ClInclude Include="GameObjects\Player\skin.h">
       <Filter>GameObjects\Player</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Library\DxLibSample\Animations\Rigging\source_object.h">
+      <Filter>Library\DxLibSample\Animations\Rigging</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Scenes\demo_scene.cpp">

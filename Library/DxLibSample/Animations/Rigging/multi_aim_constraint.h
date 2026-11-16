@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "rig_constraint.h"
+#include "source_object.h"
 
 namespace DxLibSample
 {
@@ -30,6 +31,13 @@ namespace DxLibSample::Animations::Rigging
 		/// ボーンを対象に向ける。
 		/// </summary>
 		void AimAtSourceObject();
+
+		/// <summary>
+		/// ボーンの向きに影響を与えるゲームオブジェクトの座標を取得する。
+		/// </summary>
+		/// <param name="sourceObjectPosition">ボーンの向きに影響を与えるゲームオブジェクトの座標</param>
+		/// <returns>true: 成功, false: 失敗</returns>
+		bool GetSourceObjectPosition(Vector3& sourceObjectPosition) const;
 
 		/// <summary>
 		/// 回転をボーンに適用する。
@@ -70,8 +78,7 @@ namespace DxLibSample::Animations::Rigging
 		int								_parentBoneIndex;		// constrainedBoneの親ボーンのインデックス
 		Vector3							_aimAxis;				// ボーンの前方向をsourceObjectに向けるためのローカルaim軸
 		Vector3							_upAxis;				// ボーンの上方向に向けるためのローカルup軸
-		std::string						_sourceObjectName;		// ボーンの向きに影響を与えるゲームオブジェクトの名前
-		std::weak_ptr<DxLibSample::Transform>	_sourceObject;			// ボーンの向きに影響を与えるゲームオブジェクト
+		std::vector<SourceObject>		_sourceObjects;			// ボーンの向きに影響を与えるゲームオブジェクト
 		Vector3							_offset;				// 回転をずらす量
 		bool 							_constrainedXAxis;		// X軸回転を有効にするかどうか
 		bool 							_constrainedYAxis;		// Y軸回転を有効にするかどうか
@@ -95,7 +102,7 @@ namespace DxLibSample::Animations::Rigging
 		json.at("constrainedBoneName").	get_to(multiAimConstraint._constrainedBoneName);
 		json.at("aimAxis").				get_to(multiAimConstraint._aimAxis);
 		json.at("upAxis").				get_to(multiAimConstraint._upAxis);
-		json.at("sourceObjectName").	get_to(multiAimConstraint._sourceObjectName);
+		json.at("sourceObjects").		get_to(multiAimConstraint._sourceObjects);
 		json.at("offset").				get_to(multiAimConstraint._offset);
 		json.at("constrainedXAxis").	get_to(multiAimConstraint._constrainedXAxis);
 		json.at("constrainedYAxis").	get_to(multiAimConstraint._constrainedYAxis);
@@ -108,16 +115,16 @@ namespace DxLibSample::Animations::Rigging
 		json =
 		{
 			{ "enabled",				multiAimConstraint._enabled },
-			{ "weight",				multiAimConstraint._weight },
+			{ "weight",					multiAimConstraint._weight },
 			{ "constrainedBoneName",	multiAimConstraint._constrainedBoneName },
 			{ "aimAxis",				multiAimConstraint._aimAxis },
-			{ "upAxis",				multiAimConstraint._upAxis },
-			{ "sourceObjectName",		multiAimConstraint._sourceObjectName },
-			{ "offset",				multiAimConstraint._offset },
+			{ "upAxis",					multiAimConstraint._upAxis },
+			{ "sourceObjects",			multiAimConstraint._sourceObjects },
+			{ "offset",					multiAimConstraint._offset },
 			{ "constrainedXAxis",		multiAimConstraint._constrainedXAxis },
 			{ "constrainedYAxis",		multiAimConstraint._constrainedYAxis },
 			{ "constrainedZAxis",		multiAimConstraint._constrainedZAxis },
-			{ "limit",				multiAimConstraint._limit },
+			{ "limit",					multiAimConstraint._limit },
 		};
 	}
 	#pragma endregion
