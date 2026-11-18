@@ -37,7 +37,7 @@ namespace DxLibSample::Animations::Rigging
     inline void from_json(const nlohmann::json& json, Rig& rig)
     {
         json.at("enabled").	get_to(rig._enabled);
-        json.at("weight").	get_to(rig._weight);
+        rig._weight = std::clamp(json.at("weight").get<float>(), 0.f, 1.f);
     }
 
     inline void to_json(nlohmann::json& json, const Rig& rig)

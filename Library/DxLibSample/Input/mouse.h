@@ -9,7 +9,7 @@ namespace DxLibSample::Input
 		/// <summary>
 		/// インスタンスを取得
 		/// </summary>
-		static Mouse& I()
+		[[nodiscard]] static Mouse& I()
 		{
 			// ローカル静的オブジェクトにより実装
 			// ※オブジェクトの解放タイミングを任意に決めることはできない
@@ -80,7 +80,7 @@ namespace DxLibSample::Input
 		/// </summary>
 		/// <param name="mouseButton">マウスボタン</param>
 		/// <returns>インデックス</returns>
-		int GetIndex(int mouseButton) const;
+		[[nodiscard]] int GetIndex(int mouseButton) const;
 
 		/// <summary>
 		/// マウスボタンの状態を更新する

@@ -105,7 +105,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
       <AdditionalIncludeDirectories>../../Library;../../Library/DxLib;../../Library/DxLibHelper;../../Library/EffekseerForDXLib;../../Library/DirectXTK/Include;../../Library/DxLibSample;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>

@@ -22,7 +22,7 @@ namespace DxLibSample::Animations
         void SetTrigger(const std::string& name);
         void ResetTrigger(const std::string& name);
     
-        AnimationParameters GetAnimationParameters() const { return _animationParameters; }
+        [[nodiscard]] AnimationParameters GetAnimationParameters() const { return _animationParameters; }
 
     private:
         /// <summary>
@@ -63,35 +63,35 @@ namespace DxLibSample::Animations
         /// </summary>
         /// <param name="checkAnimation">遷移可能か判定するアニメーション</param>
         /// <returns>true: 成功, false: 失敗</returns>
-        bool CheckFloatTransition(const AnimationTransition& checkAnimation) const;
+        [[nodiscard]] bool CheckFloatTransition(const AnimationTransition& checkAnimation) const;
 
         /// <summary>
         /// Bool型の遷移条件が有効か判定する。
         /// </summary>
         /// <param name="checkAnimation">遷移可能か判定するアニメーション</param>
         /// <returns>true: 成功, false: 失敗</returns>
-        bool CheckBooleanTransition(const AnimationTransition& checkAnimation) const;
+        [[nodiscard]] bool CheckBooleanTransition(const AnimationTransition& checkAnimation) const;
 
         /// <summary>
         /// Int型の遷移条件が有効か判定する。
         /// </summary>
         /// <param name="checkAnimation">遷移可能か判定するアニメーション</param>
         /// <returns>true: 成功, false: 失敗</returns>
-        bool CheckIntegerTransition(const AnimationTransition& checkAnimation) const;
+        [[nodiscard]] bool CheckIntegerTransition(const AnimationTransition& checkAnimation) const;
 
         /// <summary>
         /// Trigerの遷移条件が有効か判定する。
         /// </summary>
         /// <param name="checkAnimation">遷移可能か判定するアニメーション</param>
         /// <returns>true: 成功, false: 失敗</returns>
-        bool CheckTriggerTransition(const AnimationTransition& checkAnimation) const;
+        [[nodiscard]] bool CheckTriggerTransition(const AnimationTransition& checkAnimation) const;
         
         /// <summary>
         /// レイヤーのインデックスからブレンド率の重みを取得する。
         /// </summary>
         /// <param name="index">レイヤーのインデックス</param>
         /// <returns>ブレンド率の重み</returns>
-        float GetWeight(size_t index) const;
+        [[nodiscard]] float GetWeight(size_t index) const;
 
         /// <summary>
         /// ブレンド率を適用する。
@@ -109,7 +109,7 @@ namespace DxLibSample::Animations
         /// <param name="animationRootIndex">アニメーションのルートインデックス</param>
         /// <param name="modelInvMat">モデルの逆行列</param>
         /// <returns>各レイヤーのルート座標</returns>
-        std::vector<Vector3> GetLayerRootPositions(int animationRootIndex, const Matrix& modelInvMat) const;
+        [[nodiscard]] std::vector<Vector3> GetLayerRootPositions(int animationRootIndex, const Matrix& modelInvMat) const;
 
         /// <summary>
         /// 固定座標を更新する。
@@ -135,20 +135,20 @@ namespace DxLibSample::Animations
         /// <param name="modelMat">モデルの行列</param>
         void ApplyGameObjectYPosition(bool isApplyRootMotion, const std::shared_ptr<Transform>& transform, const std::vector<Vector3>& layerRootPositions, const Matrix& modelMat);
         
-        Matrix CalcResultWorldMatrix(bool isApplyRootMotion, const std::vector<Vector3>& layerRootPositions, const Matrix& modelMat, const Matrix& rootModelMat) const;
+        [[nodiscard]] Matrix CalcResultWorldMatrix(bool isApplyRootMotion, const std::vector<Vector3>& layerRootPositions, const Matrix& modelMat, const Matrix& rootModelMat) const;
         
         /// <summary>
         /// 遷移元のアニメーション名を取得する。
         /// </summary>
         /// <returns>遷移元のアニメーション名</returns>
-        std::vector<std::string> GetTransitionOrigins() const;
+        [[nodiscard]] std::vector<std::string> GetTransitionOrigins() const;
 
         /// <summary>
         /// 遷移元のアニメーションレイヤーを検索する。
         /// </summary>
         /// <param name="origin">遷移元のアニメーション名</param>
         /// <returns>遷移元のアニメーションレイヤー。見つからなかった場合は std::nullopt</returns>
-        std::optional<AttachAnimationLayer> FindOriginLayer(const std::string& origin) const;
+        [[nodiscard]] std::optional<AttachAnimationLayer> FindOriginLayer(const std::string& origin) const;
 
     private:
         static constexpr int kMaxAttachLayers = 4;

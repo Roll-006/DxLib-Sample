@@ -140,7 +140,7 @@ bool MultiAimConstraint::GetSourceObjectPosition(Vector3& sourceObjectPosition) 
 	{
 		auto sourceObject = source.sourceObject.lock();
 		if (!sourceObject) continue;
-		result += sourceObject->GetWorldPosition() * (source.weight / sumWeight);
+		result += sourceObject->GetWorldPosition() * (std::clamp(source.weight, 0.f, 1.f) / sumWeight);
 	}
 
 	sourceObjectPosition = result;
