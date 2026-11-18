@@ -8,7 +8,7 @@ namespace DxLibSample::Input
 		/// <summary>
 		/// インスタンスを取得
 		/// </summary>
-		static Keyboard& I()
+		[[nodiscard]] static Keyboard& I()
 		{
 			// ローカル静的オブジェクトにより実装
 			// ※オブジェクトの解放タイミングを任意に決めることはできない

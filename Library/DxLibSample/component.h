@@ -20,7 +20,7 @@ namespace DxLibSample
         /// ゲームオブジェクトを取得する
         /// </summary>
         /// <returns>ゲームオブジェクト</returns>
-        std::shared_ptr<GameObject> GetGameObject() const { return _gameObject.lock(); }
+        [[nodiscard]] std::shared_ptr<GameObject> GetGameObject() const { return _gameObject.lock(); }
         
         /// <summary>
         /// コンポーネントを取得する
@@ -28,7 +28,7 @@ namespace DxLibSample
         /// <typeparam name="T">コンポーネントの型</typeparam>
         /// <returns>取得するコンポーネント。対象が見つからなかった場合はnullptr</returns>
         template<ComponentT T>
-        std::shared_ptr<T> GetComponent() const
+        [[nodiscard]] std::shared_ptr<T> GetComponent() const
         {
             return _gameObject.lock()->GetComponent<T>();
         }
@@ -39,24 +39,24 @@ namespace DxLibSample
         /// <typeparam name="T">コンポーネントの型</typeparam>
         /// <returns>取得するコンポーネント。対象が一つも見つからなかった場合は空vector</returns>
         template<ComponentT T>
-        std::vector<std::shared_ptr<T>> GetComponents() const
+        [[nodiscard]] std::vector<std::shared_ptr<T>> GetComponents() const
         {
             return _gameObject.lock()->GetComponents<T>();
         }
         
         template<ComponentT T>
-        std::shared_ptr<T> GetComponentInChildren() const
+        [[nodiscard]] std::shared_ptr<T> GetComponentInChildren() const
         {
             return _gameObject.lock()->GetComponentInChildren<T>();
         }
 		
         template<ComponentT T>
-        std::vector<std::shared_ptr<T>> GetComponentsInChildren() const
+        [[nodiscard]] std::vector<std::shared_ptr<T>> GetComponentsInChildren() const
         {
             return _gameObject.lock()->GetComponentsInChildren<T>();
         }
 
-        std::shared_ptr<Transform> GetTransform() const
+        [[nodiscard]] std::shared_ptr<Transform> GetTransform() const
         {
             return _gameObject.lock()->GetTransform();
         }

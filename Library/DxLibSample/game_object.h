@@ -30,7 +30,7 @@ namespace DxLibSample
 		/// </summary>
 		/// <param name="name">オブジェクト名</param>
 		/// <returns>見つかったオブジェクトのTransform。見つからなかった場合はnullptr</returns>
-		std::shared_ptr<Transform> Find(const std::string& name) const;
+		[[nodiscard]] std::shared_ptr<Transform> Find(const std::string& name) const;
 
 		/// <summary>
 		/// コンポーネントを追加
@@ -52,7 +52,7 @@ namespace DxLibSample
 		/// <typeparam name="T">コンポーネントの型</typeparam>
 		/// <returns>取得するコンポーネント。対象が見つからなかった場合はnullptr</returns>
 		template<ComponentT T>
-		std::shared_ptr<T> GetComponent() const
+		[[nodiscard]] std::shared_ptr<T> GetComponent() const
 		{
 			for (const auto& component : _components)
 			{
@@ -68,7 +68,7 @@ namespace DxLibSample
 		/// <typeparam name="T">コンポーネントの型</typeparam>
 		/// <returns>取得するコンポーネント。対象が一つも見つからなかった場合は空vector</returns>
 		template<ComponentT T>
-		std::vector<std::shared_ptr<T>> GetComponents() const
+		[[nodiscard]] std::vector<std::shared_ptr<T>> GetComponents() const
 		{
 			std::vector<std::shared_ptr<T>> components = {};
 
@@ -81,7 +81,7 @@ namespace DxLibSample
 		}
 		
 		template<ComponentT T>
-		std::shared_ptr<T> GetComponentInChildren() const
+		[[nodiscard]] std::shared_ptr<T> GetComponentInChildren() const
 		{
 			if (const auto component = GetComponent<T>()) return component;
 
@@ -94,7 +94,7 @@ namespace DxLibSample
 		}
 		
 		template<ComponentT T>
-		std::vector<std::shared_ptr<T>> GetComponentsInChildren() const
+		[[nodiscard]] std::vector<std::shared_ptr<T>> GetComponentsInChildren() const
 		{
 			std::vector<std::shared_ptr<T>> components = GetComponents<T>();
 
@@ -110,13 +110,13 @@ namespace DxLibSample
 		[[nodiscard]] std::string GetName()   const { return _name; }
 		[[nodiscard]] std::string GetTag()    const { return _tag; }
 		
-		std::shared_ptr<Transform> GetTransform() const;
+		[[nodiscard]] std::shared_ptr<Transform> GetTransform() const;
 
 		/// <summary>
 		/// ゲームオブジェクトが属しているシーンを取得
 		/// </summary>
 		/// <returns></returns>
-		std::shared_ptr<Scene> GetScene() const;
+		[[nodiscard]] std::shared_ptr<Scene> GetScene() const;
 		#pragma endregion
 
 		/// <summary>
@@ -126,7 +126,7 @@ namespace DxLibSample
 		void SetActive(const bool isActive) { _isActive = isActive; }
 
 	private:
-		std::vector<std::shared_ptr<GameObject>> GetChildrenGameObject() const;
+		[[nodiscard]] std::vector<std::shared_ptr<GameObject>> GetChildrenGameObject() const;
 		
 	protected:
 		std::string _name;

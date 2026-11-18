@@ -8,7 +8,7 @@ namespace DxLibSample
         /// <summary>
         /// インスタンスを取得
         /// </summary>
-        static Screen& I()
+        [[nodiscard]] static Screen& I()
         {
             // ローカル静的オブジェクトにより実装
             // ※オブジェクトの解放タイミングを任意に決めることはできない

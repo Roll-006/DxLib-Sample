@@ -25,7 +25,7 @@ namespace DxLibSample
 		/// </summary>
 		/// <param name="name">オブジェクト名</param>
 		/// <returns>見つかったオブジェクトのTransform。見つからなかった場合はnullptr</returns>
-		std::shared_ptr<Transform> Find(const std::string& name) const;
+		[[nodiscard]] std::shared_ptr<Transform> Find(const std::string& name) const;
 
 		/// <summary>
 		/// 全ての子オブジェクトを切り離す
@@ -60,20 +60,20 @@ namespace DxLibSample
 		/// 親トランスフォームを取得
 		/// </summary>
 		/// <returns>親トランスフォーム。見つからなかった場合はnullptr</returns>
-		std::shared_ptr<Transform> GetParent() const;
+		[[nodiscard]] std::shared_ptr<Transform> GetParent() const;
 
 		/// <summary>
 		/// 子トランスフォームを取得
 		/// </summary>
 		/// <param name="index">インデックス</param>
 		/// <returns>子トランスフォーム。見つからなかった場合はnullptr</returns>
-		std::shared_ptr<Transform> GetChild(int index) const;
+		[[nodiscard]] std::shared_ptr<Transform> GetChild(int index) const;
 
 		/// <summary>
 		/// 全ての子トランスフォームを取得
 		/// </summary>
 		/// <returns>全ての子トランスフォーム</returns>
-		std::vector<std::shared_ptr<Transform>> GetChildren() const { return _children; }
+		[[nodiscard]] std::vector<std::shared_ptr<Transform>> GetChildren() const { return _children; }
 
 		/// <summary>
 		/// 子トランスフォームの数を取得
@@ -85,7 +85,7 @@ namespace DxLibSample
 		/// 階層最上位のトランスフォームを取得
 		/// </summary>
 		/// <returns>階層最上位のトランスフォーム</returns>
-		std::shared_ptr<Transform> GetRoot();
+		[[nodiscard]] std::shared_ptr<Transform> GetRoot();
 
 		/// <summary>
 		/// 兄弟内(同一階層)でのインデックスを取得する

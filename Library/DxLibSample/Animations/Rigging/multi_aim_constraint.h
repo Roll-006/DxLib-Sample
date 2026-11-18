@@ -37,7 +37,7 @@ namespace DxLibSample::Animations::Rigging
 		/// </summary>
 		/// <param name="sourceObjectPosition">ボーンの向きに影響を与えるゲームオブジェクトの座標</param>
 		/// <returns>true: 成功, false: 失敗</returns>
-		bool GetSourceObjectPosition(Vector3& sourceObjectPosition) const;
+		[[nodiscard]] bool GetSourceObjectPosition(Vector3& sourceObjectPosition) const;
 
 		/// <summary>
 		/// 回転をボーンに適用する。
@@ -98,7 +98,7 @@ namespace DxLibSample::Animations::Rigging
 	inline void from_json(const nlohmann::json& json, MultiAimConstraint& multiAimConstraint)
 	{
 		json.at("enabled").				get_to(multiAimConstraint._enabled);
-		json.at("weight").				get_to(multiAimConstraint._weight);
+		multiAimConstraint._weight		= std::clamp(json.at("weight").get<float>(), 0.f, 1.f);
 		json.at("constrainedBoneName").	get_to(multiAimConstraint._constrainedBoneName);
 		json.at("aimAxis").				get_to(multiAimConstraint._aimAxis);
 		json.at("upAxis").				get_to(multiAimConstraint._upAxis);
@@ -107,7 +107,7 @@ namespace DxLibSample::Animations::Rigging
 		json.at("constrainedXAxis").	get_to(multiAimConstraint._constrainedXAxis);
 		json.at("constrainedYAxis").	get_to(multiAimConstraint._constrainedYAxis);
 		json.at("constrainedZAxis").	get_to(multiAimConstraint._constrainedZAxis);
-		json.at("limit").				get_to(multiAimConstraint._limit);
+		multiAimConstraint._limit		= std::clamp(json.at("limit").get<float>(), -MultiAimConstraint::kMaxLimit, MultiAimConstraint::kMaxLimit);
 	}
 
 	inline void to_json(nlohmann::json& json, const MultiAimConstraint& multiAimConstraint)

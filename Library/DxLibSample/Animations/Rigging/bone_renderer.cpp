@@ -32,9 +32,7 @@ void BoneRenderer::Initialize(const std::shared_ptr<GameObject>& gameObject)
 {
     _gameObject	= gameObject;
     
-    _boneSize = std::clamp(_boneSize, kBoneMinSize, kBoneMaxSize);
     _smoothness = static_cast<int>(Math::Remap(_boneSize, kBoneMinSize, kBoneMaxSize, static_cast<float>(kMinSmoothness), static_cast<float>(kMaxSmoothness)));
-    _tripodSize = std::clamp(_tripodSize, kTripodMinSize, kTripodMaxSize);
 }
 
 void BoneRenderer::Start()

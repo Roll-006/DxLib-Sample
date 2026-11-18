@@ -54,10 +54,10 @@ namespace DxLibSample::Animations::Rigging
     {
         json.at("enabled").         get_to(boneRenderer._enabled);
         json.at("enabledBone").     get_to(boneRenderer._enabledBone);
-        json.at("boneSize").        get_to(boneRenderer._boneSize);
+        boneRenderer._boneSize      = std::clamp(json.at("boneSize").get<float>(), BoneRenderer::kBoneMinSize, BoneRenderer::kBoneMaxSize);
         json.at("color").           get_to(boneRenderer._color);
         json.at("enabledTripod").   get_to(boneRenderer._enabledTripod);
-        json.at("tripodSize").      get_to(boneRenderer._tripodSize);
+        boneRenderer._tripodSize    = std::clamp(json.at("tripodSize").get<float>(), BoneRenderer::kTripodMinSize, BoneRenderer::kTripodMaxSize);
     }
 
     inline void to_json(nlohmann::json& json, const BoneRenderer& boneRenderer)
