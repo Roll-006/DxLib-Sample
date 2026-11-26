@@ -3,7 +3,6 @@
 #include "transform.h"
 #include "scene.h"
 #include "game_object.h"
-#include "i_renderer.h"
 
 using namespace DxLibSample;
 
@@ -73,10 +72,9 @@ void GameObject::Render() const
 {
 	if (!_isActive) return;
 
-	for (const auto& component : _components)
+	for (const auto& renderer : _renderers)
 	{
-		// TODO: 高負荷
-		if (const auto& render = std::dynamic_pointer_cast<IRenderer>(component)) render->Render();
+		renderer->Render();
 	}
 }
 
@@ -84,10 +82,9 @@ void GameObject::DebugRender() const
 {
 	if (!_isActive) return;
 
-	for (const auto& component : _components)
+	for (const auto& renderer : _renderers)
 	{
-		// TODO: 高負荷
-		if (const auto& render = std::dynamic_pointer_cast<IRenderer>(component)) render->DebugRender();
+		renderer->DebugRender();
 	}
 }
 

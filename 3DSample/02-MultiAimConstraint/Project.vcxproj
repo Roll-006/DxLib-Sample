@@ -170,6 +170,7 @@
     <ClInclude Include="..\..\Library\DxLibSample\Input\cursor_lock_mode_type.h" />
     <ClInclude Include="..\..\Library\DxLibSample\Input\keyboard.h" />
     <ClInclude Include="..\..\Library\DxLibSample\Input\mouse.h" />
+    <ClInclude Include="..\..\Library\DxLibSample\i_renderer.h" />
     <ClInclude Include="..\..\Library\DxLibSample\Model\model_data.h" />
     <ClInclude Include="..\..\Library\DxLibSample\Model\model_renderer.h" />
     <ClInclude Include="..\..\Library\DxLibSample\scene.h" />
