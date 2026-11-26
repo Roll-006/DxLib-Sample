@@ -2,6 +2,7 @@
 #include <json_loader.hpp>
 #include <memory>
 #include <vector>
+#include "i_renderer.h"
 #include "component_concept.h"
 
 namespace DxLibSample
@@ -42,6 +43,12 @@ namespace DxLibSample
 		{
 			const auto component = std::make_shared<T>();
 			_components.emplace_back(component);
+			
+			if (const auto& render = std::dynamic_pointer_cast<IRenderer>(component))
+			{
+				_renderers.emplace_back(render);
+			}
+			
 			return component;
 		}
 
@@ -133,8 +140,9 @@ namespace DxLibSample
 		std::string _tag;
 		bool _isActive;
 		std::vector<std::shared_ptr<Component>> _components;
+		std::vector<std::shared_ptr<IRenderer>> _renderers;
 		std::weak_ptr<Scene> _scene;
-
+		
 		friend void from_json	(const nlohmann::json& json, GameObject& gameObject);
 		friend void to_json		(nlohmann::json& json, const GameObject& gameObject);
 	};
